@@ -50,9 +50,10 @@ document.addEventListener('DOMContentLoaded', function() {
     const comparisonSlider = document.querySelector('.comparison-slider');
     const comparisonSliderContainer = document.querySelector('.comparison-slider-container');
     const comparisonHandle = document.querySelector('.comparison-handle');
+    const comparisonWrapper = document.querySelector('.comparison-wrapper');
     
-    if (comparisonSlider) {
-        // Mouse/Touch move handler
+    if (comparisonSlider && comparisonSliderContainer && comparisonHandle) {
+        // Update slider position
         function updateSlider(value) {
             const percentage = value;
             comparisonSliderContainer.style.width = percentage + '%';
@@ -64,29 +65,55 @@ document.addEventListener('DOMContentLoaded', function() {
             updateSlider(this.value);
         });
         
-        // Optional: Add keyboard support
+        // Mouse drag functionality
+        let isDragging = false;
+        
+        function handleMove(e) {
+            if (!isDragging) return;
+            
+            const rect = comparisonWrapper.getBoundingClientRect();
+            let x = e.clientX || (e.touches && e.touches[0].clientX);
+            let position = ((x - rect.left) / rect.width) * 100;
+            
+            // Clamp between 0 and 100
+            position = Math.max(0, Math.min(100, position));
+            
+            comparisonSlider.value = position;
+            updateSlider(position);
+        }
+        
+        // Mouse events
+        comparisonWrapper.addEventListener('mousedown', (e) => {
+            isDragging = true;
+            handleMove(e);
+        });
+        
+        document.addEventListener('mousemove', handleMove);
+        
+        document.addEventListener('mouseup', () => {
+            isDragging = false;
+        });
+        
+        // Touch events for mobile
+        comparisonWrapper.addEventListener('touchstart', (e) => {
+            isDragging = true;
+            handleMove(e);
+        });
+        
+        document.addEventListener('touchmove', handleMove);
+        
+        document.addEventListener('touchend', () => {
+            isDragging = false;
+        });
+        
+        // Keyboard support
         comparisonSlider.addEventListener('keydown', function(e) {
             if (e.key === 'ArrowLeft' || e.key === 'ArrowRight') {
                 e.preventDefault();
                 const step = e.key === 'ArrowLeft' ? -1 : 1;
-                const newValue = Math.max(0, Math.min(100, parseInt(this.value) + step));
+                const newValue = Math.max(0, Math.min(100, parseFloat(this.value) + step));
                 this.value = newValue;
                 updateSlider(newValue);
-            }
-        });
-        
-        // Smooth dragging for better UX
-        let isDragging = false;
-        
-        comparisonSlider.addEventListener('mousedown', () => {
-            isDragging = true;
-            comparisonSlider.style.cursor = 'grabbing';
-        });
-        
-        document.addEventListener('mouseup', () => {
-            if (isDragging) {
-                isDragging = false;
-                comparisonSlider.style.cursor = 'ew-resize';
             }
         });
     }
