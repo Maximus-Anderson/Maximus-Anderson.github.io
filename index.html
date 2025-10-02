@@ -12,84 +12,102 @@
         <div class="nav-content">
             <h1 class="logo">Your Name</h1>
             <div class="nav-links">
-                <a href="#projects">Projects</a>
-                <a href="#about">About</a>
+                <a href="#" data-page="projects">Projects</a>
+                <a href="#" data-page="about">About</a>
             </div>
         </div>
     </nav>
 
-    <!-- Hero Section -->
-    <section class="hero">
-        <div class="hero-content">
-            <h1 class="hero-title">My Work</h1>
-            <h2 class="hero-subtitle">Engineering projects I've researched, designed, and built</h2>
-            <div class="divider"><span></span></div>
-        </div>
-    </section>
+    <!-- Projects Page -->
+    <div id="projects-page" class="page active">
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="hero-content fade-in">
+                <h1 class="hero-title">My Work</h1>
+                <h2 class="hero-subtitle">Engineering projects I've researched, designed, and built</h2>
+                <div class="divider"><span></span></div>
+            </div>
+        </section>
 
-    <!-- Projects Grid -->
-    <section id="projects" class="projects-section">
-        <div class="projects-grid">
-            <!-- Project 1 -->
-            <div class="project-card">
-                <div class="project-image">
-                    <div class="project-overlay"></div>
-                    <div class="placeholder-image">FSAE Battery</div>
+        <!-- Projects Grid -->
+        <section class="projects-section">
+            <div class="projects-grid">
+                <!-- Project 1 - Before/After Slider -->
+                <div class="project-card slide-up">
+                    <div class="project-image comparison-container">
+                        <div class="comparison-wrapper">
+                            <img src="https://i.ytimg.com/vi/zEr-mm8OSGo/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLAm0vvR3Ud4t5gSl4BF1LoxWA70Cw" alt="Finished" class="comparison-after">
+                            <div class="comparison-slider-container" style="width: 50%;">
+                                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSevGJPJZL5Pm28kCsOPIgdHlle1COpVUZYkQ&s" alt="CAD" class="comparison-before">
+                            </div>
+                            <input type="range" min="0" max="100" value="50" class="comparison-slider" aria-label="Comparison slider">
+                            <div class="comparison-handle"></div>
+                        </div>
+                        <div class="project-overlay"></div>
+                    </div>
+                    <h3>FSAE Tractive Battery Module</h3>
                 </div>
-                <h3>FSAE Tractive Battery Module</h3>
-            </div>
 
-            <!-- Project 2 -->
-            <div class="project-card">
-                <div class="project-image">
-                    <div class="project-overlay"></div>
-                    <div class="placeholder-image">Dyno Cart</div>
+                <!-- Project 2 -->
+                <div class="project-card slide-up" style="animation-delay: 0.1s;">
+                    <div class="project-image">
+                        <div class="project-overlay"></div>
+                        <div class="placeholder-image" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+                            <span>Dyno Cart</span>
+                        </div>
+                    </div>
+                    <h3>Dynamometer Cart + Motor Testing</h3>
                 </div>
-                <h3>Dynamometer Cart + Motor Testing</h3>
-            </div>
 
-            <!-- Project 3 -->
-            <div class="project-card">
-                <div class="project-image">
-                    <div class="project-overlay"></div>
-                    <div class="placeholder-image">CB750</div>
+                <!-- Project 3 -->
+                <div class="project-card slide-up" style="animation-delay: 0.2s;">
+                    <div class="project-image">
+                        <div class="project-overlay"></div>
+                        <div class="placeholder-image" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
+                            <span>CB750F1</span>
+                        </div>
+                    </div>
+                    <h3>1976 Honda CB750F1 Restoration</h3>
                 </div>
-                <h3>1976 Honda CB750F1 Restoration</h3>
-            </div>
 
-            <!-- Project 4 -->
-            <div class="project-card">
-                <div class="project-image">
-                    <div class="project-overlay"></div>
-                    <div class="placeholder-image">Projects</div>
+                <!-- Project 4 -->
+                <div class="project-card slide-up" style="animation-delay: 0.3s;">
+                    <div class="project-image">
+                        <div class="project-overlay"></div>
+                        <div class="placeholder-image" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">
+                            <span>More Projects</span>
+                        </div>
+                    </div>
+                    <h3>Other Engineering Projects</h3>
                 </div>
-                <h3>Other Engineering Projects</h3>
             </div>
-        </div>
-    </section>
+        </section>
+    </div>
 
-    <!-- About Section -->
-    <section id="about" class="about-section">
-        <div class="about-container">
-            <div class="about-image">
-                <div class="circle-frame">
-                    <div class="placeholder-profile">Your Photo</div>
+    <!-- About Page -->
+    <div id="about-page" class="page">
+        <section class="about-section">
+            <div class="about-container">
+                <div class="about-image slide-up">
+                    <div class="circle-frame">
+                        <div class="placeholder-profile">Your Photo</div>
+                    </div>
+                </div>
+                <div class="about-text slide-up" style="animation-delay: 0.2s;">
+                    <h2 class="about-name">Your Name</h2>
+                    <p class="about-email">your.email@example.com</p>
+                    <p class="about-bio">I'm an engineering student passionate about automotive design, racing, and building innovative solutions. I specialize in mechanical design, electric vehicles, and hands-on fabrication.</p>
                 </div>
             </div>
-            <div class="about-text">
-                <h2 class="about-name">Your Name</h2>
-                <p class="about-email">your.email@example.com</p>
-                <p class="about-bio">I'm an engineering student passionate about automotive design, racing, and building innovative solutions. I specialize in mechanical design, electric vehicles, and hands-on fabrication.</p>
-            </div>
-        </div>
-    </section>
+        </section>
+    </div>
 
     <!-- Footer -->
     <footer>
         <div class="footer-content">
             <div class="copyright">© 2024</div>
             <div class="social-links">
-                <a href="#" class="social-icon linkedin" aria-label="LinkedIn"></a>
+                <a href="https://www.linkedin.com/in/YOUR_PROFILE" target="_blank" class="social-icon linkedin" aria-label="LinkedIn"></a>
             </div>
         </div>
     </footer>
