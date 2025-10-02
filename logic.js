@@ -62,8 +62,9 @@ document.addEventListener('DOMContentLoaded', function() {
     const comparisonHandle = document.querySelector('.comparison-handle');
     const comparisonWrapper = document.querySelector('.comparison-wrapper');
     const comparisonBefore = document.querySelector('.comparison-before');
+    const comparisonAfter = document.querySelector('.comparison-after');
     
-    if (comparisonSlider && comparisonSliderContainer && comparisonHandle && comparisonBefore) {
+    if (comparisonSlider && comparisonSliderContainer && comparisonHandle && comparisonWrapper && comparisonBefore && comparisonAfter) {
         // Set the before image width to match wrapper width
         function setBeforeImageWidth() {
             const wrapperWidth = comparisonWrapper.offsetWidth;
@@ -77,11 +78,32 @@ document.addEventListener('DOMContentLoaded', function() {
             comparisonHandle.style.left = percentage + '%';
         }
         
-        // Initialize
-        setBeforeImageWidth();
+        // Initialize slider after images load
+        function initializeSlider() {
+            setBeforeImageWidth();
+            updateSlider(comparisonSlider.value);
+        }
         
-        // Update on window resize
-        window.addEventListener('resize', setBeforeImageWidth);
+        // Wait for both images to load
+        let imagesLoaded = 0;
+        const checkImagesLoaded = () => {
+            imagesLoaded++;
+            if (imagesLoaded === 2) {
+                initializeSlider();
+                window.addEventListener('resize', setBeforeImageWidth);
+            }
+        };
+        
+        comparisonBefore.addEventListener('load', checkImagesLoaded);
+        comparisonAfter.addEventListener('load', checkImagesLoaded);
+        
+        // Fallback in case images are already cached or fail to trigger load
+        setTimeout(() => {
+            if (imagesLoaded < 2) {
+                initializeSlider();
+                window.addEventListener('resize', setBeforeImageWidth);
+            }
+        }, 1000);
         
         // Slider input event
         comparisonSlider.addEventListener('input', function() {
