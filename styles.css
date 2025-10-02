@@ -209,6 +209,10 @@ body {
     padding: 80px var(--site-margin);
 }
 
+.current-projects-section {
+    padding: 80px var(--site-margin);
+}
+
 .projects-grid {
     max-width: var(--grid-width);
     margin: 0 auto;
@@ -599,6 +603,10 @@ footer {
     }
 
     .projects-section {
+        padding: 40px var(--site-margin);
+    }
+
+    .current-projects-section {
         padding: 40px var(--site-margin);
     }
 
