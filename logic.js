@@ -51,14 +51,27 @@ document.addEventListener('DOMContentLoaded', function() {
     const comparisonSliderContainer = document.querySelector('.comparison-slider-container');
     const comparisonHandle = document.querySelector('.comparison-handle');
     const comparisonWrapper = document.querySelector('.comparison-wrapper');
+    const comparisonBefore = document.querySelector('.comparison-before');
     
-    if (comparisonSlider && comparisonSliderContainer && comparisonHandle) {
+    if (comparisonSlider && comparisonSliderContainer && comparisonHandle && comparisonBefore) {
+        // Set the before image width to match wrapper width
+        function setBeforeImageWidth() {
+            const wrapperWidth = comparisonWrapper.offsetWidth;
+            comparisonBefore.style.width = wrapperWidth + 'px';
+        }
+        
         // Update slider position
         function updateSlider(value) {
             const percentage = value;
             comparisonSliderContainer.style.width = percentage + '%';
             comparisonHandle.style.left = percentage + '%';
         }
+        
+        // Initialize
+        setBeforeImageWidth();
+        
+        // Update on window resize
+        window.addEventListener('resize', setBeforeImageWidth);
         
         // Slider input event
         comparisonSlider.addEventListener('input', function() {
