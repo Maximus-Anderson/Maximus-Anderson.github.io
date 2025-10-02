@@ -18,10 +18,13 @@ document.addEventListener('DOMContentLoaded', function() {
     // Project card click handler
     projectCards.forEach(card => {
         card.addEventListener('click', function(e) {
-            e.preventDefault();
-            const targetPage = this.getAttribute('data-page');
-            if (targetPage) {
-                switchPage(targetPage);
+            // Only navigate if the click is not on the slider or its handle
+            if (!e.target.closest('.comparison-slider') && !e.target.closest('.comparison-wrapper')) {
+                e.preventDefault();
+                const targetPage = this.getAttribute('data-page');
+                if (targetPage) {
+                    switchPage(targetPage);
+                }
             }
         });
     });
@@ -128,7 +131,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }, 1000);
         
         // Slider input event
-        comparisonSlider.addEventListener('input', function() {
+        comparisonSlider.addEventListener('input', function(e) {
             updateSlider(this.value);
         });
         
@@ -151,6 +154,7 @@ document.addEventListener('DOMContentLoaded', function() {
         
         // Mouse events
         comparisonWrapper.addEventListener('mousedown', (e) => {
+            e.stopPropagation(); // Prevent card click when interacting with slider
             isDragging = true;
             handleMove(e);
         });
@@ -163,6 +167,7 @@ document.addEventListener('DOMContentLoaded', function() {
         
         // Touch events for mobile
         comparisonWrapper.addEventListener('touchstart', (e) => {
+            e.stopPropagation(); // Prevent card click when interacting with slider
             isDragging = true;
             handleMove(e);
         });
