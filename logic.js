@@ -1,12 +1,34 @@
 // Page Navigation
 document.addEventListener('DOMContentLoaded', function() {
     const navLinks = document.querySelectorAll('.nav-links a');
+    const projectCards = document.querySelectorAll('.project-card');
+    const backButtons = document.querySelectorAll('.back-button');
     const pages = document.querySelectorAll('.page');
     const logo = document.querySelector('.logo');
     
-    // Navigation click handler
+    // Navigation click handler for top nav
     navLinks.forEach(link => {
         link.addEventListener('click', function(e) {
+            e.preventDefault();
+            const targetPage = this.getAttribute('data-page');
+            switchPage(targetPage);
+        });
+    });
+    
+    // Project card click handler
+    projectCards.forEach(card => {
+        card.addEventListener('click', function(e) {
+            e.preventDefault();
+            const targetPage = this.getAttribute('data-page');
+            if (targetPage) {
+                switchPage(targetPage);
+            }
+        });
+    });
+    
+    // Back button click handler
+    backButtons.forEach(button => {
+        button.addEventListener('click', function(e) {
             e.preventDefault();
             const targetPage = this.getAttribute('data-page');
             switchPage(targetPage);
@@ -195,29 +217,5 @@ document.addEventListener('DOMContentLoaded', function() {
                 });
             }
         });
-    });
-    
-    // Add hover effect enhancement for project cards
-    const projectCards = document.querySelectorAll('.project-card');
-    projectCards.forEach(card => {
-        card.addEventListener('mouseenter', function() {
-            this.style.transform = 'translateY(-5px)';
-            this.style.transition = 'transform 0.3s ease';
-        });
-        
-        card.addEventListener('mouseleave', function() {
-            this.style.transform = 'translateY(0)';
-        });
-    });
-    
-    // Parallax effect for hero section (optional enhancement)
-    window.addEventListener('scroll', function() {
-        const scrolled = window.pageYOffset;
-        const heroContent = document.querySelector('.hero-content');
-        
-        if (heroContent && scrolled < window.innerHeight) {
-            heroContent.style.transform = `translateY(${scrolled * 0.5}px)`;
-            heroContent.style.opacity = 1 - (scrolled / window.innerHeight);
-        }
     });
 });
