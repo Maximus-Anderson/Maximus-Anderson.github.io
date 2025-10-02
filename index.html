@@ -33,8 +33,8 @@
         <!-- Completed Projects Grid -->
         <section class="projects-section">
             <div class="projects-grid">
-                <!-- Project 1 - Before/After Slider -->
-                <div class="project-card slide-up">
+                <!-- Project 1 - FSAE Tractive Battery Module -->
+                <div class="project-card slide-up" data-page="project-fsae">
                     <div class="project-image comparison-container">
                         <div class="comparison-wrapper">
                             <img src="images/tractivebatterymodule.jpg" alt="Finished" class="comparison-after">
@@ -49,8 +49,8 @@
                     <h3>FSAE Tractive Battery Module</h3>
                 </div>
 
-                <!-- Project 2 -->
-                <div class="project-card slide-up" style="animation-delay: 0.1s;">
+                <!-- Project 2 - Dynamometer Cart + Motor Testing -->
+                <div class="project-card slide-up" style="animation-delay: 0.1s;" data-page="project-dyno">
                     <div class="project-image">
                         <div class="project-overlay"></div>
                         <img src="images/Dyno-Title.png">
@@ -58,20 +58,20 @@
                     <h3>Dynamometer Cart + Motor Testing</h3>
                 </div>
 
-                <!-- Project 3 -->
-                <div class="project-card slide-up" style="animation-delay: 0.2s;">
+                <!-- Project 3 - 1976 Honda CB750F Restoration -->
+                <div class="project-card slide-up" style="animation-delay: 0.2s;" data-page="project-honda">
                     <div class="project-image">
                         <div class="project-overlay"></div>
-                         <img src="images/CB750F-Title.jpg">
+                        <img src="images/CB750F-Title.jpg">
                     </div>
                     <h3>1976 Honda CB750F Restoration</h3>
                 </div>
 
-                <!-- Project 4 -->
-                <div class="project-card slide-up" style="animation-delay: 0.3s;">
+                <!-- Project 4 - 2 Week Tube Chassis -->
+                <div class="project-card slide-up" style="animation-delay: 0.3s;" data-page="project-chassis">
                     <div class="project-image">
                         <div class="project-overlay"></div>
-                        <img src="images/CR29_25-C.png">
+                        <img src="images/CR29_25-C.jpg">
                     </div>
                     <h3>2 Week Tube Chassis</h3>
                 </div>
@@ -90,8 +90,8 @@
         <!-- Current Projects Grid -->
         <section class="projects-section current-projects-section">
             <div class="projects-grid">
-                <!-- Project -->
-                <div class="project-card slide-up">
+                <!-- Project - Cell Characterization -->
+                <div class="project-card slide-up" data-page="project-cell">
                     <div class="project-image">
                         <div class="project-overlay"></div>
                         <div class="placeholder-image" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">
@@ -102,6 +102,79 @@
                 </div>
             </div>
         </section>
+
+        <!-- Project Detail Pages -->
+        <!-- FSAE Tractive Battery Module Detail Page -->
+        <div id="project-fsae-page" class="page">
+            <section class="project-detail-section">
+                <div class="project-detail-container">
+                    <h1 class="project-detail-title fade-in">FSAE Tractive Battery Module</h1>
+                    <img src="images/tractivebatterymodule.jpg" alt="FSAE Tractive Battery Module" class="project-detail-image slide-up">
+                    <p class="project-detail-description slide-up" style="animation-delay: 0.2s;">
+                        This project involved the design and manufacturing of a tractive system battery module for an FSAE electric vehicle. The module was optimized for high performance and safety, integrating advanced cell technology and thermal management systems.
+                    </p>
+                    <button class="back-button slide-up" style="animation-delay: 0.4s;" data-page="projects">Back to Projects</button>
+                </div>
+            </section>
+        </div>
+
+        <!-- Dynamometer Cart + Motor Testing Detail Page -->
+        <div id="project-dyno-page" class="page">
+            <section class="project-detail-section">
+                <div class="project-detail-container">
+                    <h1 class="project-detail-title fade-in">Dynamometer Cart + Motor Testing</h1>
+                    <img src="images/Dyno-Title.png" alt="Dynamometer Cart" class="project-detail-image slide-up">
+                    <p class="project-detail-description slide-up" style="animation-delay: 0.2s;">
+                        This project focused on designing a mobile dynamometer cart for testing electric motors. The system allowed for precise measurement of motor performance under various load conditions, aiding in the optimization of powertrain components.
+                    </p>
+                    <button class="back-button slide-up" style="animation-delay: 0.4s;" data-page="projects">Back to Projects</button>
+                </div>
+            </section>
+        </div>
+
+        <!-- 1976 Honda CB750F Restoration Detail Page -->
+        <div id="project-honda-page" class="page">
+            <section class="project-detail-section">
+                <div class="project-detail-container">
+                    <h1 class="project-detail-title fade-in">1976 Honda CB750F Restoration</h1>
+                    <img src="images/CB750F-Title.jpg" alt="1976 Honda CB750F" class="project-detail-image slide-up">
+                    <p class="project-detail-description slide-up" style="animation-delay: 0.2s;">
+                        A full restoration of a 1976 Honda CB750F motorcycle, including engine rebuild, frame refinishing, and electrical system upgrades. The project preserved the classic design while enhancing performance and reliability.
+                    </p>
+                    <button class="back-button slide-up" style="animation-delay: 0.4s;" data-page="projects">Back to Projects</button>
+                </div>
+            </section>
+        </div>
+
+        <!-- 2 Week Tube Chassis Detail Page -->
+        <div id="project-chassis-page" class="page">
+            <section class="project-detail-section">
+                <div class="project-detail-container">
+                    <h1 class="project-detail-title fade-in">2 Week Tube Chassis</h1>
+                    <img src="images/CR29_25-C.jpg" alt="2 Week Tube Chassis" class="project-detail-image slide-up">
+                    <p class="project-detail-description slide-up" style="animation-delay: 0.2s;">
+                        A rapid-design project to create a lightweight tube chassis for a racing application, completed in two weeks. The chassis was engineered for structural integrity and ease of manufacturing.
+                    </p>
+                    <button class="back-button slide-up" style="animation-delay: 0.4s;" data-page="projects">Back to Projects</button>
+                </div>
+            </section>
+        </div>
+
+        <!-- Cell Characterization Detail Page -->
+        <div id="project-cell-page" class="page">
+            <section class="project-detail-section">
+                <div class="project-detail-container">
+                    <h1 class="project-detail-title fade-in">Cell Characterization</h1>
+                    <div class="placeholder-image project-detail-image slide-up" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">
+                        <span>DCIR Testing</span>
+                    </div>
+                    <p class="project-detail-description slide-up" style="animation-delay: 0.2s;">
+                        An ongoing project to characterize battery cells using DCIR testing, focusing on performance metrics such as internal resistance and capacity under varying conditions.
+                    </p>
+                    <button class="back-button slide-up" style="animation-delay: 0.4s;" data-page="projects">Back to Projects</button>
+                </div>
+            </section>
+        </div>
     </div>
 
     <!-- About Page -->
