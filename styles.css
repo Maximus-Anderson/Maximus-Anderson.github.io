@@ -315,12 +315,6 @@ body {
     pointer-events: none;
 }
 
-.comparison-before-wrapper {
-    position: relative;
-    width: 100vw;
-    height: 100%;
-}
-
 .comparison-before {
     height: 100%;
     object-fit: cover;
@@ -328,6 +322,7 @@ body {
     position: absolute;
     top: 0;
     left: 0;
+    /* Width will be set dynamically via JavaScript */
 }
 
 .comparison-wrapper {
