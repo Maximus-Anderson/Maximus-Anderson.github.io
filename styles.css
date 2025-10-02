@@ -465,6 +465,32 @@ body {
     font-family: 'Butler', Georgia, serif;
 }
 
+/* Resume Section */
+.resume-section {
+    min-height: 80vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 120px var(--site-margin);
+}
+
+.resume-container {
+    max-width: var(--grid-width);
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.resume-iframe {
+    width: 80%;
+    max-width: 800px;
+    height: 100vh;
+    max-height: 1000px;
+    border: none;
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+}
+
 /* Footer */
 footer {
     padding: 40px var(--site-margin);
@@ -558,6 +584,11 @@ footer {
     .about-bio {
         font-size: 2em;
     }
+
+    .resume-iframe {
+        width: 90%;
+        height: 80vh;
+    }
 }
 
 @media (max-width: 480px) {
@@ -575,5 +606,14 @@ footer {
 
     .about-section {
         padding: 60px var(--site-margin);
+    }
+
+    .resume-section {
+        padding: 60px var(--site-margin);
+    }
+
+    .resume-iframe {
+        width: 100%;
+        height: 60vh;
     }
 }
