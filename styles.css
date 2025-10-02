@@ -326,7 +326,6 @@ body {
     position: absolute;
     top: 0;
     left: 0;
-    /* Width will be set dynamically via JavaScript */
 }
 
 .comparison-wrapper {
@@ -402,6 +401,63 @@ body {
 
 .project-card:hover .comparison-handle::after {
     transform: rotate(-45deg) translateX(-3px);
+}
+
+/* Project Detail Section */
+.project-detail-section {
+    min-height: 80vh;
+    display: flex;
+    align-items: center;
+    padding: 120px var(--site-margin);
+}
+
+.project-detail-container {
+    max-width: var(--grid-width);
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 40px;
+}
+
+.project-detail-title {
+    font-size: 6em;
+    line-height: 1.33;
+    letter-spacing: 0.03em;
+    font-weight: 400;
+    text-align: center;
+}
+
+.project-detail-image {
+    width: 100%;
+    max-width: 800px;
+    aspect-ratio: 16/10;
+    object-fit: cover;
+    background-color: #1a1a1a;
+}
+
+.project-detail-description {
+    font-size: 2.5em;
+    line-height: 1.5;
+    text-align: center;
+    opacity: 0.85;
+    max-width: 800px;
+}
+
+.back-button {
+    font-size: 2.2em;
+    padding: 10px 20px;
+    background-color: transparent;
+    color: var(--text-color);
+    border: 1px solid var(--primary-color);
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.back-button:hover {
+    background-color: var(--primary-color);
+    color: var(--background-color);
 }
 
 /* About Section */
@@ -567,6 +623,18 @@ footer {
         font-size: 5vw;
     }
 
+    .project-detail-title {
+        font-size: 4em;
+    }
+
+    .project-detail-image {
+        max-width: 100%;
+    }
+
+    .project-detail-description {
+        font-size: 2em;
+    }
+
     .about-container {
         grid-template-columns: 1fr;
         gap: 40px;
@@ -608,6 +676,10 @@ footer {
 
     .current-projects-section {
         padding: 40px var(--site-margin);
+    }
+
+    .project-detail-section {
+        padding: 60px var(--site-margin);
     }
 
     .about-section {
