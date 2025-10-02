@@ -32,6 +32,14 @@ document.addEventListener('DOMContentLoaded', function() {
             currentPage.classList.remove('active');
             targetPage.classList.add('active');
             
+            // Reset target page styles to ensure fadeIn triggers
+            targetPage.style.animation = 'none';
+            targetPage.style.opacity = '0';
+            setTimeout(() => {
+                targetPage.style.animation = 'fadeIn 0.5s ease forwards';
+                targetPage.style.opacity = '1';
+            }, 10);
+            
             // Scroll to top
             window.scrollTo({ top: 0, behavior: 'smooth' });
             
@@ -39,8 +47,10 @@ document.addEventListener('DOMContentLoaded', function() {
             const animatedElements = targetPage.querySelectorAll('.slide-up, .fade-in');
             animatedElements.forEach((el, index) => {
                 el.style.animation = 'none';
+                el.style.opacity = '0';
                 setTimeout(() => {
                     el.style.animation = '';
+                    el.style.opacity = '';
                 }, 10);
             });
         }, 500);
