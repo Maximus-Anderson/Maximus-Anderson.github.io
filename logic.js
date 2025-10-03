@@ -35,6 +35,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
     timelines.forEach(timeline => {
         const markers = timeline.querySelectorAll('.timeline-marker');
+        const descriptions = timeline.querySelectorAll('.timeline-description');
+
+        // Close all descriptions initially
+        descriptions.forEach(desc => desc.classList.remove('active'));
 
         markers.forEach(marker => {
             marker.addEventListener('click', function() {
@@ -46,8 +50,8 @@ document.addEventListener('DOMContentLoaded', function() {
                     return;
                 }
 
-                // Close all other descriptions in this timeline
-                timeline.querySelectorAll('.timeline-description').forEach(desc => {
+                // Close all other descriptions
+                descriptions.forEach(desc => {
                     if (desc !== description) {
                         desc.classList.remove('active');
                         console.log('Closed description: ' + desc.id);
