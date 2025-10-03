@@ -1,5 +1,7 @@
 // Page Navigation
 document.addEventListener('DOMContentLoaded', function() {
+    console.log('DOM loaded, initializing portfolio');
+
     const navLinks = document.querySelectorAll('.nav-links a');
     const projectCards = document.querySelectorAll('.project-card');
     const backButtons = document.querySelectorAll('.back-button');
@@ -11,6 +13,7 @@ document.addEventListener('DOMContentLoaded', function() {
         link.addEventListener('click', function(e) {
             e.preventDefault();
             const targetPage = this.getAttribute('data-page');
+            console.log('Nav link clicked:', targetPage);
             switchPage(targetPage);
         });
     });
@@ -18,11 +21,11 @@ document.addEventListener('DOMContentLoaded', function() {
     // Project card click handler
     projectCards.forEach(card => {
         card.addEventListener('click', function(e) {
-            // Only navigate if the click is not on the slider or its handle
             if (!e.target.closest('.comparison-slider') && !e.target.closest('.comparison-wrapper')) {
                 e.preventDefault();
                 const targetPage = this.getAttribute('data-page');
                 if (targetPage) {
+                    console.log('Project card clicked:', targetPage);
                     switchPage(targetPage);
                 }
             }
@@ -34,12 +37,14 @@ document.addEventListener('DOMContentLoaded', function() {
         button.addEventListener('click', function(e) {
             e.preventDefault();
             const targetPage = this.getAttribute('data-page');
+            console.log('Back button clicked:', targetPage);
             switchPage(targetPage);
         });
     });
     
     // Logo click - go to projects
     logo.addEventListener('click', function() {
+        console.log('Logo clicked, switching to projects');
         switchPage('projects');
     });
     
@@ -54,17 +59,17 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         
         if (currentPage === targetPage) {
+            console.log('Same page, no switch needed');
             return;
         }
         
-        // Fade out current page
+        console.log('Switching from', currentPage.id, 'to', targetPage.id);
         currentPage.style.animation = 'fadeOut 0.5s ease forwards';
         
         setTimeout(() => {
             currentPage.classList.remove('active');
             targetPage.classList.add('active');
             
-            // Reset target page styles to ensure fadeIn triggers
             targetPage.style.animation = 'none';
             targetPage.style.opacity = '0';
             setTimeout(() => {
@@ -72,10 +77,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 targetPage.style.opacity = '1';
             }, 10);
             
-            // Scroll to top
             window.scrollTo({ top: 0, behavior: 'smooth' });
             
-            // Re-trigger animations for elements
             const animatedElements = targetPage.querySelectorAll('.slide-up, .fade-in, .timeline-item');
             animatedElements.forEach((el, index) => {
                 el.style.animation = 'none';
@@ -89,6 +92,7 @@ document.addEventListener('DOMContentLoaded', function() {
             // Reset timeline scroll and hide descriptions
             const timelineBar = targetPage.querySelector('.timeline-bar');
             if (timelineBar) {
+                console.log('Resetting timeline for', targetPageId);
                 timelineBar.scrollLeft = 0;
                 const descriptions = targetPage.querySelectorAll('.timeline-description');
                 descriptions.forEach(desc => desc.classList.remove('active'));
@@ -105,30 +109,28 @@ document.addEventListener('DOMContentLoaded', function() {
     const comparisonAfter = document.querySelector('.comparison-after');
     
     if (comparisonSlider && comparisonSliderContainer && comparisonHandle && comparisonWrapper && comparisonBefore && comparisonAfter) {
-        // Set the before image width to match wrapper width
+        console.log('Initializing comparison slider');
         function setBeforeImageWidth() {
             const wrapperWidth = comparisonWrapper.offsetWidth;
             comparisonBefore.style.width = wrapperWidth + 'px';
         }
         
-        // Update slider position
         function updateSlider(value) {
             const percentage = value;
             comparisonSliderContainer.style.width = percentage + '%';
             comparisonHandle.style.left = percentage + '%';
         }
         
-        // Initialize slider after images load
         function initializeSlider() {
             setBeforeImageWidth();
             updateSlider(comparisonSlider.value);
         }
         
-        // Wait for both images to load
         let imagesLoaded = 0;
         const checkImagesLoaded = () => {
             imagesLoaded++;
             if (imagesLoaded === 2) {
+                console.log('Comparison images loaded, initializing slider');
                 initializeSlider();
                 window.addEventListener('resize', setBeforeImageWidth);
             }
@@ -137,20 +139,18 @@ document.addEventListener('DOMContentLoaded', function() {
         comparisonBefore.addEventListener('load', checkImagesLoaded);
         comparisonAfter.addEventListener('load', checkImagesLoaded);
         
-        // Fallback in case images are already cached or fail to trigger load
         setTimeout(() => {
             if (imagesLoaded < 2) {
+                console.log('Fallback: initializing slider after timeout');
                 initializeSlider();
                 window.addEventListener('resize', setBeforeImageWidth);
             }
         }, 1000);
         
-        // Slider input event
         comparisonSlider.addEventListener('input', function(e) {
             updateSlider(this.value);
         });
         
-        // Mouse drag functionality for comparison slider
         let isDraggingComparison = false;
         
         function handleComparisonMove(e) {
@@ -159,8 +159,6 @@ document.addEventListener('DOMContentLoaded', function() {
             const rect = comparisonWrapper.getBoundingClientRect();
             let x = e.clientX || (e.touches && e.touches[0].clientX);
             let position = ((x - rect.left) / rect.width) * 100;
-            
-            // Clamp between 0 and 100
             position = Math.max(0, Math.min(100, position));
             
             comparisonSlider.value = position;
@@ -200,11 +198,17 @@ document.addEventListener('DOMContentLoaded', function() {
                 updateSlider(newValue);
             }
         });
+    } else {
+        console.warn('Comparison slider elements not found');
     }
     
     // Timeline Dragging and Clicking
     const timelineBars = document.querySelectorAll('.timeline-bar');
+    console.log('Found', timelineBars.length, 'timeline bars');
     timelineBars.forEach(bar => {
+        const timelineId = bar.getAttribute('data-timeline-id');
+        console.log('Initializing timeline:', timelineId);
+        
         let isDraggingTimeline = false;
         let startX, scrollLeft;
         
@@ -214,19 +218,21 @@ document.addEventListener('DOMContentLoaded', function() {
             startX = e.pageX - bar.offsetLeft;
             scrollLeft = bar.scrollLeft;
             bar.style.cursor = 'grabbing';
+            console.log('Timeline drag started:', timelineId);
         });
         
         bar.addEventListener('mousemove', (e) => {
             if (!isDraggingTimeline) return;
             e.preventDefault();
             const x = e.pageX - bar.offsetLeft;
-            const walk = (x - startX) * 2; // Adjust scroll speed
+            const walk = (x - startX) * 2;
             bar.scrollLeft = scrollLeft - walk;
         });
         
         bar.addEventListener('mouseup', () => {
             isDraggingTimeline = false;
             bar.style.cursor = 'grab';
+            console.log('Timeline drag ended:', timelineId);
         });
         
         bar.addEventListener('mouseleave', () => {
@@ -234,12 +240,12 @@ document.addEventListener('DOMContentLoaded', function() {
             bar.style.cursor = 'grab';
         });
         
-        // Touch events for mobile
         bar.addEventListener('touchstart', (e) => {
             e.preventDefault();
             isDraggingTimeline = true;
             startX = e.touches[0].pageX - bar.offsetLeft;
             scrollLeft = bar.scrollLeft;
+            console.log('Timeline touch drag started:', timelineId);
         });
         
         bar.addEventListener('touchmove', (e) => {
@@ -252,28 +258,28 @@ document.addEventListener('DOMContentLoaded', function() {
         
         bar.addEventListener('touchend', () => {
             isDraggingTimeline = false;
+            console.log('Timeline touch drag ended:', timelineId);
         });
         
         // Click handler for timeline markers
         const markers = bar.querySelectorAll('.timeline-marker');
-        markers.forEach(marker => {
+        console.log('Found', markers.length, 'markers in timeline:', timelineId);
+        markers.forEach((marker, index) => {
             marker.addEventListener('click', (e) => {
                 e.stopPropagation();
                 const descId = marker.getAttribute('data-description');
                 const description = bar.querySelector(`#${descId}`);
                 const allDescriptions = bar.querySelectorAll('.timeline-description');
                 
-                // Hide all other descriptions
                 allDescriptions.forEach(desc => {
                     if (desc !== description) {
                         desc.classList.remove('active');
                     }
                 });
                 
-                // Toggle the clicked description
                 description.classList.toggle('active');
+                console.log('Marker clicked:', descId, 'Active:', description.classList.contains('active'));
                 
-                // Center the marker in the timeline
                 const markerRect = marker.getBoundingClientRect();
                 const barRect = bar.getBoundingClientRect();
                 const scrollPosition = marker.offsetLeft - bar.offsetWidth / 2 + marker.offsetWidth / 2;
@@ -297,7 +303,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }, observerOptions);
     
-    // Observe all slide-up and timeline-item elements
     document.querySelectorAll('.slide-up, .timeline-item').forEach(el => {
         observer.observe(el);
     });
