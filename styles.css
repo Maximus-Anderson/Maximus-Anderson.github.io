@@ -572,12 +572,7 @@ body {
 .timeline-description.active {
     display: block;
     animation: fadeInUp 0.3s ease forwards;
-    z-index: 20;
-}
-
-.timeline-description p {
-    font-size: 1.8em;
-    opacity: 1;
+    z-index: 100;
 }
 
 /* About Section */
@@ -780,10 +775,6 @@ footer {
 
     .timeline-item h4 {
         font-size: 1.8em;
-    }
-
-    .timeline-description p {
-        font-size: 1.6em;
     }
 
     .about-container {
