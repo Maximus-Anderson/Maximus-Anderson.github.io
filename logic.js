@@ -48,7 +48,14 @@ document.addEventListener('DOMContentLoaded', function() {
         const currentPage = document.querySelector('.page.active');
         const targetPage = document.getElementById(targetPageId + '-page');
         
-        if (currentPage === targetPage) return;
+        if (!targetPage) {
+            console.error('Target page not found:', targetPageId + '-page');
+            return;
+        }
+        
+        if (currentPage === targetPage) {
+            return;
+        }
         
         // Fade out current page
         currentPage.style.animation = 'fadeOut 0.5s ease forwards';
@@ -69,14 +76,14 @@ document.addEventListener('DOMContentLoaded', function() {
             window.scrollTo({ top: 0, behavior: 'smooth' });
             
             // Re-trigger animations for elements
-            const animatedElements = targetPage.querySelectorAll('.slide-up, .fade-in');
+            const animatedElements = targetPage.querySelectorAll('.slide-up, .fade-in, .timeline-item');
             animatedElements.forEach((el, index) => {
                 el.style.animation = 'none';
                 el.style.opacity = '0';
                 setTimeout(() => {
                     el.style.animation = '';
                     el.style.opacity = '';
-                }, 10);
+                }, 10 + index * 100); // Stagger animations
             });
         }, 500);
     }
@@ -199,14 +206,14 @@ document.addEventListener('DOMContentLoaded', function() {
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                entry.target.style.animation = 'slideUp 0.8s ease forwards';
+                entry.target.style.animation = entry.target.classList.contains('timeline-item') ? 'timelineFadeIn 0.8s ease forwards' : 'slideUp 0.8s ease forwards';
                 observer.unobserve(entry.target);
             }
         });
     }, observerOptions);
     
-    // Observe all slide-up elements
-    document.querySelectorAll('.slide-up').forEach(el => {
+    // Observe all slide-up and timeline-item elements
+    document.querySelectorAll('.slide-up, .timeline-item').forEach(el => {
         observer.observe(el);
     });
     
