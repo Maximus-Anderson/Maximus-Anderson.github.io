@@ -572,6 +572,7 @@ body {
 .timeline-description.active {
     display: block;
     animation: fadeInUp 0.3s ease forwards;
+    z-index: 20;
 }
 
 .timeline-description p {
