@@ -83,8 +83,16 @@ document.addEventListener('DOMContentLoaded', function() {
                 setTimeout(() => {
                     el.style.animation = '';
                     el.style.opacity = '';
-                }, 10 + index * 100); // Stagger animations
+                }, 10 + index * 100);
             });
+            
+            // Reset timeline scroll and hide descriptions
+            const timelineBar = targetPage.querySelector('.timeline-bar');
+            if (timelineBar) {
+                timelineBar.scrollLeft = 0;
+                const descriptions = targetPage.querySelectorAll('.timeline-description');
+                descriptions.forEach(desc => desc.classList.remove('active'));
+            }
         }, 500);
     }
     
@@ -142,11 +150,11 @@ document.addEventListener('DOMContentLoaded', function() {
             updateSlider(this.value);
         });
         
-        // Mouse drag functionality
-        let isDragging = false;
+        // Mouse drag functionality for comparison slider
+        let isDraggingComparison = false;
         
-        function handleMove(e) {
-            if (!isDragging) return;
+        function handleComparisonMove(e) {
+            if (!isDraggingComparison) return;
             
             const rect = comparisonWrapper.getBoundingClientRect();
             let x = e.clientX || (e.touches && e.touches[0].clientX);
@@ -159,33 +167,30 @@ document.addEventListener('DOMContentLoaded', function() {
             updateSlider(position);
         }
         
-        // Mouse events
         comparisonWrapper.addEventListener('mousedown', (e) => {
-            e.stopPropagation(); // Prevent card click when interacting with slider
-            isDragging = true;
-            handleMove(e);
+            e.stopPropagation();
+            isDraggingComparison = true;
+            handleComparisonMove(e);
         });
         
-        document.addEventListener('mousemove', handleMove);
+        document.addEventListener('mousemove', handleComparisonMove);
         
         document.addEventListener('mouseup', () => {
-            isDragging = false;
+            isDraggingComparison = false;
         });
         
-        // Touch events for mobile
         comparisonWrapper.addEventListener('touchstart', (e) => {
-            e.stopPropagation(); // Prevent card click when interacting with slider
-            isDragging = true;
-            handleMove(e);
+            e.stopPropagation();
+            isDraggingComparison = true;
+            handleComparisonMove(e);
         });
         
-        document.addEventListener('touchmove', handleMove);
+        document.addEventListener('touchmove', handleComparisonMove);
         
         document.addEventListener('touchend', () => {
-            isDragging = false;
+            isDraggingComparison = false;
         });
         
-        // Keyboard support
         comparisonSlider.addEventListener('keydown', function(e) {
             if (e.key === 'ArrowLeft' || e.key === 'ArrowRight') {
                 e.preventDefault();
@@ -196,6 +201,86 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     }
+    
+    // Timeline Dragging and Clicking
+    const timelineBars = document.querySelectorAll('.timeline-bar');
+    timelineBars.forEach(bar => {
+        let isDraggingTimeline = false;
+        let startX, scrollLeft;
+        
+        bar.addEventListener('mousedown', (e) => {
+            e.preventDefault();
+            isDraggingTimeline = true;
+            startX = e.pageX - bar.offsetLeft;
+            scrollLeft = bar.scrollLeft;
+            bar.style.cursor = 'grabbing';
+        });
+        
+        bar.addEventListener('mousemove', (e) => {
+            if (!isDraggingTimeline) return;
+            e.preventDefault();
+            const x = e.pageX - bar.offsetLeft;
+            const walk = (x - startX) * 2; // Adjust scroll speed
+            bar.scrollLeft = scrollLeft - walk;
+        });
+        
+        bar.addEventListener('mouseup', () => {
+            isDraggingTimeline = false;
+            bar.style.cursor = 'grab';
+        });
+        
+        bar.addEventListener('mouseleave', () => {
+            isDraggingTimeline = false;
+            bar.style.cursor = 'grab';
+        });
+        
+        // Touch events for mobile
+        bar.addEventListener('touchstart', (e) => {
+            e.preventDefault();
+            isDraggingTimeline = true;
+            startX = e.touches[0].pageX - bar.offsetLeft;
+            scrollLeft = bar.scrollLeft;
+        });
+        
+        bar.addEventListener('touchmove', (e) => {
+            if (!isDraggingTimeline) return;
+            e.preventDefault();
+            const x = e.touches[0].pageX - bar.offsetLeft;
+            const walk = (x - startX) * 2;
+            bar.scrollLeft = scrollLeft - walk;
+        });
+        
+        bar.addEventListener('touchend', () => {
+            isDraggingTimeline = false;
+        });
+        
+        // Click handler for timeline markers
+        const markers = bar.querySelectorAll('.timeline-marker');
+        markers.forEach(marker => {
+            marker.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const descId = marker.getAttribute('data-description');
+                const description = bar.querySelector(`#${descId}`);
+                const allDescriptions = bar.querySelectorAll('.timeline-description');
+                
+                // Hide all other descriptions
+                allDescriptions.forEach(desc => {
+                    if (desc !== description) {
+                        desc.classList.remove('active');
+                    }
+                });
+                
+                // Toggle the clicked description
+                description.classList.toggle('active');
+                
+                // Center the marker in the timeline
+                const markerRect = marker.getBoundingClientRect();
+                const barRect = bar.getBoundingClientRect();
+                const scrollPosition = marker.offsetLeft - bar.offsetWidth / 2 + marker.offsetWidth / 2;
+                bar.scrollTo({ left: scrollPosition, behavior: 'smooth' });
+            });
+        });
+    });
     
     // Intersection Observer for scroll animations
     const observerOptions = {
