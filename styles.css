@@ -204,6 +204,17 @@ body {
     }
 }
 
+@keyframes timelineFadeIn {
+    from {
+        opacity: 0;
+        transform: translateX(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
 /* Projects Section */
 .projects-section {
     padding: 80px var(--site-margin);
@@ -460,6 +471,107 @@ body {
     color: var(--background-color);
 }
 
+/* Timeline */
+.timeline {
+    position: relative;
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 20px 0;
+}
+
+.timeline::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 4px;
+    height: 100%;
+    background-color: var(--primary-color);
+    opacity: 0.5;
+}
+
+.timeline ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.timeline-item {
+    position: relative;
+    width: 50%;
+    padding: 20px;
+    margin-bottom: 20px;
+    opacity: 0;
+    animation: timelineFadeIn 0.8s ease forwards;
+}
+
+.timeline-item:nth-child(odd) {
+    left: 0;
+    text-align: right;
+}
+
+.timeline-item:nth-child(even) {
+    left: 50%;
+    text-align: left;
+}
+
+.timeline-item::before {
+    content: '';
+    position: absolute;
+    top: 20px;
+    width: 16px;
+    height: 16px;
+    background-color: var(--primary-color);
+    border-radius: 50%;
+    z-index: 1;
+}
+
+.timeline-item:nth-child(odd)::before {
+    right: -8px;
+}
+
+.timeline-item:nth-child(even)::before {
+    left: -8px;
+}
+
+.timeline-item::after {
+    content: '';
+    position: absolute;
+    top: 24px;
+    width: 20px;
+    height: 4px;
+    background-color: var(--primary-color);
+    opacity: 0.5;
+}
+
+.timeline-item:nth-child(odd)::after {
+    right: -20px;
+}
+
+.timeline-item:nth-child(even)::after {
+    left: -20px;
+}
+
+.timeline-date {
+    display: block;
+    font-size: 1.8em;
+    font-weight: 300;
+    opacity: 0.7;
+    margin-bottom: 10px;
+}
+
+.timeline-item h4 {
+    font-size: 2.2em;
+    font-weight: 400;
+    margin-bottom: 10px;
+}
+
+.timeline-item p {
+    font-size: 1.8em;
+    opacity: 0.85;
+}
+
 /* About Section */
 .about-section {
     min-height: 80vh;
@@ -633,6 +745,27 @@ footer {
 
     .project-detail-description {
         font-size: 2em;
+    }
+
+    .timeline::before {
+        left: 20px;
+    }
+
+    .timeline-item {
+        width: 100%;
+        text-align: left;
+        left: 0;
+        padding-left: 40px;
+    }
+
+    .timeline-item:nth-child(odd)::before,
+    .timeline-item:nth-child(even)::before {
+        left: 12px;
+    }
+
+    .timeline-item:nth-child(odd)::after,
+    .timeline-item:nth-child(even)::after {
+        left: 16px;
     }
 
     .about-container {
