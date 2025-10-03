@@ -558,10 +558,10 @@ body {
     top: 80px;
     left: 50%;
     transform: translateX(-50%);
-    width: 300px;
+    width: 350px;
     min-height: 60px;
     padding: 15px;
-    background-color: rgba(255, 255, 255, 0.9);
+    background-color: rgba(0, 0, 0, 0.9);
     border: 1px solid var(--primary-color);
     border-radius: 5px;
     display: none;
@@ -767,7 +767,7 @@ footer {
     }
 
     .timeline-description {
-        width: 200px;
+        width: 250px;
         top: 70px;
         min-height: 50px;
         font-size: 1.6em;
@@ -854,7 +854,7 @@ footer {
     }
 
     .timeline-description {
-        width: 180px;
+        width: 220px;
         top: 60px;
         min-height: 40px;
     }
