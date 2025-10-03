@@ -89,14 +89,10 @@ document.addEventListener('DOMContentLoaded', function() {
                 }, 10 + index * 100);
             });
             
-            // Reset timeline scroll and hide descriptions
-            const timelineBar = targetPage.querySelector('.timeline-bar');
-            if (timelineBar) {
-                console.log('Resetting timeline for', targetPageId);
-                timelineBar.scrollLeft = 0;
-                const descriptions = targetPage.querySelectorAll('.timeline-description');
-                descriptions.forEach(desc => desc.classList.remove('active'));
-            }
+            // Hide all timeline descriptions
+            const descriptions = targetPage.querySelectorAll('.timeline-description');
+            descriptions.forEach(desc => desc.classList.remove('active'));
+            console.log('Timeline descriptions hidden for:', targetPageId);
         }, 500);
     }
     
@@ -202,74 +198,18 @@ document.addEventListener('DOMContentLoaded', function() {
         console.warn('Comparison slider elements not found');
     }
     
-    // Timeline Dragging and Clicking
-    const timelineBars = document.querySelectorAll('.timeline-bar');
-    console.log('Found', timelineBars.length, 'timeline bars');
-    timelineBars.forEach(bar => {
-        const timelineId = bar.getAttribute('data-timeline-id');
-        console.log('Initializing timeline:', timelineId);
-        
-        let isDraggingTimeline = false;
-        let startX, scrollLeft;
-        
-        bar.addEventListener('mousedown', (e) => {
-            e.preventDefault();
-            isDraggingTimeline = true;
-            startX = e.pageX - bar.offsetLeft;
-            scrollLeft = bar.scrollLeft;
-            bar.style.cursor = 'grabbing';
-            console.log('Timeline drag started:', timelineId);
-        });
-        
-        bar.addEventListener('mousemove', (e) => {
-            if (!isDraggingTimeline) return;
-            e.preventDefault();
-            const x = e.pageX - bar.offsetLeft;
-            const walk = (x - startX) * 2;
-            bar.scrollLeft = scrollLeft - walk;
-        });
-        
-        bar.addEventListener('mouseup', () => {
-            isDraggingTimeline = false;
-            bar.style.cursor = 'grab';
-            console.log('Timeline drag ended:', timelineId);
-        });
-        
-        bar.addEventListener('mouseleave', () => {
-            isDraggingTimeline = false;
-            bar.style.cursor = 'grab';
-        });
-        
-        bar.addEventListener('touchstart', (e) => {
-            e.preventDefault();
-            isDraggingTimeline = true;
-            startX = e.touches[0].pageX - bar.offsetLeft;
-            scrollLeft = bar.scrollLeft;
-            console.log('Timeline touch drag started:', timelineId);
-        });
-        
-        bar.addEventListener('touchmove', (e) => {
-            if (!isDraggingTimeline) return;
-            e.preventDefault();
-            const x = e.touches[0].pageX - bar.offsetLeft;
-            const walk = (x - startX) * 2;
-            bar.scrollLeft = scrollLeft - walk;
-        });
-        
-        bar.addEventListener('touchend', () => {
-            isDraggingTimeline = false;
-            console.log('Timeline touch drag ended:', timelineId);
-        });
-        
-        // Click handler for timeline markers
-        const markers = bar.querySelectorAll('.timeline-marker');
-        console.log('Found', markers.length, 'markers in timeline:', timelineId);
+    // Timeline Clicking
+    const timelines = document.querySelectorAll('.timeline');
+    console.log('Found', timelines.length, 'timelines');
+    timelines.forEach(timeline => {
+        const markers = timeline.querySelectorAll('.timeline-marker');
+        console.log('Found', markers.length, 'markers in timeline');
         markers.forEach((marker, index) => {
             marker.addEventListener('click', (e) => {
                 e.stopPropagation();
                 const descId = marker.getAttribute('data-description');
-                const description = bar.querySelector(`#${descId}`);
-                const allDescriptions = bar.querySelectorAll('.timeline-description');
+                const description = timeline.querySelector(`#${descId}`);
+                const allDescriptions = timeline.querySelectorAll('.timeline-description');
                 
                 allDescriptions.forEach(desc => {
                     if (desc !== description) {
@@ -279,11 +219,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 
                 description.classList.toggle('active');
                 console.log('Marker clicked:', descId, 'Active:', description.classList.contains('active'));
-                
-                const markerRect = marker.getBoundingClientRect();
-                const barRect = bar.getBoundingClientRect();
-                const scrollPosition = marker.offsetLeft - bar.offsetWidth / 2 + marker.offsetWidth / 2;
-                bar.scrollTo({ left: scrollPosition, behavior: 'smooth' });
             });
         });
     });
