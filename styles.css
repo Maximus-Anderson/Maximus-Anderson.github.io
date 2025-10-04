@@ -555,7 +555,7 @@ body {
 
 .timeline-popup {
     position: absolute;
-    bottom: -100px;
+    bottom: -120px;
     left: 50%;
     transform: translateX(-50%);
     width: 400px;
@@ -581,6 +581,22 @@ body {
 
 .timeline-description-content p {
     margin: 0;
+}
+
+.popup-close {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    background: transparent;
+    border: none;
+    color: var(--text-color);
+    font-size: 1.8em;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.popup-close:hover {
+    color: var(--primary-color);
 }
 
 /* About Section */
