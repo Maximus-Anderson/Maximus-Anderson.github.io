@@ -480,6 +480,12 @@ body {
     background-color: rgba(255, 255, 255, 0.05);
     border-radius: 5px;
     z-index: 1;
+    display: grid;
+    grid-template-rows: auto auto;
+    justify-content: center;
+    height: auto; /* Allow timeline to grow with popup */
+    max-height: 750px; /* Prevent excessive growth */
+    overflow-y: auto; /* Scroll if popup grows too large */
 }
 
 .timeline-title {
@@ -487,18 +493,20 @@ body {
     font-weight: 400;
     text-align: center;
     margin-bottom: 20px;
+    grid-row: 1;
 }
 
 .timeline-content {
     position: relative;
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: flex-start; /* Align items to top */
+    grid-row: 1;
 }
 
 .timeline-track {
     position: absolute;
-    top: 50%;
+    top: 20px; /* Position track near top */
     left: 0;
     right: 0;
     height: 6px;
@@ -529,7 +537,7 @@ body {
 .timeline-marker::before {
     content: '';
     position: absolute;
-    top: -30px;
+    top: 12px; /* Align button center with track center */
     left: 50%;
     transform: translateX(-50%);
     width: 20px;
@@ -544,6 +552,7 @@ body {
     font-size: 1.8em;
     font-weight: 300;
     opacity: 0.9;
+    margin-top: 30px; /* Push date below track */
     margin-bottom: 5px;
 }
 
@@ -554,20 +563,17 @@ body {
 }
 
 .timeline-popup {
-    position: absolute;
-    bottom: -120px;
-    left: 50%;
-    transform: translateX(-50%) !important;
-    width: 400px;
-    min-height: 60px;
-    padding: 15px;
+    grid-row: 2;
+    justify-self: center; /* Center horizontally in grid */
+    width: 500px; /* Wide enough for text */
+    padding: calc(10px + 2vw); /* Variable padding based on viewport width */
     background-color: rgba(0, 0, 0, 0.9);
     border: 1px solid var(--primary-color);
     border-radius: 5px;
     display: none;
     z-index: 20;
     text-align: center;
-    margin-left: 0;
+    margin-top: 10px; /* Ensure popup is below markers */
 }
 
 .timeline-popup.active {
@@ -576,8 +582,12 @@ body {
 }
 
 .timeline-description-content {
-    font-size: 1.8em;
+    font-size: 1.6em; /* Kept for readability */
     opacity: 1;
+    word-wrap: break-word; /* Ensure long words break */
+    overflow-wrap: break-word;
+    max-width: 100%; /* Fit within popup */
+    margin: 0 auto;
 }
 
 .timeline-description-content p {
@@ -684,7 +694,7 @@ body {
 
 .resume-iframe {
     width: 90vw;
-    height: 130vw;
+    height: 90vh;
     border: none;
     box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
 }
@@ -776,7 +786,9 @@ footer {
     }
 
     .timeline {
-        height: 120px;
+        height: auto;
+        max-height: 400px; /* Adjusted for smaller screens */
+        overflow-y: auto;
     }
 
     .timeline-title {
@@ -787,23 +799,31 @@ footer {
         width: 150px;
     }
 
-    .timeline-popup {
-        width: 250px;
-        bottom: -80px;
-        min-height: 50px;
-        font-size: 1.6em;
+    .timeline-track {
+        top: 15px;
     }
 
-    .timeline-description-content {
-        font-size: 1.6em;
+    .timeline-marker::before {
+        top: 2px;
     }
 
     .timeline-date {
         font-size: 1.6em;
+        margin-top: 25px;
     }
 
     .timeline-item h4 {
         font-size: 1.8em;
+    }
+
+    .timeline-popup {
+        width: 300px; /* Adjusted for smaller screens */
+        padding: calc(8px + 1.5vw); /* Slightly smaller variable padding */
+        margin-top: 80px;
+    }
+
+    .timeline-description-content {
+        font-size: 1.5em; /* Slightly smaller for smaller screens */
     }
 
     .about-container {
@@ -867,16 +887,34 @@ footer {
     }
 
     .timeline {
-        height: 100px;
+        height: auto;
+        max-height: 350px; /* Further adjusted for very small screens */
+        overflow-y: auto;
     }
 
     .timeline-item {
         width: 120px;
     }
 
+    .timeline-track {
+        top: 10px;
+    }
+
+    .timeline-marker::before {
+        top: 0;
+    }
+
+    .timeline-date {
+        margin-top: 20px;
+    }
+
     .timeline-popup {
-        width: 220px;
-        bottom: -70px;
-        min-height: 40px;
+        width: 260px; /* Further adjusted */
+        padding: calc(6px + 1vw); /* Smaller variable padding */
+        margin-top: 70px;
+    }
+
+    .timeline-description-content {
+        font-size: 1.4em; /* Slightly smaller for very small screens */
     }
 }
