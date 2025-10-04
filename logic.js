@@ -89,10 +89,14 @@ document.addEventListener('DOMContentLoaded', function() {
                 }, 10 + index * 100);
             });
             
-            // Hide all timeline descriptions
-            const descriptions = targetPage.querySelectorAll('.timeline-description');
-            descriptions.forEach(desc => desc.classList.remove('active'));
-            console.log('Timeline descriptions hidden for:', targetPageId);
+            // Hide timeline popup
+            const popup = targetPage.querySelector('#timeline-popup');
+            if (popup) {
+                popup.classList.remove('active');
+                const descriptions = popup.querySelectorAll('.timeline-description-content');
+                descriptions.forEach(desc => desc.style.display = 'none');
+                console.log('Timeline popup hidden for:', targetPageId);
+            }
         }, 500);
     }
     
@@ -203,23 +207,39 @@ document.addEventListener('DOMContentLoaded', function() {
     console.log('Found', timelines.length, 'timelines');
     timelines.forEach(timeline => {
         const markers = timeline.querySelectorAll('.timeline-marker');
+        const popup = timeline.querySelector('#timeline-popup');
         console.log('Found', markers.length, 'markers in timeline');
         markers.forEach((marker, index) => {
             marker.addEventListener('click', (e) => {
                 e.stopPropagation();
                 const descId = marker.getAttribute('data-description');
                 const description = timeline.querySelector(`#${descId}`);
-                const allDescriptions = timeline.querySelectorAll('.timeline-description');
+                const allDescriptions = timeline.querySelectorAll('.timeline-description-content');
                 
                 allDescriptions.forEach(desc => {
-                    if (desc !== description) {
-                        desc.classList.remove('active');
-                    }
+                    desc.style.display = 'none';
                 });
                 
-                description.classList.toggle('active');
-                console.log('Marker clicked:', descId, 'Active:', description.classList.contains('active'));
+                if (description.style.display === 'none') {
+                    description.style.display = 'block';
+                    popup.classList.add('active');
+                    console.log('Marker clicked:', descId, 'Popup active');
+                } else {
+                    description.style.display = 'none';
+                    popup.classList.remove('active');
+                    console.log('Marker clicked:', descId, 'Popup hidden');
+                }
             });
+        });
+        
+        // Hide popup when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!timeline.contains(e.target)) {
+                popup.classList.remove('active');
+                const descriptions = popup.querySelectorAll('.timeline-description-content');
+                descriptions.forEach(desc => desc.style.display = 'none');
+                console.log('Clicked outside timeline, popup hidden');
+            }
         });
     });
     
