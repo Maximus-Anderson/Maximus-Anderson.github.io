@@ -15,7 +15,6 @@
 
 html {
     font-size: 10px;
-    scroll-behavior: smooth;
 }
 
 body {
@@ -497,21 +496,6 @@ body {
     z-index: 1;
 }
 
-/* Reverse z-index for timeline items to ensure earlier milestones are above later ones */
-.timeline-item {
-    position: relative;
-    width: 200px;
-    text-align: center;
-    opacity: 0;
-    animation: timelineFadeIn 0.8s ease forwards;
-}
-
-.timeline-item:nth-child(1) { z-index: 10; }
-.timeline-item:nth-child(2) { z-index: 9; }
-.timeline-item:nth-child(3) { z-index: 8; }
-.timeline-item:nth-child(4) { z-index: 7; }
-.timeline-item:nth-child(5) { z-index: 6; }
-
 .timeline-track {
     position: absolute;
     top: 50%;
@@ -521,6 +505,15 @@ body {
     background-color: var(--primary-color);
     opacity: 0.8;
     z-index: 0;
+}
+
+.timeline-item {
+    position: relative;
+    width: 200px;
+    text-align: center;
+    opacity: 0;
+    animation: timelineFadeIn 0.8s ease forwards;
+    z-index: 2;
 }
 
 .timeline-marker {
@@ -573,6 +566,8 @@ body {
     border-radius: 5px;
     display: none;
     text-align: left;
+    font-size: 1.8em;
+    z-index: 10;
 }
 
 .timeline-description.active {
@@ -582,7 +577,7 @@ body {
 }
 
 .timeline-description p {
-    font-size: 1.8em;
+    font-size: 1.8em !important;
     opacity: 1;
 }
 
@@ -777,10 +772,11 @@ footer {
         width: 250px;
         top: 70px;
         min-height: 50px;
+        font-size: 1.8em;
     }
 
     .timeline-description p {
-        font-size: 1.8em;
+        font-size: 1.8em !important;
     }
 
     .timeline-date {
@@ -863,9 +859,10 @@ footer {
         width: 220px;
         top: 60px;
         min-height: 40px;
+        font-size: 1.8em;
     }
 
     .timeline-description p {
-        font-size: 1.8em;
+        font-size: 1.8em !important;
     }
 }
