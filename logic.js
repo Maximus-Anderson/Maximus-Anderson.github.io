@@ -205,40 +205,65 @@ document.addEventListener('DOMContentLoaded', function() {
     // Timeline Clicking
     const timelines = document.querySelectorAll('.timeline');
     console.log('Found', timelines.length, 'timelines');
+    
+    function hidePopup(timeline) {
+        const popup = timeline.querySelector('#timeline-popup');
+        if (popup) {
+            popup.classList.remove('active');
+            const descriptions = popup.querySelectorAll('.timeline-description-content');
+            descriptions.forEach(desc => desc.style.display = 'none');
+            console.log('Popup hidden for timeline');
+        }
+    }
+    
     timelines.forEach(timeline => {
         const markers = timeline.querySelectorAll('.timeline-marker');
         const popup = timeline.querySelector('#timeline-popup');
+        const closeButton = timeline.querySelector('.popup-close');
+        
         console.log('Found', markers.length, 'markers in timeline');
-        markers.forEach((marker, index) => {
+        
+        markers.forEach(marker => {
             marker.addEventListener('click', (e) => {
+                e.preventDefault();
                 e.stopPropagation();
                 const descId = marker.getAttribute('data-description');
-                const description = timeline.querySelector(`#${descId}`);
-                const allDescriptions = timeline.querySelectorAll('.timeline-description-content');
+                const description = popup.querySelector(`#${descId}`);
                 
-                allDescriptions.forEach(desc => {
-                    desc.style.display = 'none';
-                });
+                if (!description) {
+                    console.error('Description not found for ID:', descId);
+                    return;
+                }
                 
-                if (description.style.display === 'none') {
+                const allDescriptions = popup.querySelectorAll('.timeline-description-content');
+                const isActive = description.style.display === 'block';
+                
+                allDescriptions.forEach(desc => desc.style.display = 'none');
+                
+                if (!isActive) {
                     description.style.display = 'block';
                     popup.classList.add('active');
-                    console.log('Marker clicked:', descId, 'Popup active');
+                    console.log('Marker clicked:', descId, 'Popup shown');
                 } else {
-                    description.style.display = 'none';
                     popup.classList.remove('active');
                     console.log('Marker clicked:', descId, 'Popup hidden');
                 }
             });
         });
         
-        // Hide popup when clicking outside
+        // Close button handler
+        if (closeButton) {
+            closeButton.addEventListener('click', (e) => {
+                e.stopPropagation();
+                hidePopup(timeline);
+                console.log('Close button clicked, popup hidden');
+            });
+        }
+        
+        // Hide popup when clicking outside timeline
         document.addEventListener('click', (e) => {
-            if (!timeline.contains(e.target)) {
-                popup.classList.remove('active');
-                const descriptions = popup.querySelectorAll('.timeline-description-content');
-                descriptions.forEach(desc => desc.style.display = 'none');
-                console.log('Clicked outside timeline, popup hidden');
+            if (!timeline.contains(e.target) && !popup.contains(e.target)) {
+                hidePopup(timeline);
             }
         });
     });
