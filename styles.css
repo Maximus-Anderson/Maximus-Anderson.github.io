@@ -453,6 +453,8 @@ body {
     text-align: center;
     opacity: 0.85;
     max-width: 800px;
+    width: 100%;
+    margin: 0 auto;
 }
 
 .back-button {
@@ -745,6 +747,120 @@ footer {
     background-color: var(--primary-color);
 }
 
+/* Role and Specs Side Boxes */
+.side-boxes-container {
+    display: flex;
+    gap: 20px;
+    margin-top: 20px;
+    align-items: flex-start;
+}
+
+.role-container,
+.specs-container {
+    flex: 0 0 180px;
+    background-color: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--primary-color);
+    border-radius: 5px;
+    padding: 12px;
+    text-align: center;
+}
+
+.specs-container {
+    flex: 0 0 300px; /* Reverted to 300px as preferred */
+}
+
+.role-title,
+.specs-title {
+    font-size: 1.8em;
+    font-weight: 400;
+    color: #ff4d4d; /* Warm red */
+    text-shadow: 0 0 5px rgba(255, 77, 77, 0.7), 0 0 10px rgba(255, 77, 77, 0.5);
+    margin-bottom: 8px;
+}
+
+.role-list,
+.specs-list {
+    font-size: 1.6em;
+    line-height: 1.5;
+    opacity: 0.85;
+    list-style-position: inside;
+}
+
+.role-list li,
+.specs-list li {
+    margin-bottom: 6px;
+}
+
+/* Background Section */
+.background-container {
+    width: 100%;
+    margin-top: 20px;
+}
+
+.background-title {
+    font-size: 1.8em;
+    font-weight: 400;
+    color: #ff4d4d; /* Warm red to match role-title */
+    text-shadow: 0 0 5px rgba(255, 77, 77, 0.7), 0 0 10px rgba(255, 77, 77, 0.5);
+    margin-bottom: 10px;
+    text-align: left;
+}
+
+.background-description {
+    font-size: 1.6em;
+    line-height: 1.5;
+    opacity: 0.85;
+    text-align: left;
+    margin-bottom: 15px;
+}
+
+.background-image {
+    width: 100%;
+    max-width: 600px;
+    aspect-ratio: 16/10;
+    object-fit: cover;
+    background-color: #1a1a1a;
+    margin: 0 auto 15px;
+    display: block;
+}
+
+/* Additional Photos Section */
+.additional-photos-container {
+    max-width: 800px;
+    margin: 40px auto 0;
+}
+
+.additional-photos-title {
+    font-size: 1.8em;
+    font-weight: 400;
+    color: #ff4d4d; /* Warm red to match other titles */
+    text-shadow: 0 0 5px rgba(255, 77, 77, 0.7), 0 0 10px rgba(255, 77, 77, 0.5);
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.additional-photos-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+}
+
+.photo-item {
+    position: relative;
+}
+
+.additional-photo {
+    width: 100%;
+    aspect-ratio: 16/10;
+    object-fit: cover;
+    background-color: #1a1a1a;
+    transition: transform 0.6s ease;
+}
+
+.photo-item:hover .additional-photo {
+    transform: scale(1.05);
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
     :root {
@@ -785,6 +901,52 @@ footer {
 
     .project-detail-description {
         font-size: 2em;
+    }
+
+    .side-boxes-container {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .role-container,
+    .specs-container {
+        flex: 0 0 auto;
+        max-width: 300px; /* Wider for both on smaller screens */
+    }
+
+    .role-title,
+    .specs-title {
+        font-size: 1.6em;
+    }
+
+    .role-list,
+    .specs-list {
+        font-size: 1.4em;
+    }
+
+    .background-title {
+        font-size: 1.6em;
+    }
+
+    .background-description {
+        font-size: 1.4em;
+    }
+
+    .background-image {
+        max-width: 100%;
+    }
+
+    .additional-photos-container {
+        margin: 20px auto 0;
+    }
+
+    .additional-photos-title {
+        font-size: 1.6em;
+    }
+
+    .additional-photos-grid {
+        grid-template-columns: 1fr;
+        gap: 15px;
     }
 
     .timeline {
@@ -888,6 +1050,37 @@ footer {
         height: 60vh;
     }
 
+    .project-detail-description {
+        font-size: 1.8em;
+    }
+
+    .role-container,
+    .specs-container {
+        padding: 8px;
+    }
+
+    .role-title,
+    .specs-title {
+        font-size: 1.4em;
+    }
+
+    .role-list,
+    .specs-list {
+        font-size: 1.2em;
+    }
+
+    .background-title {
+        font-size: 1.4em;
+    }
+
+    .background-description {
+        font-size: 1.2em;
+    }
+
+    .additional-photos-title {
+        font-size: 1.4em;
+    }
+
     .timeline {
         height: auto;
         max-height: 350px; /* Further adjusted for very small screens */
@@ -918,200 +1111,5 @@ footer {
 
     .timeline-description-content {
         font-size: 1.4em; /* Slightly smaller for very small screens */
-    }
-}
-/* Role and Specs Side Boxes */
-.side-boxes-container {
-    display: flex;
-    gap: 20px;
-    margin-top: 20px;
-    align-items: flex-start;
-}
-
-.role-container {
-    flex: 0 0 180px;
-    background-color: rgba(255, 255, 255, 0.05);
-    border: 1px solid var(--primary-color);
-    border-radius: 5px;
-    padding: 12px;
-    text-align: center;
-}
-
-.specs-container {
-    flex: 0 0 300px; /* Wider than role-container */
-    background-color: rgba(255, 255, 255, 0.05);
-    border: 1px solid var(--primary-color);
-    border-radius: 5px;
-    padding: 12px;
-    text-align: center;
-}
-
-.role-title,
-.specs-title {
-    font-size: 1.8em;
-    font-weight: 400;
-    color: #ff4d4d; /* Warm red */
-    text-shadow: 0 0 5px rgba(255, 77, 77, 0.7), 0 0 10px rgba(255, 77, 77, 0.5);
-    margin-bottom: 8px;
-}
-
-.role-list,
-.specs-list {
-    font-size: 1.6em;
-    line-height: 1.5;
-    opacity: 0.85;
-    list-style-position: inside;
-}
-
-.role-list li,
-.specs-list li {
-    margin-bottom: 6px;
-}
-
-/* Background Section */
-.background-container {
-    width: 100%;
-    margin-top: 20px;
-}
-
-.background-title {
-    font-size: 1.8em;
-    font-weight: 400;
-    color: #ff4d4d; /* Warm red to match role-title */
-    text-shadow: 0 0 5px rgba(255, 77, 77, 0.7), 0 0 10px rgba(255, 77, 77, 0.5);
-    margin-bottom: 10px;
-    text-align: left;
-}
-
-.background-description {
-    font-size: 1.6em;
-    line-height: 1.5;
-    opacity: 0.85;
-    text-align: left;
-    margin-bottom: 15px;
-}
-
-.background-image {
-    width: 100%;
-    max-width: 600px;
-    aspect-ratio: 16/10;
-    object-fit: cover;
-    background-color: #1a1a1a;
-    margin: 0 auto 15px;
-    display: block;
-}
-
-/* Additional Photos Section */
-.additional-photos-container {
-    max-width: 800px;
-    margin: 40px auto 0;
-}
-
-.additional-photos-title {
-    font-size: 1.8em;
-    font-weight: 400;
-    color: #ff4d4d; /* Warm red to match other titles */
-    text-shadow: 0 0 5px rgba(255, 77, 77, 0.7), 0 0 10px rgba(255, 77, 77, 0.5);
-    margin-bottom: 20px;
-    text-align: left;
-}
-
-.additional-photos-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 20px;
-}
-
-.photo-item {
-    position: relative;
-}
-
-.additional-photo {
-    width: 100%;
-    aspect-ratio: 16/10;
-    object-fit: cover;
-    background-color: #1a1a1a;
-    transition: transform 0.6s ease;
-}
-
-.photo-item:hover .additional-photo {
-    transform: scale(1.05);
-}
-
-/* Responsive Design */
-@media (max-width: 768px) {
-    .side-boxes-container {
-        flex-direction: column;
-        gap: 15px;
-    }
-
-    .role-container,
-    .specs-container {
-        flex: 0 0 auto;
-        max-width: 300px; /* Wider for both on smaller screens */
-    }
-
-    .role-title,
-    .specs-title {
-        font-size: 1.6em;
-    }
-
-    .role-list,
-    .specs-list {
-        font-size: 1.4em;
-    }
-
-    .background-title {
-        font-size: 1.6em;
-    }
-
-    .background-description {
-        font-size: 1.4em;
-    }
-
-    .background-image {
-        max-width: 100%;
-    }
-
-    .additional-photos-container {
-        margin: 20px auto 0;
-    }
-
-    .additional-photos-title {
-        font-size: 1.6em;
-    }
-
-    .additional-photos-grid {
-        grid-template-columns: 1fr;
-        gap: 15px;
-    }
-}
-
-@media (max-width: 480px) {
-    .role-container,
-    .specs-container {
-        padding: 8px;
-    }
-
-    .role-title,
-    .specs-title {
-        font-size: 1.4em;
-    }
-
-    .role-list,
-    .specs-list {
-        font-size: 1.2em;
-    }
-
-    .background-title {
-        font-size: 1.4em;
-    }
-
-    .background-description {
-        font-size: 1.2em;
-    }
-
-    .additional-photos-title {
-        font-size: 1.4em;
     }
 }
