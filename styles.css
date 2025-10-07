@@ -685,19 +685,34 @@ body {
 }
 
 .resume-container {
-    max-width: 100vw;
+    width: 100%;
+    max-width: 900px;
     margin: 0 auto;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.resume-iframe {
-    width: 90vw;
-    height: 90vh;
+    overflow: hidden;
+    padding: 1rem;
+    box-sizing: border-box;
+  }
+  
+  
+  .resume-viewport {
+    position: relative;
+    width: 100%;
+    --pdf-aspect: 1.294;
+    padding-top: calc(var(--pdf-aspect) * 100%);
+    background: #f5f5f5;
+    border-radius: 8px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+  }
+  
+  .resume-iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
     border: none;
-    box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
-}
+    display: block;
+  }
 
 /* Footer */
 footer {
@@ -916,5 +931,178 @@ footer {
 
     .timeline-description-content {
         font-size: 1.4em; /* Slightly smaller for very small screens */
+    }
+}
+/* Role Section */
+.project-detail-content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.role-container {
+    width: 180px;
+    background-color: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--primary-color);
+    border-radius: 5px;
+    padding: 12px;
+    text-align: center;
+    margin-top: 20px;
+}
+
+.role-title {
+    font-size: 1.8em;
+    font-weight: 400;
+    color: #ff4d4d; /* Warm red */
+    text-shadow: 0 0 5px rgba(255, 77, 77, 0.7), 0 0 10px rgba(255, 77, 77, 0.5);
+    margin-bottom: 8px;
+}
+
+.role-list {
+    font-size: 1.6em;
+    line-height: 1.5;
+    opacity: 0.85;
+    list-style-position: inside;
+}
+
+.role-list li {
+    margin-bottom: 6px;
+}
+
+/* Background Section */
+.background-container {
+    width: 100%;
+    margin-top: 20px;
+}
+
+.background-title {
+    font-size: 1.8em;
+    font-weight: 400;
+    color: #ff4d4d; /* Warm red to match role-title */
+    text-shadow: 0 0 5px rgba(255, 77, 77, 0.7), 0 0 10px rgba(255, 77, 77, 0.5);
+    margin-bottom: 10px;
+    text-align: left;
+}
+
+.background-description {
+    font-size: 1.6em;
+    line-height: 1.5;
+    opacity: 0.85;
+    text-align: left;
+    margin-bottom: 15px;
+}
+
+.background-image {
+    width: 100%;
+    max-width: 600px;
+    aspect-ratio: 16/10;
+    object-fit: cover;
+    background-color: #1a1a1a;
+    margin: 0 auto 15px;
+    display: block;
+}
+
+/* Additional Photos Section */
+.additional-photos-container {
+    max-width: 800px;
+    margin: 40px auto 0;
+}
+
+.additional-photos-title {
+    font-size: 1.8em;
+    font-weight: 400;
+    color: #ff4d4d; /* Warm red to match other titles */
+    text-shadow: 0 0 5px rgba(255, 77, 77, 0.7), 0 0 10px rgba(255, 77, 77, 0.5);
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.additional-photos-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+}
+
+.photo-item {
+    position: relative;
+}
+
+.additional-photo {
+    width: 100%;
+    aspect-ratio: 16/10;
+    object-fit: cover;
+    background-color: #1a1a1a;
+    transition: transform 0.6s ease;
+}
+
+.photo-item:hover .additional-photo {
+    transform: scale(1.05);
+}
+
+@media (max-width: 768px) {
+    .role-container {
+        width: 100%;
+        max-width: 260px;
+    }
+
+    .role-title {
+        font-size: 1.6em;
+    }
+
+    .role-list {
+        font-size: 1.4em;
+    }
+
+    .background-title {
+        font-size: 1.6em;
+    }
+
+    .background-description {
+        font-size: 1.4em;
+    }
+
+    .background-image {
+        max-width: 100%;
+    }
+
+    .additional-photos-container {
+        margin: 20px auto 0;
+    }
+
+    .additional-photos-title {
+        font-size: 1.6em;
+    }
+
+    .additional-photos-grid {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    .role-container {
+        padding: 8px;
+    }
+
+    .role-title {
+        font-size: 1.4em;
+    }
+
+    .role-list {
+        font-size: 1.2em;
+    }
+
+    .background-title {
+        font-size: 1.4em;
+    }
+
+    .background-description {
+        font-size: 1.2em;
+    }
+
+    .additional-photos-title {
+        font-size: 1.4em;
     }
 }

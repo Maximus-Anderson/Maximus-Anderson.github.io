@@ -102,35 +102,54 @@
         </section>
     </div>
 
-    <!-- Project Detail Pages -->
+  <!-- Project Detail Pages -->
     <!-- FSAE Tractive Battery Module Detail Page -->
     <div id="project-fsae-page" class="page">
         <section class="project-detail-section">
             <div class="project-detail-container">
                 <h1 class="project-detail-title fade-in">FSAE Tractive Battery Module</h1>
                 <img src="images/tractivebatterymodule.jpg" alt="FSAE Tractive Battery Module" class="project-detail-image slide-up">
-                <p class="project-detail-description slide-up" style="animation-delay: 0.2s;">
-                    This project involved the manufacturing of the teams first tractive system battery module and test it to highlight key manufacturing inneficiencies and potential issues to improve in future packs.
-                </p>
+                <div class="project-detail-content slide-up" style="animation-delay: 0.2s;">
+                    <p class="project-detail-description">
+                        This project involved the manufacturing of the team's first tractive system battery module and testing it to highlight key manufacturing inefficiencies and potential issues to improve in future packs.
+                    </p>
+                    <div class="role-container">
+                        <h3 class="role-title">Role</h3>
+                        <ul class="role-list">
+                            <li>Manufacture</li>
+                            <li>Validation</li>
+                        </ul>
+                    </div>
+                    <div class="background-container">
+                        <h3 class="background-title">Background</h3>
+                        <p class="background-description">
+                            For the ISU racecar, CR29, I was tasked with assembling key components of the accumulator, now referred to as the tractive battery, with a focus on the battery modules. These were designed to prioritize safety and repairability.
+                        </p>
+                        <img src="images/tractivebatterymanufacture.png" alt="Tractive Battery Manufacture" class="background-image slide-up" style="animation-delay: 0.3s;">
+                        <p class="background-description">
+                            During manufacturing, I validated features such as press-fit nuts, identified issues like insufficient stack pressure, and noted potentially hazardous bolted connections below the main pack terminals, all of which were flagged for improvement in future designs. Despite these challenges, the module was successfully completed and has been utilized in dynamometer testing.
+                        </p>
+                    </div>
+                </div>
                 <h3 class="timeline-title slide-up" style="animation-delay: 0.4s;">Project Timeline</h3>
                 <div class="timeline slide-up" style="animation-delay: 0.4s;">
                     <div class="timeline-content">
                         <div class="timeline-track"></div>
                         <div class="timeline-item" style="animation-delay: 0.6s;">
                             <div class="timeline-marker" data-description="fsae-desc-1">
-                                <span class="timeline-date">(Date)</span>
-                                <h4>Milestone 1: Assembly</h4>
+                                <span class="timeline-date">March 20, 2025</span>
+                                <h4>Milestone 1: Inefficiencies highlighted</h4>
                             </div>
                         </div>
                         <div class="timeline-item" style="animation-delay: 0.8s;">
                             <div class="timeline-marker" data-description="fsae-desc-2">
-                                <span class="timeline-date">(Date)</span>
-                                <h4>Milestone 2: Inneficiencies highlighted</h4>
+                                <span class="timeline-date">March 21, 2025</span>
+                                <h4>Milestone 2: Assembly</h4>
                             </div>
                         </div>
                         <div class="timeline-item" style="animation-delay: 1.0s;">
                             <div class="timeline-marker" data-description="fsae-desc-3">
-                                <span class="timeline-date">(Date)</span>
+                                <span class="timeline-date">March 30, 2025</span>
                                 <h4>Milestone 3: Modules Completed and Tested</h4>
                             </div>
                         </div>
@@ -138,13 +157,24 @@
                     <div id="timeline-popup" class="timeline-popup">
                         <button class="popup-close">×</button>
                         <div id="fsae-desc-1" class="timeline-description-content" style="display: none;">
-                            <p>Initial assembly was completed of the first module.</p>
+                            <p>Due to the geometry of the tab clamping plates and bolts, the inner most nuts were meant to be press fit, and thus weren't accessible. To combat that JB weld had to be temporarily used to complete these modules. Further issues with cross threading were highlighted. Additionally, cells were on average 0.7mm thinner than the design leading to a lack of stack pressure.</p>
                         </div>
                         <div id="fsae-desc-2" class="timeline-description-content" style="display: none;">
-                            <p>Due to the geometry of the tab clmaping plates and bolts, the inner most nuts were meant to be press fit, and thus weren't accessible. To combat that JB weld had to be temporarily used to complete these modules. Further issues with cross threading were highlighted. Additionally, cells were on average 0.7mm thinner than the design leading to a lack of stack pressure.</p>
+                            <p>Initial assembly was completed of the first module.</p>
                         </div>
                         <div id="fsae-desc-3" class="timeline-description-content" style="display: none;">
-                            <p>Module integrated into motor load testing with successful validation, further issues were hilighted with thermals.</p>
+                            <p>Module integrated into motor load testing with successful validation, further issues were highlighted with thermals.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="additional-photos-container slide-up" style="animation-delay: 0.5s;">
+                    <h3 class="additional-photos-title">Additional Photos</h3>
+                    <div class="additional-photos-grid">
+                        <div class="photo-item">
+                            <img src="images/tractivebatterymodulecomplete.jpg" alt="First module finished" class="additional-photo slide-up" style="animation-delay: 0.6s;">
+                        </div>
+                        <div class="photo-item">
+                            <img src="images/tractivebatteryallmodulescomplete.jpg" alt="All modules done" class="additional-photo slide-up" style="animation-delay: 0.7s;">
                         </div>
                     </div>
                 </div>
@@ -308,9 +338,7 @@
         <section class="project-detail-section">
             <div class="project-detail-container">
                 <h1 class="project-detail-title fade-in">Cell Characterization</h1>
-                <div class="placeholder-image project-detail-image slide-up" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">
-                    <span>DCIR Testing</span>
-                </div>
+                <img src="images/DCIR-Facepressure.png" alt="Cell Characterization" class="project-detail-image slide-up">
                 <p class="project-detail-description slide-up" style="animation-delay: 0.2s;">
                     An ongoing project to characterize battery cells using DCIR testing, focusing on performance metrics such as internal resistance and capacity under varying conditions. The scope of this project is to create a 2RC model to be used in custom BMS work.
                 </p>
@@ -374,10 +402,17 @@
     </div>
 
     <!-- Resume Page -->
-    <div id="resume-page" class="page">
+   <div id="resume-page" class="page">
         <section class="resume-section">
             <div class="resume-container">
-                <iframe src="resume.pdf#zoom=FitX" class="resume-iframe" title="Resume PDF"></iframe>
+                <div class="resume-viewport">
+                    <iframe
+                    id="resume_iframe"
+                    src="resume.pdf#zoom=FitH"
+                    class="resume-iframe"
+                    title="Resume PDF">
+                    </iframe>
+                </div>
             </div>
         </section>
     </div>
