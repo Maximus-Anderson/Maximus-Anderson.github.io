@@ -695,8 +695,8 @@ body {
 
 .resume-iframe {
     border-radius: 8px;
-    width: 55vw;
-    height: 165vh;
+    width: 60vw;
+    height: 160vh;
     border: none;
     box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
 }
