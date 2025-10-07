@@ -920,26 +920,34 @@ footer {
         font-size: 1.4em; /* Slightly smaller for very small screens */
     }
 }
-/* Role Section */
-.project-detail-content {
+/* Role and Specs Side Boxes */
+.side-boxes-container {
     display: flex;
-    flex-direction: column;
+    gap: 20px;
+    margin-top: 20px;
     align-items: flex-start;
-    max-width: 800px;
-    margin: 0 auto;
 }
 
 .role-container {
-    width: 180px;
+    flex: 0 0 180px;
     background-color: rgba(255, 255, 255, 0.05);
     border: 1px solid var(--primary-color);
     border-radius: 5px;
     padding: 12px;
     text-align: center;
-    margin-top: 20px;
 }
 
-.role-title {
+.specs-container {
+    flex: 0 0 300px; /* Wider than role-container */
+    background-color: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--primary-color);
+    border-radius: 5px;
+    padding: 12px;
+    text-align: center;
+}
+
+.role-title,
+.specs-title {
     font-size: 1.8em;
     font-weight: 400;
     color: #ff4d4d; /* Warm red */
@@ -947,14 +955,16 @@ footer {
     margin-bottom: 8px;
 }
 
-.role-list {
+.role-list,
+.specs-list {
     font-size: 1.6em;
     line-height: 1.5;
     opacity: 0.85;
     list-style-position: inside;
 }
 
-.role-list li {
+.role-list li,
+.specs-list li {
     margin-bottom: 6px;
 }
 
@@ -1028,17 +1038,26 @@ footer {
     transform: scale(1.05);
 }
 
+/* Responsive Design */
 @media (max-width: 768px) {
-    .role-container {
-        width: 100%;
-        max-width: 260px;
+    .side-boxes-container {
+        flex-direction: column;
+        gap: 15px;
     }
 
-    .role-title {
+    .role-container,
+    .specs-container {
+        flex: 0 0 auto;
+        max-width: 300px; /* Wider for both on smaller screens */
+    }
+
+    .role-title,
+    .specs-title {
         font-size: 1.6em;
     }
 
-    .role-list {
+    .role-list,
+    .specs-list {
         font-size: 1.4em;
     }
 
@@ -1069,15 +1088,18 @@ footer {
 }
 
 @media (max-width: 480px) {
-    .role-container {
+    .role-container,
+    .specs-container {
         padding: 8px;
     }
 
-    .role-title {
+    .role-title,
+    .specs-title {
         font-size: 1.4em;
     }
 
-    .role-list {
+    .role-list,
+    .specs-list {
         font-size: 1.2em;
     }
 
