@@ -416,13 +416,12 @@
         <section class="project-detail-section">
             <div class="project-detail-container">
                 <h1 class="project-detail-title fade-in">CR30 Battery Pack: Thermal Optimization for Endurance</h1>
-                <img src="images/DCIRMap10-11-25.png" alt="CR30 Battery Pack Thermal Analysis" class="project-detail-image slide-up">
+                <div style="overflow: hidden; width: 100%; max-width: 800px; margin: 0 auto;">
+                    <img src="images/CR30BatteryPack.png" alt="CR30 Battery Pack" class="project-detail-image slide-up" style="transform: scale(1.15); transform-origin: center; width: 100%;">
+                </div>
                 <div class="project-detail-content slide-up" style="animation-delay: 0.2s;">
                     <p class="project-detail-description">
-                        In a previous iteration of Cyclone Racing's EV racing project, the CR29 battery module exposed critical gaps: undocumented design choices, manufacturing defects, and unverified thermal assumptions. Moving to the CR30 pack demanded more than iteration—it required deconstruction to fundamentals. Why a passive heat mass system without active cooling? What drove cell resistance in real conditions? With a $100 budget and three-week deadline, I led a redesign grounded in physics: heat as I²R losses, dissipation via conduction and convection, and decisions validated by data, not speculation.
-                    </p>
-                    <p class="project-detail-description">
-                        This project transformed CR29's lessons into CR30's architecture, blending passive thermal mass with targeted active cooling. No off-the-shelf datasheets, only vague notes stating general ranges in normal environments, inspiring testing and simulation to ensure reliability under race loads.
+                        Leading the thermal redesign of Cyclone Racing's battery pack through empirical testing and physics-based validation.
                     </p>
                     <div class="side-boxes-container">
                         <div class="role-container">
@@ -434,15 +433,15 @@
                                 <li>Lead</li>
                             </ul>
                         </div>
-                        <div class="specs-container">
-                            <h3 class="specs-title">Specifications</h3>
-                            <ul class="specs-list">
-                                <li>Budget: $100</li>
-                                <li>Timeline: 3 weeks</li>
-                                <li>Target: &lt;60°C peaks</li>
-                                <li>Load: Up to 200A pulses</li>
-                            </ul>
-                        </div>
+                    </div>
+                    <div class="background-container">
+                        <h3 class="background-title">The Challenge</h3>
+                        <p class="background-description">
+                            In a previous iteration of Cyclone Racing's EV racing project, the CR29 battery module exposed critical gaps: undocumented design choices, manufacturing defects, and unverified thermal assumptions. Moving to the CR30 pack demanded more than iteration—it required deconstruction to fundamentals. Why a passive heat mass system without active cooling? What drove cell resistance in real conditions? With a $100 budget and three-week deadline, I led a redesign grounded in physics: heat as I²R losses, dissipation via conduction and convection, and decisions validated by data, not speculation.
+                        </p>
+                        <p class="background-description">
+                            This project transformed CR29's lessons into CR30's architecture, blending passive thermal mass with targeted active cooling. No off-the-shelf datasheets, only vague notes stating general ranges in normal environments, inspiring testing and simulation to ensure reliability under race loads.
+                        </p>
                     </div>
                     <div class="background-container">
                         <h3 class="background-title">What is the CR30 Battery Pack?</h3>
@@ -452,6 +451,10 @@
                         <p class="background-description">
                             My initial design leveraged spec sheet data and the CR29 design. Calculations showed severe overheating within the pack by the end of endurance. Getting sufficient airflow would be difficult due to rules constraints, so I developed a worst case design mirroring commercial pack dedicated liquid systems and micro extruded coolant channels. Given space constraints, a new approach was taken and a less conventional design was chosen incorporating U shaped shims contacting cell faces and a separate cooling plate, with thermal padding to increase surface contact. This design featured quick disconnects and a pack dedicated cooling loop mounted to the battery.
                         </p>
+                        <div class="dual-image-container" style="display: flex; gap: 1em; justify-content: center; flex-wrap: wrap;">
+                            <img src="images/UShims.png" alt="U Shims" class="background-image slide-up" style="animation-delay: 0.3s; flex: 1; max-width: 48%;">
+                            <img src="images/CoolingPlate.png" alt="Cooling plate" class="background-image slide-up" style="animation-delay: 0.3s; flex: 1; max-width: 48%;">
+                       </div> 
                         <p class="background-description">
                             This design frustrated me—its effects would be poor at best and it added substantial weight, complexity, and reduced reliability. I'm designing a battery for a racecar so it shouldn't mirror a commercial pack with dedicated liquid systems. CR30 needed evolution through empirical DCIR (DC Internal Resistance) characterization, to reveal that overbuilt liquid cooling was unnecessary for race loads.
                         </p>
@@ -483,31 +486,40 @@
                             With the rig operational, I systematically isolated effects on DCIR, starting with mechanical factors and progressing to electrical and thermal drivers.
                         </p>
                         
-                        <h4 style="font-size: 1.2em; margin-top: 1.5em; color: #333;">Face Pressure: Minimal Impact Ruled Out</h4>
+                        <h4 style="font-size: 1.2em; margin-top: 1.5em; color: #ff8080;">Face Pressure: Minimal Impact Ruled Out</h4>
                         <p class="background-description">
                             Stack pressure was first: Using the steel plate-spring fixture, we applied 0-8 psi to cell faces, simulating compression variances. Pulses revealed negligible DCIR shifts. Given the anticipated low cycle counts for the vehicle's life, SOH degradation wasn't a design criterion. Pressure was deprioritized, freeing resources for higher-impact variables.
                         </p>
-                        
-                        <h4 style="font-size: 1.2em; margin-top: 1.5em; color: #333;">Current Draw: Modest Effect, Not Dominant</h4>
+                        <div style="overflow: hidden; width: 80%; margin: 1em auto 0; max-height: 400px;">
+                            <img src="images/FacePressureJig.jpg" alt="Face pressure test" class="background-image slide-up" style="animation-delay: 0.3s; width: 100%; object-fit: cover; object-position: center 60%;">
+                        </div>
+
+                        <h4 style="font-size: 1.2em; margin-top: 1.5em; color: #ff8080;">Current Draw: Modest Effect, Not Dominant</h4>
                         <p class="background-description">
                             Next, C-rate tests via the carbon pile rheostat. DCIR trended linearly downward with increasing draw, attributable to ohmic heating. However, the effect was secondary and not incorporated into core simulations, as thermal/SoC drivers overshadowed it.
                         </p>
-                        
-                        <h4 style="font-size: 1.2em; margin-top: 1.5em; color: #333;">State-of-Charge: As Predicted</h4>
+                        <img src="images/Carbon_Pile.jpg" alt="Current draw test" class="background-image slide-up" style="animation-delay: 0.3s;">
+
+                        <h4 style="font-size: 1.2em; margin-top: 1.5em; color: #ff8080;">State-of-Charge: As Predicted</h4>
                         <p class="background-description">
                             10-second pulses for ohmic drop and 1RC transient, plus 3-minute rests for 2RC recovery and monitoring. Effects were generally as expected with repeatable and strong effects.
                         </p>
-                        
-                        <h4 style="font-size: 1.2em; margin-top: 1.5em; color: #333;">Temperature: Pivotal Characterization</h4>
+                        <img src="images/SoC-Pulse.jpg" alt="State of charge test" class="background-image slide-up" style="animation-delay: 0.3s;">
+
+                        <h4 style="font-size: 1.2em; margin-top: 1.5em; color: #ff8080;">Temperature: Pivotal Characterization</h4>
                         <p class="background-description">
                             University temperature chamber access was delayed, so I adapted a foldable temperature controlled heat pad over isolated cells. Using FLIR thermography and IR spot metering the temperature of the cell was noted. The procedure matched the SoC tests from ~25-60°C.
                         </p>
-                        <img src="images/DCIRMapfit.png" alt="DCIR Map Fitted" class="background-image slide-up" style="animation-delay: 0.3s;">
-                        
+                        <img src="images/TemperatureTest.png" alt="Temperature test setup" class="background-image slide-up" style="animation-delay: 0.3s;">
+
                         <h3 class="background-title">Data-Driven Modeling: From Pulses to Polynomials</h3>
                         <p class="background-description">
-                            Temperature and SoC dominated DCIR variance. The plotted data was completely unexpected. Using MATLAB I created a 3D surface of DCIR vs. temp/SoC, then fit it to a third-order polynomial to be used in a new thermal sim the team was developing.
+                            Temperature and SoC dominated DCIR variance. The plotted data was completely unexpected reaching as low as 0.7mΩ, less than half the spec sheet minimum of 1.5mΩ. Using MATLAB I created a 3D surface of DCIR vs. temp/SoC, then fit it to a third-order polynomial to be used in a new thermal sim the team was developing.
                         </p>
+                        <div class="dual-image-container" style="display: flex; gap: 1em; justify-content: center; flex-wrap: wrap;">
+                            <img src="images/DCIRMap10-11-25.png" alt="DCIR Map Raw Data" class="background-image slide-up" style="animation-delay: 0.3s; flex: 1; max-width: 48%;">
+                            <img src="images/DCIRMapfit.png" alt="DCIR Map Fitted" class="background-image slide-up" style="animation-delay: 0.3s; flex: 1; max-width: 48%;">
+                        </div>
                         <p class="background-description">
                             My RC analysis through recovery phases suggested 1.3x FoS; conservatism yielded 1.5x. Despite that, the calculated maximum temperature was below 60 degrees celsius, so I concluded heat mass suffices for race durations, rendering liquid cooling obsolete.
                         </p>
@@ -516,7 +528,8 @@
                         <p class="background-description">
                             In the redesign I removed all pack specific liquid cooling items: the base plate, U-shims, pads, pump, and radiator. I then added 10 brushless DC fans (5 BMS-relayed for penthouse electronics per spec sheet data, 5 BMS-relayed for tab airflow directly above modules). I placed the intake through cells, and exhaust via penthouse vents, a simple failsafe.
                         </p>
-                        
+                        <img src="images/PenthouseFans.png" alt="Hybrid cooling architecture" class="background-image slide-up" style="animation-delay: 0.3s; width: 90%; display: block; margin: 0 auto;">
+
                         <h3 class="background-title">Specific Heat Discovery</h3>
                         <p class="background-description">
                             There was no data available on the specific heat of the cell so the team was using values matching aluminum. I decided I wanted to validate that and with some extra styrofoam, thermocouples, and my freezer… I managed to get some surprisingly consistent data for quick calculations. I conducted tests on aluminum blocks, then a cell. After creating a multiplier based on the aluminum measured values, an average of 0.954 J/g°C was found.
