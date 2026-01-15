@@ -21,20 +21,47 @@
 
     <!-- Projects Page -->
     <div id="projects-page" class="page active">
-        <!-- Completed Projects Section -->
+        <!-- Projects Section -->
         <section class="hero">
             <div class="hero-content fade-in">
-                <h1 class="hero-title">Completed Projects</h1>
+                <h1 class="hero-title">Projects</h1>
                 <h2 class="hero-subtitle">Projects I have researched, designed, or manufactured</h2>
                 <div class="divider"><span></span></div>
             </div>
         </section>
 
-        <!-- Completed Projects Grid -->
+        <!-- Projects Grid (Chronologically Ordered) -->
         <section class="projects-section">
             <div class="projects-grid">
-                <!-- Project 1 - FSAE Tractive Battery Module V1 -->
-                <div class="project-card slide-up" data-page="project-fsae">
+                <!-- Project 1 - CR30 Battery Pack (Most Recent) -->
+                <div class="project-card slide-up" data-page="project-cell">
+                    <div class="project-image">
+                        <div class="project-overlay"></div>
+                        <img src="images/DCIRMap10-11-25.png">
+                    </div>
+                    <h3>CR30 Battery Pack: Thermal Optimization</h3>
+                </div>
+
+                <!-- Project 2 - 1976 Honda CB750F Restoration -->
+                <div class="project-card slide-up" style="animation-delay: 0.1s;" data-page="project-honda">
+                    <div class="project-image">
+                        <div class="project-overlay"></div>
+                        <img src="images/CB750F-Title.jpg">
+                    </div>
+                    <h3>1976 Honda CB750F Restoration</h3>
+                </div>
+
+                <!-- Project 3 - Dynamometer Cart + Motor Testing -->
+                <div class="project-card slide-up" style="animation-delay: 0.2s;" data-page="project-dyno">
+                    <div class="project-image">
+                        <div class="project-overlay"></div>
+                        <img src="images/Dyno-Title.png">
+                    </div>
+                    <h3>Dynamometer Cart + Motor Testing</h3>
+                </div>
+
+                <!-- Project 4 - CR29 Battery Module: Manufacture -->
+                <div class="project-card slide-up" style="animation-delay: 0.3s;" data-page="project-fsae">
                     <div class="project-image comparison-container">
                         <div class="comparison-wrapper">
                             <img src="images/tractivebatterymodule.jpg" alt="Finished" class="comparison-after">
@@ -46,29 +73,11 @@
                         </div>
                         <div class="project-overlay"></div>
                     </div>
-                    <h3>FSAE Tractive Battery Module V1</h3>
+                    <h3>CR29 Battery Module: Manufacture</h3>
                 </div>
 
-                <!-- Project 2 - Dynamometer Cart + Motor Testing -->
-                <div class="project-card slide-up" style="animation-delay: 0.1s;" data-page="project-dyno">
-                    <div class="project-image">
-                        <div class="project-overlay"></div>
-                        <img src="images/Dyno-Title.png">
-                    </div>
-                    <h3>Dynamometer Cart + Motor Testing</h3>
-                </div>
-
-                <!-- Project 3 - 1976 Honda CB750F Restoration -->
-                <div class="project-card slide-up" style="animation-delay: 0.2s;" data-page="project-honda">
-                    <div class="project-image">
-                        <div class="project-overlay"></div>
-                        <img src="images/CB750F-Title.jpg">
-                    </div>
-                    <h3>1976 Honda CB750F Restoration</h3>
-                </div>
-
-                <!-- Project 4 - 2 Week Tube Chassis -->
-                <div class="project-card slide-up" style="animation-delay: 0.3s;" data-page="project-chassis">
+                <!-- Project 5 - 2 Week Tube Chassis -->
+                <div class="project-card slide-up" style="animation-delay: 0.4s;" data-page="project-chassis">
                     <div class="project-image">
                         <div class="project-overlay"></div>
                         <img src="images/CR29_25-C.png">
@@ -77,38 +86,15 @@
                 </div>
             </div>
         </section>
-
-        <!-- Current Projects Section -->
-        <section class="hero current-projects-hero">
-            <div class="hero-content fade-in">
-                <h1 class="hero-title">Current Projects</h1>
-                <h2 class="hero-subtitle">Ongoing work in progress</h2>
-                <div class="divider"><span></span></div>
-            </div>
-        </section>
-
-        <!-- Current Projects Grid -->
-        <section class="projects-section current-projects-section">
-            <div class="projects-grid">
-                <!-- Project - Cell Characterization -->
-                <div class="project-card slide-up" data-page="project-cell">
-                    <div class="project-image">
-                        <div class="project-overlay"></div>
-                        <img src="images/DCIRMap10-11-25.png">
-                    </div>
-                    <h3>Cell Characterization</h3>
-                </div>
-            </div>
-        </section>
     </div>
 
   <!-- Project Detail Pages -->
-    <!-- FSAE Tractive Battery Module V1 Detail Page -->
+    <!-- CR29 Battery Module: Manufacture Detail Page -->
     <div id="project-fsae-page" class="page">
         <section class="project-detail-section">
             <div class="project-detail-container">
-                <h1 class="project-detail-title fade-in">FSAE Tractive Battery Module V1</h1>
-                <img src="images/tractivebatterymodule.jpg" alt="FSAE Tractive Battery Module V1" class="project-detail-image slide-up">
+                <h1 class="project-detail-title fade-in">CR29 Battery Module: Manufacture</h1>
+                <img src="images/tractivebatterymodule.jpg" alt="CR29 Battery Module: Manufacture" class="project-detail-image slide-up">
                 <div class="project-detail-content slide-up" style="animation-delay: 0.2s;">
                     <p class="project-detail-description">
                         This project involved the manufacturing of the team's first tractive system battery module and testing it to highlight key manufacturing inefficiencies and potential issues to improve in future packs.
@@ -425,34 +411,122 @@
         </section>
     </div>
 
-    <!-- Cell Characterization Detail Page -->
+    <!-- CR30 Battery Pack: Thermal Optimization Detail Page -->
     <div id="project-cell-page" class="page">
         <section class="project-detail-section">
             <div class="project-detail-container">
-                <h1 class="project-detail-title fade-in">Cell Characterization</h1>
-                <img src="images/DCIRMap10-11-25.png" alt="Cell Characterization" class="project-detail-image slide-up">
-                <p class="project-detail-description slide-up" style="animation-delay: 0.2s;">
-                    An ongoing project to characterize battery cells using DCIR testing, focusing on performance metrics such as internal resistance and capacity under varying conditions. The scope of this project is to create a 2RC model to be used in custom BMS work.
-                </p>
-                <div class="side-boxes-container">
-                    <div class="role-container">
-                        <h3 class="role-title">Role</h3>
-                        <ul class="role-list">
-                            <li>Research</li>
-                            <li>Design</li>
-                            <li>Lead</li>
-                        </ul>
+                <h1 class="project-detail-title fade-in">CR30 Battery Pack: Thermal Optimization for Endurance</h1>
+                <img src="images/DCIRMap10-11-25.png" alt="CR30 Battery Pack Thermal Analysis" class="project-detail-image slide-up">
+                <div class="project-detail-content slide-up" style="animation-delay: 0.2s;">
+                    <p class="project-detail-description">
+                        In a previous iteration of Cyclone Racing's EV racing project, the CR29 battery module exposed critical gaps: undocumented design choices, manufacturing defects, and unverified thermal assumptions. Moving to the CR30 pack demanded more than iteration—it required deconstruction to fundamentals. Why a passive heat mass system without active cooling? What drove cell resistance in real conditions? With a $100 budget and three-week deadline, I led a redesign grounded in physics: heat as I²R losses, dissipation via conduction and convection, and decisions validated by data, not speculation.
+                    </p>
+                    <p class="project-detail-description">
+                        This project transformed CR29's lessons into CR30's architecture, blending passive thermal mass with targeted active cooling. No off-the-shelf datasheets, only vague notes stating general ranges in normal environments, inspiring testing and simulation to ensure reliability under race loads.
+                    </p>
+                    <div class="side-boxes-container">
+                        <div class="role-container">
+                            <h3 class="role-title">Role</h3>
+                            <ul class="role-list">
+                                <li>Research</li>
+                                <li>Design</li>
+                                <li>Testing</li>
+                                <li>Lead</li>
+                            </ul>
+                        </div>
+                        <div class="specs-container">
+                            <h3 class="specs-title">Specifications</h3>
+                            <ul class="specs-list">
+                                <li>Budget: $100</li>
+                                <li>Timeline: 3 weeks</li>
+                                <li>Target: &lt;60°C peaks</li>
+                                <li>Load: Up to 200A pulses</li>
+                            </ul>
+                        </div>
                     </div>
-                </div>
-                <div class="background-container">
-                    <h3 class="background-title">Background</h3>
-                    <p class="background-description">
-                        In order to make an accurate thermal simulation for the battery pack, certain unknown parameters need to be characterized. Through testing, I created a 3D map of DCIR vs temperature and state of charge.
-                    </p>
-                    <img src="images/DCIRMapfit.png" alt="CR29_25-C-Suspension" class="background-image slide-up" style="animation-delay: 0.3s;">
-                    <p class="background-description">
-                        This map was fit to a 3rd order polynomial via least squares regression to create an equation that can be used to predict DCIR at any temperature and state of charge from room temperature to the rules limit of 60 celcius.
-                    </p>
+                    <div class="background-container">
+                        <h3 class="background-title">What is the CR30 Battery Pack?</h3>
+                        <p class="background-description">
+                            The CR30 is a modular lithium-ion pack for our university EV racecar, comprising 5 segmented modules. It powers sustained high current bursts (up to 200A) over endurance events, where poor thermal management can be grounds for disqualification. Drawing from CR28 telemetry, the design prioritizes low weight, reliability, and fault tolerant cooling.
+                        </p>
+                        <p class="background-description">
+                            My initial design leveraged spec sheet data and the CR29 design. Calculations showed severe overheating within the pack by the end of endurance. Getting sufficient airflow would be difficult due to rules constraints, so I developed a worst case design mirroring commercial pack dedicated liquid systems and micro extruded coolant channels. Given space constraints, a new approach was taken and a less conventional design was chosen incorporating U shaped shims contacting cell faces and a separate cooling plate, with thermal padding to increase surface contact. This design featured quick disconnects and a pack dedicated cooling loop mounted to the battery.
+                        </p>
+                        <p class="background-description">
+                            This design frustrated me—its effects would be poor at best and it added substantial weight, complexity, and reduced reliability. I'm designing a battery for a racecar so it shouldn't mirror a commercial pack with dedicated liquid systems. CR30 needed evolution through empirical DCIR (DC Internal Resistance) characterization, to reveal that overbuilt liquid cooling was unnecessary for race loads.
+                        </p>
+                        
+                        <h3 class="background-title">Project Goals</h3>
+                        <p class="background-description">
+                            My objectives balanced performance, constraints, and scalability:
+                        </p>
+                        <ul class="background-description" style="margin-left: 2em;">
+                            <li>Validate and optimize thermal management for &lt;60°C peaks under worst-case pulses and confirm the cell spec sheet listed 1.5-5 mΩ DCIR range</li>
+                            <li>Integrate CR29 manufacturing insights to eliminate defects</li>
+                            <li>Resource efficiency: &lt;$100 test rig</li>
+                            <li>Failsafe integration: BMS-triggered cooling for anomalies like connection degradation</li>
+                        </ul>
+                        
+                        <h3 class="background-title">Pulse Test Rig: Building Under Constraints</h3>
+                        <p class="background-description">
+                            I prioritized parameters: stack pressure, temperature, C-rate, and state-of-charge (SoC). The $100 rig included:
+                        </p>
+                        <ul class="background-description" style="margin-left: 2em;">
+                            <li><strong>Load Bank:</strong> Four 0.1 ohm heatsink resistors (2s2p) for uniform heating, validated to be 0.131 Ω via 4-wire Kelvin sensing. Ideal for test pulses, excluding high C-rates.</li>
+                            <li><strong>C-Rate Tester:</strong> Inexpensive carbon pile rheostat</li>
+                            <li><strong>Pressure Fixture:</strong> Machined steel plates with springs (0-8 psi)</li>
+                            <li><strong>Current Sensing:</strong> Borrowed SSA-250 and current clamp from PRISM Solar Car</li>
+                        </ul>
+                        
+                        <h3 class="background-title">Parameter Tests: Isolating DCIR Influences</h3>
+                        <p class="background-description">
+                            With the rig operational, I systematically isolated effects on DCIR, starting with mechanical factors and progressing to electrical and thermal drivers.
+                        </p>
+                        
+                        <h4 style="font-size: 1.2em; margin-top: 1.5em; color: #333;">Face Pressure: Minimal Impact Ruled Out</h4>
+                        <p class="background-description">
+                            Stack pressure was first: Using the steel plate-spring fixture, we applied 0-8 psi to cell faces, simulating compression variances. Pulses revealed negligible DCIR shifts. Given the anticipated low cycle counts for the vehicle's life, SOH degradation wasn't a design criterion. Pressure was deprioritized, freeing resources for higher-impact variables.
+                        </p>
+                        
+                        <h4 style="font-size: 1.2em; margin-top: 1.5em; color: #333;">Current Draw: Modest Effect, Not Dominant</h4>
+                        <p class="background-description">
+                            Next, C-rate tests via the carbon pile rheostat. DCIR trended linearly downward with increasing draw, attributable to ohmic heating. However, the effect was secondary and not incorporated into core simulations, as thermal/SoC drivers overshadowed it.
+                        </p>
+                        
+                        <h4 style="font-size: 1.2em; margin-top: 1.5em; color: #333;">State-of-Charge: As Predicted</h4>
+                        <p class="background-description">
+                            10-second pulses for ohmic drop and 1RC transient, plus 3-minute rests for 2RC recovery and monitoring. Effects were generally as expected with repeatable and strong effects.
+                        </p>
+                        
+                        <h4 style="font-size: 1.2em; margin-top: 1.5em; color: #333;">Temperature: Pivotal Characterization</h4>
+                        <p class="background-description">
+                            University temperature chamber access was delayed, so I adapted a foldable temperature controlled heat pad over isolated cells. Using FLIR thermography and IR spot metering the temperature of the cell was noted. The procedure matched the SoC tests from ~25-60°C.
+                        </p>
+                        <img src="images/DCIRMapfit.png" alt="DCIR Map Fitted" class="background-image slide-up" style="animation-delay: 0.3s;">
+                        
+                        <h3 class="background-title">Data-Driven Modeling: From Pulses to Polynomials</h3>
+                        <p class="background-description">
+                            Temperature and SoC dominated DCIR variance. The plotted data was completely unexpected. Using MATLAB I created a 3D surface of DCIR vs. temp/SoC, then fit it to a third-order polynomial to be used in a new thermal sim the team was developing.
+                        </p>
+                        <p class="background-description">
+                            My RC analysis through recovery phases suggested 1.3x FoS; conservatism yielded 1.5x. Despite that, the calculated maximum temperature was below 60 degrees celsius, so I concluded heat mass suffices for race durations, rendering liquid cooling obsolete.
+                        </p>
+                        
+                        <h3 class="background-title">Redesign Synthesis: Hybrid Cooling Architecture</h3>
+                        <p class="background-description">
+                            In the redesign I removed all pack specific liquid cooling items: the base plate, U-shims, pads, pump, and radiator. I then added 10 brushless DC fans (5 BMS-relayed for penthouse electronics per spec sheet data, 5 BMS-relayed for tab airflow directly above modules). I placed the intake through cells, and exhaust via penthouse vents, a simple failsafe.
+                        </p>
+                        
+                        <h3 class="background-title">Specific Heat Discovery</h3>
+                        <p class="background-description">
+                            There was no data available on the specific heat of the cell so the team was using values matching aluminum. I decided I wanted to validate that and with some extra styrofoam, thermocouples, and my freezer… I managed to get some surprisingly consistent data for quick calculations. I conducted tests on aluminum blocks, then a cell. After creating a multiplier based on the aluminum measured values, an average of 0.954 J/g°C was found.
+                        </p>
+                        
+                        <h3 class="background-title">Conclusion</h3>
+                        <p class="background-description">
+                            I learned a lot through this project. From how batteries work to the 2-RC model. I really enjoyed the process and hope to refine these data and procedures when I have some free time.
+                        </p>
+                    </div>
                 </div>
                 <h3 class="timeline-title slide-up" style="animation-delay: 0.4s;">Project Timeline</h3>
                 <div class="timeline slide-up" style="animation-delay: 0.4s;">
@@ -461,32 +535,32 @@
                         <div class="timeline-item" style="animation-delay: 0.6s;">
                             <div class="timeline-marker" data-description="cell-desc-1">
                                 <span class="timeline-date">September 27, 2025</span>
-                                <h4>Milestone 1: Test Setup</h4>
+                                <h4>Milestone 1: Test Rig Design</h4>
                             </div>
                         </div>
                         <div class="timeline-item" style="animation-delay: 0.8s;">
                             <div class="timeline-marker" data-description="cell-desc-2">
                                 <span class="timeline-date">October 4, 2025</span>
-                                <h4>Milestone 2: Initial Testing</h4>
+                                <h4>Milestone 2: DCIR Characterization</h4>
                             </div>
                         </div>
                         <div class="timeline-item" style="animation-delay: 1.0s;">
                             <div class="timeline-marker" data-description="cell-desc-3">
-                                <span class="timeline-date">Future</span>
-                                <h4>Milestone 3: Battery Model</h4>
+                                <span class="timeline-date">October 18, 2025</span>
+                                <h4>Milestone 3: Thermal Model & Redesign</h4>
                             </div>
                         </div>
                     </div>
                     <div id="timeline-popup" class="timeline-popup">
                         <button class="popup-close">×</button>
                         <div id="cell-desc-1" class="timeline-description-content" style="display: none;">
-                            <p>Configured DCIR testing equipment and protocols.</p>
+                            <p>Configured $100 DCIR testing equipment with load bank, carbon pile rheostat, pressure fixture, and current sensing equipment. Established testing protocols for stack pressure, temperature, C-rate, and state-of-charge analysis.</p>
                         </div>
                         <div id="cell-desc-2" class="timeline-description-content" style="display: none;">
-                            <p>Conducted preliminary tests evaluating DCIR changes due to face pressure, C Rate, temperature changes, and SoC, focusing on ohmic responses for thermal simulation.</p>
+                            <p>Conducted systematic DCIR tests isolating mechanical (face pressure), electrical (C-rate), and thermal (temperature, SoC) variables. Generated 3D DCIR surface maps showing temperature and SoC as dominant factors. Determined liquid cooling unnecessary for race loads.</p>
                         </div>
                         <div id="cell-desc-3" class="timeline-description-content" style="display: none;">
-                            <p>Further testing, data analysis, and modeling.</p>
+                            <p>Fitted DCIR data to third-order polynomial for thermal simulation. Developed hybrid cooling architecture removing liquid systems in favor of 10 BMS-relayed brushless DC fans. Validated specific heat capacity at 0.954 J/g°C through custom calorimetry testing.</p>
                         </div>
                     </div>
                 </div>
