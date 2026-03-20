@@ -43,7 +43,9 @@ renderer.outputColorSpace   = THREE.SRGBColorSpace;
 
 // ─── SCENE & CAMERA ──────────────────────────────────────────────────────────
 const scene  = new THREE.Scene();
-// No scene background — site's #000 shows through the alpha canvas.
+// TEMP DIAGNOSTIC: red background so we can confirm the canvas is rendering.
+// Remove this line once the car appears correctly.
+scene.background = new THREE.Color(0x330000);
 
 const camera = new THREE.PerspectiveCamera(40, window.innerWidth / window.innerHeight, 0.01, 200);
 camera.position.copy(CAM_INTRO.pos);
