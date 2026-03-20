@@ -18,8 +18,8 @@ const CAM_INTRO = {
 
 const CAM_BROWSE = {
     // 3/4 view from outside — car on left half of screen.
-    pos:    new THREE.Vector3( 7.0,  4.0,  9.0),
-    target: new THREE.Vector3( 3.0,  0.0,  0.0),
+    pos:    new THREE.Vector3( 6.0,  4.0,  9.0),
+    target: new THREE.Vector3( 2.0,  0.0,  0.0),
 };
 
 // Scroll fractions (0 – 1 of .car-scroll-driver height) that define each phase
