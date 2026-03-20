@@ -21,6 +21,13 @@ html {
 body {
     font-family: 'Butler', 'Georgia', serif;
     background-color: var(--background-color);
+    background-image: linear-gradient(
+        to top,
+        #1a0000 0%,
+        #0d0000 30%,
+        #000000 70%
+    );
+    background-attachment: fixed;
     color: var(--text-color);
     line-height: 1.6;
     overflow-x: hidden;
@@ -914,10 +921,10 @@ footer {
 .projects-banners-panel {
     position: fixed;
     right: 0;
-    top: 50%;
+    top: calc(50% + 50px);
     transform: translateY(-50%);
     width: 44%;
-    max-height: 80vh;
+    max-height: calc(80vh - 50px);
     overflow-y: auto;
     overflow-x: hidden;
     z-index: 10;
