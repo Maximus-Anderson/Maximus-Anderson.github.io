@@ -254,14 +254,18 @@ window.addEventListener('resize', () => {
         const s = held.has('Shift') ? STEP * 5 : STEP;
         let moved = false;
 
+        // W/S/A/D/Q/E — orbit camera around look target (zoom/strafe/raise)
         if (held.has('w') || held.has('W')) { lerpedCamPos.z -= s; moved = true; }
         if (held.has('s') || held.has('S')) { lerpedCamPos.z += s; moved = true; }
         if (held.has('a') || held.has('A')) { lerpedCamPos.x -= s; moved = true; }
         if (held.has('d') || held.has('D')) { lerpedCamPos.x += s; moved = true; }
         if (held.has('q') || held.has('Q')) { lerpedCamPos.y -= s; moved = true; }
         if (held.has('e') || held.has('E')) { lerpedCamPos.y += s; moved = true; }
-        if (held.has('ArrowUp'))   { devLook.y += s * 0.5; moved = true; }
-        if (held.has('ArrowDown')) { devLook.y -= s * 0.5; moved = true; }
+        // Arrow keys — pan both camera AND target together (shifts which part of car is centred)
+        if (held.has('ArrowUp'))    { lerpedCamPos.z -= s; devLook.z -= s; moved = true; }
+        if (held.has('ArrowDown'))  { lerpedCamPos.z += s; devLook.z += s; moved = true; }
+        if (held.has('ArrowLeft'))  { lerpedCamPos.x -= s; devLook.x -= s; moved = true; }
+        if (held.has('ArrowRight')) { lerpedCamPos.x += s; devLook.x += s; moved = true; }
 
         if (moved) {
             // Override the lerp targets so the camera snaps to key input
