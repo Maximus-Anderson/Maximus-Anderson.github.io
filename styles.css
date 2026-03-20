@@ -883,14 +883,14 @@ footer {
     width: 100%;
 }
 
-/* Phase 1: "Projects" title centred over the car close-up */
+/* Phase 1: "Projects" title below the front wing */
 .car-hero-text {
     position: fixed;
-    top: 50%;
+    top: 65%;
     left: 50%;
-    transform: translate(-50%, -50%);
+    transform: translateX(-50%);
     text-align: center;
-    z-index: 2;
+    z-index: 10;
     pointer-events: none;
     width: 100%;
     padding: 0 var(--site-margin);
@@ -917,7 +917,7 @@ footer {
     top: 50%;
     transform: translateY(-50%);
     width: 44%;
-    z-index: 2;
+    z-index: 10;
     display: flex;
     flex-direction: column;
     gap: 10px;
