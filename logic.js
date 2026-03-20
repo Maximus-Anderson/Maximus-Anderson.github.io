@@ -4,6 +4,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     const navLinks = document.querySelectorAll('.nav-links a');
     const projectCards = document.querySelectorAll('.project-card');
+    const projectBanners = document.querySelectorAll('.project-banner');
     const backButtons = document.querySelectorAll('.back-button');
     const pages = document.querySelectorAll('.page');
     const logo = document.querySelector('.logo');
@@ -28,6 +29,17 @@ document.addEventListener('DOMContentLoaded', function() {
                     console.log('Project card clicked:', targetPage);
                     switchPage(targetPage);
                 }
+            }
+        });
+    });
+
+    // Project banner click handler (Three.js scroll layout)
+    projectBanners.forEach(banner => {
+        banner.addEventListener('click', function() {
+            const targetPage = this.getAttribute('data-page');
+            if (targetPage) {
+                console.log('Project banner clicked:', targetPage);
+                switchPage(targetPage);
             }
         });
     });

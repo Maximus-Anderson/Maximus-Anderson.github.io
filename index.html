@@ -5,6 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Maximus Anderson - Portfolio</title>
     <link rel="stylesheet" href="styles.css">
+    <!-- Three.js ES module imports (no build step required) -->
+    <script type="importmap">
+    {
+        "imports": {
+            "three":          "https://cdn.jsdelivr.net/npm/three@0.168.0/build/three.module.js",
+            "three/addons/":  "https://cdn.jsdelivr.net/npm/three@0.168.0/examples/jsm/"
+        }
+    }
+    </script>
 </head>
 <body>
     <!-- Navigation -->
@@ -21,72 +30,77 @@
 
     <!-- Projects Page -->
     <div id="projects-page" class="page active">
-        <!-- Projects Section -->
-        <section class="hero">
-            <div class="hero-content fade-in">
+
+        <!-- Three.js canvas — fixed, pointer-events off, hidden on other pages via parent display:none -->
+        <canvas id="car-canvas"></canvas>
+
+        <!-- Scroll driver: its height gives the scroll distance that drives the camera animation -->
+        <div class="car-scroll-driver">
+
+            <!-- Phase 1: Full-screen hero text (fades out as camera pulls back) -->
+            <div class="car-hero-text" id="car-hero-text">
                 <h1 class="hero-title">Projects</h1>
                 <h2 class="hero-subtitle">Projects I have researched, designed, or manufactured</h2>
                 <div class="divider"><span></span></div>
+                <div class="scroll-hint">↓ scroll</div>
             </div>
-        </section>
 
-        <!-- Projects Grid (Chronologically Ordered) -->
-        <section class="projects-section">
-            <div class="projects-grid">
-                <!-- Project 1 - CR30 Battery Pack (Most Recent) -->
-                <div class="project-card slide-up" data-page="project-cell">
-                    <div class="project-image">
-                        <div class="project-overlay"></div>
-                        <img src="images/DCIRMap10-11-25.png">
+            <!-- Phase 2: Project banners — fixed to right half, fade in after camera settles -->
+            <div class="projects-banners-panel" id="projects-banners">
+
+                <div class="project-banner" data-page="project-cell">
+                    <div class="banner-img-wrap">
+                        <img src="images/DCIRMap10-11-25.png" alt="CR30 Battery Pack: Thermal Optimization">
                     </div>
-                    <h3>CR30 Battery Pack: Thermal Optimization</h3>
+                    <div class="banner-info">
+                        <h3>CR30 Battery Pack: Thermal Optimization</h3>
+                        <span class="banner-arrow">→</span>
+                    </div>
                 </div>
 
-                <!-- Project 2 - 1976 Honda CB750F Restoration -->
-                <div class="project-card slide-up" style="animation-delay: 0.1s;" data-page="project-honda">
-                    <div class="project-image">
-                        <div class="project-overlay"></div>
-                        <img src="images/CB750F-Title.jpg">
+                <div class="project-banner" data-page="project-honda">
+                    <div class="banner-img-wrap">
+                        <img src="images/CB750F-Title.jpg" alt="1976 Honda CB750F Restoration">
                     </div>
-                    <h3>1976 Honda CB750F Restoration</h3>
+                    <div class="banner-info">
+                        <h3>1976 Honda CB750F Restoration</h3>
+                        <span class="banner-arrow">→</span>
+                    </div>
                 </div>
 
-                <!-- Project 3 - Dynamometer Cart + Motor Testing -->
-                <div class="project-card slide-up" style="animation-delay: 0.2s;" data-page="project-dyno">
-                    <div class="project-image">
-                        <div class="project-overlay"></div>
-                        <img src="images/Dyno-Title.png">
+                <div class="project-banner" data-page="project-dyno">
+                    <div class="banner-img-wrap">
+                        <img src="images/Dyno-Title.png" alt="Dynamometer Cart + Motor Testing">
                     </div>
-                    <h3>Dynamometer Cart + Motor Testing</h3>
+                    <div class="banner-info">
+                        <h3>Dynamometer Cart + Motor Testing</h3>
+                        <span class="banner-arrow">→</span>
+                    </div>
                 </div>
 
-                <!-- Project 4 - CR29 Battery Module: Manufacture -->
-                <div class="project-card slide-up" style="animation-delay: 0.3s;" data-page="project-fsae">
-                    <div class="project-image comparison-container">
-                        <div class="comparison-wrapper">
-                            <img src="images/tractivebatterymodule.jpg" alt="Finished" class="comparison-after">
-                            <div class="comparison-slider-container" style="width: 50%;">
-                                <img src="images/tractivebatterymodulecad.jpg" alt="CAD" class="comparison-before">
-                            </div>
-                            <input type="range" min="0" max="100" value="50" class="comparison-slider" aria-label="Comparison slider">
-                            <div class="comparison-handle"></div>
-                        </div>
-                        <div class="project-overlay"></div>
+                <div class="project-banner" data-page="project-fsae">
+                    <div class="banner-img-wrap">
+                        <img src="images/tractivebatterymodule.jpg" alt="CR29 Battery Module: Manufacture">
                     </div>
-                    <h3>CR29 Battery Module: Manufacture</h3>
+                    <div class="banner-info">
+                        <h3>CR29 Battery Module: Manufacture</h3>
+                        <span class="banner-arrow">→</span>
+                    </div>
                 </div>
 
-                <!-- Project 5 - 2 Week Tube Chassis -->
-                <div class="project-card slide-up" style="animation-delay: 0.4s;" data-page="project-chassis">
-                    <div class="project-image">
-                        <div class="project-overlay"></div>
-                        <img src="images/CR29_25-C.png">
+                <div class="project-banner" data-page="project-chassis">
+                    <div class="banner-img-wrap">
+                        <img src="images/CR29_25-C.png" alt="2 Week Tube Chassis">
                     </div>
-                    <h3>2 Week Tube Chassis</h3>
+                    <div class="banner-info">
+                        <h3>2 Week Tube Chassis</h3>
+                        <span class="banner-arrow">→</span>
+                    </div>
                 </div>
-            </div>
-        </section>
-    </div>
+
+            </div><!-- /.projects-banners-panel -->
+        </div><!-- /.car-scroll-driver -->
+    </div><!-- /#projects-page -->
 
   <!-- Project Detail Pages -->
     <!-- CR29 Battery Module: Manufacture Detail Page -->
@@ -446,7 +460,7 @@
                     <div class="background-container">
                         <h3 class="background-title">What is the CR30 Battery Pack?</h3>
                         <p class="background-description">
-                            The CR30 is a modular lithium-ion pack for our university EV racecar, comprising 5 segmented modules. It powers sustained high current bursts (up to 200A) over endurance events, where poor thermal management can be grounds for disqualification. Drawing from CR28 telemetry, the design prioritizes low weight, reliability, and fault tolerant cooling.
+                            The CR30 battery is a modular lithium-ion pack for our university EV racecar, comprising 5 segmented modules. It powers sustained high current bursts (up to 200A) over endurance events, where poor thermal management can be grounds for disqualification. Drawing from CR28 telemetry, the design prioritizes low weight, reliability, and fault tolerant cooling.
                         </p>
                         <p class="background-description">
                             My initial design leveraged spec sheet data and the CR29 design. Calculations showed severe overheating within the pack by the end of endurance. Getting sufficient airflow would be difficult due to rules constraints, so I developed a worst case design mirroring commercial pack dedicated liquid systems and micro extruded coolant channels. Given space constraints, a new approach was taken and a less conventional design was chosen incorporating U shaped shims contacting cell faces and a separate cooling plate, with thermal padding to increase surface contact. This design featured quick disconnects and a pack dedicated cooling loop mounted to the battery.
@@ -626,5 +640,6 @@
     </footer>
 
     <script src="logic.js"></script>
+    <script type="module" src="car-viewer.js"></script>
 </body>
 </html>
