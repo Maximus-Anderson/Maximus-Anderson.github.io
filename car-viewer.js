@@ -190,17 +190,26 @@ function animate() {
 animate();
 
 // ─── PAGE VISIBILITY ─────────────────────────────────────────────────────────
-// Pause the render loop when the projects page is not active (saves GPU).
+// Canvas lives outside .page divs (to avoid transform:fixed containment bug),
+// so we explicitly show/hide it and pause rendering when projects page is inactive.
+function syncCanvasVisibility() {
+    if (!projectsPageEl) return;
+    const active = projectsPageEl.classList.contains('active');
+    canvas.style.display = active ? 'block' : 'none';
+    isActive = active;
+    if (active) {
+        onScroll();
+        lerpedCamPos.copy(targetCamPos);
+        lerpedCamLook.copy(targetCamLook);
+    }
+}
+
+// Set initial visibility on load
+syncCanvasVisibility();
+
 if (projectsPageEl) {
-    new MutationObserver(() => {
-        isActive = projectsPageEl.classList.contains('active');
-        if (isActive) {
-            // Re-sync camera when returning to the page
-            onScroll();
-            lerpedCamPos.copy(targetCamPos);
-            lerpedCamLook.copy(targetCamLook);
-        }
-    }).observe(projectsPageEl, { attributes: true, attributeFilter: ['class'] });
+    new MutationObserver(syncCanvasVisibility)
+        .observe(projectsPageEl, { attributes: true, attributeFilter: ['class'] });
 }
 
 // ─── RESIZE ──────────────────────────────────────────────────────────────────

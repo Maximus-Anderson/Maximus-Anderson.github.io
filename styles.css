@@ -863,7 +863,8 @@ footer {
 
 /* ── Three.js Car Viewer ─────────────────────────────────────────────────── */
 
-/* Canvas: fixed, full-viewport, behind all UI. pointer-events off so clicks pass through. */
+/* Canvas: fixed to viewport (must be outside any .page div to avoid transform containment bug).
+   Visibility toggled by car-viewer.js via style.display. */
 #car-canvas {
     position: fixed;
     top: 0;
@@ -872,6 +873,7 @@ footer {
     height: 100%;
     z-index: 1;
     pointer-events: none;
+    display: none; /* car-viewer.js sets this to 'block' when projects page is active */
 }
 
 /* Tall div whose scroll height drives the camera animation (300vh = plenty of travel) */

@@ -28,11 +28,12 @@
         </div>
     </nav>
 
+    <!-- Three.js canvas — lives outside all .page divs so CSS transform on .page.active
+         (from the fadeIn animation) doesn't break position:fixed. Visibility managed by JS. -->
+    <canvas id="car-canvas"></canvas>
+
     <!-- Projects Page -->
     <div id="projects-page" class="page active">
-
-        <!-- Three.js canvas — fixed, pointer-events off, hidden on other pages via parent display:none -->
-        <canvas id="car-canvas"></canvas>
 
         <!-- Scroll driver: its height gives the scroll distance that drives the camera animation -->
         <div class="car-scroll-driver">
