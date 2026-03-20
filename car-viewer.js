@@ -2,6 +2,7 @@
 // Scroll-driven: front-wing close-up → car left / project banners right
 import * as THREE from 'three';
 import { GLTFLoader }      from 'three/addons/loaders/GLTFLoader.js';
+import { DRACOLoader }     from 'three/addons/loaders/DRACOLoader.js';
 import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
 
 // ─── CAMERA KEYFRAMES ────────────────────────────────────────────────────────
@@ -44,9 +45,7 @@ renderer.outputColorSpace   = THREE.SRGBColorSpace;
 
 // ─── SCENE & CAMERA ──────────────────────────────────────────────────────────
 const scene  = new THREE.Scene();
-// TEMP DIAGNOSTIC: red background so we can confirm the canvas is rendering.
-// Remove this line once the car appears correctly.
-scene.background = new THREE.Color(0x330000);
+// No background — site's #000 shows through the alpha canvas.
 
 const camera = new THREE.PerspectiveCamera(40, window.innerWidth / window.innerHeight, 0.01, 200);
 camera.position.copy(CAM_INTRO.pos);
@@ -86,7 +85,13 @@ const carbonMat = new THREE.MeshStandardMaterial({
 let carModel  = null;
 let modelBaseY = 0;
 
-new GLTFLoader().load(
+const dracoLoader = new DRACOLoader();
+dracoLoader.setDecoderPath('https://cdn.jsdelivr.net/npm/three@0.168.0/examples/jsm/libs/draco/');
+
+const gltfLoader = new GLTFLoader();
+gltfLoader.setDRACOLoader(dracoLoader);
+
+gltfLoader.load(
     'modules/CR30-Attempt_4-Render.glb',
 
     (gltf) => {
