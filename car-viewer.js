@@ -10,15 +10,16 @@ import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
 // The car probably faces -Z (SolidWorks front view), front wing near -Z extremity.
 
 const CAM_INTRO = {
-    // Close above the front wing. Decrease Z to move camera forward; raise Y for height.
-    pos:    new THREE.Vector3( 0.0,  1.8, -0.6),
-    target: new THREE.Vector3( 0.0,  0.1, -2.2),
+    // Safe top-down view — shows the whole car regardless of orientation.
+    // Once the car appears, use W/A/S/D/Q/E to fly to the front-wing close-up and press L.
+    pos:    new THREE.Vector3( 0.0, 10.0,  0.01),  // directly above (tiny Z offset avoids gimbal)
+    target: new THREE.Vector3( 0.0,  0.0,  0.0),
 };
 
 const CAM_BROWSE = {
-    // Pulled back and shifted right (+X) so the car sits in the left half of the canvas.
-    pos:    new THREE.Vector3( 2.4,  1.6,  4.2),
-    target: new THREE.Vector3( 0.0,  0.4,  0.0),
+    // 3/4 view from outside — car on left half of screen.
+    pos:    new THREE.Vector3( 5.0,  4.0,  9.0),
+    target: new THREE.Vector3( 0.0,  0.0,  0.0),
 };
 
 // Scroll fractions (0 – 1 of .car-scroll-driver height) that define each phase
