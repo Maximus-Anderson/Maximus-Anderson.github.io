@@ -1,0 +1,3 @@
+# Treat GLB/GLTF as binary to prevent line-ending corruption
+*.glb  binary
+*.gltf binary
