@@ -231,11 +231,12 @@ window.addEventListener('resize', () => {
 // Use these in the browser to dial in CAM_INTRO / CAM_BROWSE values without
 // pushing code each time. Press L to log the current position to the console.
 //
-//  W/S         — move camera forward / back  (Z axis)
-//  A/D         — move camera left / right    (X axis)
-//  Q/E         — move camera down / up       (Y axis)
-//  Arrow Up/Dn — tilt look-at up / down
-//  L           — log current pos + lookAt to console  (copy into CAM_INTRO or CAM_BROWSE)
+//  W/S   — zoom camera forward / back  (Z axis)
+//  A/D   — orbit camera left / right   (X axis)
+//  Q/E   — raise / lower camera        (Y axis)
+//  I/K   — pan view toward front / rear of car  (shifts target + camera together)
+//  U/O   — pan view left / right
+//  L     — log current pos + lookAt to console  (copy into CAM_INTRO or CAM_BROWSE)
 //
 // Hold Shift to move 5× faster.
 (function devControls() {
@@ -261,11 +262,11 @@ window.addEventListener('resize', () => {
         if (held.has('d') || held.has('D')) { lerpedCamPos.x += s; moved = true; }
         if (held.has('q') || held.has('Q')) { lerpedCamPos.y -= s; moved = true; }
         if (held.has('e') || held.has('E')) { lerpedCamPos.y += s; moved = true; }
-        // Arrow keys — pan both camera AND target together (shifts which part of car is centred)
-        if (held.has('ArrowUp'))    { lerpedCamPos.z -= s; devLook.z -= s; moved = true; }
-        if (held.has('ArrowDown'))  { lerpedCamPos.z += s; devLook.z += s; moved = true; }
-        if (held.has('ArrowLeft'))  { lerpedCamPos.x -= s; devLook.x -= s; moved = true; }
-        if (held.has('ArrowRight')) { lerpedCamPos.x += s; devLook.x += s; moved = true; }
+        // I/K and U/O — pan both camera AND target together (shifts which part of car is centred)
+        if (held.has('i') || held.has('I')) { lerpedCamPos.z -= s; devLook.z -= s; moved = true; }
+        if (held.has('k') || held.has('K')) { lerpedCamPos.z += s; devLook.z += s; moved = true; }
+        if (held.has('u') || held.has('U')) { lerpedCamPos.x -= s; devLook.x -= s; moved = true; }
+        if (held.has('o') || held.has('O')) { lerpedCamPos.x += s; devLook.x += s; moved = true; }
 
         if (moved) {
             // Override the lerp targets so the camera snaps to key input
