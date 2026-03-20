@@ -202,8 +202,18 @@ animate();
 function syncCanvasVisibility() {
     if (!projectsPageEl) return;
     const active = projectsPageEl.classList.contains('active');
-    canvas.style.display = active ? 'block' : 'none';
     isActive = active;
+
+    canvas.style.display = active ? 'block' : 'none';
+
+    // Hero text and banners also live outside .page divs, so hide them explicitly
+    if (heroTextEl) {
+        heroTextEl.style.display = active ? '' : 'none';
+    }
+    if (bannersPanelEl) {
+        bannersPanelEl.style.display = active ? '' : 'none';
+    }
+
     if (active) {
         onScroll();
         lerpedCamPos.copy(targetCamPos);

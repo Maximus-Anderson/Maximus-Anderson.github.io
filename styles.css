@@ -886,7 +886,7 @@ footer {
 /* Phase 1: "Projects" title below the front wing */
 .car-hero-text {
     position: fixed;
-    top: 65%;
+    top: 70%;
     left: 50%;
     transform: translateX(-50%);
     text-align: center;
