@@ -14,12 +14,12 @@
 }
 
 html {
-    font-size: 10px;
+    font-size: 11px;
     scroll-behavior: smooth;
 }
 
 body {
-    font-family: 'Butler', 'Georgia', serif;
+    font-family: 'JetBrains Mono', 'Fira Code', monospace;
     background-color: var(--background-color);
     background-image: linear-gradient(
         to top,
@@ -760,7 +760,7 @@ body {
     font-size: 2.5em;
     line-height: 1.5;
     opacity: 0.85;
-    font-family: 'Butler', Georgia, serif;
+    font-family: 'JetBrains Mono', 'Fira Code', monospace;
 }
 
 /* Resume Section */
