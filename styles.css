@@ -35,27 +35,64 @@ body {
 
 /* Navigation */
 .navigation {
-    position: sticky;
+    position: fixed;
     top: 0;
+    left: 0;
+    right: 0;
     z-index: 1000;
-    background-color: var(--background-color);
-    padding: 30px var(--site-margin);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 0 var(--site-margin);
+    background: transparent;
+    transition: padding 0.45s ease;
 }
 
 .nav-content {
     max-width: var(--grid-width);
     margin: 0 auto;
     display: flex;
-    justify-content: space-between;
     align-items: center;
+    gap: 28px;
+    padding: 20px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    background: rgba(5, 5, 5, 0.92);
+    border-radius: 0;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    /* make it span edge-to-edge at banner stage */
+    margin-left: calc(-1 * var(--site-margin));
+    margin-right: calc(-1 * var(--site-margin));
+    padding-left: var(--site-margin);
+    padding-right: var(--site-margin);
+    transition: padding 0.45s ease, border-radius 0.45s ease,
+                background 0.45s ease, backdrop-filter 0.45s ease,
+                border-color 0.45s ease, margin 0.45s ease, max-width 0.45s ease;
+}
+
+/* Scrolled — nav-content becomes a centered floating pill */
+.navigation.scrolled {
+    padding: 12px var(--site-margin);
+}
+
+.navigation.scrolled .nav-content {
+    max-width: fit-content;
+    margin: 0 auto;
+    padding: 8px 26px;
+    border-radius: 50px;
+    border-color: rgba(255, 255, 255, 0.09);
+    background: rgba(8, 8, 8, 0.68);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
 }
 
 .logo {
-    font-size: 3.5em;
+    font-size: 2.4em;
     font-weight: 400;
     letter-spacing: -0.02em;
-    transition: opacity 0.3s ease;
+    transition: font-size 0.45s ease, opacity 0.3s ease;
+    white-space: nowrap;
+}
+
+.navigation.scrolled .logo {
+    font-size: 1.45em;
 }
 
 .logo:hover {
@@ -63,42 +100,42 @@ body {
     cursor: pointer;
 }
 
+.nav-divider {
+    width: 1px;
+    height: 18px;
+    background: rgba(255, 255, 255, 0.15);
+    flex-shrink: 0;
+}
+
 .nav-links {
     display: flex;
-    gap: 20px;
-    font-size: 2.6em;
+    gap: 4px;
+    font-size: 2em;
+    transition: font-size 0.45s ease;
+}
+
+.navigation.scrolled .nav-links {
+    font-size: 1.3em;
 }
 
 .nav-links a {
     color: var(--text-color);
     text-decoration: none;
     position: relative;
-    transition: filter 0.3s ease;
-}
-
-.nav-links a::before {
-    content: '';
-    position: absolute;
-    bottom: -3px;
-    left: 0;
-    width: 0;
-    height: 1px;
-    background-color: var(--primary-color);
-    transition: width 0.5s ease;
-}
-
-.nav-links a:hover::before {
-    width: 100%;
+    padding: 4px 10px;
+    border-radius: 20px;
+    opacity: 0.75;
+    transition: background 0.2s ease, opacity 0.2s ease, color 0.2s ease;
 }
 
 .nav-links a:hover {
-    filter: brightness(1.5);
+    background: rgba(255, 255, 255, 0.08);
+    opacity: 1;
 }
 
-.nav-links a:not(:last-child)::after {
-    content: '/';
-    margin-left: 10px;
-    margin-right: -10px;
+.nav-links a.active-link {
+    opacity: 1;
+    color: var(--primary-color);
 }
 
 /* Page Transitions */
@@ -106,11 +143,17 @@ body {
     display: none;
     opacity: 0;
     animation: fadeOut 0.5s ease forwards;
+    padding-top: 80px;
 }
 
 .page.active {
     display: block;
     animation: fadeIn 0.5s ease forwards;
+}
+
+/* Projects page is all fixed/scroll-driven — no top padding needed */
+#projects-page {
+    padding-top: 0;
 }
 
 @keyframes fadeIn {
@@ -923,19 +966,18 @@ footer {
     right: 0;
     top: calc(50% + 50px);
     transform: translateY(-50%);
-    width: 44%;
-    max-height: calc(80vh - 50px);
+    width: 48%;
+    max-height: calc(82vh - 50px);
     overflow-y: auto;
-    overflow-x: hidden;
     z-index: 10;
     display: flex;
     flex-direction: column;
-    gap: 14px;
-    padding: 10px 40px 10px 0;
+    gap: 12px;
+    /* left padding gives shadow room; right padding keeps off edge */
+    padding: 10px 36px 10px 8px;
     opacity: 0;
     pointer-events: none;
     transition: opacity 0.3s ease;
-    /* Hide scrollbar visually but keep functionality */
     scrollbar-width: none;
 }
 .projects-banners-panel::-webkit-scrollbar {
@@ -948,37 +990,43 @@ footer {
     align-items: center;
     gap: 16px;
     cursor: pointer;
-    background: rgba(0, 0, 0, 0.72);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    padding: 11px 14px;
-    transition: border-color 0.3s ease, transform 0.3s ease, background 0.3s ease;
-    backdrop-filter: blur(6px);
-    -webkit-backdrop-filter: blur(6px);
+    background: rgba(12, 12, 12, 0.80);
+    border: 1px solid rgba(255, 255, 255, 0.07);
+    border-left: 3px solid rgba(255, 85, 85, 0.25);
+    border-radius: 16px;
+    padding: 14px;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.35);
+    transition: border-left-color 0.3s ease, box-shadow 0.3s ease,
+                transform 0.3s ease, background 0.3s ease;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
 }
 
 .project-banner:hover {
-    border-color: var(--primary-color);
-    transform: translateX(-6px);
-    background: rgba(0, 0, 0, 0.88);
+    border-left-color: var(--primary-color);
+    box-shadow: 0 4px 28px rgba(255, 85, 85, 0.18), 0 0 0 1px rgba(255, 85, 85, 0.2);
+    transform: translateX(-5px);
+    background: rgba(18, 10, 10, 0.90);
 }
 
 .banner-img-wrap {
-    width: 200px;
-    height: 112px;
     flex-shrink: 0;
     overflow: hidden;
-    background: #1a1a1a;
+    border-radius: 10px;
+    background: #111;
+    width: 180px;
+    height: 120px;
 }
 
 .banner-img-wrap img {
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: contain;
     transition: transform 0.4s ease;
 }
 
 .project-banner:hover .banner-img-wrap img {
-    transform: scale(1.06);
+    transform: scale(1.04);
 }
 
 .banner-info {
@@ -990,7 +1038,7 @@ footer {
 }
 
 .banner-info h3 {
-    font-size: 2em;
+    font-size: 1.8em;
     font-weight: 400;
     line-height: 1.4;
     flex: 1;
@@ -1004,14 +1052,16 @@ footer {
 }
 
 .banner-arrow {
-    font-size: 1.8em;
+    font-size: 1.6em;
     color: var(--primary-color);
     flex-shrink: 0;
-    transition: transform 0.3s ease;
+    opacity: 0.5;
+    transition: transform 0.3s ease, opacity 0.3s ease;
 }
 
 .project-banner:hover .banner-arrow {
-    transform: translateX(5px);
+    transform: translateX(4px);
+    opacity: 1;
 }
 
 /* Responsive Design */

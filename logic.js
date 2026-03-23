@@ -8,6 +8,21 @@ document.addEventListener('DOMContentLoaded', function() {
     const backButtons = document.querySelectorAll('.back-button');
     const pages = document.querySelectorAll('.page');
     const logo = document.querySelector('.logo');
+    const nav = document.querySelector('.navigation');
+
+    // Morph nav from banner → pill exactly when the car starts moving (SCROLL_CAM_START = 0.18)
+    function getCarMorphThreshold() {
+        const driver = document.querySelector('.car-scroll-driver');
+        if (!driver) return 80;
+        const scrollable = driver.offsetHeight - window.innerHeight;
+        return 0.18 * scrollable + driver.offsetTop;
+    }
+
+    let morphThreshold = getCarMorphThreshold();
+    window.addEventListener('resize', () => { morphThreshold = getCarMorphThreshold(); }, { passive: true });
+    window.addEventListener('scroll', () => {
+        nav.classList.toggle('scrolled', window.scrollY > morphThreshold);
+    }, { passive: true });
     
     // Navigation click handler for top nav
     navLinks.forEach(link => {
@@ -54,6 +69,11 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
     
+    // Set initial active nav link
+    document.querySelectorAll('.nav-links a').forEach(a => {
+        a.classList.toggle('active-link', a.getAttribute('data-page') === 'projects');
+    });
+
     // Logo click - go to projects
     logo.addEventListener('click', function() {
         console.log('Logo clicked, switching to projects');
@@ -81,6 +101,11 @@ document.addEventListener('DOMContentLoaded', function() {
         setTimeout(() => {
             currentPage.classList.remove('active');
             targetPage.classList.add('active');
+
+            // Update active nav link
+            document.querySelectorAll('.nav-links a').forEach(a => {
+                a.classList.toggle('active-link', a.getAttribute('data-page') === targetPageId);
+            });
             
             targetPage.style.animation = 'none';
             targetPage.style.opacity = '0';
