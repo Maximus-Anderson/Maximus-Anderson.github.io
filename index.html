@@ -286,26 +286,81 @@
                 <h1 class="project-detail-title fade-in">1976 Honda CB750F Restoration</h1>
                 <img src="images/CB750F-Title.jpg" alt="1976 Honda CB750F Restoration" class="project-detail-image slide-up">
                 <p class="project-detail-description slide-up" style="animation-delay: 0.2s;">
-                    A full restoration of a 1976 Honda CB750F motorcycle, including carb rebuild, tune, compresion testing, timing, and electrical system upgrades. The project preserved the classic design while maintaining performance and reliability.
+                    Reviving a 50-year-old SOHC four: carburetors, electrics, timing, and the start of a cafe racer build.
                 </p>
                 <div class="side-boxes-container">
                     <div class="role-container">
                         <h3 class="role-title">Role</h3>
                         <ul class="role-list">
-                            <li>Inspection</li>
+                            <li>Diagnosis</li>
                             <li>Rebuild</li>
-                            <li>Validation</li>
+                            <li>Fabrication</li>
                         </ul>
                     </div>
                 </div>
                 <div class="background-container">
-                    <h3 class="background-title">Background</h3>
+                    <h3 class="background-title">Why This Bike</h3>
                     <p class="background-description">
-                        I purchased this bike over the summer as a project bike. It wasn't running but was in beautiful condition with no visible rust or major corrosion. To get it running, I immediately checked for spark, compression, air, and fuel. Spark was weak and the battery wasn't holding charge, so I replaced the battery with an AGM, then spark boots and plugs, the air filter was torn so I installed a new one, compression was relatively low at 130-135 psi, but it was consistent, but the carbs were in rough condition with the float pins siezed due to corrosion.
+                        I came across a cafe racer build by Milezero Racer based on a CB750F Clubsport and immediately wanted one. Beyond the aesthetics, this was a project I genuinely needed. I'd learned about carbureted engines in theory but never had my hands on one, and carburetors are dated technology but the physics behind them are fascinating. There's also something satisfying about reviving a machine that hadn't turned over in years.
                     </p>
-                    <img src="images/CB750F-Carbs.jpg" alt="CB750F Carbeurator" class="background-image slide-up" style="animation-delay: 0.3s;">
                     <p class="background-description">
-                        I had a second set of carbs from a donor bike that I rebuilt that were in far better condition, so after syncing them and replacing jets to match the stock specs I installed those instead. Fairly soon after I managed to start the bike, but it was running off 3 cylinders. Spark was still weak so I traced the wiring harness and found loose connections. Spark was now good, but it would often misfire or lug to a stop after a few minutes. This led me to check timing, which was behind for the cyl 2-3. After changing static then dynamic timing, all 4 cylinders were firing and the bike seemed to be in great condition, and I was able to complete a 100 mile ride with essentially no issues.
+                        There's a practical reason too. I learn best by doing, and working through a real mechanical system, diagnosing problems, chasing faults, fixing things that fight back, builds intuition you can't get from a textbook. The CB750 has been one of the better teachers I've had.
+                    </p>
+                </div>
+                <div class="background-container">
+                    <h3 class="background-title">Initial Assessment</h3>
+                    <p class="background-description">
+                        The bike wasn't running when I got it but wasn't a disaster either. Tires were dry rotted, so I built a makeshift center stand from scrap wood and swapped them before anything else.
+                    </p>
+                    <img src="images/CB750_Center_Stand.jpg" alt="Makeshift center stand" class="background-image slide-up" style="animation-delay: 0.3s;">
+                    <p class="background-description"> Then I ran through the basics: spark, compression, air, fuel.
+                    </p>
+                    <p class="background-description">
+                        Compression came in at 130–135 psi across all four cylinders. The SOHC forums put the healthy range at 150–180 psi, 120 being the low end of acceptable, and below 100 needing immediate work. The consistency across cylinders is a good sign, but it's on the low side and worth revisiting. The air filter was torn and got replaced. The carbs were the main concern: float pins seized from corrosion, so a simple clean wasn't going to work.
+                    </p>
+                </div>
+                <div class="background-container">
+                    <h3 class="background-title">Electrical System</h3>
+                    <p class="background-description">
+                        The electrics needed significant work. The headlight and tail light both had heavy parasitic draw, the high beams killed power to the whole bike, and the turn signals were dead. The previous owner had installed a lithium battery whose BMS couldn't handle the bike's demands, so I replaced it with an AGM while sorting everything else.
+                    </p>
+                    <p class="background-description">
+                        Tracing the harness with a multimeter turned up a collection of loose and corroded bullet connectors throughout. I cleaned or replaced the bad ones and ran continuity checks to confirm. Spark was weak but the coils tested fine; the coil boots had resistance far above spec at the plug interface, so those and the plugs got replaced.
+                    </p>
+                    <p class="background-description">
+                        For lighting I built a custom headlight from a Suzuki GS850 housing fitted with high-output LEDs and swapped the tail light. Before the swap, switching the lights on caused nearly half a volt of drop from the parasitic draw. After, the turn signals worked, draw was negligible, and the high beam issue was gone.
+                    </p>
+                    <div class="dual-image-container" style="display: flex; gap: 1em; justify-content: center; flex-wrap: wrap;">
+                        <img src="images/CB750_LED_Front.jpg" alt="Custom LED headlight" class="background-image slide-up" style="animation-delay: 0.3s; flex: 1; max-width: 48%;">
+                        <img src="images/CB750_LED_Tail.jpg" alt="LED tail light swap" class="background-image slide-up" style="animation-delay: 0.3s; flex: 1; max-width: 48%;">
+                    </div>
+                </div>
+                <div class="background-container">
+                    <h3 class="background-title">Carburetor Swap</h3>
+                    <p class="background-description">
+                        The original carbs were too corroded to rebuild cleanly. I sourced a donor bike and stripped a set of Keihin 7A carbs, which are roughly equivalent in jetting to the originals. After cleaning, setting float levels, and syncing all four, I installed them.
+                    </p>
+                    <img src="images/CB750F-Carbs.jpg" alt="CB750F Carburetors" class="background-image slide-up" style="animation-delay: 0.3s;">
+                    <p class="background-description">
+                        They got the bike running but have been an ongoing problem. The carbs run rich, clog regularly, and lose their tune. I've retuned them six times and done a full rebuild with float level reset and jet cleaning four times. Plugs have fouled repeatedly as a result. Sorting the carbs properly is the top priority going forward.
+                    </p>
+                </div>
+                <div class="background-container">
+                    <h3 class="background-title">Timing</h3>
+                    <p class="background-description">
+                        With spark and carbs sorted the bike started, but only on three cylinders and would lug to a stop after a few minutes. I ran the static timing procedure from the SOHC forums: 12V test light on the points, engine rotated by hand with TDC/BDC confirmed by the markings and a finger in the plug hole. Timing was retarded on cylinders 2 and 3. After adjusting, all four fired cleanly. I skipped dynamic timing since the bike ran well after the static adjustment and I wanted to get miles on it. Something to verify properly down the road.
+                    </p>
+                </div>
+                <div class="background-container">
+                    <h3 class="background-title">First Miles and What Still Needs Work</h3>
+                    <p class="background-description">
+                        The first 100-mile ride went well enough to call it a success, but the remaining issues were hard to ignore. Fuel economy is poor from the rich-running carbs, and I have to run the petcock in reserve to get adequate flow. The clutch is notchy and needs a rebuild. The front brakes are unhappy, and the left caliper has a slow seep leaving a film on the rotor before each ride. It hasn't saturated the pad yet, which I haven't fully explained.
+                    </p>
+                </div>
+                <div class="background-container">
+                    <h3 class="background-title">What's Next</h3>
+                    <p class="background-description">
+                        Mechanical reliability first: clutch rebuild, brake overhaul, and properly sorting the carbs. After that, the cafe build starts. I want to fabricate a custom seat in carbon fiber nylon filament to cut weight and clean up the tail. The tank is getting a clear coat to preserve the steel and some of the patina. The mirrors vibrate badly at speed so I'm planning a lower-profile replacement with better isolation.
                     </p>
                 </div>
                 <h3 class="timeline-title slide-up" style="animation-delay: 0.4s;">Project Timeline</h3>
@@ -321,7 +376,7 @@
                         <div class="timeline-item" style="animation-delay: 0.8s;">
                             <div class="timeline-marker" data-description="honda-desc-2">
                                 <span class="timeline-date">July 19, 2025</span>
-                                <h4>Milestone 2: Carbeurator Swap/Rebuild</h4>
+                                <h4>Milestone 2: Carb Swap & Electrical Overhaul</h4>
                             </div>
                         </div>
                         <div class="timeline-item" style="animation-delay: 1.0s;">
@@ -334,26 +389,24 @@
                     <div id="timeline-popup" class="timeline-popup">
                         <button class="popup-close">×</button>
                         <div id="honda-desc-1" class="timeline-description-content" style="display: none;">
-                            <p>Complete inspection.</p>
+                            <p>Full inspection: compression at 130–135 psi, dry rotted tires, seized carb floats, corroded bullet connectors, weak spark from failed coil boots, parasitic draw from headlight and tail light.</p>
                         </div>
                         <div id="honda-desc-2" class="timeline-description-content" style="display: none;">
-                            <p>New Keihin 7A carbs with new floats and pilot jets to match the original carbs were rebuilt and installed.</p>
+                            <p>Swapped in Keihin 7A carbs from donor bike, rebuilt and synced. Replaced coil boots and plugs. Traced and repaired wiring harness. Built custom headlight from GS850 housing with LEDs. Swapped tail light. Replaced lithium battery with AGM. Set static timing on cylinders 2 and 3.</p>
                         </div>
                         <div id="honda-desc-3" class="timeline-description-content" style="display: none;">
-                            <p>After re-assembly, the motorcycle was started and was able to complete a 100 mile ride with minimal issues.</p>
+                            <p>100-mile ride completed. Bike runs on all four cylinders. Remaining issues: rich-running carbs, front brake seep, clutch feel. Cafe racer modifications planned.</p>
                         </div>
                     </div>
                 </div>
-                                <div class="additional-photos-container slide-up" style="animation-delay: 0.5s;">
+                <div class="additional-photos-container slide-up" style="animation-delay: 0.5s;">
                     <h3 class="additional-photos-title">Additional Photos</h3>
                     <div class="additional-photos-grid">
                         <div class="photo-item">
                             <img src="images/tasty.jpg" alt="Torn air filter" class="additional-photo slide-up" style="animation-delay: 0.6s;">
                         </div>
-                        <!--<div class="photo-item">
-                            <img src="images/newcarbsinstalled.jpg" alt="New carbs installed" class="additional-photo slide-up" style="animation-delay: 0.7s;">-->
-                        </div>
                     </div>
+                </div>
                 <button class="back-button slide-up" style="animation-delay: 1.2s;" data-page="projects">Back to Projects</button>
             </div>
         </section>
