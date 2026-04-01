@@ -1360,20 +1360,22 @@ footer {
    Breakpoint matches typical phone portrait widths.                         */
 @media (max-width: 600px) {
 
-    /* Hero text moves up so it clears the banner strip */
+    /* Hero text sits in the top strip above the banner panel */
     .car-hero-text {
-        top: 32%;
+        top: 10%;
     }
 
-    /* Banners: bottom-docked full-width strip instead of right-side panel */
+    /* Banners: bottom-docked full-width strip instead of right-side panel.
+       top: 25% pins the top edge 25% down the viewport; bottom: 0 anchors
+       to the screen bottom — giving the lower 75% for banners.            */
     .projects-banners-panel {
         right: 0;
         left: 0;
         bottom: 0;
-        top: auto;
+        top: 25%;
         transform: none;
         width: 100%;
-        max-height: 46vh;
+        max-height: none;
         padding: 10px 12px 20px;
         gap: 8px;
         /* re-declare scrolling in case 768px rules interfere */

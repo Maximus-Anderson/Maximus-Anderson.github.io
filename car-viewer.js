@@ -27,8 +27,11 @@ const CAM_BROWSE = {
 
 function updateCamBrowse() {
     if (window.innerWidth <= 600) {
-        CAM_BROWSE.pos.set( 0.0,  4.0,  9.0);
-        CAM_BROWSE.target.set( 0.0,  0.0,  0.0);
+        // Side view: camera on +X axis looking across the car.
+        // pos.y=3.5 and target.y=-0.3 tilt the camera slightly downward,
+        // placing the car in the top quarter of the viewport above the banners.
+        CAM_BROWSE.pos.set( 9.0,  3.5,  0.0);
+        CAM_BROWSE.target.set( 0.0, -0.3,  0.0);
     } else {
         CAM_BROWSE.pos.set( 6.0,  4.0,  9.0);
         CAM_BROWSE.target.set( 2.0,  0.0,  0.0);
