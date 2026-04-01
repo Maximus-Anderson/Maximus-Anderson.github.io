@@ -16,11 +16,26 @@ const CAM_INTRO = {
     target: new THREE.Vector3( 0.00,  0.00,  2.08),
 };
 
+// CAM_BROWSE values depend on viewport width:
+//   Desktop (>600px) — car moves to left half, banners fill right side.
+//   Mobile  (≤600px) — car stays centred, banners dock to the bottom.
+// Vectors are mutated in place so the scroll animation references stay valid.
 const CAM_BROWSE = {
-    // 3/4 view from outside — car on left half of screen.
-    pos:    new THREE.Vector3( 6.0,  4.0,  9.0),
-    target: new THREE.Vector3( 2.0,  0.0,  0.0),
+    pos:    new THREE.Vector3(),
+    target: new THREE.Vector3(),
 };
+
+function updateCamBrowse() {
+    if (window.innerWidth <= 600) {
+        CAM_BROWSE.pos.set( 0.0,  4.0,  9.0);
+        CAM_BROWSE.target.set( 0.0,  0.0,  0.0);
+    } else {
+        CAM_BROWSE.pos.set( 6.0,  4.0,  9.0);
+        CAM_BROWSE.target.set( 2.0,  0.0,  0.0);
+    }
+}
+updateCamBrowse();
+window.addEventListener('resize', updateCamBrowse, { passive: true });
 
 // Scroll fractions (0 – 1 of .car-scroll-driver height) that define each phase
 const SCROLL_CAM_START    = 0.18;   // camera starts moving
