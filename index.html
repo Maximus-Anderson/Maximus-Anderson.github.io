@@ -111,11 +111,11 @@
     <div id="project-fsae-page" class="page">
         <section class="project-detail-section">
             <div class="project-detail-container">
-                <h1 class="project-detail-title fade-in">CR29 Battery Module: Manufacture</h1>
+                <h1 class="project-detail-title fade-in">CR29 Accumulator: Manufacture</h1>
                 <img src="images/tractivebatterymodule.jpg" alt="CR29 Battery Module: Manufacture" class="project-detail-image slide-up">
                 <div class="project-detail-content slide-up" style="animation-delay: 0.2s;">
                     <p class="project-detail-description">
-                        This project involved the manufacturing of the team's first tractive system battery module and testing it to highlight key manufacturing inefficiencies and potential issues to improve in future packs.
+                        Building Cyclone Racing's first tractive system from scratch: the aluminum housing, five battery modules, and everything that went wrong along the way.
                     </p>
                     <div class="side-boxes-container">
                         <div class="role-container">
@@ -128,66 +128,120 @@
                         <div class="specs-container">
                             <h3 class="specs-title">Specifications</h3>
                             <ul class="specs-list">
-                                <li>Configuration: 28s1p</li>
+                                <li>Configuration: 28s1p per module</li>
                                 <li>Cells: COSMX CA95B0D0HD</li>
+                                <li>5 modules total</li>
                             </ul>
                         </div>
                     </div>
+
                     <div class="background-container">
-                        <h3 class="background-title">Background</h3>
+                        <h3 class="background-title">Context</h3>
                         <p class="background-description">
-                            For the ISU racecar, CR29, I was tasked with assembling key components of the accumulator, now referred to as the tractive battery, with a focus on the battery modules. These were designed to prioritize safety and repairability.
+                            CR29 was Cyclone Racing's first electric car. The accumulator, the main high-voltage battery pack, had to be built from scratch. Nobody on the team had done this before. This write-up covers the full manufacturing process: the aluminum housing and the five battery modules that go inside it.
+                        </p>
+                    </div>
+
+                    <div class="background-container">
+                        <h3 class="background-title">What an Accumulator Is</h3>
+                        <p class="background-description">
+                            The FSAE rules called the main high-voltage battery pack the accumulator — that terminology shifted to "tractive battery" in the 2026 ruleset, but for CR29 it was the accumulator. It isn't one big battery. It's a housing containing smaller sub-units called modules, wired in series to reach the total pack voltage. Each module is its own self-contained group of cells. For CR29, each module holds 28 pouch cells wired in series with one cell per parallel group — 28s1p. Five modules in the housing make up the full pack.
+                        </p>
+                        <p class="background-description">
+                            The cells are COSMX CA95B0D0HD pouch cells — 13 Ah, 3.73 V nominal, 180 Wh/kg, 1.5 mΩ DCIR. Pouch cells are "flexible" in the sense that they're encased in a polymer film rather than a metal can like a cylindrical cell, but they're still quite rigid in practice. The advantage over cylindrical cells is meaningful: the large, flat electrode area gives a lower DC internal resistance, which means less resistive heating and better power delivery under load. The gravimetric energy density is also favorable, which matters for a car that has to stay under weight.
+                        </p>
+                        <p class="background-description">
+                            They do need careful handling, though. The polymer casing isn't as mechanically protective as a steel can. A dent, a crease, or a puncture can bring the anode and cathode into direct contact inside the cell, creating an internal short circuit. From there, the cell enters thermal runaway: a self-sustaining exothermic reaction that produces heat, gas, and eventually fire. Lithium battery fires are particularly bad because they generate their own oxygen and produce toxic gases including hydrogen fluoride — not that I'd know anything about that... The tabs — aluminum on the cathode side, nickel-plated copper on the anode — are not especially fragile as materials go, but bending or creasing them at the root can cause delamination where the tab meets the internal electrode, which is a different kind of failure.
+                        </p>
+                    </div>
+
+                    <div class="background-container">
+                        <h3 class="background-title">The Aluminum Housing</h3>
+                        <p class="background-description">
+                            The housing is a welded aluminum enclosure that holds all five modules, the BMS, and the high-voltage wiring. The flat panels were water jet cut from aluminum sheet, which gave clean, accurate profiles without introducing heat distortion.
+                        </p>
+                        <p class="background-description">
+                            The original design called for the side walls to be bent to shape rather than cut as separate pieces and welded. Bending would have been faster and produced cleaner corners, but when the parts came back from the shop, the bend tolerances weren't tight enough to be usable. The walls didn't sit where they needed to sit. Rather than redesign around the bending process, the bent sections were cut off and the walls were welded on as individual flat pieces instead, both the exterior panels and the interior partition walls.
+                        </p>
+                        <p class="background-description">
+                            That decision created a new problem. The exterior walls are 3.2mm thick and welded fine. The interior partition walls are a different story — 2.3mm, the rules minimum. Welding a full continuous seam into 2.3mm aluminum puts far more heat into the part than it can absorb without moving. The walls warped. After welding, the interior cavity was tight enough in places that the modules wouldn't fit. The fix was a mallet: carefully working the distorted spots outward until the modules could be coaxed in. The result was close enough to functional, but still out of spec dimensionally.
+                        </p>
+                        <p class="background-description">
+                            A lot of time also went into fitting and positioning each panel before tacking it in place so the assembled housing would match the CAD model. Even with that effort, the final housing still wasn't perfect. For CR30, the suggestion was to add slots to the mating edges so the panels self-locate when assembled, effectively self-jigging. That would cut fitment time significantly and remove the dependence on careful alignment before every tack weld.
+                        </p>
+                    </div>
+
+                    <div class="background-container">
+                        <h3 class="background-title">Module Assembly</h3>
+                        <p class="background-description">
+                            The 28 cells in each module get sorted into four types, A through D, based on tab length and orientation. The type determines where in the stack the cell goes. Getting the order wrong means a tab that doesn't reach its clamping plate, or one that's bent at the wrong angle.
+                        </p>
+                        <p class="background-description">
+                            Before touching a cell, the tab clamping plates had to be prepared. These are 3D-printed plates that clamp the cell tabs and allow them to be bolted together electrically. The inner-most bolt positions on each plate are inaccessible from below once cells are stacked on top, so the design called for press-fit nuts embedded in the plastic. In FDM-printed parts, press-fit doesn't hold reliably, so each nut got bonded in with JB Weld and left to cure. The intent was for them to behave like heat-set inserts, locking the nut in place so the bolt has something solid to thread into under clamping load.
+                        </p>
+                        <p class="background-description">
+                            With the plates ready, assembly went like this: drop the first D cell into the stack, lay a tab block over the tabs, fold the tabs up onto it, drop in the first A cell, fold its tab, add another tab block with a BMS sense wire ring, bolt through. Then repeat, alternating A and B cells through the stack. The final cell is a C type. After the last cell, main terminals get attached and the whole stack goes into polycarbonate baskets for structural support and isolation.
+                        </p>
+                        <p class="background-description">
+                            Total module build time ran about 5 hours a day over three days, which works out to roughly 3 hours per module including cell stacking, tab folding, bolting, and BMS sense wire harnessing. That doesn't count the 4 hours spent sanding burrs off the water jet-cut tab blocks before assembly could start, or the time spent crimping fuses onto the BMS wires separately.
                         </p>
                         <img src="images/tractivebatterymanufacture.jpg" alt="Tractive Battery Manufacture" class="background-image slide-up" style="animation-delay: 0.3s;">
+                    </div>
+
+                    <div class="background-container">
+                        <h3 class="background-title">What Didn't Work</h3>
                         <p class="background-description">
-                            During manufacturing, I validated features such as press-fit nuts, identified issues like insufficient stack pressure, and noted potentially hazardous bolted connections below the main pack terminals, all of which were flagged for improvement in future designs. Despite these challenges, the module was successfully completed and has been utilized in dynamometer testing.
+                            The JB-welded nuts were the biggest module problem. Because they weren't sitting perfectly square in their pockets, some bolts cross-threaded on the way in. Once a bolt cross-threads into an epoxy-held nut, the nut breaks free. Now there's a loose nut somewhere inside a sealed module. Fixing it meant partially disassembling the stack mid-build. The bonded nuts also made disassembly difficult later when modules needed to come apart for CR30 work.
+                        </p>
+                        <p class="background-description">
+                            Stack pressure was the second gap. Pouch cells need to be compressed during cycling to prevent swelling and dendrite growth. The module design had compression plates for this, but the cell dimensions in CAD came from the datasheet rather than actual measurements. Real cells ran about 0.7mm thinner than spec per cell. Across 28 cells, that's roughly 20mm of lost compression. The plates that were supposed to clamp the stack weren't doing much.
+                        </p>
+                        <p class="background-description">
+                            The terminal bolts were a safety concern. The main pack terminal connections were accessible from below the module even with TPU plugs installed. Live conductors at those locations are a problem both for inspections and for any scenario where someone's hand ends up near the bottom of a live pack.
+                        </p>
+                    </div>
+
+                    <div class="background-container">
+                        <h3 class="background-title">Notes for CR30</h3>
+                        <p class="background-description">
+                            The full list flagged coming out of this build: add self-jigging slots to the housing panels so fitment doesn't require manual alignment, redesign the press-fit nut pockets with deeper and tighter interference fits so the nuts lock mechanically without JB Weld and have more wall contact so the plastic doesn't round out under bolt load, measure actual cells before finalizing compression plate dimensions, fully enclose the terminal bolt connections, reduce total bolt count in the module, and clean up the wiring harness routing inside the housing. The accumulator worked well enough to run subsequent testing. Building it showed exactly where the second-generation design needs to be different.
                         </p>
                     </div>
                 </div>
+
                 <h3 class="timeline-title slide-up" style="animation-delay: 0.4s;">Project Timeline</h3>
                 <div class="timeline slide-up" style="animation-delay: 0.4s;">
                     <div class="timeline-content">
                         <div class="timeline-track"></div>
                         <div class="timeline-item" style="animation-delay: 0.6s;">
                             <div class="timeline-marker" data-description="fsae-desc-1">
-                                <span class="timeline-date">March 20, 2025</span>
-                                <h4>Milestone 1: Inefficiencies highlighted</h4>
+                                <span class="timeline-date">Early March 2025</span>
+                                <h4>Housing Fabrication</h4>
                             </div>
                         </div>
                         <div class="timeline-item" style="animation-delay: 0.8s;">
                             <div class="timeline-marker" data-description="fsae-desc-2">
-                                <span class="timeline-date">March 21, 2025</span>
-                                <h4>Milestone 2: Assembly</h4>
+                                <span class="timeline-date">March 20, 2025</span>
+                                <h4>First Module Assembly</h4>
                             </div>
                         </div>
                         <div class="timeline-item" style="animation-delay: 1.0s;">
                             <div class="timeline-marker" data-description="fsae-desc-3">
                                 <span class="timeline-date">March 30, 2025</span>
-                                <h4>Milestone 3: Modules Completed</h4>
+                                <h4>All Five Modules Complete</h4>
                             </div>
                         </div>
                     </div>
                     <div id="timeline-popup" class="timeline-popup">
                         <button class="popup-close">×</button>
                         <div id="fsae-desc-1" class="timeline-description-content" style="display: none;">
-                            <p>Due to the geometry of the tab clamping plates and bolts, the inner most nuts were meant to be press fit, and thus weren't accessible. To combat that JB weld had to be temporarily used to complete these modules. Further issues with cross threading were highlighted. Additionally, cells were on average 0.7mm thinner than the design leading to a lack of stack pressure.</p>
+                            <p>Aluminum panels were water jet cut and welded into the housing enclosure. The planned bending process was abandoned after tolerances proved too loose. Weld distortion in the 2.3mm interior walls required mallet correction before modules could fit. Self-jigging slots flagged as a CR30 improvement.</p>
                         </div>
                         <div id="fsae-desc-2" class="timeline-description-content" style="display: none;">
-                            <p>Initial assembly was completed of the first module.</p>
+                            <p>The first module came together over the course of a full day. Cross-threading from misaligned JB-welded nuts appeared early. Cell gap from real vs. spec dimensions was confirmed at ~0.7mm per cell. Exposed terminal connections were flagged as a safety concern. All issues were documented for CR30 design review.</p>
                         </div>
                         <div id="fsae-desc-3" class="timeline-description-content" style="display: none;">
-                            <p>All modules fully completed with wiring harnesses and baskets.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="additional-photos-container slide-up" style="animation-delay: 0.5s;">
-                    <h3 class="additional-photos-title">Additional Photos</h3>
-                    <div class="additional-photos-grid">
-                        <div class="photo-item">
-                            <img src="images/tractivebatterymodulecomplete.jpg" alt="First module finished" class="additional-photo slide-up" style="animation-delay: 0.6s;">
-                        </div>
-                        <div class="photo-item">
-                            <img src="images/tractivebatteryallmodulescomplete.jpg" alt="All modules done" class="additional-photo slide-up" style="animation-delay: 0.7s;">
+                            <p>All five modules were completed with wiring harnesses and polycarbonate baskets installed. The full accumulator was assembled and the pack was ready for subsequent system-level testing.</p>
                         </div>
                     </div>
                 </div>
@@ -460,29 +514,73 @@
             <div class="project-detail-container">
                 <h1 class="project-detail-title fade-in">2 Week Tube Chassis</h1>
                 <img src="images/CR29_25-C.png" alt="2 Week Tube Chassis" class="project-detail-image slide-up">
-                <p class="project-detail-description slide-up" style="animation-delay: 0.2s;">
-                    After a carbon chassis failure, this rapid-design project to create a lightweight tube chassis matching the geometry of CR29 while maintaining rules compliance was completed in two weeks. The chassis was engineered for structural integrity and ease of manufacturing, we called it CR25-C.
-                </p>
-                <div class="side-boxes-container">
-                    <div class="role-container">
-                        <h3 class="role-title">Role</h3>
-                        <ul class="role-list">
-                            <li>Research</li>
-                            <li>Design</li>
-                            <li>Validation</li>
-                        </ul>
+                <div class="project-detail-content slide-up" style="animation-delay: 0.2s;">
+                    <p class="project-detail-description">
+                        CR29's carbon chassis failed at demolding. Over spring break, five of us designed a replacement tube frame from scratch in two weeks. It never got built, but it was worth doing.
+                    </p>
+                    <div class="side-boxes-container">
+                        <div class="role-container">
+                            <h3 class="role-title">Role</h3>
+                            <ul class="role-list">
+                                <li>Research</li>
+                                <li>Design</li>
+                                <li>Validation</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="background-container">
+                        <h3 class="background-title">How It Started</h3>
+                        <p class="background-description">
+                            CR29 was designed around a carbon monocoque chassis. To speed up manufacturing, we built a welded steel mold instead of the usual fiberglass tooling. Steel is harder to seal, and during cure the vacuum bag lost pressure. Without full vacuum, the laminate didn't consolidate properly. When the chassis was demolded, it was immediately obvious — the surface looked crispy, layers visibly frayed at the edges. Press anywhere and it was soft, crunching because the fibers had no matrix holding them together. There was no repairing it. We knew right there at the mold that it was a total loss.
+                        </p>
+                        <p class="background-description">
+                            That left us with a competition season, a complete drivetrain and suspension package, and no chassis. Over spring break, myself and four others decided to try to salvage it.
+                        </p>
+                    </div>
+
+                    <div class="background-container">
+                        <h3 class="background-title">The Sprint</h3>
+                        <p class="background-description">
+                            No formal assignments upfront — we built a burndown list of everything the chassis needed, put it in front of everyone, and people grabbed tasks. The goal was to divide major subsystems so nobody was blocking anyone else.
+                        </p>
+                        <p class="background-description">
+                            The design wasn't starting from nothing. CR25 was the 25th car and one of the strongest competitive tube frames the program had built. Its geometry was the reference point. The objective for CR25-C was to match CR29's critical dimensions as closely as possible — driver position, overall envelope, and especially the mounting locations for the motor, wings, and suspension pickups. Those had all been carefully optimized for CR29, and changing them would mean revisiting work that was already done well. The tube frame was a workaround, not a redesign.
+                        </p>
+                        <img src="images/CR29_25-C-Chassis-2.png" alt="CR29_25-C Suspension" class="background-image slide-up" style="animation-delay: 0.3s;">
+                    </div>
+
+                    <div class="background-container">
+                        <h3 class="background-title">What I Worked On</h3>
+                        <p class="background-description">
+                            I took cooling because the system was my original design for CR29. Moving to a tube frame changed the packaging constraints, not the system, so it made sense for me to adapt it rather than hand it off. The firewall went with it — the firewall rules in FSAE are specific about what has to be sealed and how, and getting it wrong is a technical inspection failure, so I took it to make sure compliance was handled carefully. I had been involved with both the firewall and seat on the original CR29 work as well.
+                        </p>
+                        <p class="background-description">
+                            Suspension was the bigger task. A tube frame is heavier than a carbon monocoque, which means the spring rates from CR29 wouldn't be appropriate anymore. I updated the spring selection to account for the added mass, re-ran the blade simulations the suspension team had developed to validate the geometry, laid out all the hardpoints, and carried over the A-arms, ARB, and struts from the original design. The goal was to touch as little as possible while making what needed to change actually correct.
+                        </p>
+                        <p class="background-description">
+                            At the end of the design phase, the team submitted an SES — Structural Equivalency Spreadsheet. It's an official FSAE-provided document that runs calculations to prove a chassis design meets the structural requirements of the rules. It's mandatory for competition; no SES approval, no tech sign-off. Submitting it was the formal checkpoint that the design was rules-legal.
+                        </p>
+                    </div>
+
+                    <div class="background-container">
+                        <h3 class="background-title">The Vote</h3>
+                        <p class="background-description">
+                            After the design was done and SES was in, the team had to decide whether to actually build it. That came down to funding and time. The vote went to the team leads and it wasn't clean — two tied votes, the meeting was essentially a war. Ultimately the decision came down in favor of bringing CR28, the last IC car, to competition instead. Optimizing a known, working car was a safer bet than manufacturing and debugging a brand new chassis in the time that remained.
+                        </p>
+                        <p class="background-description">
+                            CR28 went to Michigan and finished 5th. That's a hard result to argue with.
+                        </p>
+                    </div>
+
+                    <div class="background-container">
+                        <h3 class="background-title">Looking Back</h3>
+                        <p class="background-description">
+                            The two weeks were worth it. Not because the chassis got built, but because of what working that way felt like. A small group, a clear deadline, a list of tasks, no bureaucracy in the room — everyone just worked. It's the closest thing to a startup environment I've been in, and it confirmed that's the kind of team I want to be part of. The lesson that came with it is harder: you can do everything right and still lose the vote. A good solution to a bad situation doesn't guarantee it gets used. Sometimes the answer is correct and it still doesn't happen.
+                        </p>
                     </div>
                 </div>
-                <div class="background-container">
-                    <h3 class="background-title">Background</h3>
-                    <p class="background-description">
-                        CR29 was meant to have a carbon monocoque chassis. A new method of fabrication was employed to speed up the manufacturing process using a welded steel mold. This ended up having too much porosity causing the extreme delamination of layers. Due to this, over spring break a group of us attempted to salvage what was lost by creating a steel tube frame chassis that matched CR29's geometry as closely as possible. 
-                    </p>
-                    <img src="images/CR29_25-C-Chassis-2.png" alt="CR29_25-C-Suspension" class="background-image slide-up" style="animation-delay: 0.3s;">
-                    <p class="background-description">
-                        The work was split up with each member taking over a subsystem. I was in charge of suspension as well as the firewall, seat, and the cooling system components I was previously responsible for. After making substantial progress and submitting SES, funding was evaluated and a vote was taken to decide whether we would pursure the manufacture of the chassis. It was decided that funding was too limited and the timeline too aggressive so the project was terminated.
-                    </p>
-                </div>
+
                 <h3 class="timeline-title slide-up" style="animation-delay: 0.4s;">Project Timeline</h3>
                 <div class="timeline slide-up" style="animation-delay: 0.4s;">
                     <div class="timeline-content">
@@ -490,32 +588,32 @@
                         <div class="timeline-item" style="animation-delay: 0.6s;">
                             <div class="timeline-marker" data-description="chassis-desc-1">
                                 <span class="timeline-date">March 17, 2025</span>
-                                <h4>Milestone 1: Design Phase</h4>
+                                <h4>Design Begins</h4>
                             </div>
                         </div>
                         <div class="timeline-item" style="animation-delay: 0.8s;">
                             <div class="timeline-marker" data-description="chassis-desc-2">
                                 <span class="timeline-date">March 31, 2025</span>
-                                <h4>Milestone 2: SES Submitted</h4>
+                                <h4>SES Submitted</h4>
                             </div>
                         </div>
                         <div class="timeline-item" style="animation-delay: 1.0s;">
                             <div class="timeline-marker" data-description="chassis-desc-3">
                                 <span class="timeline-date">April 7, 2025</span>
-                                <h4>Milestone 3: Project Termination</h4>
+                                <h4>Project Terminated</h4>
                             </div>
                         </div>
                     </div>
                     <div id="timeline-popup" class="timeline-popup">
                         <button class="popup-close">×</button>
                         <div id="chassis-desc-1" class="timeline-description-content" style="display: none;">
-                            <p>Refrencing the CAD design of CR25 and adapting it to match the geometry of CR29, CR25-C was modeled.</p>
+                            <p>Using CR25 as the geometric reference and CR29's critical mounting locations as constraints, CR25-C was modeled over spring break. Subsystems were divided across the group: suspension, cooling, firewall, seat, and chassis structure, with each person working in parallel to avoid bottlenecks.</p>
                         </div>
                         <div id="chassis-desc-2" class="timeline-description-content" style="display: none;">
-                            <p>Completed and submitted an SES form to validate CR25-C.</p>
+                            <p>The Structural Equivalency Spreadsheet was completed and submitted, formally demonstrating that CR25-C met FSAE's structural requirements. SES approval is required before a car can pass technical inspection at competition.</p>
                         </div>
                         <div id="chassis-desc-3" class="timeline-description-content" style="display: none;">
-                            <p>A vote was taken to allocate funds to build a chassis to bring the car to competition, but the team found it to be in our best intrests to optimize CR28 making one of our most competitive IC cars.</p>
+                            <p>After two tied votes, the team leads decided to bring CR28 to competition rather than manufacture CR25-C. CR28 finished 5th at Michigan — the team's final IC season.</p>
                         </div>
                     </div>
                 </div>
