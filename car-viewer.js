@@ -10,37 +10,33 @@ import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
 // Axes: X = right,  Y = up,  Z = toward the viewer
 // The car probably faces -Z (SolidWorks front view), front wing near -Z extremity.
 
-const CAM_INTRO = {
-    // Front wing close-up (user-tuned)
-    pos:    new THREE.Vector3( 0.00,  2.64,  2.17),
-    target: new THREE.Vector3( 0.00,  0.00,  2.08),
-};
-
-// CAM_BROWSE values depend on viewport width:
-//   Desktop (>600px) — car moves to left half, banners fill right side.
-//   Mobile  (≤600px) — car stays centred, banners dock to the bottom.
-// Vectors are mutated in place so the scroll animation references stay valid.
-const CAM_BROWSE = {
-    pos:    new THREE.Vector3(),
-    target: new THREE.Vector3(),
-};
+// Both keyframes are viewport-aware. Vectors are mutated in place so all
+// downstream references (lerp vectors, camera.position) stay valid.
+// updateCamKeyframes() is called before those references are initialised,
+// so they copy the correct values at load time.
+const CAM_INTRO  = { pos: new THREE.Vector3(), target: new THREE.Vector3() };
+const CAM_BROWSE = { pos: new THREE.Vector3(), target: new THREE.Vector3() };
 
 const mobileQuery = window.matchMedia('(max-width: 600px)');
 
-function updateCamBrowse() {
+function updateCamKeyframes() {
     if (mobileQuery.matches) {
-        // Side view: camera on +X axis looking across the car.
-        // pos.y=3.5 and target.y=-0.3 tilt the camera slightly downward,
-        // placing the car in the top quarter of the viewport above the banners.
-        CAM_BROWSE.pos.set( 9.0,  1.0,  0.0);
+        // Mobile intro: pulled back so the front wing appears smaller
+        CAM_INTRO.pos.set(    0.0,  4.5,  5.5);
+        CAM_INTRO.target.set( 0.0,  0.0,  2.08);
+        // Mobile browse: side view, camera further out for a smaller car
+        CAM_BROWSE.pos.set(   12.0,  1.0,  0.0);
         CAM_BROWSE.target.set( 0.0, -2.0,  0.0);
     } else {
-        CAM_BROWSE.pos.set( 6.0,  4.0,  9.0);
-        CAM_BROWSE.target.set( 2.0,  0.0,  0.0);
+        // Desktop — unchanged
+        CAM_INTRO.pos.set(    0.00,  2.64,  2.17);
+        CAM_INTRO.target.set( 0.00,  0.00,  2.08);
+        CAM_BROWSE.pos.set(   6.0,   4.0,   9.0);
+        CAM_BROWSE.target.set(2.0,   0.0,   0.0);
     }
 }
-updateCamBrowse();
-mobileQuery.addEventListener('change', updateCamBrowse);
+updateCamKeyframes();
+mobileQuery.addEventListener('change', updateCamKeyframes);
 
 // Scroll fractions (0 – 1 of .car-scroll-driver height) that define each phase
 const SCROLL_CAM_START    = 0.18;   // camera starts moving
