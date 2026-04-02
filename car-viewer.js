@@ -22,8 +22,8 @@ const mobileQuery = window.matchMedia('(max-width: 600px)');
 function updateCamKeyframes() {
     if (mobileQuery.matches) {
         // Mobile intro: pulled back so the front wing appears smaller
-        CAM_INTRO.pos.set(    0.0,  4.5,  5.5);
-        CAM_INTRO.target.set( 0.0,  0.0,  2.08);
+        CAM_INTRO.pos.set(    0.0,  3.0,  5.5);
+        CAM_INTRO.target.set( 0.0,  0.0,  3.28);
         // Mobile browse: side view, camera further out for a smaller car
         CAM_BROWSE.pos.set(   12.0,  1.0,  0.0);
         CAM_BROWSE.target.set( 0.0, -2.0,  0.0);
