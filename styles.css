@@ -1362,7 +1362,7 @@ footer {
 
     /* Hero text sits in the top strip above the banner panel */
     .car-hero-text {
-        top: 30%;
+        top: 25%;
     }
 
     /* Banners: bottom-docked full-width strip instead of right-side panel.
@@ -1372,7 +1372,7 @@ footer {
         right: 0;
         left: 0;
         bottom: 0;
-        top: 53%;
+        top: 43%;
         transform: none;
         width: 100%;
         max-height: none;
@@ -1419,14 +1419,18 @@ footer {
 
     /* Banner state: shrink logo + links + padding so nothing overflows */
     .nav-content {
-        padding: 12px 16px;
-        gap: 12px;
+        padding: 10px 14px;
+        gap: 8px;
     }
     .logo {
-        font-size: 4.5vw;
+        font-size: 3.5vw;
     }
     .nav-links {
-        font-size: 3.5vw;
+        font-size: 3vw;
+    }
+    /* Reduce per-link horizontal padding — 3 links × 20px was eating ~60px */
+    .nav-links a {
+        padding: 4px 5px;
     }
 
     /* Pill state: cap width so it can't overflow the viewport */
