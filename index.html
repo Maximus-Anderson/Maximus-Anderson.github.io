@@ -812,6 +812,11 @@
                     title="Resume PDF">
                     </iframe>
                 </div>
+                <!-- Shown on mobile instead of the iframe, which iOS Safari renders incorrectly -->
+                <div class="resume-mobile-fallback">
+                    <p>PDF preview isn't available on mobile browsers.</p>
+                    <a href="resume.pdf" target="_blank" class="resume-open-btn">Open Resume PDF ↗</a>
+                </div>
             </div>
         </section>
     </div>
