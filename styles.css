@@ -1362,7 +1362,7 @@ footer {
 
     /* Hero text sits in the top strip above the banner panel */
     .car-hero-text {
-        top: 10%;
+        top: 20%;
     }
 
     /* Banners: bottom-docked full-width strip instead of right-side panel.
@@ -1372,7 +1372,7 @@ footer {
         right: 0;
         left: 0;
         bottom: 0;
-        top: 25%;
+        top: 40%;
         transform: none;
         width: 100%;
         max-height: none;
