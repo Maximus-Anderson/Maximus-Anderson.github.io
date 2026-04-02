@@ -25,20 +25,22 @@ const CAM_BROWSE = {
     target: new THREE.Vector3(),
 };
 
+const mobileQuery = window.matchMedia('(max-width: 600px)');
+
 function updateCamBrowse() {
-    if (window.innerWidth <= 600) {
+    if (mobileQuery.matches) {
         // Side view: camera on +X axis looking across the car.
         // pos.y=3.5 and target.y=-0.3 tilt the camera slightly downward,
         // placing the car in the top quarter of the viewport above the banners.
-        CAM_BROWSE.pos.set( 9.0,  3.5,  0.0);
-        CAM_BROWSE.target.set( 0.0, -0.3,  0.0);
+        CAM_BROWSE.pos.set( 9.0,  1.0,  0.0);
+        CAM_BROWSE.target.set( 0.0, -2.0,  0.0);
     } else {
         CAM_BROWSE.pos.set( 6.0,  4.0,  9.0);
         CAM_BROWSE.target.set( 2.0,  0.0,  0.0);
     }
 }
 updateCamBrowse();
-window.addEventListener('resize', updateCamBrowse, { passive: true });
+mobileQuery.addEventListener('change', updateCamBrowse);
 
 // Scroll fractions (0 – 1 of .car-scroll-driver height) that define each phase
 const SCROLL_CAM_START    = 0.18;   // camera starts moving
