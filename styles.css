@@ -16,6 +16,7 @@
 html {
     font-size: 11px;
     scroll-behavior: smooth;
+    overflow-x: hidden; /* iOS Safari needs this on html, not just body */
 }
 
 body {
