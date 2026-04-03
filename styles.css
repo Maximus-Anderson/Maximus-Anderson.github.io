@@ -1132,6 +1132,16 @@ footer {
         --site-margin: 20px;
     }
 
+    /* Prevent any child element from pushing the page wider than the viewport */
+    .page {
+        overflow-x: hidden;
+        width: 100%;
+    }
+
+    .project-detail-container {
+        width: 100%;
+    }
+
     .hero-title {
         font-size: 4.8em;
     }
@@ -1246,8 +1256,8 @@ footer {
     }
 
     .timeline-popup {
-        width: 300px; /* Adjusted for smaller screens */
-        padding: calc(8px + 1.5vw); /* Slightly smaller variable padding */
+        width: min(300px, calc(100vw - 40px));
+        padding: calc(8px + 1.5vw);
         margin-top: 80px;
     }
 
