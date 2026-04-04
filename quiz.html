@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Powertrain Fundamentals</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600&display=swap">
+    <link rel="stylesheet" href="quiz.css">
+</head>
+<body>
+
+    <header class="quiz-header">
+        <a href="index.html" class="back-link">← Portfolio</a>
+        <span class="app-title">Powertrain Fundamentals</span>
+        <div class="elo-display">
+            <span class="elo-value" id="elo-display">1200</span>
+            <span class="elo-label" id="level-display">Engineer</span>
+        </div>
+    </header>
+
+    <main class="quiz-main">
+
+        <!-- Start / home screen -->
+        <div id="start-screen" class="screen">
+            <div class="start-card">
+                <h1 class="start-title">⚡ Powertrain<br>Fundamentals</h1>
+                <p class="start-subtitle">
+                    Adaptive practice for EV powertrain and battery systems.
+                    Questions match your level and adjust as you improve.
+                </p>
+                <div class="start-stats" id="start-stats"></div>
+                <button class="start-btn" id="start-btn">Start Practice</button>
+                <button class="reset-btn" id="reset-btn">Reset Progress</button>
+            </div>
+        </div>
+
+        <!-- Question screen -->
+        <div id="question-screen" class="screen">
+            <div class="question-meta">
+                <span class="topic-tag" id="topic-tag">Battery</span>
+                <span class="streak-display" id="streak-display">🔥 0</span>
+            </div>
+            <div class="question-card">
+                <p class="question-text" id="question-text"></p>
+            </div>
+            <div class="choices-grid" id="choices-grid"></div>
+        </div>
+
+        <!-- Feedback screen -->
+        <div id="feedback-screen" class="screen">
+            <div class="feedback-card" id="feedback-card">
+                <span class="feedback-icon"  id="feedback-icon">✓</span>
+                <h2  class="feedback-heading" id="feedback-heading">Correct!</h2>
+                <p   class="feedback-explain" id="feedback-explain"></p>
+                <span class="elo-change"      id="elo-change"></span>
+            </div>
+            <button class="continue-btn" id="continue-btn">Continue →</button>
+        </div>
+
+    </main>
+
+    <script src="quiz.js"></script>
+</body>
+</html>

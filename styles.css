@@ -817,8 +817,13 @@ body {
 
 /* Footer */
 footer {
-    padding: 40px var(--site-margin);
+    padding: 20px var(--site-margin);
     border-top: 1px solid rgba(255, 255, 255, 0.1);
+    position: relative;
+    z-index: 20;
+    background: rgba(0, 0, 0, 0.82);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
 }
 
 .footer-content {
@@ -857,6 +862,21 @@ footer {
 .social-icon:hover {
     transform: scale(1.1);
     background-color: var(--primary-color);
+}
+
+.footer-quiz-link {
+    font-size: 0.85em;
+    color: rgba(255, 255, 255, 0.45);
+    text-decoration: none;
+    letter-spacing: 0.04em;
+    padding: 5px 12px;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 50px;
+    transition: color 0.2s, border-color 0.2s;
+}
+.footer-quiz-link:hover {
+    color: #ff5555;
+    border-color: rgba(255, 85, 85, 0.4);
 }
 
 /* Role and Specs Side Boxes */
