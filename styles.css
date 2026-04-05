@@ -817,7 +817,7 @@ body {
 
 /* Footer */
 footer {
-    padding: 20px var(--site-margin);
+    padding: 12.5px var(--site-margin);
     border-top: 1px solid rgba(255, 255, 255, 0.1);
     position: relative;
     z-index: 20;
