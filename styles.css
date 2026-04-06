@@ -24,9 +24,9 @@ body {
     background-color: var(--background-color);
     background-image: linear-gradient(
         to top,
-        #1a0000 0%,
-        #0d0000 30%,
-        #000000 70%
+        #200000 0%,
+        #0f0000 45%,
+        #000000 75%
     );
     background-attachment: fixed;
     color: var(--text-color);
@@ -387,119 +387,6 @@ body {
     color: var(--primary-color);
 }
 
-/* Before/After Comparison Slider */
-.comparison-container {
-    position: relative;
-}
-
-.comparison-wrapper {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-}
-
-.comparison-after {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-}
-
-.comparison-slider-container {
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 100%;
-    overflow: hidden;
-    border-right: 3px solid var(--primary-color);
-    box-shadow: 0 0 20px rgba(255, 52, 52, 0.5);
-    pointer-events: none;
-}
-
-.comparison-before {
-    height: 100%;
-    object-fit: cover;
-    display: block;
-    position: absolute;
-    top: 0;
-    left: 0;
-}
-
-.comparison-wrapper {
-    cursor: ew-resize;
-}
-
-.comparison-slider {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
-    opacity: 0;
-    cursor: ew-resize;
-    z-index: 10;
-}
-
-.comparison-slider::-webkit-slider-thumb {
-    width: 100%;
-    height: 100%;
-    cursor: ew-resize;
-    -webkit-appearance: none;
-}
-
-.comparison-slider::-moz-range-thumb {
-    width: 100%;
-    height: 100%;
-    cursor: ew-resize;
-    border: none;
-    background: transparent;
-}
-
-.comparison-handle {
-    position: absolute;
-    width: 45px;
-    height: 45px;
-    background-color: var(--primary-color);
-    border-radius: 50%;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    pointer-events: none;
-    z-index: 5;
-    box-shadow: 0 0 20px rgba(255, 52, 52, 0.8);
-}
-
-.comparison-handle::before,
-.comparison-handle::after {
-    content: '';
-    position: absolute;
-    width: 8px;
-    height: 8px;
-    border-top: 2px solid white;
-    top: 50%;
-    margin-top: -5px;
-}
-
-.comparison-handle::before {
-    left: 50%;
-    border-right: 2px solid white;
-    transform: rotate(45deg);
-}
-
-.comparison-handle::after {
-    right: 50%;
-    border-left: 2px solid white;
-    transform: rotate(-45deg);
-}
-
-.project-card:hover .comparison-handle::before {
-    transform: rotate(45deg) translateX(3px);
-}
-
-.project-card:hover .comparison-handle::after {
-    transform: rotate(-45deg) translateX(-3px);
-}
 
 /* Project Detail Section */
 .project-detail-section {
@@ -898,7 +785,7 @@ footer {
 }
 
 .specs-container {
-    flex: 0 0 300px; /* Reverted to 300px as preferred */
+    flex: 0 0 300px;
 }
 
 .role-title,
@@ -1320,11 +1207,8 @@ footer {
         font-size: 1.6em;
     }
 
-    .resume-iframe {
-        width: 90vw;
-        height: 80vh;
-    }
 }
+
 
 @media (max-width: 480px) {
     .hero {
@@ -1427,8 +1311,7 @@ footer {
 /* ── Mobile 3D layout ────────────────────────────────────────────────────────
    On narrow portrait screens the desktop split (car left / banners right)
    doesn't work. Instead: car fills the full viewport, banners dock to the
-   bottom as a compact scrollable strip.
-   Breakpoint matches typical phone portrait widths.                         */
+   bottom as a compact scrollable strip.                                   */
 @media (max-width: 600px) {
 
     /* Hero text sits in the top strip above the banner panel */
@@ -1449,7 +1332,6 @@ footer {
         max-height: none;
         padding: 10px 12px 20px;
         gap: 8px;
-        /* re-declare scrolling in case 768px rules interfere */
         overflow-y: auto;
         overflow-x: hidden;
     }
@@ -1485,8 +1367,6 @@ footer {
     .nav-center {
         display: none;
     }
-
-    /* ── Mobile nav fixes ────────────────────────────────────────────────── */
 
     /* Banner state: shrink logo + links + padding so nothing overflows */
     .nav-content {

@@ -28,7 +28,7 @@ function updateCamKeyframes() {
         CAM_BROWSE.pos.set(   21.5,  1.0,  0.0);
         CAM_BROWSE.target.set( 0.0, -3.5,  0.0);
     } else {
-        // Desktop — unchanged
+        // Desktop
         CAM_INTRO.pos.set(    0.00,  2.64,  2.17);
         CAM_INTRO.target.set( 0.00,  1.5,  2.08);
         CAM_BROWSE.pos.set(   6.0,   4.0,   9.0);
