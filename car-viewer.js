@@ -22,15 +22,15 @@ const mobileQuery = window.matchMedia('(max-width: 600px)');
 function updateCamKeyframes() {
     if (mobileQuery.matches) {
         // Mobile intro: pulled back so the front wing appears smaller
-        CAM_INTRO.pos.set(    0.0,  3.0,  5.5);
-        CAM_INTRO.target.set( 0.0,  0.0,  3.28);
+        CAM_INTRO.pos.set(    0.0,  9.0,  6.0);
+        CAM_INTRO.target.set( 0.0,  -1.4,  3.28);
         // Mobile browse: side view, camera further out for a smaller car
-        CAM_BROWSE.pos.set(   12.0,  1.0,  0.0);
-        CAM_BROWSE.target.set( 0.0, -2.0,  0.0);
+        CAM_BROWSE.pos.set(   21.5,  1.0,  0.0);
+        CAM_BROWSE.target.set( 0.0, -3.5,  0.0);
     } else {
         // Desktop — unchanged
         CAM_INTRO.pos.set(    0.00,  2.64,  2.17);
-        CAM_INTRO.target.set( 0.00,  0.00,  2.08);
+        CAM_INTRO.target.set( 0.00,  1.5,  2.08);
         CAM_BROWSE.pos.set(   6.0,   4.0,   9.0);
         CAM_BROWSE.target.set(2.0,   0.0,   0.0);
     }
@@ -97,8 +97,9 @@ const carbonMat = new THREE.MeshStandardMaterial({
 });
 
 // ─── LOAD MODEL ──────────────────────────────────────────────────────────────
-let carModel  = null;
+let carModel   = null;
 let modelBaseY = 0;
+let modelLoaded = false;
 
 const dracoLoader = new DRACOLoader();
 dracoLoader.setDecoderPath('https://cdn.jsdelivr.net/npm/three@0.168.0/examples/jsm/libs/draco/');
@@ -106,40 +107,45 @@ dracoLoader.setDecoderPath('https://cdn.jsdelivr.net/npm/three@0.168.0/examples/
 const gltfLoader = new GLTFLoader();
 gltfLoader.setDRACOLoader(dracoLoader);
 
-gltfLoader.load(
-    'modules/CR30-Attempt_4-Render.glb',
+function loadModel() {
+    if (modelLoaded) return;
+    modelLoaded = true;
 
-    (gltf) => {
-        carModel = gltf.scene;
+    gltfLoader.load(
+        'modules/CR30-Attempt_5-Render.glb',
 
-        // Apply carbon material to every mesh
-        carModel.traverse((child) => {
-            if (child.isMesh) {
-                child.material        = carbonMat;
-                child.castShadow      = false;
-                child.receiveShadow   = false;
-            }
-        });
+        (gltf) => {
+            carModel = gltf.scene;
 
-        // Auto-centre and scale so the longest axis ≈ 5 world units
-        const box    = new THREE.Box3().setFromObject(carModel);
-        const center = box.getCenter(new THREE.Vector3());
-        const size   = box.getSize(new THREE.Vector3());
-        const scale  = 5 / Math.max(size.x, size.y, size.z);
+            // Apply carbon material to every mesh
+            carModel.traverse((child) => {
+                if (child.isMesh) {
+                    child.material      = carbonMat;
+                    child.castShadow    = false;
+                    child.receiveShadow = false;
+                }
+            });
 
-        carModel.scale.setScalar(scale);
-        carModel.position.sub(center.multiplyScalar(scale));
+            // Auto-centre and scale so the longest axis ≈ 5 world units
+            const box    = new THREE.Box3().setFromObject(carModel);
+            const center = box.getCenter(new THREE.Vector3());
+            const size   = box.getSize(new THREE.Vector3());
+            const scale  = 5 / Math.max(size.x, size.y, size.z);
 
-        modelBaseY = carModel.position.y;
-        scene.add(carModel);
+            carModel.scale.setScalar(scale);
+            carModel.position.sub(center.multiplyScalar(scale));
 
-        console.log('[car-viewer] Loaded — size:', size, '→ scale:', scale.toFixed(3));
-        console.log('[car-viewer] Adjust CAM_INTRO / CAM_BROWSE in car-viewer.js to reframe.');
-    },
+            modelBaseY = carModel.position.y;
+            scene.add(carModel);
 
-    (xhr) => console.log(`[car-viewer] ${Math.round((xhr.loaded / xhr.total) * 100)}%`),
-    (err) => console.error('[car-viewer] Load error:', err)
-);
+            console.log('[car-viewer] Loaded — size:', size, '→ scale:', scale.toFixed(3));
+            console.log('[car-viewer] Adjust CAM_INTRO / CAM_BROWSE in car-viewer.js to reframe.');
+        },
+
+        (xhr) => console.log(`[car-viewer] ${Math.round((xhr.loaded / xhr.total) * 100)}%`),
+        (err) => console.error('[car-viewer] Load error:', err)
+    );
+}
 
 // ─── SCROLL ANIMATION ────────────────────────────────────────────────────────
 const targetCamPos  = new THREE.Vector3().copy(CAM_INTRO.pos);
@@ -231,6 +237,7 @@ function syncCanvasVisibility() {
     }
 
     if (active) {
+        loadModel();
         onScroll();
         lerpedCamPos.copy(targetCamPos);
         lerpedCamLook.copy(targetCamLook);
