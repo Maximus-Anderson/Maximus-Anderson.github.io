@@ -8,9 +8,9 @@ const QUESTION_BANK = [
         question: 'What does a higher cell capacity (Ah) rating mean?',
         choices: [
             'The cell can deliver more charge before being depleted',
-            'The cell has a higher voltage',
-            'The cell charges faster',
-            'The cell weighs less'
+            'The cell has a higher terminal voltage under load',
+            'The cell accepts charge faster during a standard charge cycle',
+            'The cell has lower mass for the same energy output'
         ],
         answer: 0,
         explanation: 'Amp-hours (Ah) is a measure of charge capacity — how many amps the cell can deliver for how many hours. A 13 Ah cell can theoretically supply 13 A for one hour, or 1 A for 13 hours before reaching its discharge cutoff voltage.'
@@ -26,10 +26,10 @@ const QUESTION_BANK = [
         id: 3, topic: 'Battery', elo: 900,
         question: 'What is the primary purpose of applying stack pressure to a pouch cell module?',
         choices: [
-            'To increase the cell voltage',
+            'To increase the cell voltage by compressing the electrode stack',
             'To suppress swelling and reduce dendrite formation',
-            'To improve thermal conductivity between cells',
-            'To reduce the internal resistance of the BMS wiring'
+            'To improve thermal conductivity and reduce hotspots between cells',
+            'To reduce the contact resistance of the BMS sense wiring connections'
         ],
         answer: 1,
         explanation: 'Controlled stack pressure suppresses swelling and discourages lithium dendrite growth, which can cause internal short circuits. Too little pressure accelerates degradation; too much can damage the cell.'
@@ -74,10 +74,10 @@ const QUESTION_BANK = [
         id: 7, topic: 'Battery', elo: 1050,
         question: 'Why is thermal runaway in a lithium cell particularly dangerous?',
         choices: [
-            'It causes the cell voltage to drop to zero instantly',
-            'It releases hydrogen gas which is mildly flammable',
-            'It is self-sustaining — heat causes more reactions, producing more heat, and can release toxic HF gas',
-            'It only occurs in cylindrical cells, not pouch cells'
+            'It causes the cell voltage to drop to zero, disabling the pack permanently',
+            'It releases hydrogen gas, which vents safely through pressure relief valves',
+            'It is self-sustaining — exothermic reactions accelerate, releasing toxic HF gas and potential fire',
+            'It only occurs in cylindrical cells; pouch cell chemistry is inherently more stable'
         ],
         answer: 2,
         explanation: 'Thermal runaway is a cascade: heat triggers exothermic decomposition, which generates more heat. It can eject flaming electrolyte, and LiPF₆ electrolyte decomposition can produce hydrogen fluoride (HF) gas — highly toxic and corrosive. Not that I\'d know anything about that.'
@@ -86,10 +86,10 @@ const QUESTION_BANK = [
         id: 8, topic: 'Battery', elo: 1100,
         question: 'What does "energy density" of 180 Wh/kg mean in practical terms?',
         choices: [
-            'The cell can deliver 180 watts for one kilogram of load',
+            'The cell can deliver 180 watts continuously per kilogram of its own mass',
             'Every kilogram of cell mass stores 180 watt-hours of energy',
-            'The cell charges at 180 watts per kilogram of mass',
-            'The pack provides 180 kJ of energy per discharge cycle'
+            'The cell accepts charge at a rate of 180 watts per kilogram during fast charging',
+            'The pack delivers 180 kJ of total energy across a full discharge cycle'
         ],
         answer: 1,
         explanation: 'Gravimetric energy density (Wh/kg): 1 kg of cell stores 180 Wh. At 180 Wh/kg, a 1 kg cell can power a 180 W device for one hour. High energy density means more pack energy without weight penalty — critical for FSAE.'
@@ -98,10 +98,10 @@ const QUESTION_BANK = [
         id: 9, topic: 'Battery', elo: 1150,
         question: 'In series-connected cells, what happens to the pack if one cell has significantly lower capacity than the rest?',
         choices: [
-            'The other cells compensate by delivering more current',
-            'The weak cell limits the entire string — the pack hits its cutoff voltage when that cell is depleted',
-            'Only the weak cell stops working; the rest continue normally',
-            'The BMS bypasses the weak cell automatically'
+            'The other cells compensate by delivering more current, maintaining total pack voltage',
+            'The weak cell limits the entire string and the pack stops when that cell reaches cutoff voltage',
+            'Only the weak cell stops working; the rest continue delivering their full capacity',
+            'The BMS detects and bypasses the weak cell, routing current around it'
         ],
         answer: 1,
         explanation: 'In a series string, all cells carry the same current. The weakest cell depletes first and pulls its voltage down to cutoff, stopping the whole string — even if other cells have remaining capacity. This is why cell matching matters for pack design.'
@@ -110,10 +110,10 @@ const QUESTION_BANK = [
         id: 10, topic: 'Battery', elo: 1200,
         question: 'What is the primary risk when bending or folding a pouch cell\'s tab at its root?',
         choices: [
-            'The tab heats up and welds itself shut',
-            'The internal electrode layers delaminate from the tab, increasing resistance or causing an open circuit',
-            'The polymer casing cracks, exposing lithium metal',
-            'The cell immediately short-circuits due to aluminum-copper contact'
+            'The tab overheats and fuses shut, blocking current flow in that cell',
+            'The electrode-to-tab bond delaminates, raising resistance or causing an open circuit',
+            'The polymer casing tears at the bend, exposing the cell interior to air',
+            'The bent tab contacts the opposite-polarity surface, causing an immediate internal short'
         ],
         answer: 1,
         explanation: 'Pouch cell tabs are ultrasonically welded stacks of thin foils bonded to the electrode inside the cell. Bending at the root stresses this weld and can cause delamination — raising resistance, reducing capacity, causing hot spots.'
@@ -124,10 +124,10 @@ const QUESTION_BANK = [
         id: 11, topic: 'Powertrain', elo: 850,
         question: 'What is the function of a motor controller (inverter) in an EV powertrain?',
         choices: [
-            'It stores energy from regenerative braking in a capacitor',
-            'It converts DC from the battery into AC (or controlled DC) to drive the motor',
-            'It monitors cell temperatures and balances the pack',
-            'It steps up battery voltage to reduce current losses in the wiring'
+            'It stores regenerative braking energy in supercapacitors for later reuse',
+            'It converts DC from the battery into AC to drive the motor at variable speed',
+            'It monitors cell temperatures and actively balances the pack during charging',
+            'It steps up battery voltage using a boost converter to reduce wiring losses'
         ],
         answer: 1,
         explanation: 'The inverter converts battery DC into the waveform the motor needs. For a three-phase AC motor, it synthesises three sinusoidal AC phases at variable frequency and amplitude to control motor speed and torque.'
@@ -136,10 +136,10 @@ const QUESTION_BANK = [
         id: 12, topic: 'Powertrain', elo: 950,
         question: 'What does peak torque at zero RPM mean for an electric motor compared to a combustion engine?',
         choices: [
-            'Electric motors need a clutch to launch because torque is zero at stall',
-            'Electric motors produce maximum torque from a standstill, unlike combustion engines which need to build RPM',
-            'Electric motors produce the same torque curve shape as combustion engines',
-            'Peak torque at zero RPM means the motor overheats at launch'
+            'Electric motors need a clutch at launch because torque builds gradually from stall, like an ICE',
+            'Electric motors deliver maximum torque from a standstill, unlike combustion engines which need RPM',
+            'Electric motors follow the same rising torque curve as a naturally-aspirated combustion engine',
+            'Peak torque at zero RPM means the motor draws maximum current, causing rapid overheating'
         ],
         answer: 1,
         explanation: 'Electric motors generate torque proportional to current, independent of speed. At stall, full current can be applied, giving peak torque immediately. ICE vehicles need RPM to build combustion pressure and must use a clutch — EVs launch at full torque directly.'
@@ -148,10 +148,10 @@ const QUESTION_BANK = [
         id: 13, topic: 'Powertrain', elo: 1000,
         question: 'In a permanent magnet synchronous motor (PMSM), what is "field weakening"?',
         choices: [
-            'Reducing current to protect the motor at high temperature',
-            'Injecting negative d-axis current to extend the motor\'s speed range beyond its base speed',
-            'Increasing supply voltage to raise peak RPM',
-            'Reversing the motor direction for regenerative braking'
+            'Reducing d-axis current to thermally derate the motor above its rated temperature',
+            'Injecting negative d-axis current to reduce effective flux and extend speed beyond base speed',
+            'Boosting supply voltage above the nominal bus voltage to raise achievable peak RPM',
+            'Reversing the phase sequence to achieve regenerative braking while the motor is spinning'
         ],
         answer: 1,
         explanation: 'At base speed, back-EMF equals the available voltage and the motor can no longer accelerate. Field weakening applies negative d-axis current to reduce effective flux, lowering back-EMF and allowing higher RPM — at the cost of reduced torque.'
@@ -160,10 +160,10 @@ const QUESTION_BANK = [
         id: 14, topic: 'Powertrain', elo: 1100,
         question: 'What is the difference between motor efficiency and drivetrain efficiency?',
         choices: [
-            'They are identical — drivetrain efficiency is just motor efficiency reported differently',
-            'Motor efficiency is electrical-to-mechanical conversion; drivetrain efficiency includes additional losses in gearbox, differential, shafts, and bearings',
-            'Drivetrain efficiency only accounts for thermal losses; motor efficiency accounts for friction losses',
-            'Motor efficiency is only measured at peak power; drivetrain efficiency is measured across all operating points'
+            'They are identical since all drivetrain losses are already captured in the motor efficiency map',
+            'Motor efficiency is electrical-to-mechanical at the shaft; drivetrain efficiency adds gearbox, differential, and bearing losses',
+            'Drivetrain efficiency captures only gearbox thermal losses; motor efficiency captures all electrical losses',
+            'Motor efficiency is only valid at peak power; drivetrain efficiency is a weighted average over all operating points'
         ],
         answer: 1,
         explanation: 'Motor efficiency = mechanical power out / electrical power in. Drivetrain efficiency includes all components between motor shaft and wheels: gearing, differentials, CV joints, bearings. Total drivetrain efficiency is the product of each component\'s efficiency.'
@@ -172,10 +172,10 @@ const QUESTION_BANK = [
         id: 15, topic: 'Powertrain', elo: 1250,
         question: 'Why might a lower gear ratio (closer to 1:1) be chosen for an FSAE EV on a tight autocross course?',
         choices: [
-            'Lower gear ratios always maximize acceleration at all speeds',
-            'Autocross requires very high top speed so a low ratio reduces RPM at speed',
-            'Tight courses are acceleration-limited and low-speed torque is already high in EVs; a lower ratio reduces peak motor RPM and can improve efficiency',
-            'A 1:1 ratio eliminates all differential losses'
+            'Lower gear ratios always maximize wheel torque regardless of vehicle speed, motor speed, or the peak power delivered by the battery',
+            'Autocross top speeds are high enough that a low ratio prevents motor overspeed',
+            'Tight courses rarely exceed moderate speeds; a lower ratio keeps motor RPM in its efficient range',
+            'A 1:1 ratio eliminates all gearbox friction losses by direct-driving the wheels'
         ],
         answer: 2,
         explanation: 'FSAE autocross courses are slow and tight — top speed is limited, and the car accelerates frequently from low speed. EVs already have abundant low-speed torque, so a lower gear ratio keeps motor RPM in its efficient operating region and reduces gearbox losses.'
@@ -223,10 +223,10 @@ const QUESTION_BANK = [
         id: 21, topic: 'Safety', elo: 850,
         question: 'What is the purpose of a shutdown circuit (SDC) in an FSAE electric vehicle?',
         choices: [
-            'It shuts down the motor controller if the driver exceeds a speed limit',
-            'It is a series circuit that cuts power to the AIRs (contactors) if any safety condition is violated',
-            'It controls regenerative braking energy flow',
-            'It monitors cell temperatures and balances the pack'
+            'It limits motor power if the driver exceeds a speed or g-force threshold',
+            'It is a series loop that de-energizes the IRs when any safety condition is violated',
+            'It regulates regenerative braking current to prevent overcharging the battery',
+            'It monitors individual cell temperatures and triggers balancing in high-temp conditions'
         ],
         answer: 1,
         explanation: 'The SDC is a series loop of normally-open safety switches. Any single fault (IMD trip, BMS fault, BSPD activation, TSMS off, inertia switch) opens the loop, de-energizing the AIRs and disconnecting the tractive system. Failures default to a safe, de-energized state.'
@@ -235,10 +235,10 @@ const QUESTION_BANK = [
         id: 22, topic: 'Safety', elo: 950,
         question: 'What does an IMD (Insulation Monitoring Device) detect and why does it matter?',
         choices: [
-            'It measures current imbalance between motor phases to detect winding faults',
-            'It detects insulation breakdown between the HV tractive system and the LV/chassis ground, opening the SDC on fault',
-            'It monitors inter-cell insulation resistance to prevent thermal runaway',
-            'It measures the impedance of the accumulator housing for structural integrity'
+            'It measures phase current imbalance in the motor windings to detect winding faults or gaps in winding insulation',
+            'It detects insulation breakdown between the HV tractive system and chassis ground, tripping the SDC',
+            'It monitors insulation resistance between individual cells to prevent cascade thermal runaway, confirming the isolation of cells',
+            'It measures the structural impedance of the accumulator housing to detect crash damage'
         ],
         answer: 1,
         explanation: 'The IMD monitors isolation resistance between the tractive system (high voltage) and chassis ground. A fault — e.g. chafed wiring contacting the chassis — reduces this below threshold. The IMD opens the SDC before anyone can be exposed to shock. FSAE rules require ≥500 Ω/V minimum.'
@@ -247,10 +247,10 @@ const QUESTION_BANK = [
         id: 23, topic: 'Safety', elo: 1000,
         question: 'Why must an FSAE accumulator container be structurally rated to prevent HV exposure in a crash?',
         choices: [
-            'To reduce the weight of the container by using thinner walls with an air gap',
-            'To ensure the HV terminals and cells remain protected if the outer wall is breached, preventing accidental contact or short-circuit',
-            'Because double walls improve thermal insulation, keeping cells at operating temperature',
-            'FSAE rules require double walls only for the GLV system, not the accumulator'
+            'To reduce container weight by using an air gap between inner and outer walls',
+            'To keep HV terminals and cells protected after an impact, preventing accidental contact or short-circuit',
+            'To improve thermal insulation and maintain cells within their optimal temperature range to prevent thermal runaway',
+            'FSAE rules mandate double walls only for the GLV system, not the accumulator container'
         ],
         answer: 1,
         explanation: 'In a crash, the accumulator container may be impacted. FSAE rules require the HV terminals and cells to remain protected from accidental contact even after an impact — keeping first responders safe from live HV conductors and preventing secondary short-circuit fires.'
@@ -259,10 +259,10 @@ const QUESTION_BANK = [
         id: 24, topic: 'Safety', elo: 1100,
         question: 'What is the function of a BSPD (Brake System Plausibility Device)?',
         choices: [
-            'It monitors brake pad wear and alerts the driver when pads need replacing',
+            'It monitors brake pad wear and triggers a pit-lane warning when replacement is needed',
             'It detects simultaneous hard braking and high motor current (implausible state), and opens the SDC',
-            'It balances brake bias between front and rear circuits automatically',
-            'It prevents brake fluid from overheating by monitoring caliper temperature'
+            'It automatically adjusts brake bias between front and rear circuits for optimal deceleration (plausible breaking)',
+            'It monitors caliper temperature and prevents brake fluid vaporization under hard braking'
         ],
         answer: 1,
         explanation: 'The BSPD monitors brake pressure and motor current. If both are above their thresholds simultaneously — braking hard while the motor draws significant current — this is considered implausible and dangerous. The BSPD opens the SDC to prevent simultaneous high-force acceleration and braking.'
@@ -271,10 +271,10 @@ const QUESTION_BANK = [
         id: 25, topic: 'Safety', elo: 1200,
         question: 'What is the SES (Structural Equivalency Spreadsheet) used for in FSAE?',
         choices: [
-            'It documents every weld joint in the chassis for inspection purposes',
-            'It is a required analysis proving that a non-standard chassis meets the structural stiffness and strength of the specified steel tube baseline',
-            'It specifies the minimum wall thickness for the accumulator container',
-            'It is submitted after the event to report any structural failures during competition'
+            'It documents every weld joint in the chassis for technical inspection review',
+            'It is a required equivalency analysis proving a non-standard chassis meets the steel tube baseline',
+            'It specifies minimum wall thickness and material grade for the accumulator container beyond what is listed by the rules',
+            'It is submitted after competition to document any structural failures or field repairs made'
         ],
         answer: 1,
         explanation: 'Any chassis deviation from the steel tube baseline (different tube sizes, material substitutions, carbon monocoques) requires an SES. Teams prove equivalent bending stiffness, tensile strength, etc. It is reviewed at technical inspection.'
@@ -285,10 +285,10 @@ const QUESTION_BANK = [
         id: 26, topic: 'Battery', elo: 850,
         question: 'What is the difference between a cell, a module, and a pack?',
         choices: [
-            'They are all the same thing — just different industry naming conventions',
-            'A cell is the basic electrochemical unit; a module is a group of cells with structural support; a pack is the full assembly of modules with BMS and housing',
-            'A module is a single cell in a metal can; a pack is a module with added electronics',
-            'A cell and module are identical; a pack adds the charger'
+            'They are all the same thing, with naming differences across regions and manufacturers',
+            'A cell is the basic electrochemical unit; a module groups cells structurally; a pack is the full system with BMS and housing',
+            'A module is a single cell in a protective metal can; a pack is a module with added control electronics',
+            'A cell and module are electrically identical; a module only has added electronics; a pack adds integrated charging circuitry'
         ],
         answer: 1,
         explanation: 'Cell = individual electrochemical unit. Module = cells grouped together with busbars, cell holders, and sensing — a structural sub-assembly. Pack = complete system: modules + BMS + housing + contactors + thermal management.'
@@ -297,7 +297,7 @@ const QUESTION_BANK = [
         id: 27, topic: 'Battery', elo: 850,
         question: 'What does "state of charge" (SoC) represent?',
         choices: [
-            'The ratio of current voltage to max voltage',
+            'The ratio of (minimum) current voltage to max (peak) voltage',
             'The percentage of remaining charge relative to full capacity',
             'The number of cycles the cell has completed',
             'The ratio of cell internal resistance to nominal resistance'
@@ -309,10 +309,10 @@ const QUESTION_BANK = [
         id: 28, topic: 'Battery', elo: 900,
         question: 'What is the difference between energy (Wh) and power (W) in the context of a battery pack?',
         choices: [
-            'They are the same quantity expressed in different units',
-            'Energy is how much total work the pack can deliver; power is how fast it can deliver it',
-            'Power determines pack voltage; energy determines pack current',
-            'Energy is a DC quantity; power is an AC quantity'
+            'They are the same physical quantity, just expressed in different unit systems',
+            'Energy is the total work the pack can deliver; power is how fast it delivers it',
+            'Power sets the operating voltage; energy capacity determines the maximum current draw',
+            'Energy applies to DC storage systems only; power is a property of AC delivery systems'
         ],
         answer: 1,
         explanation: 'Energy (Wh) = total stored work — how long the pack can run. Power (W) = rate of energy delivery — how hard it can push. A pack with high energy but low power runs long but can\'t sprint. FSAE demands both: enough energy for endurance and enough power for acceleration events.'
@@ -322,7 +322,7 @@ const QUESTION_BANK = [
         question: 'What does "C-rate" mean? If a 13 Ah cell is discharged at 2C, what is the current?',
         choices: [
             'C-rate is the number of charge cycles; 2C means 2 full charges. Current = 2 A',
-            'C-rate is the charge rate only; discharge is always 1C. Current = 13 A',
+            'C-rate is the "charge rate"; so discharge is always 1C. Current = 13 A',
             'C-rate is a multiplier on capacity: 2C = 2 × 13 Ah = 26 A',
             'C-rate is the voltage multiplier; 2C = 2 × nominal voltage'
         ],
@@ -333,10 +333,10 @@ const QUESTION_BANK = [
         id: 30, topic: 'Battery', elo: 900,
         question: 'Why are pouch cells generally preferred over cylindrical cells for high-current FSAE applications?',
         choices: [
-            'Pouch cells have higher voltage per cell than cylindrical cells',
-            'Pouch cells have a larger flat electrode area giving lower DCIR, better power delivery, and higher gravimetric energy density',
-            'Pouch cells are mechanically more robust than cylindrical cells in crash scenarios',
-            'Pouch cells do not require a BMS, reducing system complexity'
+            'Pouch cells operate at a higher nominal voltage than equivalent cylindrical cells',
+            'Pouch cells have a large flat electrode area, giving lower DCIR and a better power-to-weight ratio',
+            'Pouch cells are mechanically more rugged than cylindrical cells and tolerate side impact better',
+            'Pouch cells have integrated sensing, so they do not require an external BMS'
         ],
         answer: 1,
         explanation: 'The large flat electrode area of pouch cells gives lower DC internal resistance than cylindrical cells of similar chemistry — less voltage sag and less heat at high currents. They also tend to have better gravimetric energy density. The tradeoff is mechanical fragility: they need careful compression and housing.'
@@ -345,10 +345,10 @@ const QUESTION_BANK = [
         id: 31, topic: 'Battery', elo: 950,
         question: 'What is coulomb counting and what is its main limitation for SoC estimation?',
         choices: [
-            'Coulomb counting integrates current over time to track charge in/out, but errors accumulate and it cannot self-correct without a reference point',
-            'Coulomb counting measures individual electron flow and is perfectly accurate over the pack lifetime',
-            'Coulomb counting uses voltage to estimate SoC and is limited by cell temperature effects',
-            'Coulomb counting is only valid during charging, not during discharge'
+            'Coulomb counting integrates current over time to estimate charge in/out, but small errors accumulate into drift',
+            'Coulomb counting directly measures individual electron flow and is perfectly accurate over the pack lifetime',
+            'Coulomb counting infers SoC from voltage measurements and is limited by cell temperature variation',
+            'Coulomb counting is valid only during active charging, not during regenerative or discharge phases'
         ],
         answer: 0,
         explanation: 'Coulomb counting integrates current (∫I·dt) to track charge in/out. It\'s simple and fast, but any sensor error or noise integrates over time — errors grow unbounded. Without periodic recalibration (e.g. at full charge), the estimate drifts. Most BMS systems combine it with voltage-based correction.'
@@ -357,10 +357,10 @@ const QUESTION_BANK = [
         id: 32, topic: 'Battery', elo: 950,
         question: 'What is the purpose of cell balancing in a BMS?',
         choices: [
-            'To equalize current flow through all cells during peak discharge',
-            'To equalize state of charge across cells in a series string, preventing the weakest cell from limiting the pack',
-            'To balance the temperature distribution across modules',
-            'To equalize the DCIR of all cells to a common value'
+            'To equalize current through all cells, ensuring uniform discharge rates across a series string or pack',
+            'To equalize SoC across cells in a series string, preventing the weakest cell from limiting the pack',
+            'To balance temperature distribution across modules by redistributing heat during discharge',
+            'To equalize DCIR across all cells by conditioning weak cells with controlled charge pulses'
         ],
         answer: 1,
         explanation: 'Cells in a series string have slightly different capacities and self-discharge rates. Over cycles, SoC diverges. The weakest cell hits cutoff first, leaving stranded capacity in the others. Balancing — passive (bleed excess energy) or active (transfer charge) — keeps all cells at the same SoC so the full string capacity is usable.'
@@ -369,10 +369,10 @@ const QUESTION_BANK = [
         id: 33, topic: 'Battery', elo: 950,
         question: 'What is "state of health" (SoH) and how does it differ from SoC?',
         choices: [
-            'SoH and SoC are the same metric reported at different timescales',
-            'SoH measures the remaining usable capacity relative to the cell\'s original rated capacity; SoC measures remaining charge relative to current usable capacity',
-            'SoH is a voltage metric; SoC is a current metric',
-            'SoH only applies to the BMS hardware; SoC applies to the cells'
+            'SoH and SoC measure the same thing — how full the battery is — at different time horizons',
+            'SoH = remaining capacity vs. original rated capacity; SoC = remaining charge vs. current capacity',
+            'SoH is derived from open-circuit voltage measurements; SoC is derived from current integration',
+            'SoH describes the health of the BMS hardware; SoC describes the state of the individual cells'
         ],
         answer: 1,
         explanation: 'SoC = how full the battery is right now (0–100% of current capacity). SoH = how degraded the battery is from new (100% = new; 80% SoH means only 80% of original capacity remains). A cell at 80% SoH and 50% SoC has 40% of its original energy available.'
@@ -381,10 +381,10 @@ const QUESTION_BANK = [
         id: 34, topic: 'Battery', elo: 1000,
         question: 'What is a Ragone plot and what tradeoff does it illustrate?',
         choices: [
-            'A plot of cell voltage vs temperature showing safe operating range',
-            'A log-log plot of specific energy (Wh/kg) vs specific power (W/kg) showing the energy-power tradeoff for different storage technologies',
-            'A plot of capacity fade vs cycle count for different cell chemistries',
-            'A plot of DCIR vs SoC used to characterize cell performance'
+            'A plot of cell voltage versus temperature showing the safe operating region',
+            'A log-log plot of specific energy (Wh/kg) vs specific power (W/kg) comparing energy storage technologies',
+            'A plot of capacity retention versus cycle count for different cell chemistries',
+            'A plot of DCIR versus SoC used to model cell performance under load'
         ],
         answer: 1,
         explanation: 'The Ragone plot maps energy density (how much) vs power density (how fast) on log-log axes. Capacitors have very high power but low energy; lithium cells are in the middle; fuel cells have high energy but low power. For FSAE, you want to be as far upper-right as possible — high energy AND high power.'
@@ -393,10 +393,10 @@ const QUESTION_BANK = [
         id: 35, topic: 'Battery', elo: 1000,
         question: 'In the context of lithium-ion cells, what is the SEI layer and why does it matter?',
         choices: [
-            'The Solid Electrode Interface — a conductive coating applied during manufacture to improve tab bonding',
-            'The Solid Electrolyte Interphase — a passivation layer that forms on the anode during first charge, consuming some lithium and affecting long-term capacity',
-            'The Secondary Electrochemical Indicator — a BMS-measured value for predicting cell failure',
-            'The Stable Energy Index — a rating system for comparing cell chemistries'
+            'The Solid Electrode Interface — a conductive layer applied in manufacturing to improve electrode bonding and decrease cell DCIR',
+            'The Solid Electrolyte Interphase — a passivation layer that forms on the anode during initial charging, consuming lithium',
+            'The Secondary Electrochemical Indicator — a BMS-calculated value used to predict imminent cell failure',
+            'The Stable Energy Index — an industry rating system for comparing cell chemistries and thermal stability'
         ],
         answer: 1,
         explanation: 'The SEI forms on the graphite anode during initial charge cycles as electrolyte partially reduces. It consumes some lithium (irreversible capacity loss) but stabilizes and protects the anode. SEI growth over the cell\'s life contributes to capacity fade and resistance increase.'
@@ -405,10 +405,10 @@ const QUESTION_BANK = [
         id: 36, topic: 'Battery', elo: 1000,
         question: 'What does "parallel group" mean in pack architecture, and what does adding cells in parallel do?',
         choices: [
-            'Parallel groups increase pack voltage proportionally',
-            'A parallel group is cells connected positive-to-positive and negative-to-negative; it increases capacity (Ah) while keeping voltage the same as a single cell',
-            'Parallel connection reduces DCIR but also reduces capacity',
-            'Parallel groups are only used when series strings fail, as a redundancy measure'
+            'Parallel groups increase pack voltage proportionally to the number of cells added',
+            'Cells in a parallel group share terminals, increasing capacity without changing cell voltage',
+            'Parallel connection reduces effective DCIR but also lowers the total available capacity',
+            'Parallel groups are only used as a backup redundancy measure if a series string cell fails'
         ],
         answer: 1,
         explanation: 'Cells in parallel share the same terminals — voltages must match. Adding N cells in parallel multiplies capacity by N (more Ah) while voltage stays at one cell\'s voltage. It also divides effective DCIR by N. In a 28s4p pack: voltage = 28 × Vcell, capacity = 4 × Ah_cell.'
@@ -417,10 +417,10 @@ const QUESTION_BANK = [
         id: 37, topic: 'Battery', elo: 1050,
         question: 'What is the open circuit voltage (OCV) of a cell and how does it relate to SoC?',
         choices: [
-            'OCV is the voltage measured while current is flowing — it equals nominal voltage at all times',
-            'OCV is the cell terminal voltage measured after sufficient rest with no current flowing; it follows a predictable curve with SoC and can be used as a reference for SoC estimation',
-            'OCV is the maximum voltage the cell can reach and is fixed by chemistry regardless of SoC',
-            'OCV equals nominal voltage plus the voltage sag from DCIR'
+            'OCV is the terminal voltage measured under load — it equals nominal voltage at steady state',
+            'OCV is the resting terminal voltage with no current flowing; it tracks SoC along a known curve',
+            'OCV is the maximum achievable cell voltage, fixed by the electrode chemistry regardless of SoC',
+            'OCV equals nominal voltage adjusted by the ohmic voltage sag from internal DC resistance'
         ],
         answer: 1,
         explanation: 'With no current flowing, the cell\'s terminal voltage relaxes to its open circuit voltage — a thermodynamic quantity that depends on SoC via the electrode chemistry. The BMS can use OCV (measured after a rest period) as a ground-truth reference to recalibrate coulomb counting.'
@@ -429,10 +429,10 @@ const QUESTION_BANK = [
         id: 38, topic: 'Battery', elo: 1050,
         question: 'Why does DCIR increase at low temperatures?',
         choices: [
-            'Cold temperatures increase electrolyte conductivity, paradoxically slowing ion flow',
-            'Cold slows ionic mobility in the electrolyte and charge transfer kinetics at electrode surfaces, increasing resistance to current flow',
-            'Cold temperatures cause the SEI layer to dissolve, exposing bare lithium',
-            'Cold increases DCIR only in NCA chemistry; NMC cells are unaffected'
+            'Cold paradoxically increases electrolyte conductivity, which slows the overall ionic diffusion rate',
+            'Cold slows ionic mobility in the electrolyte and charge-transfer kinetics at electrode surfaces',
+            'Cold causes SEI layer dissolution, leaving the bare lithium anode exposed to the electrolyte',
+            'Cold only raises DCIR in NCA cells; NMC chemistry is thermally stable at low temperatures'
         ],
         answer: 1,
         explanation: 'Ionic conductivity in the electrolyte and charge transfer kinetics at the electrode-electrolyte interface are thermally activated (Arrhenius-type) processes. At low temperatures, both slow significantly — ions move through the electrolyte more slowly and intercalation is less favorable, directly increasing measured DCIR and reducing available power.'
@@ -441,10 +441,10 @@ const QUESTION_BANK = [
         id: 39, topic: 'Battery', elo: 1050,
         question: 'What is lithium plating, when does it occur, and why is it dangerous?',
         choices: [
-            'Lithium plating is the normal process of lithium intercalating into the graphite anode during charging',
-            'Lithium plating occurs when lithium cannot intercalate fast enough and deposits as metallic lithium on the anode surface; it can form dendrites that penetrate the separator and cause internal shorts',
-            'Lithium plating is a cathode phenomenon that occurs at high SoC and reduces energy density',
-            'Lithium plating is triggered by over-discharge and is fully reversible on the next charge'
+            'Lithium plating is the normal term for lithium intercalating into the graphite anode during charging',
+            'Lithium plating occurs when Li⁺ can\'t intercalate fast enough, depositing as metallic lithium and potentially forming dendrites',
+            'Lithium plating is a cathode-side phenomenon that occurs at high SoC where the lithium ios for a "plate" near the separator and reduces energy density',
+            'Lithium plating is triggered by deep over-discharge and is fully reversible on the subsequent charge cycle'
         ],
         answer: 1,
         explanation: 'During charging, Li⁺ ions should intercalate into the graphite anode. If charging is too fast (high C-rate), too cold (slow kinetics), or the anode is full, lithium deposits as metallic Li on the anode surface instead. Metallic lithium can form needle-like dendrites that pierce the separator, potentially leading to thermal runaway.'
@@ -453,10 +453,10 @@ const QUESTION_BANK = [
         id: 40, topic: 'Battery', elo: 1100,
         question: 'What is the difference between NMC, LFP, and NCA lithium-ion cathode chemistries in terms of energy density and safety?',
         choices: [
-            'NMC, LFP, and NCA are all identical chemistries — the naming difference is regional',
-            'NCA has highest energy density but lowest thermal stability; LFP has lowest energy density but highest thermal stability; NMC is a middle-ground compromise',
-            'LFP has the highest energy density; NMC has the best safety profile',
-            'NMC is only used in consumer electronics; LFP and NCA are motorsport-specific'
+            'NMC, LFP, and NCA are identical chemistries — naming varies by region or manufacturer',
+            'NCA has highest energy density with lowest thermal stability; LFP has lowest energy density with highest stability; NMC balances both',
+            'LFP has the highest energy density of the three; NMC offers the best thermal safety profile, NCA is the cheapest and is widely used despite it\'s poor performance',
+            'NMC is exclusively for consumer electronics; LFP and NCA are designed for motorsport applications'
         ],
         answer: 1,
         explanation: 'NCA: very high energy density (~200–260 Wh/kg), less thermally stable. NMC: high energy density (~150–220 Wh/kg), moderate stability — common FSAE choice. LFP: lower energy density (~90–160 Wh/kg) but very thermally stable (no oxygen release in runaway) and very long cycle life. The tradeoff is always energy density vs safety/longevity.'
@@ -465,10 +465,10 @@ const QUESTION_BANK = [
         id: 41, topic: 'Battery', elo: 1100,
         question: 'What do the 1RC and 2RC pairs in an equivalent circuit model of a cell represent?',
         choices: [
-            'The resistance of the first and second busbars in a series string',
-            'RC pairs (resistor-capacitor) that model the transient electrochemical response of the cell — 1RC captures fast diffusion effects, 2RC captures slower solid-state diffusion',
-            '1RC is the cell\'s DC resistance; 2RC is the AC impedance at 1 kHz',
-            '1RC and 2RC refer to the first and second charge cycles used for cell formation'
+            'The contact resistance at the first and second busbar joints in the series string',
+            'RC networks modeling the cell\'s transient electrochemical response — 1RC for fast dynamics, 2RC for slower diffusion',
+            '1RC represents the cell\'s DC ohmic resistance; 2RC represents the AC impedance measured at 1 kHz',
+            '1RC and 2RC denote the first and second formation charge cycles used to initialize the SEI layer — used to differentiate a battery vs. a capacitor'
         ],
         answer: 1,
         explanation: 'A typical ECM has R0 (ohmic DCIR) plus one or two RC networks in series. The 1RC pair captures fast electrochemical double-layer / charge transfer transients (milliseconds to seconds). The 2RC captures slower solid-state diffusion dynamics (seconds to minutes). Together they replicate the cell\'s voltage response to a current pulse better than R0 alone.'
@@ -477,10 +477,10 @@ const QUESTION_BANK = [
         id: 42, topic: 'Battery', elo: 1100,
         question: 'What is "calendar aging" in a lithium cell, and how does it differ from cycle aging?',
         choices: [
-            'Calendar aging and cycle aging are identical — both result from charge/discharge cycles',
-            'Calendar aging is capacity loss over time even without cycling — driven by SoC, temperature, and time; cycle aging is additional degradation from charge/discharge cycling',
-            'Calendar aging only occurs at very high temperatures (>60°C); at room temperature only cycle aging applies',
-            'Calendar aging is recoverable by full charge/discharge cycles; cycle aging is permanent'
+            'Calendar aging and cycle aging are the same process — both are caused by charge/discharge cycling over a period of time',
+            'Calendar aging is degradation at rest, driven by SoC and temperature; cycle aging adds wear from active cycling',
+            'Calendar aging only occurs above 60°C; standard operating temperatures produce only cycle aging',
+            'Calendar aging is fully reversible through reconditioning cycles; only cycle aging is permanent'
         ],
         answer: 1,
         explanation: 'Even sitting unused, cells degrade: electrolyte decomposition, SEI growth, and lithium loss continue as thermally activated processes — worse at high SoC and high temperature. Cycle aging adds on top via lithium plating risk, mechanical stress from volume change, and further SEI growth. For FSAE, storage at cool temperature and ~50% SoC minimizes calendar aging.'
@@ -489,10 +489,10 @@ const QUESTION_BANK = [
         id: 43, topic: 'Battery', elo: 1150,
         question: 'What is a "busbar" in a battery pack and what material properties matter for its design?',
         choices: [
-            'A busbar is the structural bracket that holds cell modules to the housing — material strength is the key property',
-            'A busbar is a low-resistance electrical conductor connecting cells or modules in series or parallel — key properties are conductivity, current capacity, and contact resistance at joints',
-            'A busbar is the communication line connecting BMS sense wires — material must be non-conductive',
-            'A busbar is a thermal interface pad that conducts heat from cells to the cooling plate'
+            'A busbar is the structural compression bracket holding modules inside the housing — key properties are yield strength and elastic modulus',
+            'A busbar is a low-resistance conductor linking cells or modules — key properties are conductivity and joint contact resistance',
+            'A busbar is the communication bus for BMS voltage sense wires — the material must be electrically non-conductive',
+            'A busbar is a thermal interface pad between cells and the cooling plate — key property is thermal conductivity'
         ],
         answer: 1,
         explanation: 'Busbars carry the full pack current between series-connected modules or parallel-connected cells. Key design factors: material conductivity (copper > aluminum, but aluminum is lighter), cross-sectional area (determines I²R heating), and joint resistance at bolted or welded connections. In FSAE packs, busbars must handle burst currents of 200+ A.'
@@ -501,10 +501,10 @@ const QUESTION_BANK = [
         id: 44, topic: 'Battery', elo: 1150,
         question: 'Why does a cell\'s terminal voltage drop immediately when a large current pulse is applied, then continue to drop more slowly?',
         choices: [
-            'The immediate drop is from BMS switching delay; the slow drop is from actual cell discharge',
-            'The immediate drop is the ohmic voltage drop across DCIR (V = I×R0); the continued slow drop reflects electrochemical polarization as diffusion gradients build up inside the cell',
-            'The immediate drop occurs because temperature rises instantly; the slow drop is from thermal expansion changing DCIR',
-            'The immediate drop is a measurement artifact from inductance in the wiring; the slow drop is the real cell response'
+            'The immediate drop is a BMS switching artefact; the slow drop reflects the actual cell discharge',
+            'The immediate drop is the ohmic sag across DCIR; the slower drop is electrochemical polarization building inside the cell',
+            'The immediate drop occurs as cell temperature spikes on current application; the slow drop is thermal expansion altering DCIR',
+            'The immediate drop is a wiring inductance artefact; the slower drop is the true electrochemical cell response'
         ],
         answer: 1,
         explanation: 'When current starts: voltage drops instantly by I×R0 (pure ohmic). Then it continues to sag as charge transfer polarization at the electrode surface builds (fast, 1RC timescale) and concentration gradients develop in the electrolyte and electrodes (slower, 2RC timescale). This multi-timescale behavior is exactly what pulse discharge testing characterizes.'
@@ -513,10 +513,10 @@ const QUESTION_BANK = [
         id: 45, topic: 'Battery', elo: 1200,
         question: 'What is "capacity fade" and what are the primary mechanisms causing it over a cell\'s life?',
         choices: [
-            'Capacity fade is the increase in DCIR over cycles; it is caused by electrode cracking',
-            'Capacity fade is the permanent reduction in usable Ah over the cell\'s life, caused by lithium inventory loss (SEI growth, lithium plating) and active material loss (particle cracking, electrode degradation)',
-            'Capacity fade only occurs from overcharging; under normal use cells maintain full capacity indefinitely',
-            'Capacity fade is fully reversible through deep discharge and full recharge conditioning cycles'
+            'Capacity fade is the gradual increase in DCIR over cycles, primarily caused by electrode particle cracking',
+            'Capacity fade is permanent reduction in usable Ah, caused by lithium inventory loss and active material degradation',
+            'Capacity fade only results from extreme discharge rates and overcharging abuse; under normal use, cell capacity is maintained indefinitely',
+            'Capacity fade is reversible through a full deep-discharge and slow-recharge reconditioning cycle'
         ],
         answer: 1,
         explanation: 'Two root causes: (1) Lithium inventory loss — lithium consumed forming SEI or lost as irreversible lithium plating. (2) Active material loss — electrode particles crack from repeated volume change during cycling, losing electrical contact. Both are permanent. FSAE cells are typically cycled ~50–200 times per season, so calendar aging often dominates.'
@@ -525,10 +525,10 @@ const QUESTION_BANK = [
         id: 46, topic: 'Battery', elo: 1200,
         question: 'What is the purpose of a precharge circuit in an HV battery system?',
         choices: [
-            'Precharge balances cell voltages before the pack is connected to any load',
-            'Precharge slowly charges the DC bus capacitors in the inverter through a resistor before closing the main contactors, limiting inrush current that would otherwise weld or damage the contactors',
-            'Precharge monitors isolation resistance before the AIRs close, acting as a backup IMD',
-            'Precharge is required only during charging, not during normal driving operation'
+            'Precharge equalizes individual cell voltages before the pack is first connected to any load',
+            'Precharge charges the inverter\'s DC bus capacitors through a resistor before the main contactors close, limiting inrush current',
+            'Precharge monitors isolation resistance before the IRs close, providing a secondary safety check',
+            'Precharge is a method of preparing a battery to be charged to 100% and is only active during the charging sequence, not during normal driving operation'
         ],
         answer: 1,
         explanation: 'Motor controllers contain large DC bus capacitors. When AIRs close onto an uncharged capacitor bank, instantaneous inrush current can be enormous (hundreds to thousands of amps) — enough to weld contactor contacts. Precharge routes current through a series resistor to slowly charge the capacitors to near pack voltage before the main AIRs close.'
@@ -539,10 +539,10 @@ const QUESTION_BANK = [
         id: 47, topic: 'Drive Unit', elo: 1100,
         question: 'What is the effect of increasing the number of poles in an electric motor on its drive frequency requirements?',
         choices: [
-            'More poles reduce the required drive frequency because flux paths are shorter',
-            'More poles increase the required electrical drive frequency: f = (p/2) × (RPM/60), so more pole pairs mean higher frequency at the same RPM',
-            'Number of poles has no effect on drive frequency — only RPM determines frequency',
-            'More poles reduce RPM requirements, which lowers drive frequency proportionally'
+            'More poles reduce drive frequency because shorter flux paths require slower switching',
+            'More poles increase the required electrical drive frequency: f = (p/2) × (RPM/60)',
+            'Pole count has no effect on drive frequency — only shaft RPM determines electrical frequency',
+            'More poles reduce the required shaft RPM, which proportionally lowers the drive frequency'
         ],
         answer: 1,
         explanation: 'Electrical frequency = pole pairs × mechanical frequency: f = (p/2) × (n/60). A 10-pole motor (5 pole pairs) at 6000 RPM requires f = 5 × 100 = 500 Hz. More poles allow thinner back-iron (shorter flux path between adjacent poles) but demand higher switching frequency from the inverter.'
@@ -551,10 +551,10 @@ const QUESTION_BANK = [
         id: 48, topic: 'Drive Unit', elo: 1050,
         question: 'What are the primary tradeoffs between axial flux and radial flux motor topologies?',
         choices: [
-            'Axial flux motors are always superior — higher torque density with no disadvantages',
-            'Radial flux motors are the standard cylindrical topology — mature manufacturing and longer axial length; axial flux motors are pancake-shaped with higher torque density per volume but more complex manufacturing',
-            'Axial flux motors only work at low RPM; radial flux is required for high-speed applications',
-            'Radial flux motors have higher efficiency; axial flux has higher peak power only'
+            'Axial flux motors are strictly superior as they almost always have a higher torque density with minimal packaging or thermal disadvantages',
+            'Radial flux is the conventional cylindrical topology with mature manufacturing; axial flux is pancake-shaped with higher torque density but more complex to build',
+            'Axial flux motors are limited to low-RPM applications that require only a high peak torque; due to differences in their moment\'s of inertia high-speed operation requires radial flux topology',
+            'Radial flux motors achieve higher efficiency across the operating map; axial flux only outperforms at peak power'
         ],
         answer: 1,
         explanation: 'Radial flux: conventional cylindrical motor, flux crosses the air gap radially. Mature manufacturing, well-understood thermal paths. Axial flux: "pancake" motor, flux crosses axially. Higher torque density per unit volume/weight — favorable for FSAE packaging — but stator manufacturing is more complex and heat rejection can be harder.'
@@ -563,10 +563,10 @@ const QUESTION_BANK = [
         id: 49, topic: 'Drive Unit', elo: 1150,
         question: 'What can be changed in an electric motor\'s design to lower its Kv (RPM/V)?',
         choices: [
-            'Increase the air gap between rotor and stator',
-            'Increase the number of turns per coil, use a higher pole count, or use a higher winding factor — all of which increase flux linkage and therefore reduce Kv',
-            'Use a lower permeability core material to increase flux density',
-            'Reduce the rotor diameter to lower peripheral velocity'
+            'Increase the air gap between rotor and stator to reduce back-EMF per revolution',
+            'Increase turns per coil, pole count, or winding factor to increase flux linkage and lower Kv',
+            'Use a lower-permeability core material to concentrate flux and increase flux density per pole',
+            'Reduce the rotor diameter to decrease the peripheral velocity of the permanent magnets'
         ],
         answer: 1,
         explanation: 'Lower Kv = higher Kt (more torque per amp). To lower Kv: add more turns per coil (increases flux linkage), increase pole count, or optimize winding factor. Higher Kv motors spin faster per volt but produce less torque per amp — the tradeoff depends on the operating point and gear ratio.'
@@ -575,10 +575,10 @@ const QUESTION_BANK = [
         id: 50, topic: 'Drive Unit', elo: 1000,
         question: 'How are Kv and Kt related in an electric motor?',
         choices: [
-            'They are inversely related through a nonlinear function that depends on temperature',
-            'Kv (RPM/V) and Kt (Nm/A) are inversely proportional: Kt ∝ 1/Kv. In SI units, Kt = 60/(2π × Kv)',
-            'Kv and Kt are independent — one describes voltage and the other torque',
-            'They are equal numerically only at nominal voltage'
+            'They are inversely related via a nonlinear function that varies with operating temperature',
+            'Kv and Kt are inversely proportional: Kt ∝ 1/Kv, or in SI units Kt = 60/(2π × Kv)',
+            'Kv and Kt are independent constants — one characterizes the voltage domain, the other the torque domain',
+            'They are numerically equal only when the motor is operating at its nominal voltage rating'
         ],
         answer: 1,
         explanation: 'By conservation of energy, the motor\'s back-EMF constant and torque constant are reciprocals (in consistent SI units). A motor with Kv = 100 RPM/V has Kt = 60/(2π×100) ≈ 0.0955 Nm/A. Higher Kv → lower Kt: faster but less torque per amp.'
@@ -587,10 +587,10 @@ const QUESTION_BANK = [
         id: 51, topic: 'Drive Unit', elo: 1250,
         question: 'Which slot-pole combination — 6p9s or 10p12s — has a higher fundamental winding factor?',
         choices: [
-            '6p9s and 10p12s have identical winding factors of 1.0 since both are balanced three-phase windings',
-            '10p12s has a higher fundamental winding factor (~0.966) compared to 6p9s (~0.866) because the winding is more concentrated and the flux linkage per coil is higher',
-            '6p9s has a higher winding factor because it has fewer poles, allowing longer coil pitch',
-            'Winding factor only applies to distributed windings; both 6p9s and 10p12s are concentrated and the concept does not apply'
+            '6p9s and 10p12s both achieve winding factors of exactly 1.0 as balanced three-phase windings',
+            '10p12s has a higher fundamental winding factor than 6p9s, giving better flux linkage per coil',
+            '6p9s has a higher winding factor because its larger slot pitch allows a longer, more effective coil',
+            'Winding factor only applies to distributed windings; fractional-slot concentrated windings like these are exempt'
         ],
         answer: 1,
         explanation: 'Winding factor kw represents how effectively the winding links the fundamental air-gap flux. 6p9s has kw ≈ 0.866; 10p12s has kw ≈ 0.966 — closer to 1.0 means more effective flux linkage per unit of copper, giving higher torque density. This is why high pole-count fractional slot machines are popular for traction motors.'
@@ -599,10 +599,10 @@ const QUESTION_BANK = [
         id: 52, topic: 'Drive Unit', elo: 1200,
         question: 'What constraints drive the electromagnetic sizing of an electric motor for FSAE?',
         choices: [
-            'Only peak torque and max RPM matter — all other constraints are secondary',
-            'Peak torque and power requirements, available DC bus voltage, max continuous and peak current (inverter and winding limits), thermal limits of winding insulation, target efficiency map, and packaging envelope',
-            'The only constraints are the FSAE power limit rule and the motor weight limit',
-            'Motor sizing is unconstrained in FSAE — teams choose freely based on availability'
+            'For FSAE only peak torque and max RPM matter due to speed and acceleration targets — all other factors are secondary design choices',
+            'Peak torque, bus voltage, inverter current limits, winding thermal limits, efficiency targets, and packaging envelope',
+            'Only the FSAE 80 kW power limit and the vehicle weight budget constrain motor sizing',
+            'Motor sizing in FSAE is unconstrained by rules — teams select motors based purely on availability'
         ],
         answer: 1,
         explanation: 'EM motor sizing is driven by: required peak torque (sets air-gap shear stress → volume), required speed range (sets Kv / winding), DC bus voltage (sets turns and insulation), peak and continuous current limits (inverter rating, wire gauge, thermal), copper fill factor, target efficiency, and physical packaging. FSAE also imposes an 80 kW peak power limit.'
@@ -613,10 +613,10 @@ const QUESTION_BANK = [
         id: 53, topic: 'Optimization', elo: 900,
         question: 'What is the difference between a global minimum and a local minimum in an optimization problem?',
         choices: [
-            'They are the same — any minimum found by an optimizer is by definition global',
-            'The global minimum is the lowest point in the entire design space; local minima are lower than their immediate neighbors but not the lowest overall — a gradient-based optimizer can get trapped in them',
-            'Local minima only exist in discrete design spaces; continuous problems always have one global minimum',
-            'The global minimum is found first; local minima are found in subsequent optimization runs'
+            'They are effectively the same — any minimum an optimizer converges to is, by definition, the global minimum',
+            'The global minimum is the lowest point in the full design space; local minima are locally lowest but not globally — gradient optimizers can get trapped',
+            'Local minima only occur in discrete design spaces; continuous differentiable objectives always have one global minimum',
+            'The global minimum is always found on the first optimizer run; subsequent runs locate the local minima'
         ],
         answer: 1,
         explanation: 'A local minimum is a point where all nearby moves increase the objective — the optimizer is "stuck in a bowl." The global minimum is the lowest bowl in the entire landscape. Gradient-based optimizers (SLSQP, BFGS) follow the gradient downhill and stop at the first local minimum they reach. Escaping requires global methods (genetic algorithms, basin hopping, simulated annealing) or multi-start strategies.'
@@ -625,10 +625,10 @@ const QUESTION_BANK = [
         id: 54, topic: 'Optimization', elo: 1000,
         question: 'Why should gradient descent optimizers like SLSQP be avoided when the design space is discrete?',
         choices: [
-            'SLSQP cannot handle more than 10 design variables and breaks on large discrete problems',
-            'Gradient-based methods require continuous, differentiable objectives — discrete variables have undefined gradients, causing the optimizer to fail or produce meaningless results',
-            'SLSQP is too slow for discrete problems because it evaluates every possible combination',
-            'Discrete problems always have a single global minimum, so SLSQP finds it trivially'
+            'SLSQP can only handle up to 10 design variables and crashes on larger discrete search spaces',
+            'Gradient methods require differentiable objectives — discrete variables have no gradient, so the optimizer fails or gives garbage',
+            'SLSQP is computationally slow for discrete problems because it enumerates every possible combination',
+            'Discrete design spaces always have a single unique global minimum, which SLSQP finds in one pass'
         ],
         answer: 1,
         explanation: 'Gradient descent computes ∂f/∂x to determine the search direction. For discrete variables (integer slot counts, pole numbers, etc.), the gradient is either undefined or zero everywhere except at discontinuities — the optimizer cannot navigate. Use derivative-free methods: COBYLA, genetic algorithms, or Nelder-Mead simplex.'
@@ -637,10 +637,10 @@ const QUESTION_BANK = [
         id: 55, topic: 'Optimization', elo: 1150,
         question: 'What is a surrogate model in engineering optimization, and when is it beneficial?',
         choices: [
-            'A surrogate model is a simplified version of the real system with reduced fidelity used only for visualization',
-            'A surrogate model is a computationally cheap mathematical approximation (e.g. Gaussian process, polynomial response surface) trained on high-fidelity simulation data, used to explore the design space when each simulation is expensive',
-            'A surrogate model is the actual physics simulation — "surrogate" means it replaces physical testing',
-            'Surrogate models are only valid for linear systems; nonlinear motor or thermal problems require direct simulation'
+            'A surrogate model is a lower-fidelity version of the simulation, used only for interactive visualization',
+            'A surrogate model is a cheap mathematical approximation (e.g. Gaussian process) trained on expensive simulation data to accelerate design space exploration',
+            'A surrogate model is the authoritative simulation — "surrogate" refers to it replacing physical hardware tests',
+            'Surrogate models are only valid for linear systems; nonlinear electromagnetic or thermal problems require full simulation'
         ],
         answer: 1,
         explanation: 'When a single simulation (FEA, CFD, lap-time sim) takes minutes to hours, running thousands of evaluations is impractical. A surrogate (Gaussian process, radial basis function, neural net) is trained on a designed experiment of 50–200 high-fidelity evaluations, then the optimizer queries the surrogate. You explore broadly, then validate promising designs with the real simulation.'
@@ -649,10 +649,10 @@ const QUESTION_BANK = [
         id: 56, topic: 'Optimization', elo: 1250,
         question: 'What optimization architecture is appropriate when simulation time is non-negligible, the design space is discrete, but follows a "noisy funnel" geometry?',
         choices: [
-            'Pure gradient descent with finite-difference gradients — it handles noisy objectives through averaging',
-            'Surrogate optimization using a global optimizer (e.g. basin hopping) paired with a local derivative-free method (e.g. COBYLA) to refine within each basin',
-            'Exhaustive grid search — the only reliable method for noisy discrete spaces',
-            'Single-start COBYLA — it handles discrete variables and noisy objectives simultaneously'
+            'Gradient descent with finite-difference approximations — noise is handled by averaging repeated evaluations',
+            'Surrogate optimization with a global method like basin hopping, plus a local derivative-free refiner like COBYLA',
+            'Exhaustive grid search over the full discrete space — the only truly noise-robust option',
+            'Single-start COBYLA — derivative-free and handles both discrete variables and noisy objectives natively'
         ],
         answer: 1,
         explanation: 'A "noisy funnel" has a broad global trend toward a minimum with superimposed noise/local structure. Surrogate optimization trains a model on sampled evaluations, letting the global optimizer (basin hopping, differential evolution) find the funnel without getting trapped in noise, while the local optimizer refines the solution within the basin.'
@@ -663,10 +663,10 @@ const QUESTION_BANK = [
         id: 57, topic: 'HV Dist', elo: 900,
         question: 'What are the primary sources of resistance in a high-voltage tractive system?',
         choices: [
-            'Only the motor windings contribute meaningful resistance; all other components are negligible',
-            'Resistance arises from bulk conductor resistance (wire and busbar) and connection resistance at joints (crimp, bolted busbar, connector interfaces) — both must be minimized to reduce I²R losses and voltage sag',
-            'Resistance is primarily determined by the BMS, which actively controls current flow',
-            'Only the battery cells have significant resistance; wiring resistance is negligible at EV voltages'
+            'Only the motor windings contribute significant resistance; all other path components are negligible',
+            'Resistance comes from bulk conductor resistance and joint connection resistance',
+            'Resistance is actively managed by the BMS, which limits current draw to keep path resistance low',
+            'Only the battery cells have significant resistance (DCIR); at EV voltage levels, wiring resistance is negligible'
         ],
         answer: 1,
         explanation: 'In an HV circuit carrying 200 A, even milliohm-level resistances matter: P = I²R, so 2 mΩ × (200 A)² = 80 W of waste heat at a single point. Sources: cell DCIR, busbar/wire bulk resistance (ρ × L/A), contact resistance at bolted joints, connector pin resistance, and current sensor shunts. Connections often dominate because they\'re distributed and hard to control.'
@@ -675,10 +675,10 @@ const QUESTION_BANK = [
         id: 58, topic: 'HV Dist', elo: 1050,
         question: 'What is the skin effect and does it meaningfully affect FSAE EV powertrain wiring?',
         choices: [
-            'Skin effect causes current to concentrate at the conductor\'s surface at high frequency, significantly increasing effective resistance in all EV wiring',
-            'Skin effect concentrates AC current near the conductor surface, increasing effective resistance at high frequency. In low-frequency DC bus wiring it is negligible, but in motor phase windings (driven at hundreds of Hz) it becomes relevant',
-            'Skin effect only occurs in aluminum conductors; copper wiring in FSAE is immune',
-            'Skin effect increases inductance, not resistance, and is only relevant in RF applications above 100 MHz'
+            'Skin effect concentrates current at the surface at high frequency, significantly raising resistance throughout all EV wiring',
+            'Skin effect raises effective resistance at high frequency — negligible in DC bus wiring, but relevant in motor phase windings at 300–600 Hz',
+            'Skin effect only affects aluminum conductors; the copper wiring used in FSAE is immune to the effect',
+            'Skin effect increases inductance rather than resistance, and only appears in RF circuits above 100 MHz'
         ],
         answer: 1,
         explanation: 'Skin depth δ = √(2ρ/ωμ). For FSAE DC bus cables, current is low-frequency switched — skin effect is negligible, conductor sizing is dominated by I²R at DC. Motor phase windings are driven at 300–600 Hz electrical frequency — skin effect starts to matter for conductor strand sizing, which is why high-frequency windings use Litz wire or thin strands.'
@@ -689,10 +689,10 @@ const QUESTION_BANK = [
         id: 59, topic: 'Battery', elo: 1300,
         question: 'What is the difference between "power fade" and "capacity fade" in an aging lithium-ion cell, and why might a cell show significant power fade with minimal capacity fade early in its life?',
         choices: [
-            'Power fade and capacity fade are the same phenomenon described at different discharge rates',
-            'Capacity fade = reduction in total usable Ah (lithium inventory loss + active material loss). Power fade = increase in internal resistance (DCIR growth — the cell delivers the same energy but at a higher voltage penalty, reducing peak power). Early in life, SEI growth drives power fade before significantly impacting capacity.',
-            'Power fade only occurs in high-power cells; capacity fade only occurs in high-energy cells',
-            'Power fade is caused by cathode degradation only; capacity fade is caused by anode degradation only'
+            'Power fade and capacity fade are the same mechanism, just observable at different discharge rates — Power growth can be observed early in a cell life if it experiences high C-rates',
+            'Capacity fade is reduction in usable Ah; power fade is DCIR growth limiting peak deliverable power — SEI growth drives power fade earliest in life',
+            'Power fade only occurs in high-power cell formats; capacity fade is exclusive to high-energy cells — High-power cell formats typically have rare earth metals that are more likely to increase DCIR without major impacts to the Li-ion electrolyte capacity',
+            'Power fade is driven solely by cathode particle cracking; capacity fade is an anode-only degradation mode — Depending on how the cell is handled the more brittle cathode can crack sooner than the anode leading to significant power fade'
         ],
         answer: 1,
         explanation: 'Capacity fade measures total Ah at low rate (lithium inventory reduction). Power fade measures peak power at a given SoC — P_peak = (OCV − V_min)² / (4 × R_total). Early in life, SEI ionic resistance grows quickly, raising DCIR and cutting peak power — while total capacity (total lithium inventory) is still mostly intact.'
@@ -701,46 +701,46 @@ const QUESTION_BANK = [
         id: 60, topic: 'Battery', elo: 1350,
         question: 'What is the "knee point" in a battery capacity fade curve, and why is predicting its onset critical?',
         choices: [
-            'The knee point is the voltage at which the cell transitions from the upper to the lower voltage plateau — it occurs at about 50% SoC and is not related to aging',
-            'The knee point is an inflection in the cycle life curve where gradual near-linear capacity fade transitions abruptly to rapid capacity loss — caused by electrode operating windows shifting out of alignment as lithium inventory is depleted',
-            'The knee point is caused by sudden separator failure at high cycle counts — it is unpredictable by definition',
-            'The knee point only occurs in LFP cells due to their flat OCV curve'
+            'The knee point is the voltage step near 50% SoC where the cell shifts between discharge plateaus — unrelated to aging',
+            'The knee point is an inflection in the cycle-life curve where slow capacity fade transitions abruptly to rapid loss, as electrode windows go out of alignment',
+            'The knee point is sudden separator rupture at high cycle counts — inherently unpredictable and unpreventable',
+            'The knee point only occurs in LFP cells due to their characteristically flat voltage discharge curve'
         ],
         answer: 1,
         explanation: 'Early cycling: small lithium inventory loss shifts electrode operating windows slightly but the full cell still reaches cutoff with most capacity intact. Near the knee: the anode and cathode windows have shifted to the point where one electrode hits its capacity limit before the other — the electrodes go "out of alignment." A small additional Li loss then causes disproportionately large capacity loss. Predicting onset is critical for aerospace and aviation to avoid in-service failure.'
     },
     {
         id: 61, topic: 'Battery', elo: 1400,
-        question: 'What is a contactor (AIR) welding failure in a high-voltage battery system, under what conditions does it occur, and what prevents it?',
+        question: 'What is a contactor (IR) welding failure in a high-voltage battery system, under what conditions does it occur, and what prevents it?',
         choices: [
-            'Contactor welding occurs when the contacts get too hot from normal current flow and fuse together — prevented by using contacts rated for 2× normal current',
-            'AIR welding occurs when the contactor opens or closes while carrying current above its make/break rating — an arc forms between the separating contacts, melting or welding the surfaces together. Prevented by precharge (limiting inrush), correct contactor ratings, and detecting welded contactors via auxiliary contacts.',
-            'AIR welding is a software failure where the BMS incorrectly reports the contactor as open — prevented by redundant position sensors',
-            'Contactors cannot weld in FSAE applications because the currents are too low'
+            'Contactor welding occurs from sustained high current heating the contacts — prevented by adding fuses or using higher rated contactors to account for potential influxes or voltage spikes',
+            'IR welding occurs when a contactor opens or closes above its make/break rating — an arc welds the contacts together. Prevention: precharge, correct ratings, and auxiliary contact monitoring.',
+            'IR welding is a BMS software fault where the contactor is incorrectly reported as open — prevented by redundant position sensors and ensuring compatible hardware has been used within the BMS',
+            'Contactors cannot weld in FSAE applications because pack currents are too low to sustain an arc'
         ],
         answer: 1,
         explanation: 'When a contactor opens under load, an arc forms between separating contacts (arc temperature: 5,000–20,000 K). If arc energy exceeds the melting enthalpy of the contact material, the contacts fuse. Prevention: precharge limits inrush on close; contactors must be rated for the make/break current; auxiliary contacts detect welding; the SDC design avoids hot-switching wherever possible.'
     },
     {
         id: 62, topic: 'Battery', elo: 1450,
-        question: 'In a series-connected battery string, why is a fuse placed in series with each parallel cell group rather than just one master fuse for the whole pack?',
+        question: 'In a battery pack composed of series-connected modules, where each module contains parallel cells, why is it beneficial to place fuses on each parallel cell group rather than relying on a single pack-level (master) fuse?',
         choices: [
-            'Cell-level fuses are a cost-saving measure — they are cheaper than a single large fuse',
-            'A master fuse only protects against external shorts. An internal cell failure forces all other parallel cells to dump current into the failing cell — fault current flows within the parallel group, never through the master fuse. Cell-level fuses interrupt this internal fault current.',
-            'Cell-level fuses are only required by FSAE rules and have no engineering justification',
-            'The master fuse protects against all fault types; cell-level fuses are redundant and reduce efficiency'
+            'Cell-level fuses are a BOM cost reduction — individual small fuses are cheaper than one large master fuse',
+            'A master fuse only catches external shorts; an internal parallel cell fault never passes through it — only cell-level fuses can interrupt that current path',
+            'Cell-level fuses are required by FSAE rules but offer no real engineering benefit over a well-rated master fuse',
+            'The master fuse is rated to handle all fault scenarios; cell-level fuses only add drop-out resistance and reduce efficiency'
         ],
         answer: 1,
-        explanation: 'In a 28s4p pack, if one cell develops an internal short, the three adjacent parallel cells dump current into the shorted cell: I_fault ≈ 3 × V_cell / R_cell — potentially thousands of amps within the parallel group. This current flows through the parallel interconnects and the shorted cell, NOT through the master fuse (which is in series with the entire string). Without cell-level fuses, this fault current goes unchecked.'
+        explanation: 'In a 28s4p pack, if one cell develops an internal short, the three adjacent parallel cells dump current into the shorted cell: I_fault ≈ 3 × V_cell / R_cell — potentially thousands of amps within the parallel group. This current flows through the parallel interconnects and the shorted cell, NOT through the master fuse (which is in series with the entire string). Without cell-level fuses, this fault current goes unchecked. This is why you see fusible links in many industry packs'
     },
     {
         id: 63, topic: 'Battery', elo: 1450,
         question: 'What is "self-discharge" in a lithium-ion cell and what are the two dominant mechanisms?',
         choices: [
-            'Self-discharge is a feature, not a bug — it equalizes all cells to the same SoC automatically, eliminating the need for BMS balancing',
-            'Self-discharge is the spontaneous loss of stored charge at rest. Two dominant mechanisms: (1) electronic leakage through the separator/SEI — tiny electron current discharges the cell; (2) chemical self-discharge — direct chemical reactions between electrode and electrolyte consume lithium',
-            'Self-discharge only occurs at elevated temperature (>40°C); at room temperature, lithium-ion cells have zero self-discharge',
-            'Self-discharge is caused solely by the BMS parasitic current draw from the cells'
+            'Self-discharge is a passive balancing feature — it equalizes SoC across cells and eliminates the need for active BMS balancing',
+            'Self-discharge is spontaneous charge loss at rest, via electronic leakage through the separator and chemical reactions at electrode surfaces',
+            'Self-discharge only occurs above 40°C; at room temperature, lithium-ion cells retain charge indefinitely',
+            'Self-discharge is caused entirely by the BMS voltage sensing circuits drawing parasitic current from the cells'
         ],
         answer: 1,
         explanation: 'Self-discharge rates for Li-ion at room temperature: typically 1–5% per month for good cells, up to 15–30%/month for cells with defects. (1) Electronic leakage: parasitic electron current through separator/SEI — very slow in a good cell (GΩ electronic resistance). (2) Chemical self-discharge: direct chemical reactions between electrode and electrolyte at the particle surface. An abnormally high self-discharge rate in one cell of a series string causes SoC divergence, eventually requiring balancing to compensate.'
@@ -749,10 +749,10 @@ const QUESTION_BANK = [
         id: 64, topic: 'Battery', elo: 870,
         question: 'SoC and SoH — which should a battery engineer working on a new pack design care about MORE and why?',
         choices: [
-            'SoC = degradation over time; SoH = current charge level. SoH matters more because it tells you how full the pack is right now',
-            'SoC = remaining charge as a % of current capacity. SoH = remaining capacity as a % of original rated capacity. A pack designer should care more about SoH — it determines the actual usable capacity the pack will deliver at end of life, which sets the required pack size',
-            'They are the same thing — "state of health" is just the industry term for state of charge used by some manufacturers',
-            'SoC matters more because it directly sets the pack voltage, which determines everything else'
+            'SoC tracks degradation; SoH tracks current charge level — SoH matters more for real-time energy management',
+            'SoC = remaining charge vs. current capacity; SoH = remaining capacity vs. rated capacity. Pack designers size for SoH=80% at end-of-life, not SoH=100% when new.',
+            'They are the same metric — "state of health" is the preferred industry term for state of charge in some manufacturer specs',
+            'SoC matters more for design because it directly determines pack open-circuit voltage at every operating point'
         ],
         answer: 1,
         explanation: 'SoC answers "how full is it right now?" — changes every minute during use. SoH answers "how worn out is it?" — degrades slowly over months and years, starting at 100% and typically ending pack life around 70–80%. For a pack designer, SoH is the critical concern: you size the pack for the SoH=80% condition, not the brand-new SoH=100% condition — otherwise the pack fails its mission requirements at end of life.'
