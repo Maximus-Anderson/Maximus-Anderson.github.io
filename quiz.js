@@ -821,7 +821,454 @@ const QUESTION_BANK = [
         answer: 1,
         explanation: 'R = ρL/A. ρ = resistivity (material constant; copper: 1.72×10⁻⁸ Ω·m). L = length (proportional). A = cross-sectional area (inversely proportional). AWG scale is inverse: AWG 0 (thick, ~8.3mm diameter) has very low resistance; AWG 30 (thin, ~0.25mm) has very high resistance. Every 6 AWG increase approximately halves the cross-sectional area and doubles the resistance per unit length.'
     },
+
+    // ── CSV Extension ─────────────────────────────────────────────────────────
+    {
+        id: 70, topic: 'Battery', elo: 800,
+        question: 'A lithium cell is fully charged when its voltage reaches approximately 4.2 V. What voltage does it typically reach when fully discharged?',
+        choices: [
+            'Approximately 0 V — it is completely depleted like a standard alkaline cell',
+            'Approximately 2.5–3.0 V — the cell still has a residual voltage at its discharge cutoff',
+            'Approximately 1.5 V — the same cutoff as a standard alkaline AA cell',
+            'Approximately 4.0 V — the cell barely changes voltage throughout discharge'
+        ],
+        answer: 1,
+        explanation: 'Lithium-ion cells have a discharge cutoff voltage of approximately 2.5–3.0 V depending on chemistry — the cell is considered "empty" at this point, not at 0 V. Discharging below the cutoff damages the cell through copper dissolution and other irreversible reactions. The usable voltage window for NMC is roughly 3.0–4.2 V.'
+    },
+    {
+        id: 71, topic: 'Powertrain', elo: 800,
+        question: 'What does it mean for a motor to be "back-driven"?',
+        choices: [
+            'The motor is spinning in reverse to apply braking torque at the request of the driver',
+            'An external mechanical force is spinning the motor shaft, causing it to act as a generator',
+            'The motor controller is sending current in the reverse direction to slow the rotor',
+            'The motor is operating in its field-weakening region above base speed'
+        ],
+        answer: 1,
+        explanation: 'A motor is back-driven when a mechanical load (e.g. the wheels of a decelerating vehicle) spins its shaft from the outside. In this condition the motor acts as a generator, converting mechanical energy back into electrical energy. This is the physical basis of regenerative braking.'
+    },
+    {
+        id: 72, topic: 'Safety', elo: 800,
+        question: 'Why is it dangerous to touch a high-voltage conductor even after the main contactors (AIRs) have been opened?',
+        choices: [
+            'The contactors may not have fully opened, leaving the circuit partially energized',
+            'Large capacitors in the inverter can retain lethal charge for seconds to minutes after disconnection',
+            'The BMS continues supplying low current through the sense wires, maintaining a shock hazard',
+            'Battery cells can briefly spike to twice their normal voltage when the circuit is broken'
+        ],
+        answer: 1,
+        explanation: 'Motor controllers contain large DC bus capacitors that store significant energy. When the AIRs open, these capacitors do not discharge instantly — they retain voltage for seconds to minutes depending on the bleed resistor design. The stored charge is sufficient to cause cardiac arrest. Always wait for the capacitor discharge time specified in the system documentation before contacting HV conductors.'
+    },
+    {
+        id: 73, topic: 'Battery', elo: 820,
+        question: 'If you connect two identical cells in series, what happens to the pack voltage and capacity compared to a single cell?',
+        choices: [
+            'Voltage doubles; capacity doubles',
+            'Voltage doubles; capacity stays the same',
+            'Voltage stays the same; capacity doubles',
+            'Voltage and capacity both stay the same — series connection only improves reliability'
+        ],
+        answer: 1,
+        explanation: 'Series connection adds voltages but the capacity (Ah) is set by the weakest cell in the string — in an ideal matched pair, capacity equals one cell\'s capacity. If each cell is 3.7 V and 10 Ah, the series pack is 7.4 V and 10 Ah. This is why series connections increase pack voltage for motor drive requirements without increasing stored charge.'
+    },
+    {
+        id: 74, topic: 'Powertrain', elo: 850,
+        question: 'A motor produces 50 Nm of torque at 3000 RPM. What is its mechanical output power?',
+        choices: [
+            'Approximately 1.6 kW',
+            'Approximately 15.7 kW',
+            'Approximately 150 kW',
+            'Approximately 50 kW'
+        ],
+        answer: 1,
+        explanation: 'Power = torque × angular velocity = T × ω, where ω = (RPM × 2π) / 60. ω = 3000 × 2π / 60 = 314.2 rad/s. P = 50 × 314.2 = 15,708 W ≈ 15.7 kW. This is the fundamental relationship between torque, speed, and power — a motor producing high torque at low RPM can deliver the same power as a low-torque motor at high RPM.'
+    },
+    {
+        id: 75, topic: 'HV Dist', elo: 850,
+        question: 'Two wires have the same length and are made of the same material. Wire A has twice the cross-sectional area of Wire B. How do their resistances compare?',
+        choices: [
+            'Wire A has twice the resistance of Wire B because it has more material',
+            'Wire A has half the resistance of Wire B because R = ρL/A and A doubles',
+            'Wire A and Wire B have the same resistance because length and material are identical',
+            'Wire A has four times the resistance of Wire B because resistance scales with area squared'
+        ],
+        answer: 1,
+        explanation: 'From R = ρL/A: resistance is inversely proportional to cross-sectional area. Doubling the area halves the resistance. Physically, a thicker wire provides more parallel paths for electrons, reducing resistance. This is why high-current HV cables use large cross-section copper — to keep I²R losses and voltage drop manageable.'
+    },
+    {
+        id: 76, topic: 'Battery', elo: 870,
+        question: 'A cell is rated at 13 Ah. A second identical cell is connected in parallel with it. What is the capacity of the parallel pair?',
+        choices: [
+            '13 Ah — parallel connection does not change capacity',
+            '6.5 Ah — the capacity is split between the two cells',
+            '26 Ah — parallel connection adds the capacities of both cells',
+            '169 Ah — capacity scales with the product of the two cell ratings'
+        ],
+        answer: 2,
+        explanation: 'Parallel connection adds capacities. Two 13 Ah cells in parallel produce a 26 Ah pack at the same voltage as a single cell. Both cells share the load current, each supplying half — so the combined pack can run twice as long at the same current draw. This is the key benefit of parallel groups: more total energy at the same voltage.'
+    },
+    {
+        id: 77, topic: 'Safety', elo: 880,
+        question: 'What does "galvanic isolation" mean between the HV tractive system and the low-voltage (12V) system in an EV?',
+        choices: [
+            'The LV system uses galvanized steel enclosures to protect against corrosion near the HV wiring',
+            'There is no direct electrical connection between HV and LV conductors — current cannot flow between them under normal conditions',
+            'The HV system is isolated from external charging equipment using a mechanical disconnect',
+            'The LV system is isolated from the chassis ground to prevent corrosion of the frame'
+        ],
+        answer: 1,
+        explanation: 'Galvanic isolation means the HV and LV circuits share no direct conductive path. A fault in one system cannot directly drive current into the other. In EVs this is achieved by isolated DC-DC converters (not transformerless) and optocouplers for signals. It is required by FSAE rules and safety standards because it prevents a HV fault from electrocuting someone touching LV components like the steering wheel or data logger.'
+    },
+    {
+        id: 78, topic: 'Powertrain', elo: 900,
+        question: 'In regenerative braking, where does the recovered energy go?',
+        choices: [
+            'It is dissipated as heat in the motor windings to slow the vehicle',
+            'It is returned to the battery pack as electrical energy via the motor acting as a generator',
+            'It is stored in a flywheel connected to the motor shaft for later mechanical use',
+            'It is dumped into a brake resistor because the battery cannot accept charge during braking'
+        ],
+        answer: 1,
+        explanation: 'During regenerative braking, the wheels back-drive the motor, which acts as a generator producing AC. The inverter converts this back to DC and returns it to the battery. This recovers kinetic energy that would otherwise be lost as heat in friction brakes. The amount recoverable depends on battery SoC (a full battery cannot accept charge), braking intensity, and inverter/motor efficiency.'
+    },
+    {
+        id: 79, topic: 'Battery', elo: 900,
+        question: 'Why does a cell\'s voltage drop when current is drawn, even if the cell is not depleted?',
+        choices: [
+            'Current draw causes the electrolyte to temporarily freeze, reducing ionic conductivity',
+            'The cell\'s internal resistance causes a voltage drop proportional to the current drawn',
+            'The BMS reduces cell voltage under load to protect against overheating',
+            'Increased current draw lowers the cell\'s state of charge instantaneously'
+        ],
+        answer: 1,
+        explanation: 'V_terminal = OCV − (I × R_internal). Every cell has internal resistance (DCIR), and when current flows, Ohm\'s law produces a voltage drop across that resistance. The terminal voltage the load sees is lower than the open-circuit voltage. At higher currents this drop is larger — this is why a battery pack that reads 100 V at rest may only deliver 92 V under a 200 A load.'
+    },
+    {
+        id: 80, topic: 'Calculations', elo: 920,
+        question: 'A motor controller is 95% efficient. If the battery delivers 20 kW of electrical power to the controller, how much power reaches the motor shaft?',
+        choices: [
+            '19 kW — 5% is lost as heat in the controller',
+            '21 kW — the controller boosts power through switching',
+            '20 kW — efficiency losses appear in the motor, not the controller',
+            '1 kW — only the excess power above 95% is delivered'
+        ],
+        answer: 0,
+        explanation: 'Power out = Power in × efficiency = 20 kW × 0.95 = 19 kW. The remaining 1 kW is dissipated as heat in the controller\'s switching transistors, gate drivers, and other losses. Each component in the drivetrain chain has its own efficiency — total drivetrain efficiency is the product of all individual efficiencies, which is why small losses compound quickly.'
+    },
+    {
+        id: 81, topic: 'HV Dist', elo: 950,
+        question: 'A 100 V pack delivers 150 A through a cable with 5 mΩ total resistance. How much power is wasted as heat in that cable?',
+        choices: [
+            '0.75 W',
+            '112.5 W',
+            '750 W',
+            '15 W'
+        ],
+        answer: 1,
+        explanation: 'P_loss = I² × R = 150² × 0.005 = 22,500 × 0.005 = 112.5 W. This is entirely wasted as heat. Notice the loss scales with current squared — doubling the current quadruples the cable loss. This is why high-current HV cables must have low resistance (large cross-section, short runs, quality connections), and why reducing pack current by increasing pack voltage is a common design strategy.'
+    },
+    {
+        id: 82, topic: 'Powertrain', elo: 950,
+        question: 'What happens to the torque available at the wheels when you increase the gear ratio (e.g. from 4:1 to 6:1)?',
+        choices: [
+            'Wheel torque decreases because more gear reduction means more mechanical losses',
+            'Wheel torque increases because the gear ratio multiplies motor torque at the cost of wheel speed',
+            'Wheel torque stays the same because power is conserved through the gearbox',
+            'Wheel torque doubles because there are now more gear teeth in contact with the shaft'
+        ],
+        answer: 1,
+        explanation: 'A gear ratio multiplies torque: T_wheel = T_motor × gear_ratio × η_gear. Going from 4:1 to 6:1 increases wheel torque by 50% for the same motor torque output. The tradeoff is wheel speed — a 6:1 ratio means the wheel spins at 1/6 the motor speed instead of 1/4, so top speed is lower. This is the fundamental torque-speed tradeoff of any gearing system.'
+    },
+    {
+        id: 83, topic: 'Battery', elo: 980,
+        question: 'A 28s pack is at 50% SoC. Each cell has an OCV of 3.65 V at this SoC. What is the pack open-circuit voltage?',
+        choices: [
+            '3.65 V — the series pack voltage equals the individual cell voltage',
+            '102.2 V — the pack voltage is 28 × 3.65 V',
+            '1.83 V — the pack voltage is halved at 50% SoC',
+            '51.1 V — series connection averages the cell voltages'
+        ],
+        answer: 1,
+        explanation: 'Series connection adds voltages: V_pack = N_series × V_cell = 28 × 3.65 = 102.2 V. SoC affects the per-cell voltage (lower SoC = lower OCV per cell), but the pack voltage is always the sum of all series cells. At 100% SoC (~4.2 V/cell): V_pack = 117.6 V. At 0% SoC (~3.0 V/cell): V_pack = 84 V. The pack voltage window tracks the cell voltage window scaled by series count.'
+    },
+    {
+        id: 84, topic: 'Powertrain', elo: 1000,
+        question: 'An electric motor has a peak efficiency of 94%. At what operating condition is efficiency likely to be lowest?',
+        choices: [
+            'At peak torque and rated RPM — maximum power always coincides with maximum losses',
+            'At very light load (low torque, low current) — fixed losses dominate a small useful output',
+            'At maximum RPM in field weakening — the motor is most stressed at high speed',
+            'At room temperature — motors are most efficient when thermally loaded'
+        ],
+        answer: 1,
+        explanation: 'Motor efficiency = useful power out / total power in. Fixed losses (iron losses, bearing friction, windage) are roughly constant regardless of load. At very light loads, these fixed losses represent a large fraction of the small input power, so efficiency is low. This is why efficiency maps show low efficiency at light load and high efficiency in a "sweet spot" region. Peak efficiency is typically at moderate torque and moderate speed.'
+    },
+    {
+        id: 85, topic: 'Battery', elo: 1000,
+        question: 'Why does a cell feel warm during a high-rate discharge even if nothing appears to be wrong?',
+        choices: [
+            'Heat is a sign of irreversible damage — a warm cell during discharge indicates a failing cell',
+            'The cell\'s BMS is actively heating the cell to maintain optimal operating temperature',
+            'Current flowing through the cell\'s internal resistance generates heat according to P = I²R',
+            'Chemical energy converts to heat first, then back to electrical energy in a two-step process'
+        ],
+        answer: 2,
+        explanation: 'P_heat = I² × R_internal. Even a healthy cell with low DCIR generates heat under current. A 13 Ah pouch cell with 1.5 mΩ DCIR at 100 A produces P = 100² × 0.0015 = 15 W per cell — that\'s 420 W across a 28-cell pack. This heat must be managed by the thermal system. Higher DCIR cells run hotter for the same current, accelerating degradation.'
+    },
+    {
+        id: 86, topic: 'HV Dist', elo: 1020,
+        question: 'A wire is rated for 40 A continuous. A 50 A fuse is installed to protect it. Is this setup safe?',
+        choices: [
+            'Yes — fuses always have a safety margin, so a 50 A fuse adequately protects a 40 A wire',
+            'No — the fuse must be rated at or below the wire\'s ampacity; a 50 A fuse allows currents that overheat the wire before the fuse blows',
+            'Yes — the fuse rating only needs to match the load current, not the wire rating',
+            'No — fuses should always be rated at 200% of wire ampacity to handle inrush currents'
+        ],
+        answer: 1,
+        explanation: 'The fuse protects the wire, not the load. If the fuse rating exceeds the wire\'s ampacity, a fault can draw 50 A through a 40 A wire — the wire overheats and potentially starts a fire before the fuse opens. Fuses must always be rated at or below the wire ampacity. If a higher fuse is needed for the load, a larger gauge wire must be used.'
+    },
+    {
+        id: 87, topic: 'Powertrain', elo: 1050,
+        question: 'A vehicle accelerates at full power from rest. As it speeds up, the motor torque decreases even though the motor controller is still commanding maximum power. Why?',
+        choices: [
+            'The battery voltage drops at high current, reducing available motor torque',
+            'At constant power, torque must decrease as speed increases because P = T × ω',
+            'The motor controller reduces torque above a threshold speed to protect the winding insulation',
+            'Gear friction increases at high RPM, absorbing more torque before it reaches the wheels'
+        ],
+        answer: 1,
+        explanation: 'P = T × ω. If power is held constant and ω (speed) increases, T (torque) must decrease proportionally. This is the constant-power region on a torque-speed curve. EVs operate in this region above base speed — peak torque is available from 0 RPM up to base speed, then torque tapers inversely with speed to hold power constant. It\'s a fundamental consequence of the physics, not a protection strategy.'
+    },
+    {
+        id: 88, topic: 'Battery', elo: 1050,
+        question: 'Two packs each store 1.36 kWh. Pack A is 28s1p (104 V, 13 Ah). Pack B is 14s2p (52 V, 26 Ah). At the same load power, which pack delivers higher current?',
+        choices: [
+            'Pack A delivers higher current because it has fewer parallel cells',
+            'Pack B delivers higher current because its lower voltage requires more current for the same power',
+            'Both packs deliver the same current because they have equal energy',
+            'Pack A delivers higher current because higher voltage packs always have higher current capacity'
+        ],
+        answer: 1,
+        explanation: 'P = V × I, so I = P / V. At the same power, lower voltage requires proportionally more current. Pack B at 52 V needs twice the current of Pack A at 104 V to deliver the same power. This has significant implications for wiring gauge, connector ratings, and I²R losses — which is why higher voltage packs are preferred for high-power applications: the same power at higher voltage means lower current and less resistive loss.'
+    },
+    {
+        id: 89, topic: 'Powertrain', elo: 1100,
+        question: 'A PMSM motor is spinning at its base speed. The driver commands more speed. Without field weakening, why can the inverter not simply increase motor speed further?',
+        choices: [
+            'The motor windings overheat above base speed regardless of control strategy',
+            'At base speed the back-EMF equals the available bus voltage — there is no voltage headroom to drive more current and accelerate',
+            'The motor\'s rotor magnets demagnetize above base speed due to centrifugal force',
+            'The inverter switching frequency cannot exceed the electrical frequency at base speed'
+        ],
+        answer: 1,
+        explanation: 'A PMSM generates back-EMF proportional to speed: V_bemf = Kv × ω. At base speed, V_bemf = V_bus. The inverter can no longer push current into the motor because there is no voltage difference to drive it — the motor and inverter are at the same voltage. Field weakening (negative d-axis current) reduces effective flux, lowering back-EMF and restoring voltage headroom, allowing higher speed at the cost of reduced torque.'
+    },
+    {
+        id: 90, topic: 'Battery', elo: 1100,
+        question: 'A pack is stored at 100% SoC for three months. Why is this worse for long-term health than storing at 50% SoC?',
+        choices: [
+            'At full charge the BMS draws more current for balancing, accelerating electrode wear',
+            'High SoC means high cell voltage, which accelerates electrolyte oxidation at the cathode and SEI growth — both thermally activated degradation mechanisms',
+            'A full pack is heavier, so gravity compresses the cells and damages the electrode stack over time',
+            'At 100% SoC the cell voltage exceeds the electrolyte stability window, causing continuous decomposition'
+        ],
+        answer: 1,
+        explanation: 'Cell degradation reactions are thermally and electrochemically driven. At high SoC, cell voltage is high — the cathode is in a strongly oxidizing state that reacts more aggressively with the electrolyte. The SEI on the anode also grows faster at high SoC. Both are Arrhenius-type processes that accelerate exponentially with temperature and are amplified at high SoC. Storage at 40–50% SoC minimizes both, which is why EV manufacturers recommend not storing at full charge for extended periods.'
+    },
+    {
+        id: 91, topic: 'Calculations', elo: 1150,
+        question: 'A 104 V pack powers a motor drawing 180 A. The total HV wiring resistance is 8 mΩ. What voltage actually appears at the motor controller terminals?',
+        choices: [
+            '104 V — wiring resistance causes no voltage drop at DC',
+            '102.56 V — the wiring drops I × R = 180 × 0.008 = 1.44 V',
+            '100.16 V — the wiring drops I² × R = 180² × 0.008',
+            '96 V — wiring resistance drops 8% of pack voltage at this current'
+        ],
+        answer: 1,
+        explanation: 'V_load = V_pack − I × R_wiring = 104 − (180 × 0.008) = 104 − 1.44 = 102.56 V. The power wasted in the wiring is P = I² × R = 180² × 0.008 = 259 W — a continuous loss that heats the cables. Minimizing wiring resistance through larger conductor cross-section and quality connections is essential in high-current EV drivetrains.'
+    },
+    {
+        id: 92, topic: 'Powertrain', elo: 1150,
+        question: 'An EV motor produces 30 kW at the shaft. The gearbox is 97% efficient, and the differential is 98% efficient. How much power reaches the wheels?',
+        choices: [
+            '30 kW — efficiency losses in gearing are negligible at these values',
+            '28.55 kW — total drivetrain efficiency is 0.97 × 0.98 = 95.1%',
+            '27.9 kW — each component subtracts its loss independently from 30 kW',
+            '29.1 kW — only the less efficient component applies its loss'
+        ],
+        answer: 1,
+        explanation: 'Total drivetrain efficiency = η_gearbox × η_differential = 0.97 × 0.98 = 0.9506. Power at wheels = 30 kW × 0.9506 = 28.52 kW ≈ 28.55 kW. Component efficiencies multiply — they do not add or subtract independently. Each stage\'s losses reduce the power entering the next stage. A chain of several 95–98% efficient components can reduce total efficiency to 85–90%, which has significant impact on vehicle range and thermal management.'
+    },
+    {
+        id: 93, topic: 'Battery', elo: 1200,
+        question: 'During fast charging, a cell\'s temperature rises significantly even though the charger is operating within the rated current. What is the most direct cause?',
+        choices: [
+            'Fast charging activates a chemical reaction in the cathode that releases heat as a byproduct',
+            'Higher charge current increases I²R heating in the cell\'s internal resistance, and the charge rate may also promote SEI growth generating exothermic side reactions',
+            'The BMS intentionally heats the cell during fast charging to improve lithium intercalation kinetics',
+            'AC ripple current from the charger causes dielectric heating in the separator'
+        ],
+        answer: 1,
+        explanation: 'The dominant thermal source during fast charging is I²R heating: P = I² × R_internal. Doubling the charge current quadruples the heat generated inside the cell. At high C-rate, additional heat comes from overpotential losses at the electrode-electrolyte interface (charge transfer polarization) and, in some conditions, minor exothermic side reactions. The cell temperature must be managed to prevent accelerated degradation, lithium plating, or thermal runaway.'
+    },
+    {
+        id: 94, topic: 'Powertrain', elo: 1250,
+        question: 'Two motors have the same peak power rating but different Kv values: Motor A has Kv = 50 RPM/V and Motor B has Kv = 200 RPM/V. Both are driven from the same 100 V bus. Which statement correctly describes their behavior?',
+        choices: [
+            'Motor A has higher peak RPM because higher Kv means more speed per volt',
+            'Motor B has higher no-load speed but lower torque per amp than Motor A at the same bus voltage',
+            'Both motors produce the same torque per amp because they have the same power rating',
+            'Motor A runs hotter than Motor B because lower Kv means higher winding resistance'
+        ],
+        answer: 1,
+        explanation: 'Kv and Kt are inversely related: Kt = 60/(2π × Kv). Motor A (Kv=50): Kt ≈ 0.191 Nm/A — high torque per amp. Motor B (Kv=200): Kt ≈ 0.0477 Nm/A — low torque per amp. At the same bus voltage, Motor B reaches 4× the no-load RPM but needs 4× the current to produce the same torque. Same power rating doesn\'t mean same torque per amp — Kv sets the speed-torque character of the motor and must be matched to the application\'s gear ratio and speed requirements.'
+    },
+    {
+        id: 95, topic: 'Battery', elo: 1250,
+        question: 'A pack\'s capacity is measured as 12.8 Ah at a 1C discharge rate but only 11.5 Ah at a 3C discharge rate. What fundamental mechanism causes this apparent capacity reduction at higher rate?',
+        choices: [
+            'The BMS terminates discharge earlier at high rate to prevent overheating, not a true capacity reduction',
+            'Increased I²R heating at 3C raises cell temperature, which paradoxically accelerates self-discharge during the test',
+            'Higher current increases voltage sag, causing the pack to reach its minimum cutoff voltage before all lithium has been extracted from the electrodes',
+            'At 3C, lithium ions cannot intercalate fast enough, so they precipitate as a solid on the separator instead of entering the electrode'
+        ],
+        answer: 2,
+        explanation: 'At higher discharge rates, the voltage sag (V = OCV − I×R_internal) is larger. The pack hits the low-voltage cutoff earlier — not because the lithium is gone, but because the resistive drop pulls the terminal voltage to the cutoff limit while usable charge remains in the electrodes. If you let the pack rest after a 3C discharge, the terminal voltage recovers — confirming charge was stranded, not consumed. This rate-dependent apparent capacity is a key reason C-rate must be specified when quoting cell capacity.'
+    },
+    {
+        id: 96, topic: 'HV Dist', elo: 1300,
+        question: 'An engineer wants to reduce HV wiring losses by a factor of four without changing wire length or material. What change accomplishes this?',
+        choices: [
+            'Double the wire cross-sectional area — this halves resistance and halves I²R loss',
+            'Quadruple the wire cross-sectional area — this quarters resistance and quarters I²R loss',
+            'Double the pack voltage and halve the current — same power, I²R loss quarters because loss scales with I²',
+            'Both B and C independently achieve a 4× loss reduction through different physical mechanisms'
+        ],
+        answer: 3,
+        explanation: 'Two independent paths to 4× loss reduction: (1) R = ρL/A — quadrupling A quarters R, and since I is unchanged, I²R loss quarters. (2) For fixed power and resistance, doubling voltage halves current and quarters I²R loss (loss ∝ I²). Both are valid engineering strategies. Option B is a hardware change (bigger wire); Option C is a system-level design choice (higher voltage bus). In practice, EV powertrains use both: large cables AND the highest practical bus voltage.'
+    },
+    {
+        id: 97, topic: 'Powertrain', elo: 1300,
+        question: 'A vehicle is coasting downhill with the motor back-driving the inverter. The battery is at 98% SoC. What happens to the recovered braking energy?',
+        choices: [
+            'It charges the battery normally — the BMS simply accepts the regenerated charge',
+            'The inverter must dissipate the energy as heat or redirect it to a brake resistor because a nearly-full battery cannot safely accept significant charge',
+            'The energy is stored in the DC bus capacitors indefinitely until the battery has room',
+            'Regenerative braking is disabled by the inverter at all times when the battery exceeds 90% SoC'
+        ],
+        answer: 1,
+        explanation: 'A battery near full charge has very little remaining capacity to absorb energy. Forcing charge into an already-full cell can push cell voltage above its maximum (4.2 V for NMC), causing electrolyte oxidation and potential thermal runaway. The BMS signals the inverter to limit or disable regeneration at high SoC. The mechanical brakes must handle the remaining deceleration force. Some systems use a brake chopper resistor to dump regenerated energy as heat rather than let bus voltage rise uncontrolled.'
+    },
+    {
+        id: 98, topic: 'HV Dist', elo: 1450,
+        question: 'An HV cable run is 3 meters one-way (6 m round trip total). The motor draws 200 A continuously. Compare 4 AWG copper (0.328 mΩ/m) vs 2 AWG copper (0.205 mΩ/m). How much additional power is wasted with 4 AWG?',
+        choices: [
+            'ΔP = 29.5 W — 4 AWG wastes about 30 W more than 2 AWG at this current',
+            'ΔP = 7.4 W — 4 AWG wastes only slightly more because the AWG difference is small',
+            'ΔP = 118 W — 4 AWG wastes four times as much as 2 AWG because resistance is four times higher',
+            'ΔP = 0 W — both gauges carry 200 A, so power loss is determined only by current, not gauge'
+        ],
+        answer: 0,
+        explanation: 'R_4AWG = 0.328 mΩ/m × 6 m = 1.968 mΩ. R_2AWG = 0.205 × 6 = 1.230 mΩ. ΔR = 0.738 mΩ. ΔP = I² × ΔR = 200² × 0.000738 = 40,000 × 0.000738 = 29.5 W. This 30 W of extra heat must be rejected by the cable — over 2000 operating hours, that\'s 59 kWh of wasted energy. It also validates using the larger 2 AWG wire: the marginal resistance reduction is worth the added weight in a continuous high-current application.'
+    },
+    {
+        id: 99, topic: 'Calculations', elo: 1350,
+        question: 'An FSAE car completes an autocross event in 60 seconds using an average of 25 kW. The pack is 104 V nominal. What average current does the pack deliver, and how many Ah are consumed?',
+        choices: [
+            'Average current = 240 A; Ah consumed = 4.0 Ah',
+            'Average current = 240 A; Ah consumed = 0.42 Ah',
+            'Average current = 2600 A; Ah consumed = 43 Ah',
+            'Average current = 24 A; Ah consumed = 0.4 Ah'
+        ],
+        answer: 0,
+        explanation: 'I_avg = P / V = 25,000 / 104 = 240 A average. Energy used = 25 kW × (60/3600) h = 0.417 kWh. Charge consumed: Ah = I × t = 240 A × (60/3600) h = 240 × 0.0167 = 4.0 Ah. A 13 Ah pack has plenty of capacity for a single 60-second autocross run, but 22 km endurance at similar intensity would consume much more.'
+    },
+    {
+        id: 100, topic: 'Powertrain', elo: 1400,
+        question: 'An engineer argues that doubling the motor\'s Kt (torque constant) by rewinding with more turns is always better because it produces more torque per amp. What is the flaw in this reasoning?',
+        choices: [
+            'More turns increase winding resistance proportionally, so I²R losses increase for the same torque output',
+            'Doubling Kt halves Kv, so the motor reaches half the speed at the same bus voltage, requiring a higher gear ratio to achieve the same wheel speed',
+            'More turns in the winding increase the motor\'s inductance, which increases switching losses in the inverter',
+            'All of the above are real tradeoffs — more turns increases torque per amp but reduces top speed, increases winding resistance, and increases inductance'
+        ],
+        answer: 3,
+        explanation: 'Rewinding with more turns is not a free lunch. (A) Resistance: more turns of the same wire gauge means longer wire and higher R — winding copper losses (I²R) increase. (B) Speed: Kt ∝ 1/Kv — doubling Kt halves Kv and halves no-load speed for the same voltage. You need a higher gear ratio to compensate, adding mechanical losses. (C) Inductance scales with turns², so doubling turns quadruples inductance, increasing current ripple and switching losses. Good motor design balances all these tradeoffs simultaneously for the target operating point.'
+    },
+    {
+        id: 101, topic: 'Battery', elo: 1400,
+        question: 'A pack engineer notices that two cells in a 28s string consistently show lower voltage than the others at the same SoC throughout the entire discharge curve — not just at the end. What does this most likely indicate?',
+        choices: [
+            'Those cells have higher DCIR than the rest — their voltage sag is larger at any given current',
+            'Those cells are at a lower SoC than the others, indicating a balancing failure or higher self-discharge rate',
+            'Those cells have lower capacity than the rest and will reach cutoff voltage first',
+            'The BMS voltage sense wires for those cells have higher resistance, causing a false low reading'
+        ],
+        answer: 0,
+        explanation: 'The key detail is "throughout the entire discharge curve" — not just at the end. Lower capacity would show up as earlier cutoff, not a consistent voltage offset across all SoC. Different SoC would show an offset that changes shape. A consistent voltage offset at all SoC levels at the same current is the signature of higher DCIR: V = OCV − I×R, and if R is higher, V is lower at every point by the same amount (I×ΔR). This is diagnosable by checking under load vs open circuit — the gap closes at zero current.'
+    },
+    {
+        id: 102, topic: 'Powertrain', elo: 1500,
+        question: 'An electric motor is operating in field weakening. Compared to operating at base speed with the same shaft power output, what is true about the phase current and torque?',
+        choices: [
+            'Phase current is lower in field weakening because the motor is more efficient at high speed',
+            'Phase current is higher in field weakening because d-axis current is added on top of the torque-producing q-axis current to achieve the same shaft power at higher speed',
+            'Torque is higher in field weakening because the motor runs at a more favorable operating point',
+            'Phase current and torque are both identical to the base speed condition at the same shaft power'
+        ],
+        answer: 1,
+        explanation: 'In field weakening, the inverter injects negative d-axis current (Id) to oppose the rotor flux and allow higher RPM. The total phase current magnitude is √(Id² + Iq²). For the same output power at higher speed, torque is lower (P = T×ω), so Iq is lower — but the added Id means total phase current can be equal to or higher than at base speed. The motor must be rated for this combined current. This is why field weakening operation is thermally demanding despite lower torque — the copper losses depend on total current, not just the torque-producing component.'
+    },
+    {
+        id: 103, topic: 'Battery', elo: 1500,
+        question: 'A battery engineer tests two packs of the same chemistry and energy capacity. Pack A is 28s1p (104 V, 13 Ah). Pack B is 56s1p (208 V, 6.5 Ah). At identical delivered power, which pack has lower wiring I²R loss, and why?',
+        choices: [
+            'Pack A has lower wiring loss because higher current through more cells generates more conduction paths',
+            'Pack B has lower wiring loss because delivering the same power at twice the voltage requires half the current, and I²R loss scales with current squared',
+            'Both packs have identical wiring losses because they store and deliver the same total energy',
+            'Pack A has lower wiring loss because its lower voltage means lower electric field stress on the insulation, reducing leakage current'
+        ],
+        answer: 1,
+        explanation: 'P_loss = I²R. Pack B operates at 208 V; for the same delivered power P = V×I, Pack B needs I = P/208 while Pack A needs I = P/104 — exactly half the current. Since loss scales with I², Pack B has (1/2)² = 1/4 the wiring I²R loss for identical wiring. This is the fundamental argument for higher voltage EV architectures (400 V vs 800 V): same power, half the current, quarter the resistive losses, or alternatively the same losses with much thinner and lighter wiring.'
+    },
+    {
+        id: 104, topic: 'Powertrain', elo: 1550,
+        question: 'A motor spec sheet shows a peak torque of 100 Nm and continuous torque of 40 Nm. The engineer designs the drivetrain assuming 80 Nm continuous. What failure mode should they anticipate?',
+        choices: [
+            'The motor will produce too little torque because 80 Nm exceeds the 40 Nm continuous rating and will trigger a current limit',
+            'The motor windings will overheat because the thermal system is only designed to reject the heat generated at 40 Nm continuous, and 80 Nm requires 4× the heat generation',
+            'The rotor magnets will demagnetize because sustained torque above continuous rating causes the magnets to exceed their Curie temperature',
+            'The gearbox will fail because it was sized for 40 Nm input torque and 80 Nm doubles gear tooth stress'
+        ],
+        answer: 1,
+        explanation: 'Continuous torque ratings are set by thermal limits — the motor\'s cooling system (ambient air, housing, potting) can reject heat generated at exactly this torque level continuously. Torque ∝ current, so 80 Nm requires 2× the current of 40 Nm. Heat ∝ I²R, so 4× the heat generation. The cooling system cannot keep up. Over time, winding temperature rises above the insulation class limit, degrading the insulation, eventually causing inter-turn short circuits or winding failure. Peak torque is achievable only briefly before the thermal limit is reached.'
+    },
+    {
+        id: 105, topic: 'Battery', elo: 1600,
+        question: 'In a series string of cells, one cell has 20% higher internal resistance than the rest. During a high-current discharge pulse, this cell\'s temperature rises faster than its neighbors. Over many cycles, what is the most likely long-term failure mechanism?',
+        choices: [
+            'The hotter cell self-discharges faster, gradually falling behind in SoC until the BMS can no longer balance it',
+            'The hotter cell experiences faster calendar aging and SEI growth due to elevated temperature, further increasing its resistance, creating a self-reinforcing degradation cycle',
+            'The hotter cell charges faster than its neighbors because elevated temperature improves lithium intercalation kinetics, causing it to become overcharged during balancing',
+            'The hotter cell will eventually reach the same resistance as its neighbors because high-temperature operation anneals the electrode structure'
+        ],
+        answer: 1,
+        explanation: 'This is a self-reinforcing (positive feedback) degradation loop. Higher DCIR → more I²R heat at same current → higher temperature → faster SEI growth (Arrhenius kinetics, roughly doubling every 10°C) → higher DCIR. Each cycle, this cell ages faster than its neighbors. It becomes the weakest cell in the string — limiting pack capacity — while simultaneously getting hotter, which accelerates the divergence further. This is why tight DCIR matching at pack assembly is important: outliers become progressively worse over the pack\'s life.'
+    },
+    {
+        id: 106, topic: 'Powertrain', elo: 1650,
+        question: 'An engineer is choosing between a single motor driving both rear wheels through a differential versus two independent motors (one per rear wheel) with torque vectoring. The two-motor system is heavier. Under what condition does the weight penalty become worthwhile?',
+        choices: [
+            'The two-motor system is never worth the weight penalty because differential losses are negligible',
+            'The two-motor system is worthwhile on tight technical tracks where independent wheel torque control can direct torque to the outside wheel in corners, generating a yaw moment that reduces understeer and improves lap time beyond what the weight penalty costs',
+            'The two-motor system is only worthwhile for straight-line acceleration events where both motors can apply full torque simultaneously',
+            'The two-motor system is worthwhile whenever the vehicle exceeds 80 kW total because a single motor cannot produce sufficient torque'
+        ],
+        answer: 1,
+        explanation: 'The value proposition of torque vectoring is cornering performance. By applying more torque to the outside rear wheel and less (or negative, via regeneration) to the inside, the drivetrain creates a yaw moment that turns the car into the corner, reducing understeer and allowing higher corner entry speed. This effect is most valuable on slow, tight, technical tracks with many corners — exactly the FSAE autocross profile. On high-speed tracks with fewer corners, the weight penalty hurts more than the torque vectoring helps. The cost-benefit is track and vehicle specific.'
+    },
 ];
+
 
 // ── Config ────────────────────────────────────────────────────────────────────
 const STORAGE_KEY   = 'ptf_state';
