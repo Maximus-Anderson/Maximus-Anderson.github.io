@@ -366,18 +366,6 @@ const QUESTION_BANK = [
         explanation: 'Cells in a series string have slightly different capacities and self-discharge rates. Over cycles, SoC diverges. The weakest cell hits cutoff first, leaving stranded capacity in the others. Balancing — passive (bleed excess energy) or active (transfer charge) — keeps all cells at the same SoC so the full string capacity is usable.'
     },
     {
-        id: 33, topic: 'Battery', elo: 950,
-        question: 'What is "state of health" (SoH) and how does it differ from SoC?',
-        choices: [
-            'SoH and SoC measure the same thing — how full the battery is — at different time horizons',
-            'SoH = remaining capacity vs. original rated capacity; SoC = remaining charge vs. current capacity',
-            'SoH is derived from open-circuit voltage measurements; SoC is derived from current integration',
-            'SoH describes the health of the BMS hardware; SoC describes the state of the individual cells'
-        ],
-        answer: 1,
-        explanation: 'SoC = how full the battery is right now (0–100% of current capacity). SoH = how degraded the battery is from new (100% = new; 80% SoH means only 80% of original capacity remains). A cell at 80% SoH and 50% SoC has 40% of its original energy available.'
-    },
-    {
         id: 34, topic: 'Battery', elo: 1000,
         question: 'What is a Ragone plot and what tradeoff does it illustrate?',
         choices: [
@@ -645,19 +633,6 @@ const QUESTION_BANK = [
         answer: 1,
         explanation: 'When a single simulation (FEA, CFD, lap-time sim) takes minutes to hours, running thousands of evaluations is impractical. A surrogate (Gaussian process, radial basis function, neural net) is trained on a designed experiment of 50–200 high-fidelity evaluations, then the optimizer queries the surrogate. You explore broadly, then validate promising designs with the real simulation.'
     },
-    {
-        id: 56, topic: 'Optimization', elo: 1250,
-        question: 'What optimization architecture is appropriate when simulation time is non-negligible, the design space is discrete, but follows a "noisy funnel" geometry?',
-        choices: [
-            'Gradient descent with finite-difference approximations — noise is handled by averaging repeated evaluations',
-            'Surrogate optimization with a global method like basin hopping, plus a local derivative-free refiner like COBYLA',
-            'Exhaustive grid search over the full discrete space — the only truly noise-robust option',
-            'Single-start COBYLA — derivative-free and handles both discrete variables and noisy objectives natively'
-        ],
-        answer: 1,
-        explanation: 'A "noisy funnel" has a broad global trend toward a minimum with superimposed noise/local structure. Surrogate optimization trains a model on sampled evaluations, letting the global optimizer (basin hopping, differential evolution) find the funnel without getting trapped in noise, while the local optimizer refines the solution within the basin.'
-    },
-
     // ── HV Distribution ───────────────────────────────────────────────────────
     {
         id: 57, topic: 'HV Dist', elo: 900,
@@ -745,19 +720,6 @@ const QUESTION_BANK = [
         answer: 1,
         explanation: 'Self-discharge rates for Li-ion at room temperature: typically 1–5% per month for good cells, up to 15–30%/month for cells with defects. (1) Electronic leakage: parasitic electron current through separator/SEI — very slow in a good cell (GΩ electronic resistance). (2) Chemical self-discharge: direct chemical reactions between electrode and electrolyte at the particle surface. An abnormally high self-discharge rate in one cell of a series string causes SoC divergence, eventually requiring balancing to compensate.'
     },
-    {
-        id: 64, topic: 'Battery', elo: 870,
-        question: 'SoC and SoH — which should a battery engineer working on a new pack design care about MORE and why?',
-        choices: [
-            'SoC tracks degradation; SoH tracks current charge level — SoH matters more for real-time energy management',
-            'SoC = remaining charge vs. current capacity; SoH = remaining capacity vs. rated capacity. Pack designers size for SoH=80% at end-of-life, not SoH=100% when new.',
-            'Both SoC (state of charge) and SoH (state of health) are the same metric — "state of health" is the preferred industry term for state of charge in some manufacturer specs',
-            'SoC matters more for design because it directly determines pack open-circuit voltage at every operating point, SoH is only used to determine if cells have been damaged'
-        ],
-        answer: 1,
-        explanation: 'SoC answers "how full is it right now?" — changes every minute during use. SoH answers "how worn out is it?" — degrades slowly over months and years, starting at 100% and typically ending pack life around 70–80%. For a pack designer, SoH is the critical concern: you size the pack for the SoH=80% condition, not the brand-new SoH=100% condition — otherwise the pack fails its mission requirements at end of life.'
-    },
-
     // ── Safety — HV Handling ──────────────────────────────────────────────────
     {
         id: 65, topic: 'Safety', elo: 800,
