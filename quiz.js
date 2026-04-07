@@ -784,7 +784,6 @@ const QUESTION_BANK = [
         explanation: 'R = ρL/A. ρ = resistivity (material constant; copper: 1.72×10⁻⁸ Ω·m). L = length (proportional). A = cross-sectional area (inversely proportional). AWG scale is inverse: AWG 0 (thick, ~8.3mm diameter) has very low resistance; AWG 30 (thin, ~0.25mm) has very high resistance. Every 6 AWG increase approximately halves the cross-sectional area and doubles the resistance per unit length.'
     },
 
-    // ── CSV Extension ─────────────────────────────────────────────────────────
     {
         id: 70, topic: 'Battery', elo: 800,
         question: 'A lithium cell is fully charged when its voltage reaches approximately 4.2 V. What voltage does it typically reach when fully discharged?',

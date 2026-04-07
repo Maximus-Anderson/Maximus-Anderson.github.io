@@ -1,4 +1,3 @@
-// Page Navigation
 document.addEventListener('DOMContentLoaded', function() {
     console.log('DOM loaded, initializing portfolio');
 
@@ -10,7 +9,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const logo = document.querySelector('.logo');
     const nav = document.querySelector('.navigation');
 
-    // Morph nav from banner → pill exactly when the car starts moving (SCROLL_CAM_START = 0.18)
+    // Morph nav from banner - pill exactly when the car starts moving (SCROLL_CAM_START = 0.18)
     function getCarMorphThreshold() {
         const driver = document.querySelector('.car-scroll-driver');
         if (!driver) return 80;
@@ -24,7 +23,6 @@ document.addEventListener('DOMContentLoaded', function() {
         nav.classList.toggle('scrolled', window.scrollY > morphThreshold);
     }, { passive: true });
     
-    // Navigation click handler for top nav
     navLinks.forEach(link => {
         link.addEventListener('click', function(e) {
             e.preventDefault();
@@ -34,7 +32,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
     
-    // Project card click handler
     projectCards.forEach(card => {
         card.addEventListener('click', function(e) {
             if (!e.target.closest('.comparison-slider') && !e.target.closest('.comparison-wrapper')) {
@@ -48,7 +45,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // Project banner click handler (Three.js scroll layout)
     projectBanners.forEach(banner => {
         banner.addEventListener('click', function() {
             const targetPage = this.getAttribute('data-page');
@@ -59,7 +55,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
     
-    // Back button click handler
     backButtons.forEach(button => {
         button.addEventListener('click', function(e) {
             e.preventDefault();
@@ -69,12 +64,10 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
     
-    // Set initial active nav link
     document.querySelectorAll('.nav-links a').forEach(a => {
         a.classList.toggle('active-link', a.getAttribute('data-page') === 'projects');
     });
 
-    // Logo click - go to projects
     logo.addEventListener('click', function() {
         console.log('Logo clicked, switching to projects');
         switchPage('projects');
@@ -102,7 +95,6 @@ document.addEventListener('DOMContentLoaded', function() {
             currentPage.classList.remove('active');
             targetPage.classList.add('active');
 
-            // Update active nav link
             document.querySelectorAll('.nav-links a').forEach(a => {
                 a.classList.toggle('active-link', a.getAttribute('data-page') === targetPageId);
             });
@@ -126,7 +118,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 }, 10 + index * 100);
             });
             
-            // Hide timeline popup
             const popup = targetPage.querySelector('#timeline-popup');
             if (popup) {
                 popup.classList.remove('active');
@@ -137,7 +128,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }, 500);
     }
     
-    // Timeline Clicking
     const timelines = document.querySelectorAll('.timeline');
     console.log('Found', timelines.length, 'timelines');
     
@@ -186,7 +176,6 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         });
         
-        // Close button handler
         if (closeButton) {
             closeButton.addEventListener('click', (e) => {
                 e.stopPropagation();

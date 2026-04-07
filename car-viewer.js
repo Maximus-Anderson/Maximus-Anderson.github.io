@@ -6,14 +6,6 @@ import { DRACOLoader }     from 'three/addons/loaders/DRACOLoader.js';
 import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
 
 // ─── CAMERA KEYFRAMES ────────────────────────────────────────────────────────
-// Tweak these values after the model loads to frame the car correctly.
-// Axes: X = right,  Y = up,  Z = toward the viewer
-// The car probably faces -Z (SolidWorks front view), front wing near -Z extremity.
-
-// Both keyframes are viewport-aware. Vectors are mutated in place so all
-// downstream references (lerp vectors, camera.position) stay valid.
-// updateCamKeyframes() is called before those references are initialised,
-// so they copy the correct values at load time.
 const CAM_INTRO  = { pos: new THREE.Vector3(), target: new THREE.Vector3() };
 const CAM_BROWSE = { pos: new THREE.Vector3(), target: new THREE.Vector3() };
 
@@ -21,14 +13,11 @@ const mobileQuery = window.matchMedia('(max-width: 600px)');
 
 function updateCamKeyframes() {
     if (mobileQuery.matches) {
-        // Mobile intro: pulled back so the front wing appears smaller
         CAM_INTRO.pos.set(    0.0,  9.0,  6.0);
         CAM_INTRO.target.set( 0.0,  -1.4,  3.28);
-        // Mobile browse: side view, camera further out for a smaller car
         CAM_BROWSE.pos.set(   21.5,  1.0,  0.0);
         CAM_BROWSE.target.set( 0.0, -3.5,  0.0);
     } else {
-        // Desktop
         CAM_INTRO.pos.set(    0.00,  2.64,  2.17);
         CAM_INTRO.target.set( 0.00,  1.5,  2.08);
         CAM_BROWSE.pos.set(   6.0,   4.0,   9.0);
@@ -60,12 +49,11 @@ renderer.outputColorSpace   = THREE.SRGBColorSpace;
 
 // ─── SCENE & CAMERA ──────────────────────────────────────────────────────────
 const scene  = new THREE.Scene();
-// No background — site's #000 shows through the alpha canvas.
 
 const camera = new THREE.PerspectiveCamera(40, window.innerWidth / window.innerHeight, 0.01, 200);
 camera.position.copy(CAM_INTRO.pos);
 
-// ─── ENVIRONMENT (soft studio light for carbon) ───────────────────────────────
+// ─── ENVIRONMENT ─────────────────────────────────────────────────────────────
 const pmrem   = new THREE.PMREMGenerator(renderer);
 const roomEnv = new RoomEnvironment(renderer);
 scene.environment = pmrem.fromScene(roomEnv, 0.04).texture;
@@ -88,7 +76,6 @@ fillLight.position.set(0, -3, 3);
 scene.add(fillLight);
 
 // ─── CARBON FIBRE MATERIAL ───────────────────────────────────────────────────
-// All meshes receive this material. Adjust color/roughness to taste.
 const carbonMat = new THREE.MeshStandardMaterial({
     color:           0x0d0d0d,   // near-black
     roughness:       0.36,        // some sheen
@@ -117,7 +104,6 @@ function loadModel() {
         (gltf) => {
             carModel = gltf.scene;
 
-            // Apply carbon material to every mesh
             carModel.traverse((child) => {
                 if (child.isMesh) {
                     child.material      = carbonMat;
@@ -173,7 +159,6 @@ function onScroll() {
     const t    = getScrollFraction();
     const camT = easeInOut(clamp01(t, SCROLL_CAM_START, SCROLL_CAM_END));
 
-    // Drive camera keyframes
     targetCamPos.lerpVectors(CAM_INTRO.pos,    CAM_BROWSE.pos,    camT);
     targetCamLook.lerpVectors(CAM_INTRO.target, CAM_BROWSE.target, camT);
 
@@ -182,7 +167,6 @@ function onScroll() {
         heroTextEl.style.opacity = String(Math.max(0, 1 - camT * 2.2));
     }
 
-    // Banners fade in
     if (bannersPanelEl) {
         const bannerT = easeInOut(clamp01(t, SCROLL_BANNERS_SHOW, SCROLL_BANNERS_FULL));
         bannersPanelEl.style.opacity       = String(bannerT);
@@ -220,7 +204,7 @@ animate();
 
 // ─── PAGE VISIBILITY ─────────────────────────────────────────────────────────
 // Canvas lives outside .page divs (to avoid transform:fixed containment bug),
-// so we explicitly show/hide it and pause rendering when projects page is inactive.
+// show/hide it and pause rendering when projects page is inactive.
 function syncCanvasVisibility() {
     if (!projectsPageEl) return;
     const active = projectsPageEl.classList.contains('active');
@@ -244,7 +228,6 @@ function syncCanvasVisibility() {
     }
 }
 
-// Set initial visibility on load
 syncCanvasVisibility();
 
 if (projectsPageEl) {
@@ -260,9 +243,6 @@ window.addEventListener('resize', () => {
 });
 
 // ─── DEV CAMERA CONTROLS ─────────────────────────────────────────────────────
-// Use these in the browser to dial in CAM_INTRO / CAM_BROWSE values without
-// pushing code each time. Press L to log the current position to the console.
-//
 //  W/S   — zoom camera forward / back  (Z axis)
 //  A/D   — orbit camera left / right   (X axis)
 //  Q/E   — raise / lower camera        (Y axis)
@@ -307,7 +287,7 @@ window.addEventListener('resize', () => {
         }
 
         if (held.has('l') || held.has('L')) {
-            held.delete('l'); held.delete('L'); // fire once per press
+            held.delete('l'); held.delete('L');
             const p = lerpedCamPos;
             const t = devLook;
             console.log(

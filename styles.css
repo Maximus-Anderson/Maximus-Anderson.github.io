@@ -6,7 +6,7 @@
 }
 
 :root {
-    --primary-color: #ff5555; /* Brighter red for visibility */
+    --primary-color: #ff5555;
     --background-color: #000000;
     --text-color: #ffffff;
     --grid-width: 1100px;
@@ -558,7 +558,7 @@ body {
 }
 
 .timeline-description-content {
-    font-size: 1.6em; /* Kept for readability */
+    font-size: 1.6em;
     opacity: 1;
     word-wrap: break-word; /* Ensure long words break */
     overflow-wrap: break-word;
@@ -792,7 +792,7 @@ footer {
 .specs-title {
     font-size: 1.8em;
     font-weight: 400;
-    color: #ff4d4d; /* Warm red */
+    color: #ff4d4d;
     text-shadow: 0 0 5px rgba(255, 77, 77, 0.7), 0 0 10px rgba(255, 77, 77, 0.5);
     margin-bottom: 8px;
 }
@@ -819,7 +819,7 @@ footer {
 .background-title {
     font-size: 1.8em;
     font-weight: 400;
-    color: #ff4d4d; /* Warm red to match role-title */
+    color: #ff4d4d;
     text-shadow: 0 0 5px rgba(255, 77, 77, 0.7), 0 0 10px rgba(255, 77, 77, 0.5);
     margin-bottom: 10px;
     text-align: left;
@@ -852,7 +852,7 @@ footer {
 .additional-photos-title {
     font-size: 1.8em;
     font-weight: 400;
-    color: #ff4d4d; /* Warm red to match other titles */
+    color: #ff4d4d;
     text-shadow: 0 0 5px rgba(255, 77, 77, 0.7), 0 0 10px rgba(255, 77, 77, 0.5);
     margin-bottom: 20px;
     text-align: left;
@@ -1093,7 +1093,7 @@ footer {
     .role-container,
     .specs-container {
         flex: 0 0 auto;
-        max-width: 300px; /* Wider for both on smaller screens */
+        max-width: 300px;
     }
 
     .role-title,
@@ -1133,7 +1133,7 @@ footer {
 
     .timeline {
         height: auto;
-        max-height: 400px; /* Adjusted for smaller screens */
+        max-height: 400px;
         overflow-y: auto;
     }
 
@@ -1169,7 +1169,7 @@ footer {
     }
 
     .timeline-description-content {
-        font-size: 1.5em; /* Slightly smaller for smaller screens */
+        font-size: 1.5em;
     }
 
     .about-container {
@@ -1277,7 +1277,7 @@ footer {
 
     .timeline {
         height: auto;
-        max-height: 350px; /* Further adjusted for very small screens */
+        max-height: 350px;
         overflow-y: auto;
     }
 
@@ -1298,13 +1298,13 @@ footer {
     }
 
     .timeline-popup {
-        width: 260px; /* Further adjusted */
-        padding: calc(6px + 1vw); /* Smaller variable padding */
+        width: 260px;
+        padding: calc(6px + 1vw);
         margin-top: 70px;
     }
 
     .timeline-description-content {
-        font-size: 1.4em; /* Slightly smaller for very small screens */
+        font-size: 1.4em;
     }
 }
 
