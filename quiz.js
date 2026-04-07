@@ -751,8 +751,8 @@ const QUESTION_BANK = [
         choices: [
             'SoC tracks degradation; SoH tracks current charge level — SoH matters more for real-time energy management',
             'SoC = remaining charge vs. current capacity; SoH = remaining capacity vs. rated capacity. Pack designers size for SoH=80% at end-of-life, not SoH=100% when new.',
-            'They are the same metric — "state of health" is the preferred industry term for state of charge in some manufacturer specs',
-            'SoC matters more for design because it directly determines pack open-circuit voltage at every operating point'
+            'Both SoC (state of charge) and SoH (state of health) are the same metric — "state of health" is the preferred industry term for state of charge in some manufacturer specs',
+            'SoC matters more for design because it directly determines pack open-circuit voltage at every operating point, SoH is only used to determine if cells have been damaged'
         ],
         answer: 1,
         explanation: 'SoC answers "how full is it right now?" — changes every minute during use. SoH answers "how worn out is it?" — degrades slowly over months and years, starting at 100% and typically ending pack life around 70–80%. For a pack designer, SoH is the critical concern: you size the pack for the SoH=80% condition, not the brand-new SoH=100% condition — otherwise the pack fails its mission requirements at end of life.'
@@ -763,10 +763,10 @@ const QUESTION_BANK = [
         id: 65, topic: 'Safety', elo: 800,
         question: 'What is the "live-dead-live" test procedure and when should you use it before working on a high-voltage system?',
         choices: [
-            'Live-dead-live is a test where you apply voltage to a circuit to confirm the fuse has blown, then disconnect, then reapply to confirm it stays blown',
-            'Live-dead-live is a verification sequence: (1) LIVE — confirm your voltmeter works on a known live source. (2) DEAD — measure the circuit you intend to work on and confirm zero voltage. (3) LIVE — re-confirm the voltmeter still works. This verifies the circuit is truly dead, not just your meter.',
-            'Live-dead-live means you test the circuit while live, then kill power, then test live again to confirm the contactor opened correctly',
-            'It is a three-step crimping procedure for HV connectors'
+            'Apply voltage to confirm a fuse is blown, disconnect, then reapply to confirm no current leaks',
+            'Verify meter on a known live source → test the target circuit for zero voltage → re-verify the meter still works',
+            'Test circuit live, cut power, then test live again to confirm the contactor opened correctly',
+            'A three-step quality check procedure used when crimping HV connector pins'
         ],
         answer: 1,
         explanation: 'The core problem: a voltmeter can fail silently. If you measure a conductor and get 0V, either the conductor is dead or your meter is broken. Live-dead-live eliminates this ambiguity: step 1 proves the meter works. Step 2 checks the target conductor. Step 3 re-proves the meter is still working — ruling out a meter failure that occurred between steps 1 and 2. Always use this before touching any potentially energized HV conductor.'
@@ -775,10 +775,10 @@ const QUESTION_BANK = [
         id: 66, topic: 'Safety', elo: 800,
         question: 'Why should you use only one hand when working on or near energized high-voltage circuits?',
         choices: [
-            'One-hand technique is required by FSAE rules only for aesthetic reasons and has no safety basis',
-            'If both hands contact conductors at different potentials simultaneously, current flows hand-to-hand — directly across the chest through the heart. Even 50–150 mA crossing the heart can cause ventricular fibrillation and death.',
-            'One hand is used to hold the voltmeter; the other holds the probe — this is a coordination technique, not safety',
-            'Two hands introduce more capacitance to ground, increasing the risk of an arc flash'
+            'One-hand technique is in FSAE rules for ergonomic consistency and has no underlying safety purpose',
+            'Both hands touching different potentials creates a hand-to-hand path across the heart — 50–150 mA can cause fatal ventricular fibrillation',
+            'One hand holds the meter body; the other holds the probe — using both is a coordination aid, not a safety rule',
+            'Two hands double the body capacitance to chassis ground, increasing the likelihood of an arc flash'
         ],
         answer: 1,
         explanation: 'The lethality of electric shock is primarily determined by current magnitude and the path through the body. Hand-to-hand current path crosses the thoracic cavity, passing through or near the heart. The threshold for ventricular fibrillation is approximately 50–100 mA. At 100V pack voltage with 1 kΩ body resistance (wet hands), I = 100 mA — right at the threshold. Keeping one hand in your pocket removes the return path across the chest entirely.'
@@ -789,10 +789,10 @@ const QUESTION_BANK = [
         id: 67, topic: 'HV Dist', elo: 850,
         question: 'Does low-voltage control wiring in an EV (e.g. BMS sense wires, CAN bus) need overcurrent protection?',
         choices: [
-            'No — low-voltage wiring operates below 60V so it is inherently safe and does not need overcurrent protection',
-            'Yes — even low-voltage wiring needs overcurrent protection. Although the voltage is low, a short circuit can still drive enough current to ignite wire insulation. Practical method: an inline fuse or polyfuse sized just above the maximum normal current.',
-            'Low-voltage wiring only needs protection above 12V',
-            'Overcurrent protection is only needed on the HV side; the BMS monitors all LV sense voltages'
+            'No — low-voltage wiring operates below 60 V and is inherently safe, requiring no overcurrent protection',
+            'Yes — a short can still ignite LV wire insulation regardless of voltage; use an inline fuse rated just above maximum normal current',
+            'LV wiring only needs overcurrent protection once the operating voltage exceeds 12 V',
+            'Overcurrent protection only applies to the HV side; the BMS provides all needed protection for LV sense wiring'
         ],
         answer: 1,
         explanation: 'The hazard from overcurrent is not voltage but I²R heating in the conductor. A 24 AWG wire at 85 mΩ/m with 5 A flowing: P = 25 × 0.085 = 2.1 W/m — enough to heat wire above insulation temperature limits in seconds. In an enclosed pack, burning wire insulation is a fire risk regardless of voltage. Size fuses at 125–150% of max normal current.'
@@ -801,10 +801,10 @@ const QUESTION_BANK = [
         id: 68, topic: 'HV Dist', elo: 850,
         question: 'What are the two primary considerations that drive wire sizing in an EV, and what happens if the wire is too small?',
         choices: [
-            'Wire gauge is chosen purely by weight — smaller gauge (thinner wire) always minimizes mass',
-            'Wire sizing is driven by: (1) current capacity (ampacity) — the wire must carry max expected current without exceeding its insulation temperature rating; (2) voltage drop — resistance must be low enough that I×R loss doesn\'t impair the circuit. An undersized wire overheats and can start a fire.',
-            'Wire gauge is chosen to match the connector pin size only',
-            'Only HV wiring requires specific sizing; LV wiring can be any convenient gauge'
+            'Wire gauge is chosen purely for weight minimization — the thinnest wire that fits the connector is optimal',
+            'Wire sizing is governed by (1) ampacity — insulation temperature limit at max current — and (2) voltage drop — I×R loss must not impair the circuit',
+            'Wire gauge is selected purely to match the mechanical size of the termination connector pin',
+            'Only HV cables require formal sizing; LV wiring can be any gauge that fits the connector'
         ],
         answer: 1,
         explanation: 'Two constraints must both be satisfied: (1) Ampacity — maximum continuous current that keeps conductor temperature below insulation class limit (typically 105°C for XLPE, 150°C for silicone). Exceeding ampacity melts insulation → short → fire. (2) Voltage drop — I²R losses in wiring reduce available voltage at the load and waste power as heat. Fuses must be sized to protect the wire, not just the load.'
@@ -813,10 +813,10 @@ const QUESTION_BANK = [
         id: 69, topic: 'HV Dist', elo: 900,
         question: 'A higher AWG number means a thinner wire. Does a thinner wire have more or less resistance than a thicker wire of the same length and material?',
         choices: [
-            'Higher AWG (thinner) wire has less resistance because there is less material for current to flow through',
-            'Higher AWG (thinner) wire has MORE resistance. The governing equation is R = ρL/A — a thinner wire has smaller cross-sectional area A, so R increases. Doubling length doubles resistance.',
-            'Resistance depends only on material, not dimensions — all copper wires of the same length have the same resistance',
-            'Higher AWG wire has more resistance only at high frequency due to skin effect; at DC all gauges are equivalent'
+            'Higher AWG (thinner) wire has less resistance — less material means fewer electron collisions',
+            'Higher AWG (thinner) wire has MORE resistance; R = ρL/A means smaller cross-sectional area A directly increases R',
+            'Resistance depends only on conductor material — all copper wires of the same length have identical resistance',
+            'Higher AWG wire has more resistance only at high frequency due to skin effect; at DC all gauges are equivalent per unit length'
         ],
         answer: 1,
         explanation: 'R = ρL/A. ρ = resistivity (material constant; copper: 1.72×10⁻⁸ Ω·m). L = length (proportional). A = cross-sectional area (inversely proportional). AWG scale is inverse: AWG 0 (thick, ~8.3mm diameter) has very low resistance; AWG 30 (thin, ~0.25mm) has very high resistance. Every 6 AWG increase approximately halves the cross-sectional area and doubles the resistance per unit length.'
@@ -969,15 +969,19 @@ function loadQuestion() {
     const grid = document.getElementById('choices-grid');
     grid.innerHTML = '';
 
+    // Shuffle choices, remapping the correct answer index to match
+    const indices = [0, 1, 2, 3].sort(() => Math.random() - 0.5);
+    const shuffledCorrect = indices.indexOf(currentQuestion.answer);
+
     const labels = ['A', 'B', 'C', 'D'];
-    currentQuestion.choices.forEach((text, i) => {
+    indices.forEach((origIdx, displayIdx) => {
         const btn = document.createElement('button');
         btn.className = 'choice-btn';
         btn.innerHTML = `
-            <span class="choice-label">${labels[i]}</span>
-            <span class="choice-text">${text}</span>
+            <span class="choice-label">${labels[displayIdx]}</span>
+            <span class="choice-text">${currentQuestion.choices[origIdx]}</span>
         `;
-        btn.addEventListener('click', () => handleAnswer(i));
+        btn.addEventListener('click', () => handleAnswer(displayIdx, shuffledCorrect));
         grid.appendChild(btn);
     });
 
@@ -985,12 +989,12 @@ function loadQuestion() {
 }
 
 // ── Answer handling ───────────────────────────────────────────────────────────
-function handleAnswer(choiceIndex) {
-    const correct = choiceIndex === currentQuestion.answer;
+function handleAnswer(choiceIndex, correctIndex) {
+    const correct = choiceIndex === correctIndex;
     const buttons = document.querySelectorAll('.choice-btn');
 
     buttons.forEach(btn => (btn.disabled = true));
-    buttons[currentQuestion.answer].classList.add('correct');
+    buttons[correctIndex].classList.add('correct');
     if (!correct) buttons[choiceIndex].classList.add('incorrect');
 
     if (correct) {
