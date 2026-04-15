@@ -123,12 +123,8 @@ function loadModel() {
 
             modelBaseY = carModel.position.y;
             scene.add(carModel);
-
-            console.log('[car-viewer] Loaded — size:', size, '→ scale:', scale.toFixed(3));
-            console.log('[car-viewer] Adjust CAM_INTRO / CAM_BROWSE in car-viewer.js to reframe.');
         },
-
-        (xhr) => console.log(`[car-viewer] ${Math.round((xhr.loaded / xhr.total) * 100)}%`),
+        undefined,
         (err) => console.error('[car-viewer] Load error:', err)
     );
 }
