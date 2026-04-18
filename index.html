@@ -157,13 +157,13 @@
                     <div class="background-container">
                         <h3 class="background-title">What an Accumulator Is</h3>
                         <p class="background-description">
-                            The FSAE rules called the main high-voltage battery pack the accumulator — that terminology shifted to "tractive battery" in the 2026 ruleset, but for CR29 it was the accumulator. It isn't one big battery. It's a housing containing smaller sub-units called modules, wired in series to reach the total pack voltage. Each module is its own self-contained group of cells. For CR29, each module holds 28 pouch cells wired in series with one cell per parallel group — 28s1p. Five modules in the housing make up the full pack.
+                            The FSAE rules called the main high-voltage battery pack the accumulator. That terminology shifted to "tractive battery" in the 2026 ruleset, but for CR29 it was the accumulator. It isn't one big battery. It's a housing containing smaller sub-units called modules, wired in series to reach the total pack voltage. Each module is a self-contained group of cells. For CR29, each module holds 28 pouch cells wired in series with one cell per parallel group (28s1p). Five modules make up the full pack.
                         </p>
                         <p class="background-description">
-                            The cells are COSMX CA95B0D0HD pouch cells — 13 Ah, 3.73 V nominal, 180 Wh/kg, 1.5 mΩ DCIR. Pouch cells are "flexible" in the sense that they're encased in a polymer film rather than a metal can like a cylindrical cell, but they're still quite rigid in practice. The advantage over cylindrical cells is meaningful: the large, flat electrode area gives a lower DC internal resistance, which means less resistive heating and better power delivery under load. The gravimetric energy density is also favorable, which matters for a car that has to stay under weight.
+                            The cells are COSMX CA95B0D0HD pouch cells: 13 Ah, 3.73 V nominal, 180 Wh/kg, 1.5 mΩ DCIR. Pouch cells are encased in a polymer film rather than a metal can, but they're still rigid in practice. The large, flat electrode area gives lower internal resistance, which means less heating and better power delivery under load. Energy density is also better, which matters for a car that has to stay under weight.
                         </p>
                         <p class="background-description">
-                            They do need careful handling, though. The polymer casing isn't as mechanically protective as a steel can. A dent, a crease, or a puncture can bring the anode and cathode into direct contact inside the cell, creating an internal short circuit. From there, the cell enters thermal runaway: a self-sustaining exothermic reaction that produces heat, gas, and eventually fire. Lithium battery fires are particularly bad because they generate their own oxygen and produce toxic gases including hydrogen fluoride — not that I'd know anything about that... The tabs — aluminum on the cathode side, nickel-plated copper on the anode — are not especially fragile as materials go, but bending or creasing them at the root can cause delamination where the tab meets the internal electrode, which is a different kind of failure.
+                            They do need careful handling. The polymer casing isn't as protective as a steel can. A dent, crease, or puncture can bring the anode and cathode into contact, creating an internal short. From there, the cell enters thermal runaway: a self-sustaining reaction that produces heat, gas, and fire. Lithium battery fires are bad because they generate their own oxygen and produce toxic gases including hydrogen fluoride. Not that I'd know anything about that... The tabs (aluminum on the cathode side, nickel-plated copper on the anode) aren't fragile, but bending them at the root can cause delamination where the tab meets the electrode.
                         </p>
                     </div>
 
@@ -173,13 +173,13 @@
                             The housing is a welded aluminum enclosure that holds all five modules, the BMS, and the high-voltage wiring. The flat panels were water jet cut from aluminum sheet, which gave clean, accurate profiles without introducing heat distortion.
                         </p>
                         <p class="background-description">
-                            The original design called for the side walls to be bent to shape rather than cut as separate pieces and welded. Bending would have been faster and produced cleaner corners, but when the parts came back from the shop, the bend tolerances weren't tight enough to be usable. The walls didn't sit where they needed to sit. Rather than redesign around the bending process, the bent sections were cut off and the walls were welded on as individual flat pieces instead, both the exterior panels and the interior partition walls.
+                            The original design called for the side walls to be bent to shape rather than cut as separate pieces and welded. Bending would have been faster and produced cleaner corners, but the bend tolerances weren't tight enough to be usable. The walls didn't sit where they needed to sit. Rather than redesign around the bending process, the bent sections were cut off and the walls were welded on as flat pieces. Both the exterior panels and the interior partitions.
                         </p>
                         <p class="background-description">
-                            That decision created a new problem. The exterior walls are 3.2mm thick and welded fine. The interior partition walls are a different story — 2.3mm, the rules minimum. Welding a full continuous seam into 2.3mm aluminum puts far more heat into the part than it can absorb without moving. The walls warped. After welding, the interior cavity was tight enough in places that the modules wouldn't fit. The fix was a mallet: carefully working the distorted spots outward until the modules could be coaxed in. The result was close enough to functional, but still out of spec dimensionally.
+                            That created a new problem. The exterior walls are 3.2mm thick and welded fine. The interior partitions are 2.3mm, the rules minimum. Welding a continuous seam into 2.3mm aluminum puts more heat into the part than it can absorb without moving. The walls warped. After welding, the interior cavity was tight enough in places that the modules wouldn't fit. The fix was a mallet, working the distorted spots outward until the modules fit. Functional, but out of spec.
                         </p>
                         <p class="background-description">
-                            A lot of time also went into fitting and positioning each panel before tacking it in place so the assembled housing would match the CAD model. Even with that effort, the final housing still wasn't perfect. For CR30, the suggestion was to add slots to the mating edges so the panels self-locate when assembled, effectively self-jigging. That would cut fitment time significantly and remove the dependence on careful alignment before every tack weld.
+                            A lot of time went into fitting each panel before tacking so the housing would match CAD. Even then, it wasn't perfect. For CR30, the plan is to add slots to the mating edges so panels self-locate when assembled. That cuts fitment time and removes the need for careful alignment before every tack.
                         </p>
                     </div>
 
@@ -189,13 +189,13 @@
                             The 28 cells in each module get sorted into four types, A through D, based on tab length and orientation. The type determines where in the stack the cell goes. Getting the order wrong means a tab that doesn't reach its clamping plate, or one that's bent at the wrong angle.
                         </p>
                         <p class="background-description">
-                            Before touching a cell, the tab clamping plates had to be prepared. These are 3D-printed plates that clamp the cell tabs and allow them to be bolted together electrically. The inner-most bolt positions on each plate are inaccessible from below once cells are stacked on top, so the design called for press-fit nuts embedded in the plastic. In FDM-printed parts, press-fit doesn't hold reliably, so each nut got bonded in with JB Weld and left to cure. The intent was for them to behave like heat-set inserts, locking the nut in place so the bolt has something solid to thread into under clamping load.
+                            Before touching a cell, the tab clamping plates had to be prepared. These are 3D-printed plates that clamp the cell tabs and bolt them together electrically. The innermost bolt positions are inaccessible once cells are stacked, so the design used press-fit nuts embedded in the plastic. In FDM prints, press-fit doesn't hold reliably, so each nut got bonded in with JB Weld and left to cure. The intent was for them to behave like heat-set inserts, locking the nut so the bolt has something solid to thread into.
                         </p>
                         <p class="background-description">
                             With the plates ready, assembly went like this: drop the first D cell into the stack, lay a tab block over the tabs, fold the tabs up onto it, drop in the first A cell, fold its tab, add another tab block with a BMS sense wire ring, bolt through. Then repeat, alternating A and B cells through the stack. The final cell is a C type. After the last cell, main terminals get attached and the whole stack goes into polycarbonate baskets for structural support and isolation.
                         </p>
                         <p class="background-description">
-                            Total module build time ran about 5 hours a day over three days, which works out to roughly 3 hours per module including cell stacking, tab folding, bolting, and BMS sense wire harnessing. That doesn't count the 4 hours spent sanding burrs off the water jet-cut tab blocks before assembly could start, or the time spent crimping fuses onto the BMS wires separately.
+                            Total module build time ran about 5 hours a day over three days, roughly 3 hours per module including cell stacking, tab folding, bolting, and BMS sense wire harnessing. That doesn't count 4 hours sanding burrs off the tab blocks before assembly, or the time crimping fuses onto the BMS wires.
                         </p>
                         <figure class="post-figure">
                             <img src="images/tractivebatterymanufacture.jpg" alt="Tractive Battery Manufacture" class="background-image slide-up" style="animation-delay: 0.3s;">
@@ -206,20 +206,20 @@
                     <div class="background-container">
                         <h3 class="background-title">What Didn't Work</h3>
                         <p class="background-description">
-                            The JB-welded nuts were the biggest module problem. Because they weren't sitting perfectly square in their pockets, some bolts cross-threaded on the way in. Once a bolt cross-threads into an epoxy-held nut, the nut breaks free. Now there's a loose nut somewhere inside a sealed module. Fixing it meant partially disassembling the stack mid-build. The bonded nuts also made disassembly difficult later when modules needed to come apart for CR30 work.
+                            The JB-welded nuts were the biggest problem. Because they weren't square in their pockets, some bolts cross-threaded on the way in. Once a bolt cross-threads into an epoxy-held nut, the nut breaks free. Now there's a loose nut inside a sealed module. Fixing it meant partially disassembling the stack mid-build. The bonded nuts also made disassembly difficult when modules needed to come apart for CR30.
                         </p>
                         <p class="background-description">
-                            Stack pressure was the second gap. Pouch cells need to be compressed during cycling to prevent swelling and dendrite growth. The module design had compression plates for this, but the cell dimensions in CAD came from the datasheet rather than actual measurements. Real cells ran about 0.7mm thinner than spec per cell. Across 28 cells, that's roughly 20mm of lost compression. The plates that were supposed to clamp the stack weren't doing much.
+                            Stack pressure was the second gap. Pouch cells need to be compressed during cycling to prevent swelling and dendrite growth. The module had compression plates, but the cell dimensions in CAD came from the datasheet, not actual measurements. Real cells ran about 0.7mm thinner than spec per cell. Across 28 cells, that's roughly 20mm of lost compression. The plates weren't doing much.
                         </p>
                         <p class="background-description">
-                            The terminal bolts were a safety concern. The main pack terminal connections were accessible from below the module even with TPU plugs installed. Live conductors at those locations are a problem both for inspections and for any scenario where someone's hand ends up near the bottom of a live pack.
+                            The terminal bolts were a safety concern. The pack terminals were accessible from below even with TPU plugs installed. Live conductors there are a problem for inspections and for anyone whose hand ends up near the bottom of a live pack.
                         </p>
                     </div>
 
                     <div class="background-container">
                         <h3 class="background-title">Notes for CR30</h3>
                         <p class="background-description">
-                            The full list flagged coming out of this build: add self-jigging slots to the housing panels so fitment doesn't require manual alignment, redesign the press-fit nut pockets with deeper and tighter interference fits so the nuts lock mechanically without JB Weld and have more wall contact so the plastic doesn't round out under bolt load, measure actual cells before finalizing compression plate dimensions, fully enclose the terminal bolt connections, reduce total bolt count in the module, and clean up the wiring harness routing inside the housing. The accumulator worked well enough to run subsequent testing. Building it showed exactly where the second-generation design needs to be different.
+                            The full list from this build: add self-jigging slots to the housing panels, redesign the nut pockets with tighter interference fits so they lock mechanically without JB Weld, measure actual cells before finalizing compression plate dimensions, fully enclose the terminal connections, reduce bolt count, and clean up harness routing. The accumulator worked well enough for testing. Building it showed where the next generation needs to be different.
                         </p>
                     </div>
                 </div>
@@ -291,56 +291,56 @@
                     <div class="background-container">
                         <h3 class="background-title">Why This Existed</h3>
                         <p class="background-description">
-                            Cyclone Racing was finishing its last season as an IC team while beginning the transition to electric. The Emrax 208 motor was on hand, but we had no chassis to put it in and no way to run it under load. Before committing to abandoning a program we'd been dominant in, we needed to prove the electric powertrain actually worked. That meant spinning the motor with a full tractive system outside the car, which required somewhere to mount everything.
+                            Cyclone Racing was finishing its last season as an IC team while beginning the transition to electric. The Emrax 208 motor was on hand, but we had no chassis to put it in and no way to run it under load. Before abandoning a program we'd been dominant in, we needed to prove the electric powertrain worked. That meant spinning the motor with the full tractive system outside the car, which meant building somewhere to mount it.
                         </p>
                         <p class="background-description">
-                            The team had a dyno cart that had been around so long nobody knew exactly when it was built. It had a Porsche sticker and a Ferrari sticker on the side, so we called it the Porsche Ferrari. It was configured for a Yamaha R6 engine, which meant it was useless for our purposes in its current state.
+                            The team had a dyno cart that had been around so long nobody knew when it was built. It had a Porsche sticker and a Ferrari sticker on the side, so we called it the Porsche Ferrari. It was configured for a Yamaha R6 engine, which made it useless as-is.
                         </p>
                     </div>
                     <div class="background-container">
                         <h3 class="background-title">Reconfiguration</h3>
                         <p class="background-description">
-                            The original cart was built around the R6: IC mounting features, a gas tank, and basic IC wiring with no provision for GLV power or the HV interlocks needed to keep the tractive system live. The GLV battery cutting out would kill HV power to the tractive system, so that had to be managed carefully.
+                            The original cart was built around the R6: IC mounting features, a gas tank, and IC wiring with no provision for GLV power or the HV interlocks needed to keep the tractive system live. The GLV battery cutting out would kill HV power, so that had to be managed carefully.
                         </p>
                         <p class="background-description">
-                            Rather than permanently converting it, I designed the reconfiguration to be swappable. IC mounting features were removed and replaced with bolted equivalents so the cart could be quickly switched between IC and EV configurations. The GLV wiring was pulled off the cart entirely and moved to a separate nearby cart, making the harness swap straightforward depending on what you were testing.
+                            I designed the reconfiguration to be swappable rather than permanent. IC mounting features were removed and replaced with bolted equivalents so the cart could switch between IC and EV configurations. The GLV wiring was pulled off entirely and moved to a separate cart, making the harness swap simple depending on what you were testing.
                         </p>
                     </div>
                     <div class="background-container">
                         <h3 class="background-title">Motor Mount</h3>
                         <p class="background-description">
-                            The Emrax 208 is a pancake-style motor with a bolt pattern that didn't correspond to anything on the existing cart. I kept the mount simple: two lengths of square tube steel cut to span the full width of the cart to handle the motor torque, bolted at both ends, with a third piece cut at 90 degrees to capture three of the four motor bracket mounting holes and actually secure the motor. Nothing exotic, but it was rigid and did the job.
+                            The Emrax 208 is a pancake-style motor with a bolt pattern that didn't match anything on the cart. I kept the mount simple: two lengths of square tube steel spanning the full width to handle motor torque, bolted at both ends, with a third piece at 90 degrees to capture three of the four bracket mounting holes. Nothing exotic, but rigid and functional.
                         </p>
                     </div>
                     <div class="background-container">
                         <h3 class="background-title">The Water Brake</h3>
                         <p class="background-description">
-                            A water brake is essentially a hydraulic absorption unit — water enclosed in a housing that acts like a pump, using fluid resistance to apply a counter-torque against whatever is spinning it. I chose it because the CR27 team had used one to complete a full-power test with the Yamaha R6, so I assumed it would hold up for the electric motor as well.
+                            A water brake is a hydraulic absorption unit. Water enclosed in a housing acts like a pump, using fluid resistance to apply counter-torque against whatever is spinning it. The CR27 team had used one for a full-power test with the R6, so I assumed it would hold up for the electric motor.
                         </p>
                         <p class="background-description">
-                            In hindsight I should have run hand calculations first. The data sheets for the water brake had been lost along with most institutional knowledge of the thing, and I'm not confident it was actually capable of the loads the Emrax can produce. It was sufficient for what we needed to confirm at the time, but future testing will use the 300 kW dynamometer the university has since installed, which gives actual load control and accurate torque curves. The Porsche Ferrari has probably earned its retirement.
+                            In hindsight I should have run hand calculations first. The data sheets had been lost along with most institutional knowledge of the thing, and I'm not confident it could handle the loads the Emrax produces. It was sufficient for what we needed at the time, but future testing will use the 300 kW dynamometer the university has since installed, which gives real load control and accurate torque curves. The Porsche Ferrari has probably earned its retirement.
                         </p>
                     </div>
                     <div class="background-container">
                         <h3 class="background-title">Testing</h3>
                         <p class="background-description">
-                            The no-load test was the first time the full tractive system was spun up: battery pack, Orion BMS, electrical PCB code, and the DTI HV550 inverter all running together for the first time. The goal was to confirm everything communicated correctly, the BMS behaved as expected, and we understood how the system operated before putting any real demand on it.
+                            The no-load test was the first time the full tractive system ran: battery pack, Orion BMS, and DTI HV550 inverter all running together. The goal was to confirm everything communicated correctly and the BMS behaved as expected before putting real demand on it.
                         </p>
                         <figure class="post-figure">
                             <img src="images/dynocartnoloadtest.png" alt="No-load test" class="background-image slide-up" style="animation-delay: 0.3s;">
                             <figcaption class="post-caption">First full tractive-system spin-up: battery pack, Orion BMS, and DTI HV550 inverter running together for the first time.</figcaption>
                         </figure>
                         <p class="background-description">
-                            The loaded test pushed higher power through the system with the water brake applying resistance. It surfaced an issue: the motor would stop randomly after about 30 seconds with no fault codes from the inverter or BMS. We worked through it, but it was a good reminder that a system that looks clean on paper has a way of surprising you the first time you actually run it.
+                            The loaded test pushed higher power through the system with the water brake applying resistance. It surfaced an issue: the motor would stop randomly after about 30 seconds with no fault codes from the inverter or BMS. We worked through it, but it was a reminder that systems that look clean on paper have a way of surprising you the first time you run them.
                         </p>
                         <p class="background-description">
-                            The results weren't well documented, which is something I'd do differently. What we did confirm was that all the major components in the tractive system were functional and that the team understood how to operate and troubleshoot them — which was the whole point before committing to an EV program.
+                            The results weren't well documented. Something I'd do differently. What we confirmed was that the tractive system was functional and the team understood how to operate and troubleshoot it. That was the whole point before committing to an EV program.
                         </p>
                     </div>
                     <div class="background-container">
                         <h3 class="background-title">What's Next</h3>
                         <p class="background-description">
-                            Future powertrain testing will move to the university's proper dynamometer. Beyond the load limitations of the water brake, we've found that driver testing gives more useful data than anything we can simulate on the cart. The custom hub motors currently in development will spend time on the dyno before they go anywhere near a car, though that's a job for the 300 kW unit, not the Porsche Ferrari.
+                            Future powertrain testing will move to the university's dynamometer. Beyond the water brake's load limits, driver testing gives more useful data than anything we can simulate on the cart. The custom hub motors in development will spend time on the dyno before they go near a car, but that's a job for the 300 kW unit, not the Porsche Ferrari.
                         </p>
                     </div>
                 </div>
@@ -410,10 +410,10 @@
                 <div class="background-container">
                     <h3 class="background-title">Why This Bike</h3>
                     <p class="background-description">
-                        I came across a cafe racer build by Milezero Racer based on a CB750F Clubsport and immediately wanted one. Beyond the aesthetics, this was a project I genuinely needed. I'd learned about carbureted engines in theory but never had my hands on one, and carburetors are dated technology but the physics behind them are fascinating. There's also something satisfying about reviving a machine that hadn't turned over in years.
+                        I came across a cafe racer build by Milezero Racer based on a CB750F Clubsport and immediately wanted one. Beyond the aesthetics, this was a project I needed. I'd learned about carbureted engines in theory but never had my hands on one. Carburetors are dated technology, but the physics behind them are fascinating. There's also something satisfying about reviving a machine that hadn't turned over in years.
                     </p>
                     <p class="background-description">
-                        There's a practical reason too. I learn best by doing, and working through a real mechanical system, diagnosing problems, chasing faults, fixing things that fight back, builds intuition you can't get from a textbook. The CB750 has been one of the better teachers I've had.
+                        There's a practical reason too. Working through a real mechanical system, diagnosing problems, chasing faults, fixing things that fight back, builds intuition you can't get from a textbook. The CB750 has been one of the better teachers I've had.
                     </p>
                 </div>
                 <div class="background-container">
@@ -428,19 +428,19 @@
                     <p class="background-description"> Then I ran through the basics: spark, compression, air, fuel.
                     </p>
                     <p class="background-description">
-                        Compression came in at 130–135 psi across all four cylinders. The SOHC forums put the healthy range at 150–180 psi, 120 being the low end of acceptable, and below 100 needing immediate work. The consistency across cylinders is a good sign, but it's on the low side and worth revisiting. The air filter was torn and got replaced. The carbs were the main concern: float pins seized from corrosion, so a simple clean wasn't going to work.
+                        Compression came in at 130–135 psi across all four cylinders. The SOHC forums put healthy range at 150–180 psi, with 120 being the low end and below 100 needing work. Consistent across cylinders, which is a good sign, but on the low side. The air filter was torn and got replaced. The carbs were the main concern: float pins seized from corrosion, so a simple clean wasn't going to work.
                     </p>
                 </div>
                 <div class="background-container">
                     <h3 class="background-title">Electrical System</h3>
                     <p class="background-description">
-                        The electrics needed significant work. The headlight and tail light both had heavy parasitic draw, the high beams killed power to the whole bike, and the turn signals were dead. The previous owner had installed a lithium battery whose BMS couldn't handle the bike's demands, so I replaced it with an AGM while sorting everything else.
+                        The electrics needed work. Both lights had heavy parasitic draw, the high beams killed power to the whole bike, and the turn signals were dead. The previous owner installed a lithium battery whose BMS couldn't handle the bike's demands, so I replaced it with an AGM while sorting everything else.
                     </p>
                     <p class="background-description">
-                        Tracing the harness with a multimeter turned up a collection of loose and corroded bullet connectors throughout. I cleaned or replaced the bad ones and ran continuity checks to confirm. Spark was weak but the coils tested fine; the coil boots had resistance far above spec at the plug interface, so those and the plugs got replaced.
+                        Tracing the harness turned up loose and corroded bullet connectors throughout. I cleaned or replaced the bad ones and ran continuity checks to confirm. Spark was weak but the coils tested fine. The coil boots had resistance well above spec at the plug interface, so those and the plugs got replaced.
                     </p>
                     <p class="background-description">
-                        For lighting I built a custom headlight from a Suzuki GS850 housing fitted with high-output LEDs and swapped the tail light. Before the swap, switching the lights on caused nearly half a volt of drop from the parasitic draw. After, the turn signals worked, draw was negligible, and the high beam issue was gone.
+                        For lighting I built a custom headlight from a Suzuki GS850 housing fitted with high-output LEDs and swapped the tail light. Before the swap, switching lights on caused nearly half a volt of drop. After, the turn signals worked, draw was negligible, and the high beam issue was gone.
                     </p>
                     <figure class="post-figure">
                         <div class="dual-image-container" style="display: flex; gap: 1em; justify-content: center; flex-wrap: wrap;">
@@ -453,32 +453,32 @@
                 <div class="background-container">
                     <h3 class="background-title">Carburetor Swap</h3>
                     <p class="background-description">
-                        The original carbs were too corroded to rebuild cleanly. I sourced a donor bike and stripped a set of Keihin 7A carbs, which are roughly equivalent in jetting to the originals. After cleaning, setting float levels, and syncing all four, I installed them.
+                        The original carbs were too corroded to rebuild. I sourced a donor bike and stripped a set of Keihin 7A carbs, roughly equivalent in jetting to the originals. After cleaning, setting float levels, and syncing all four, I installed them.
                     </p>
                     <figure class="post-figure">
                         <img src="images/CB750F-Carbs.jpg" alt="CB750F Carburetors" class="background-image slide-up" style="animation-delay: 0.3s;">
                         <figcaption class="post-caption">Keihin 7A carbs pulled from a donor bike, cleaned and synced before install.</figcaption>
                     </figure>
                     <p class="background-description">
-                        They got the bike running but have been an ongoing problem. The carbs run rich, clog regularly, and lose their tune. I've retuned them six times and done a full rebuild with float level reset and jet cleaning four times. Plugs have fouled repeatedly as a result. Sorting the carbs properly is the top priority going forward.
-                    </p>
+                        They got the bike running but have been an ongoing problem. The carbs run rich, clog regularly, and lose their tune. I've retuned them six times and done a full rebuild with float level reset and jet cleaning four times. Plugs have fouled repeatedly. Sorting the carbs is the top priority.
+</p>
                 </div>
                 <div class="background-container">
                     <h3 class="background-title">Timing</h3>
                     <p class="background-description">
-                        With spark and carbs sorted the bike started, but only on three cylinders and would lug to a stop after a few minutes. I ran the static timing procedure from the SOHC forums: 12V test light on the points, engine rotated by hand with TDC/BDC confirmed by the markings and a finger in the plug hole. Timing was retarded on cylinders 2 and 3. After adjusting, all four fired cleanly. I skipped dynamic timing since the bike ran well after the static adjustment and I wanted to get miles on it. Something to verify properly down the road.
+                        With spark and carbs sorted the bike started, but only on three cylinders and would lug to a stop after a few minutes. I ran the static timing procedure from the SOHC forums: 12V test light on the points, engine rotated by hand with TDC/BDC confirmed by the markings and a finger in the plug hole. Timing was retarded on cylinders 2 and 3. After adjusting, all four fired cleanly. I skipped dynamic timing since the bike ran well after the static adjustment. Something to verify down the road.
                     </p>
                 </div>
                 <div class="background-container">
                     <h3 class="background-title">First Miles and What Still Needs Work</h3>
                     <p class="background-description">
-                        The first 100-mile ride went well enough to call it a success, but the remaining issues were hard to ignore. Fuel economy is poor from the rich-running carbs, and I have to run the petcock in reserve to get adequate flow. The clutch is notchy and needs a rebuild. The front brakes are unhappy, and the left caliper has a slow seep leaving a film on the rotor before each ride. It hasn't saturated the pad yet, which I haven't fully explained.
+                        The first 100-mile ride went well enough to call it a success, but the remaining issues were hard to ignore. Fuel economy is poor from the rich carbs, and I have to run the petcock on reserve for adequate flow. The clutch is notchy and needs a rebuild. The front brakes are unhappy. The left caliper has a slow seep that leaves a film on the rotor before each ride. It hasn't saturated the pad yet, which I haven't fully explained.
                     </p>
                 </div>
                 <div class="background-container">
                     <h3 class="background-title">What's Next</h3>
                     <p class="background-description">
-                        Mechanical reliability first: clutch rebuild, brake overhaul, and properly sorting the carbs. After that, the cafe build starts. I want to fabricate a custom seat in carbon fiber nylon filament to cut weight and clean up the tail. The tank is getting a clear coat to preserve the steel and some of the patina. The mirrors vibrate badly at speed so I'm planning a lower-profile replacement with better isolation.
+                        Mechanical reliability first: clutch rebuild, brake overhaul, and sorting the carbs. After that, the cafe build starts. I want to fabricate a custom seat in carbon fiber nylon to cut weight and clean up the tail. The tank is getting a clear coat to preserve the steel and some of the patina. The mirrors vibrate at speed, so I'm planning a lower-profile replacement with better damping.
                     </p>
                 </div>
                 <h3 class="timeline-title slide-up" style="animation-delay: 0.4s;">Project Timeline</h3>
@@ -557,20 +557,20 @@
                     <div class="background-container">
                         <h3 class="background-title">How It Started</h3>
                         <p class="background-description">
-                            CR29 was designed around a carbon monocoque chassis. To speed up manufacturing, we built a welded steel mold instead of the usual fiberglass tooling. Steel is harder to seal, and during cure the vacuum bag lost pressure. Without full vacuum, the laminate didn't consolidate properly. When the chassis was demolded, it was immediately obvious — the surface looked crispy, layers visibly frayed at the edges. Press anywhere and it was soft, crunching because the fibers had no matrix holding them together. There was no repairing it. We knew right there at the mold that it was a total loss.
+                            CR29 was designed around a carbon monocoque chassis. To speed up manufacturing, we built a welded steel mold instead of the usual fiberglass tooling. Steel is harder to seal, and during cure the vacuum bag lost pressure. Without vacuum, the laminate didn't consolidate. When the chassis was demolded, it was obvious. The surface looked crispy, layers frayed at the edges. Press anywhere and it was soft, crunching because the fibers had no matrix. There was no repairing it. Total loss.
                         </p>
                         <p class="background-description">
-                            That left us with a competition season, a complete drivetrain and suspension package, and no chassis. Over spring break, myself and four others decided to try to salvage it.
+                            That left us with a competition season, a complete drivetrain and suspension package, and no chassis. Over spring break, five of us decided to salvage it.
                         </p>
                     </div>
 
                     <div class="background-container">
                         <h3 class="background-title">The Sprint</h3>
                         <p class="background-description">
-                            No formal assignments upfront — we built a burndown list of everything the chassis needed, put it in front of everyone, and people grabbed tasks. The goal was to divide major subsystems so nobody was blocking anyone else.
+                            No formal assignments. We built a burndown list of everything the chassis needed, put it in front of everyone, and people grabbed tasks. The goal was to divide subsystems so nobody blocked anyone else.
                         </p>
                         <p class="background-description">
-                            The design wasn't starting from nothing. CR25 was the 25th car and one of the strongest competitive tube frames the program had built. Its geometry was the reference point. The objective for CR25-C was to match CR29's critical dimensions as closely as possible — driver position, overall envelope, and especially the mounting locations for the motor, wings, and suspension pickups. Those had all been carefully optimized for CR29, and changing them would mean revisiting work that was already done well. The tube frame was a workaround, not a redesign.
+                            The design wasn't starting from nothing. CR25 was the 25th car and one of the strongest tube frames the program had built. Its geometry was the reference point. The objective for CR25-C was to match CR29's critical dimensions: driver position, overall envelope, and the mounting locations for motor, wings, and suspension pickups. Those were optimized for CR29, and changing them would mean revisiting work already done well. The tube frame was a workaround, not a redesign.
                         </p>
                         <figure class="post-figure">
                             <img src="images/CR29_25-C-Chassis-2.png" alt="CR29_25-C Suspension" class="background-image slide-up" style="animation-delay: 0.3s;">
@@ -581,20 +581,20 @@
                     <div class="background-container">
                         <h3 class="background-title">What I Worked On</h3>
                         <p class="background-description">
-                            I took cooling because the system was my original design for CR29. Moving to a tube frame changed the packaging constraints, not the system, so it made sense for me to adapt it rather than hand it off. The firewall went with it — the firewall rules in FSAE are specific about what has to be sealed and how, and getting it wrong is a technical inspection failure, so I took it to make sure compliance was handled carefully. I had been involved with both the firewall and seat on the original CR29 work as well.
+                            I took cooling because it was my original design for CR29. The tube frame changed packaging constraints, not the system, so it made sense to adapt it myself. The firewall went with it. FSAE rules are specific about what has to be sealed and how, and getting it wrong is a tech inspection failure. I'd worked on both the firewall and seat for CR29 as well.
                         </p>
                         <p class="background-description">
-                            Suspension was the bigger task. A tube frame is heavier than a carbon monocoque, which means the spring rates from CR29 wouldn't be appropriate anymore. I updated the spring selection to account for the added mass, re-ran the blade simulations the suspension team had developed to validate the geometry, laid out all the hardpoints, and carried over the A-arms, ARB, and struts from the original design. The goal was to touch as little as possible while making what needed to change actually correct.
+                            Suspension was the bigger task. A tube frame is heavier than a monocoque, so the spring rates from CR29 wouldn't work. I updated spring selection for the added mass, re-ran the blade simulations to validate geometry, laid out hardpoints, and carried over the A-arms, ARB, and struts from the original design. The goal was to touch as little as possible while making what needed to change correct.
                         </p>
                         <p class="background-description">
-                            At the end of the design phase, the team submitted an SES — Structural Equivalency Spreadsheet. It's an official FSAE-provided document that runs calculations to prove a chassis design meets the structural requirements of the rules. It's mandatory for competition; no SES approval, no tech sign-off. Submitting it was the formal checkpoint that the design was rules-legal.
+                            At the end of the design phase, the team submitted an SES (Structural Equivalency Spreadsheet). It's an FSAE document that proves a chassis meets the structural requirements. It's mandatory for competition; no SES approval, no tech sign-off.
                         </p>
                     </div>
 
                     <div class="background-container">
                         <h3 class="background-title">The Vote</h3>
                         <p class="background-description">
-                            After the design was done and SES was in, the team had to decide whether to actually build it. That came down to funding and time. The vote went to the team leads and it wasn't clean — two tied votes, the meeting was essentially a war. Ultimately the decision came down in favor of bringing CR28, the last IC car, to competition instead. Optimizing a known, working car was a safer bet than manufacturing and debugging a brand new chassis in the time that remained.
+                            With the design done and SES submitted, the team had to decide whether to build it. That came down to funding and time. The vote went to the team leads. Two tied votes. The meeting was a war. The decision came down to bringing CR28, the last IC car, to competition instead. Optimizing a known car was a safer bet than manufacturing and debugging a new chassis in the time remaining.
                         </p>
                         <p class="background-description">
                             CR28 went to Michigan and finished 5th. That's a hard result to argue with.
@@ -604,7 +604,7 @@
                     <div class="background-container">
                         <h3 class="background-title">Looking Back</h3>
                         <p class="background-description">
-                            The two weeks were worth it. Not because the chassis got built, but because of what working that way felt like. A small group, a clear deadline, a list of tasks, no bureaucracy in the room — everyone just worked. It's the closest thing to a startup environment I've been in, and it confirmed that's the kind of team I want to be part of. The lesson that came with it is harder: you can do everything right and still lose the vote. A good solution to a bad situation doesn't guarantee it gets used. Sometimes the answer is correct and it still doesn't happen.
+                            The two weeks were worth it. Not because the chassis got built, but because of what working that way felt like. A small group, a clear deadline, a list of tasks, no bureaucracy. Everyone just worked. It's the closest thing to a startup environment I've been in, and it confirmed that's the kind of team I want to be part of. The lesson that came with it is harder: you can do everything right and still lose the vote. A good solution to a bad situation doesn't guarantee it gets used. Sometimes the answer is correct and it still doesn't happen.
                         </p>
                     </div>
                 </div>
@@ -641,7 +641,7 @@
                             <p>The Structural Equivalency Spreadsheet was completed and submitted, formally demonstrating that CR25-C met FSAE's structural requirements. SES approval is required before a car can pass technical inspection at competition.</p>
                         </div>
                         <div id="chassis-desc-3" class="timeline-description-content" style="display: none;">
-                            <p>After two tied votes, the team leads decided to bring CR28 to competition rather than manufacture CR25-C. CR28 finished 5th at Michigan — the team's final IC season.</p>
+                            <p>After two tied votes, the team leads decided to bring CR28 to competition rather than manufacture CR25-C. CR28 finished 5th at Michigan. The team's final IC season.</p>
                         </div>
                     </div>
                 </div>
@@ -674,15 +674,15 @@
                 </figure>
                 <div class="project-detail-content slide-up" style="animation-delay: 0.2s;">
                     <p class="project-detail-description">
-                        How empirical DCIR testing on Cyclone Racing's CR30 cells replaced a complex liquid cooling system with ten fans — and why the spec sheet was nearly useless.
+                        How DCIR testing on Cyclone Racing's CR30 cells replaced a liquid cooling system with ten fans, and why the spec sheet was useless.
                     </p>
                     <div class="background-container">
                         <h3 class="background-title">The Problem with the Spec Sheet</h3>
                         <p class="background-description">
-                            The CR30 battery is a 5-module lithium-ion pack that needs to sustain current bursts up to 200A through FSAE endurance events powering the CR30 racecar. Heat rejection is critical — but when I went to calculate how much cooling the pack actually needed, I ran straight into a wall.
+                            The CR30 battery is a 5-module lithium-ion pack that needs to sustain current bursts up to 200A through FSAE endurance events. Heat rejection is critical, but when I went to calculate how much cooling the pack needed, I ran into a wall.
                         </p>
                         <p class="background-description">
-                            The cell spec sheet listed DCIR as either 1.5 mΩ or 5 mΩ — two discrete values with no curve, no conditions, no context. Depending on which you used, the thermal math either showed the pack severely overheating by the end of endurance, or barely needing any cooling at all. Assuming worst case to be safe, I started designing a liquid cooling system: U-shaped shims contacting cell faces, a dedicated cooling plate, thermal padding, quick disconnects, and a dedicated pump loop mounted to the pack.
+                            The cell spec sheet listed DCIR as either 1.5 mΩ or 5 mΩ. Two values with no graph, no conditions, no context. Depending on which you used, the thermal math either showed the pack overheating by end of endurance or barely needing cooling at all. Assuming worst case, I started designing a liquid cooling system: U-shaped shims contacting cell faces, a cooling plate, thermal padding, quick disconnects, and a pump loop mounted to the pack.
                         </p>
                         <figure class="post-figure">
                             <div class="dual-image-container" style="display: flex; gap: 1em; justify-content: center; flex-wrap: wrap;">
@@ -692,13 +692,13 @@
                             <figcaption class="post-caption">The abandoned liquid cooling design: U-shaped shims contacting the cell faces (left) and the dedicated cooling plate (right).</figcaption>
                         </figure>
                         <p class="background-description">
-                            The more I looked at it, the worse it felt. The design added significant weight and complexity, the cooling effectiveness would be marginal at best, and reliability on a racecar running a pack-dedicated fluid loop was a real concern. I was building an elaborate solution to a problem I hadn't actually confirmed existed. What I actually needed was to characterize the cells under real conditions, rather than trusting a spec sheet that clearly wasn't written with race applications in mind.
+                            The more I looked at it, the worse it felt. The design added weight and complexity, cooling effectiveness would be marginal, and reliability of a fluid loop on a racecar was a real concern. I was building a solution to a problem I hadn't confirmed existed. What I needed was to characterize the cells under real conditions instead of trusting a spec sheet not written for racing.
                         </p>
                     </div>
                     <div class="background-container">
                         <h3 class="background-title">Building the Test Rig</h3>
                         <p class="background-description">
-                            I identified four variables that could meaningfully affect DCIR: stack pressure, temperature, C-rate, and state-of-charge. The goal was to isolate each one and understand how much it actually mattered, all for under $100.
+                            I identified four variables that affect DCIR: stack pressure, temperature, C-rate, and state-of-charge. The goal was to isolate each one and understand how much it mattered, all for under $100.
                         </p>
                         <ul class="background-description" style="margin-left: 2em;">
                             <li><strong>Load Bank:</strong> Four 0.1 Ω heatsink resistors in a 2s2p configuration for uniform heating, validated at 0.131 Ω via 4-wire Kelvin sensing</li>
@@ -713,9 +713,9 @@
                     <div class="background-container">
                         <h3 class="background-title">Testing Each Variable</h3>
 
-                        <h4 style="font-size: 1.2em; margin-top: 1.5em; color: #ff8080;">Face Pressure — Ruled Out</h4>
+                        <h4 style="font-size: 1.2em; margin-top: 1.5em; color: #ff8080;">Face Pressure: Ruled Out</h4>
                         <p class="background-description">
-                            Stack pressure was first. Using the spring fixture, I ran pulse tests at 0, 2, 5, and 8 psi across cell faces. DCIR barely moved. Given that the car sees a relatively low cycle count over its lifetime, pressure-driven SOH degradation isn't a meaningful design concern anyway — so I deprioritized it and moved on.
+                            Stack pressure was first. Using the spring fixture, I ran pulse tests at 0, 2, 5, and 8 psi across cell faces. DCIR barely moved. The car sees a low cycle count over its lifetime, so pressure-driven SOH degradation isn't a design concern. I deprioritized it and moved on.
                         </p>
                         <figure class="post-figure">
                             <div style="overflow: hidden; width: 80%; margin: 1em auto 0; max-height: 400px;">
@@ -724,27 +724,27 @@
                             <figcaption class="post-caption">Spring-loaded fixture for adjustable cell face pressure across the 0–8 psi range.</figcaption>
                         </figure>
 
-                        <h4 style="font-size: 1.2em; margin-top: 1.5em; color: #ff8080;">C-Rate — Secondary Effect</h4>
+                        <h4 style="font-size: 1.2em; margin-top: 1.5em; color: #ff8080;">C-Rate: Secondary Effect</h4>
                         <p class="background-description">
-                            C-rate tests via the carbon pile rheostat showed DCIR trending linearly downward with increasing current draw, which I assume to be from local temperature increases due to ohmic heating. The effect was real but small relative to the other variables, so I didn't incorporate it into the core thermal simulations.
+                            C-rate tests via the carbon pile rheostat showed DCIR trending downward with increasing current draw, likely from local temperature increases due to ohmic heating. The effect was real but small, so I didn't incorporate it into the thermal simulations.
                         </p>
                         <figure class="post-figure">
                             <img src="images/Carbon_Pile.jpg" alt="Current draw test" class="background-image slide-up" style="animation-delay: 0.3s;">
                             <figcaption class="post-caption">Carbon pile rheostat rig for sweeping C-rate against DCIR.</figcaption>
                         </figure>
 
-                        <h4 style="font-size: 1.2em; margin-top: 1.5em; color: #ff8080;">State-of-Charge — Repeatable and Strong</h4>
+                        <h4 style="font-size: 1.2em; margin-top: 1.5em; color: #ff8080;">State-of-Charge: Repeatable and Strong</h4>
                         <p class="background-description">
-                            For SoC testing I ran 10-second discharge pulses to capture the ohmic voltage drop and 1RC transient, followed by 3-minute rests to track 2RC recovery. Theory predicts that as SoC drops, Li⁺ concentration in the electrolyte decreases and charge transfer kinetics at the electrode surface become less favorable — both of which increase resistance. The results matched: a clear, repeatable DCIR increase at lower states of charge.
+                            For SoC testing I ran 10-second discharge pulses to capture the ohmic voltage drop and 1RC transient, followed by 3-minute rests to track 2RC recovery. As SoC drops, Li⁺ concentration in the electrolyte decreases and charge transfer kinetics at the electrode surface become less favorable, both of which increase resistance. The results matched: a clear, repeatable DCIR increase at lower states of charge.
                         </p>
                         <figure class="post-figure">
                             <img src="images/SoC-Pulse.jpg" alt="State of charge test" class="background-image slide-up" style="animation-delay: 0.3s;">
                             <figcaption class="post-caption">10-second discharge pulse protocol capturing ohmic drop and 1RC/2RC recovery.</figcaption>
                         </figure>
 
-                        <h4 style="font-size: 1.2em; margin-top: 1.5em; color: #ff8080;">Temperature — The One That Mattered</h4>
+                        <h4 style="font-size: 1.2em; margin-top: 1.5em; color: #ff8080;">Temperature: The One That Mattered</h4>
                         <p class="background-description">
-                            I didn't have access to the university temperature chamber when I needed it, so I improvised with a foldable temperature-controlled heat pad wrapped around isolated cells. Cell temperature was monitored with FLIR thermography and IR spot metering. I ran the same pulse protocol as the SoC tests across a range of roughly 25–60°C, and this is where things got interesting.
+                            I didn't have access to the university temperature chamber, so I improvised with a foldable heat pad wrapped around isolated cells. Cell temperature was monitored with FLIR thermography and IR spot metering. I ran the same pulse protocol across 25–60°C, and this is where things got interesting.
                         </p>
                         <figure class="post-figure">
                             <img src="images/TemperatureTest.png" alt="DCIR vs. SoC across temperatures" class="background-image slide-up" style="animation-delay: 0.3s;">
@@ -752,12 +752,12 @@
                         </figure>
                     </div>
                     <div class="background-container">
-                        <h3 class="background-title">DCIR Mapping — The Spec Sheet Was Way Off</h3>
+                        <h3 class="background-title">DCIR Mapping: The Spec Sheet Was Way Off</h3>
                         <p class="background-description">
-                            Temperature and SoC together dominated DCIR variance. When I plotted the full dataset, the results were genuinely surprising — DCIR dropped as low as 0.7 mΩ at operating temperature, which is less than half the spec sheet's stated minimum of 1.5 mΩ. The cells were running far more efficiently than the datasheet implied under real conditions.
+                            Temperature and SoC together dominated DCIR variance. When I plotted the full dataset, DCIR dropped as low as 0.7 mΩ at operating temperature, less than half the spec sheet's 1.5 mΩ minimum. The cells were running more efficiently than the datasheet implied.
                         </p>
                         <p class="background-description">
-                            I built a 3D surface in MATLAB mapping DCIR against temperature and SoC, then fit it to a third-order polynomial so it could feed into the thermal simulation the team was developing.
+                            I built a 3D surface in MATLAB mapping DCIR against temperature and SoC, then fit it to a third-order polynomial for the team's thermal simulation.
                         </p>
                         <figure class="post-figure">
                             <div class="dual-image-container" style="display: flex; gap: 1em; justify-content: center; flex-wrap: wrap;">
@@ -767,13 +767,13 @@
                             <figcaption class="post-caption">DCIR surface against temperature and SoC: raw dataset (left) and third-order polynomial fit (right).</figcaption>
                         </figure>
                         <p class="background-description">
-                            Running the thermal model with the real DCIR data — using a 1.5x factor of safety derived from RC recovery analysis — the pack's peak temperature stayed well below 60°C, the maximum allowable cell temperature under the rules, for the full endurance duration. The liquid cooling system wasn't just overkill, it was completely unnecessary.
+                            Running the thermal model with real DCIR data and a 1.5x safety factor from RC recovery analysis, the pack's peak temperature stayed well below 60°C (the rules maximum) for the full endurance duration. The liquid cooling system wasn't just overkill. It was unnecessary.
                         </p>
                     </div>
                     <div class="background-container">
                         <h3 class="background-title">Redesign</h3>
                         <p class="background-description">
-                            With the data confirming that passive heat mass was sufficient, I stripped out everything from the liquid system: the base plate, U-shims, thermal pads, pump, and radiator. In their place I added 10 brushless DC fans — 5 always-on for penthouse electronics cooling, and 5 BMS-relayed above the modules as a backup for cell cooling if needed. Regardless of whether the cell fans are active, airflow always intakes over the cell tabs and exhausts through the penthouse vents. Simple, lightweight, and the BMS relay gives it a real failsafe for anomalies like connection degradation.
+                            With passive heat mass confirmed sufficient, I stripped the liquid system: base plate, U-shims, thermal pads, pump, and radiator. In their place I added 10 fans: 5 always-on for penthouse electronics cooling, 5 BMS-relayed above the modules as backup for cell cooling. Whether or not the cell fans are active, airflow intakes over the cell tabs and exhausts through the penthouse vents. Simple, lightweight, and the BMS relay gives it a failsafe for anomalies like connection degradation.
                         </p>
                         <figure class="post-figure">
                             <img src="images/PenthouseFans.png" alt="Redesigned cooling architecture" class="background-image slide-up" style="animation-delay: 0.3s; width: 90%; display: block; margin: 0 auto;">
@@ -781,15 +781,15 @@
                         </figure>
                     </div>
                     <div class="background-container">
-                        <h3 class="background-title">Specific Heat — Freezer Calorimetry</h3>
+                        <h3 class="background-title">Specific Heat: Freezer Calorimetry</h3>
                         <p class="background-description">
-                            There was no published specific heat data for these cells, so the team had been using aluminum as a stand-in for thermal simulations. I wanted to actually validate that before it fed into anything important. With some styrofoam, thermocouples, and my freezer, I set up a basic calorimetry test — first on aluminum blocks to establish a calibration multiplier, then on the cell itself. The results were surprisingly consistent across runs, landing at an average of 0.954 J/g°C. Not aluminum, but close enough that the simulations weren't wildly off.
+                            No published specific heat data existed for these cells, so the team was using aluminum as a stand-in. I wanted to validate that before it fed into anything important. With styrofoam, thermocouples, and my freezer, I set up a calorimetry test: first on aluminum blocks to establish a calibration multiplier, then on the cell itself. Results were consistent across runs, averaging 0.954 J/g°C. Not aluminum, but close enough that the simulations weren't wildly off.
                         </p>
                     </div>
                     <div class="background-container">
                         <h3 class="background-title">Takeaways</h3>
                         <p class="background-description">
-                            The biggest lesson from this project is that spec sheets for cells like these are essentially useless for thermal design — they're written for general-purpose consumers, not race applications. Actually characterizing the cells under realistic conditions completely changed the design direction, saved meaningful weight, and gave the team a much better thermal model based on real data rather than conservative guesses. Sometime in the future I'd like to revisit this with proper temperature chamber access to fill in the edges of the DCIR map and run higher C-rate tests I couldn't reach with the resistor load bank.
+                            The biggest lesson is that spec sheets for cells like these are useless for thermal design. They're written for general consumers, not race applications. Characterizing the cells under real conditions changed the design direction, saved weight, and gave the team a thermal model based on real data instead of guesses. I'd like to revisit this with proper temperature chamber access to fill in the edges of the DCIR map and run higher C-rate tests I couldn't reach with the load bank.
                         </p>
                     </div>
                 </div>
