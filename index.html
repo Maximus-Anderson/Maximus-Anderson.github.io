@@ -58,6 +58,16 @@
     </div>
 
     <div class="projects-banners-panel" id="projects-banners">
+        <div class="project-banner" data-page="project-pack">
+            <div class="banner-img-wrap">
+                <img src="images/TB-001-CR30_Render_1.png" alt="CR30 Battery Pack: Design and Manufacture">
+            </div>
+            <div class="banner-info">
+                <h3>CR30 Battery Pack: Design and Manufacture</h3>
+                <span class="banner-arrow">→</span>
+            </div>
+        </div>
+
         <div class="project-banner" data-page="project-cell">
             <div class="banner-img-wrap">
                 <img src="images/DCIRMap10-11-25.png" alt="CR30 Battery Pack: Thermal Optimization">
@@ -181,6 +191,13 @@
                         <p class="background-description">
                             A lot of time went into fitting each panel before tacking so the housing would match CAD. Even then, it wasn't perfect. For CR30, the plan is to add slots to the mating edges so panels self-locate when assembled. That cuts fitment time and removes the need for careful alignment before every tack.
                         </p>
+                        <figure class="post-figure">
+                            <div class="dual-image-container" style="display: flex; gap: 1em; justify-content: center; flex-wrap: wrap;">
+                                <img src="images/CR29_Welding_Jigging.jpg" alt="CR29 housing panels jigged for welding" class="background-image slide-up" style="animation-delay: 0.3s; flex: 1; max-width: 38%;">
+                                <img src="images/CR29_Near_Complete_Container.jpg" alt="CR29 housing near complete" class="background-image slide-up" style="animation-delay: 0.3s; flex: 1; max-width: 38%;">
+                            </div>
+                            <figcaption class="post-caption">CR29 housing panels fixtured for welding (left), and the container near complete (right). Every panel needed external clamping to hold square before tacking.</figcaption>
+                        </figure>
                     </div>
 
                     <div class="background-container">
@@ -200,6 +217,12 @@
                         <figure class="post-figure">
                             <img src="images/tractivebatterymanufacture.jpg" alt="Tractive Battery Manufacture" class="background-image slide-up" style="animation-delay: 0.3s;">
                             <figcaption class="post-caption">Module assembly in progress: cells, tab blocks, and clamping plates layered into the stack.</figcaption>
+                        </figure>
+                        <figure class="post-figure">
+                            <div style="max-width: 700px; margin: 0 auto; overflow: hidden; aspect-ratio: 4 / 3;">
+                                <img src="images/CR29_First_Module.jpg" alt="First completed CR29 module" class="background-image slide-up" style="animation-delay: 0.3s; width: 100%; height: 100%; object-fit: cover; object-position: center 75%;">
+                            </div>
+                            <figcaption class="post-caption">The first completed CR29 module after cell stacking, tab folding, and BMS sense harnessing.</figcaption>
                         </figure>
                     </div>
 
@@ -221,6 +244,10 @@
                         <p class="background-description">
                             The full list from this build: add self-jigging slots to the housing panels, redesign the nut pockets with tighter interference fits so they lock mechanically without JB Weld, measure actual cells before finalizing compression plate dimensions, fully enclose the terminal connections, reduce bolt count, and clean up harness routing. The accumulator worked well enough for testing. Building it showed where the next generation needs to be different.
                         </p>
+                        <figure class="post-figure">
+                            <img src="images/CR29_Complete_Pack_And_Messy_Penthouse.jpg" alt="Completed CR29 pack with messy penthouse wiring" class="background-image slide-up" style="animation-delay: 0.3s;">
+                            <figcaption class="post-caption">CR29 pack complete, penthouse wiring visible. The harness routing mess in this photo is what CR30's cleanup targeted.</figcaption>
+                        </figure>
                     </div>
                 </div>
 
@@ -830,6 +857,310 @@
                     </div>
                 </div>
                 <button class="back-button slide-up" style="animation-delay: 1.2s;" data-page="projects">Back to Projects</button>
+            </div>
+        </section>
+    </div>
+
+    <div id="project-pack-page" class="page">
+        <section class="project-detail-section">
+            <div class="project-detail-container">
+                <h1 class="project-detail-title fade-in">CR30 Battery Pack: Design and Manufacture</h1>
+                <div class="post-meta fade-in" style="animation-delay: 0.1s;">
+                    <span class="post-meta-date">April 2026</span>
+                    <span class="post-meta-sep">·</span>
+                    <span class="post-meta-chips">
+                        <span class="post-meta-chip">Design</span>
+                        <span class="post-meta-chip">Manufacture</span>
+                        <span class="post-meta-chip">Lead</span>
+                    </span>
+                    <span class="post-meta-sep">·</span>
+                    <span class="post-meta-read">~7 min read</span>
+                </div>
+                <figure class="post-figure slide-up">
+                    <div style="overflow: hidden; width: 100%; max-width: 800px; margin: 0 auto; background: transparent;">
+                        <img src="images/TB-001-CR30_Render_1.png" alt="CR30 Battery Pack" class="project-detail-image" style="transform: scale(1.15); transform-origin: center; width: 100%; background: transparent;">
+                    </div>
+                    <figcaption class="post-caption">CR30 pack render, full assembly.</figcaption>
+                </figure>
+                <div class="project-detail-content slide-up" style="animation-delay: 0.2s;">
+                    <p class="project-detail-description">
+                        Powertrain lead on Cyclone Racing's second electric pack. What worked, what didn't, and what's to come.
+                    </p>
+                    <div class="side-boxes-container">
+                        <div class="specs-container">
+                            <h3 class="specs-title">Specifications</h3>
+                            <ul class="specs-list">
+                                <li>Configuration: 28s per module, 5 modules in series</li>
+                                <li>Cells: COSMX CA95B0D0HD (carried from CR29)</li>
+                                <li>Pack voltage: 600V nominal</li>
+                                <li>Mass: ~140 lbs</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="background-container">
+                        <h3 class="background-title">Context</h3>
+                        <p class="background-description">
+                            CR30 is my second tractive battery pack for Cyclone Racing and the team's first electric car to run under its own power. I was powertrain lead through manufacturing, responsible for the full pack build: modules, aluminum housing, HV integration, chassis fit-up, and BMB commissioning. I also drove the pack-level design changes off CR29: a redesigned module basket, self-jigging slots on the housing, and cantilever retention on the tab blocks.
+                        </p>
+                        <p class="background-description">
+                            Cells carry over from CR29: we didn't run them in competition and didn't have budget for new ones. The thermal architecture (ten fans, no liquid loop) sits in its own post: <a href="#" class="inline-page-link" data-page="project-cell">CR30 Battery Pack: Thermal Optimization for Endurance</a>. I also manufactured the CR29 pack, covered in the <a href="#" class="inline-page-link" data-page="project-fsae">CR29 Accumulator: Manufacture</a> post. This post covers the mechanical, electrical, and structural build.
+                        </p>
+                    </div>
+
+                    <div class="background-container">
+                        <h3 class="background-title">Module Baskets</h3>
+                        <p class="background-description">
+                            Each basket is a printed PAHT-CF shell that holds 28 cells, isolates them from the housing, and keeps the stack rigid under load. CR29 used polycarbonate baskets. PAHT-CF was chosen for CR30 after testing it against other carbon-impregnated and non-carbon filaments for impact resistance.
+                        </p>
+                        <p class="background-description">
+                            Printing them was a month-long fight. PAHT-CF wants to warp off the bed and warps especially badly in Z. I ran test articles on every printer I could get time on across the university and the team, and every one came out with too much deformation to use. Temporary access to a Bambu H2D finally gave me a print that warped only in Z, and only a little. I dialed in a +1.25% Z-scale to cancel the remaining shrinkage and had a basket I could print five of.
+                        </p>
+                        <p class="background-description">
+                            Even on the H2D, surface quality was rough. Every basket came out with burrs I wasn't comfortable pressing cells against, so I sanded all five by hand before assembly. A burr through a pouch cell turns the pack into a fire risk, not worth the time saved.
+                        </p>
+                        <figure class="post-figure">
+                            <div class="dual-image-container" style="display: flex; gap: 1em; justify-content: center; flex-wrap: wrap;">
+                                <img src="images/PAHT-CF_Basket_Burrs.jpg" alt="PAHT-CF basket surface burrs" class="background-image slide-up" style="animation-delay: 0.3s; flex: 1; max-width: 48%;">
+                                <img src="images/PAHT-CF_Basket_Burrs_2.jpg" alt="PAHT-CF basket surface burrs, second angle" class="background-image slide-up" style="animation-delay: 0.3s; flex: 1; max-width: 48%;">
+                            </div>
+                            <figcaption class="post-caption">Surface quality off the H2D. Every basket came out with burrs like these before sanding.</figcaption>
+                        </figure>
+                        <p class="background-description">
+                            The basket has one open face. A close-out plate bolts in and sandwiches the cells against the opposite wall. CAD called for about a millimeter of clearance. Real parts had none. Closing a basket around its cells takes real force (not instrumented, but not a one-person job), which technically applies a stack pressure I didn't design for. DCIR isn't sensitive to stack pressure on these cells (receipts in the thermal post), so it doesn't hurt performance.
+                        </p>
+                    </div>
+
+                    <div class="background-container">
+                        <h3 class="background-title">Tab Plates and Tab Blocks</h3>
+                        <p class="background-description">
+                            The tab plate is a PETG print that holds the 28 cell positions, the Amphenol maintenance posts, and the tab blocks. Cell tabs slot through the plate, fold between two tab blocks, and clamp together to minimize contact resistance across the joint. The whole assembly drops into the basket for structural protection.
+                        </p>
+                        <p class="background-description">
+                            On CR29 each tab block was bolted on both ends. For CR30 I sketched a cantilever redesign and pushed it through design review after the initial proposal had stress concentrators I wasn't comfortable with: one end slots into a PETG feature on the plate, the other bolts down. It halves the fastener count and removes the stress concentrators from the load path.
+                        </p>
+                        <p class="background-description">
+                            The tab blocks are aluminum: the clamp needed to be light, stiff, and conductive enough to double as a thermal path off the tabs.
+                        </p>
+                        <p class="background-description">
+                            The bolts thread into aluminum nuts held in pockets in the PETG. On CR29 those pockets had clearance, so the nuts couldn't be held square: if one shifted as a bolt seated, the bolt rounded it. For CR30 I moved to an interference fit to lock the nuts in place. I test-printed a range of interferences and 0.05 mm pressed in cleanly without splitting the PETG. The CR30 nuts happened to be a slightly rounder spec than CR29's, and even with the interference holding them, seating the bolts with a tool deformed the pockets and took my preload with them. I got everything tight, but couldn't crank harder without rounding the pockets further. Contact resistance across those joints is unvalidated.
+                        </p>
+                        <p class="background-description">
+                            Ultrasonic or laser welding the cell tabs directly on CR31 deletes this whole stack: no tab blocks, no nut pockets, no fastener preload to worry about. Sponsor search is ongoing.
+                        </p>
+                    </div>
+
+                    <div class="background-container">
+                        <h3 class="background-title">BMBs</h3>
+                        <p class="background-description">
+                            Each module has a battery management board (BMB) on top, interfacing with the cell tabs through pogo pins. I ordered the bare PCBs from JLC, assembled the components, and led commissioning. Several issues surfaced and cost us weeks to work through.
+                        </p>
+                        <figure class="post-figure">
+                            <img src="images/7_BMBs_Assembled_No_Connector.jpg" alt="Seven assembled BMBs" class="background-image slide-up" style="animation-delay: 0.3s;">
+                            <figcaption class="post-caption">Seven BMBs assembled from bare JLC blanks: five for the modules, two held back as spares.</figcaption>
+                        </figure>
+                        <p class="background-description">
+                            The biggest issue was stiffness. The BMB was mounted on both ends but unsupported in the middle, and the pogo pins push up against the tab blocks with real force. The board flexed under that load, the center pogo pins lost contact with the cells, and sense signals dropped. A vertical retention stack for the cell sense harness already existed in the design, but its plastic insulation was borderline sketchy and I wanted to tighten it up anyway. While redesigning it I realized the same part could do double duty as a load path across the central top face of the BMB. The new stack is a single assembly (steel rod, plastic insulator, stiffener) that clips in, pushes the BMB flat against the tab blocks, and restores contact on the center pogo pins. No board redesign needed.
+                        </p>
+                        <figure class="post-figure">
+                            <img src="images/CR30_BMB_retention+Insulation.jpg" alt="BMB retention stack and insulation assembly" class="background-image slide-up" style="animation-delay: 0.3s;">
+                            <figcaption class="post-caption">The redesigned retention stack: steel rod, plastic insulator, and stiffener as one assembly, seating the BMB flat and restoring contact on the center pogo pins.</figcaption>
+                        </figure>
+                        <p class="background-description">
+                            A few smaller issues also cost us time:
+                        </p>
+                        <ul class="background-description" style="margin-left: 2em;">
+                            <li><strong>Harness termination:</strong> The sense harness routed cell 12, cell 13-, and cell 13 as three separate terminations. In a series stack cell 12's positive tap is the same node as cell 13's negative tap, so those two sense wires need to share a termination. Because they didn't, the BMS read ten of the cells as missing until I rewired the harness.</li>
+                            <li><strong>Missing trace:</strong> One trace was absent on the production boards. There wasn't time to re-order the PCBs, so every board currently carries a jumper wire where the trace should have been.</li>
+                            <li><strong>Thermistor routing:</strong> The thermistor traces share a common plane, so a wire termination brushing a cell during installation can blow a trace. It happened twice before I started covering the pins with Kapton tape while mounting the rest of the board, then pulling the tape off once everything was secured. The board that blew had all its components swapped onto one of the spare blanks I'd ordered.</li>
+                            <li><strong>Connector:</strong> The chosen sense connector isn't robust to alignment error. Slight mis-mating arcs the pins and takes out fuses. Not fixable in this revision.</li>
+                        </ul>
+                        <figure class="post-figure">
+                            <div class="dual-image-container" style="display: flex; gap: 1em; justify-content: center; flex-wrap: wrap;">
+                                <img src="images/CR30_Module_complete_with_BMB_But_blown_trace.jpg" alt="Module with BMB installed, blown thermistor trace" class="background-image slide-up" style="animation-delay: 0.3s; flex: 1; max-width: 48%;">
+                                <img src="images/Blown_trace_BMB_Removed_Pic_of_trace.jpg" alt="Closeup of blown thermistor trace on removed BMB" class="background-image slide-up" style="animation-delay: 0.3s; flex: 1; max-width: 48%;">
+                            </div>
+                            <figcaption class="post-caption">A completed module with its BMB seated (left), and the blown thermistor trace on the removed board up close (right). After this one, every install got Kapton tape over the pins until the board was secured.</figcaption>
+                        </figure>
+                        <p class="background-description">
+                            These boards were supposed to make BMS harnessing cleaner than CR29's hand-terminated wiring. In the current state they work after rescue, and they're the single biggest CR31 rework item.
+                        </p>
+                        <p class="background-description">
+                            One oversight I caught late: the baskets had no lifting provision. When I needed to pull a module for service, there was no clean way to do it. I designed a lifting tool in about twenty minutes that drops into the same holes as the vertical retention stack, so the retention and the lift point share the same interface.
+                        </p>
+                        <figure class="post-figure">
+                            <div class="dual-image-container" style="display: flex; gap: 1em; justify-content: center; flex-wrap: wrap; align-items: flex-start;">
+                                <img src="images/CR30_Module_Lift_Tool_Pic_1.jpg" alt="Module lifting tool" class="background-image slide-up" style="animation-delay: 0.3s; flex: 1; max-width: 38%; aspect-ratio: 5/6; object-fit: cover; object-position: center;">
+                                <img src="images/CR30_Module_Lift_Tool_Pic_2.jpg" alt="Module lifting tool, second angle" class="background-image slide-up" style="animation-delay: 0.3s; flex: 1; max-width: 38%; aspect-ratio: 5/6; object-fit: cover; object-position: center;">
+                            </div>
+                            <figcaption class="post-caption">The lifting tool, built in about twenty minutes. Interfaces with the basket through the same holes the retention stack uses.</figcaption>
+                        </figure>
+                    </div>
+
+                    <div class="background-container">
+                        <h3 class="background-title">The Aluminum Housing</h3>
+                        <p class="background-description">
+                            The housing is a welded aluminum enclosure that holds all five modules, the BMS, and the HV distribution. On CR29 the panel edges were flat, which meant every seam needed external clamps to hold panels square during weld-up. The walls warped anyway. For CR30 I cut slots into the internal walls and matching tabs along the external walls so the panels self-jig: each external tab drops into its slot, flush on the inside, no clamps. It worked phenomenally on every seam where I added it.
+                        </p>
+                        <figure class="post-figure">
+                            <div class="dual-image-container" style="display: flex; gap: 1em; justify-content: center; flex-wrap: wrap;">
+                                <img src="images/TB_Container_Layout_All_Waterjet_Parts_with_slots_and_tabs_CR30.jpg" alt="Waterjet aluminum panels with slot and tab features" class="background-image slide-up" style="animation-delay: 0.3s; flex: 1; max-width: 48%;">
+                                <img src="images/Self_Jigged_TB_Container_CR30.jpg" alt="Self-jigged housing assembly" class="background-image slide-up" style="animation-delay: 0.3s; flex: 1; max-width: 48%;">
+                            </div>
+                            <figcaption class="post-caption">Waterjet aluminum panels with slot and tab features cut in (left), and the same panels dropped into self-jigged assembly (right). No external clamps needed on any seam where the feature was present.</figcaption>
+                        </figure>
+                        <figure class="post-figure">
+                            <div class="dual-image-container" style="display: flex; gap: 1em; justify-content: center; flex-wrap: wrap;">
+                                <img src="images/Self_Jigged_TB_COntainer_CR30_Isometric_Pic.jpg" alt="Self-jigged housing, isometric view" class="background-image slide-up" style="animation-delay: 0.3s; flex: 1; max-width: 48%;">
+                                <img src="images/Jigged_TB_Container_CR30_For_Easier_Tacks.jpg" alt="Self-jigged housing ready for tack welds" class="background-image slide-up" style="animation-delay: 0.3s; flex: 1; max-width: 48%;">
+                            </div>
+                            <figcaption class="post-caption">Isometric view of the self-jigged container (left), and the same jig holding panels square for tack welds (right).</figcaption>
+                        </figure>
+                        <p class="background-description">
+                            I missed the corner pieces. After welding wrapped up, I looked at the pack from inside and caught one corner visibly bent inward. It compressed the HV distribution region enough that the original corner plan no longer fit, triggering the redesign in the next section.
+                        </p>
+                    </div>
+
+                    <div class="background-container">
+                        <h3 class="background-title">HV Distribution</h3>
+                        <p class="background-description">
+                            CR29 ran a single beefy Amphenol connector in one corner of the pack with Coroflex HV cable handling all module-to-module routing. CR30 started from the same pattern. Midway through design, more senior members of the team proposed replacing it with a printed sleeve in that same corner (the "Power Prism") holding the contactors, the main fuse, and properly-sized copper busbars. Better packaging, fewer long HV runs, cleaner safety story. It became the new plan.
+                        </p>
+                        <p class="background-description">
+                            The busbar sizing that made the sleeve viable came from a conductor recalculation: the cross-sections we'd been pulling from ampacity tables were too conservative for a pack that sees peak current for seconds at a time with ambient convection. Re-deriving them from ρ·L/A with endurance-duration heat rejection dropped the copper significantly. I ran a material comparison study for the busbars and contributed supporting calcs.
+                        </p>
+                        <p class="background-description">
+                            After my missed corner slots warped the housing inward, the corner volume shrank below what the original sleeve fit into. I coordinated the sleeve redesign with newer members of the team to fit the reduced volume.
+                        </p>
+                        <figure class="post-figure">
+                            <div style="max-width: 700px; margin: 0 auto;">
+                                <img src="images/CR30_PowerPrism_In_Container.jpg" alt="Power Prism sleeve installed in the pack corner" class="background-image slide-up" style="animation-delay: 0.3s; width: 100%;">
+                            </div>
+                            <figcaption class="post-caption">The Power Prism sleeve installed in the corner of the pack, holding the contactors, the main fuse, and the busbar routing.</figcaption>
+                        </figure>
+                        <p class="background-description">
+                            Open item for CR31: the main contactors currently terminate toward the center of the pack rather than at the adjacent module poles right next to them, even though electrically those points are the same. Moving termination to the corner replaces most of the wire runs with busbars, frees up space in the center of the pack, reduces the risk of mis-plugging the connectors, and drops a small amount of weight from shorter runs.
+                        </p>
+                    </div>
+
+                    <div class="background-container">
+                        <h3 class="background-title">Wiring Harness</h3>
+                        <p class="background-description">
+                            The pack carries a dense low-voltage harness for BMS sense lines, thermistors, contactor drives, pre-charge logic, and the shutdown loop. The wiring diagram was laid out by more senior members of the team. I built the physical harness from that diagram, crimping, terminating, and running each loom as the electrical subsystem boards came off bench testing.
+                        </p>
+                    </div>
+
+                    <div class="background-container">
+                        <h3 class="background-title">Chassis Mounts</h3>
+                        <p class="background-description">
+                            The pack mounts to the chassis through ten bolted mounts: four at the rear and six at the front, all bolted through pre-preg inserts (pucks) laid up into the monocoque before cure.
+                        </p>
+                        <figure class="post-figure">
+                            <div class="dual-image-container" style="display: flex; gap: 1em; justify-content: center; flex-wrap: wrap;">
+                                <img src="images/Chassis_Puck_Interts_CR30.jpg" alt="Pre-preg insert pucks in the CR30 monocoque" class="background-image slide-up" style="animation-delay: 0.3s; flex: 1; max-width: 48%;">
+                                <img src="images/Chassis_Puck_Inserts_Low_Angle.jpg" alt="Pre-preg pucks, low angle" class="background-image slide-up" style="animation-delay: 0.3s; flex: 1; max-width: 48%;">
+                            </div>
+                            <figcaption class="post-caption">Pre-preg insert pucks laid into the CR30 monocoque before cure, shown in two angles. The front pucks came out proud of the surrounding surface, driving the spacer fix below.</figcaption>
+                        </figure>
+                        <figure class="post-figure">
+                            <img src="images/Tab_Shims_Sizing_Temporary_Fit.jpg" alt="Shims sizing pack-to-chassis mount tabs" class="background-image slide-up" style="animation-delay: 0.3s;">
+                            <figcaption class="post-caption">Shims sizing the pack-to-chassis mount tabs during dimensional fit-up.</figcaption>
+                        </figure>
+                        <p class="background-description">
+                            The four rear pucks came out flush and those mounts bolted on without drama. The six front pucks came out proud of the surrounding surface, so the front mounts sat higher than the pack's corresponding mounting points. The pack itself was already positioned and couldn't move, so I lowered each front mount until its bottom sat flush with the pack, added aluminum block spacers sized to bridge each gap, and drilled the bolt holes using the pack and chassis together as the fixture.
+                        </p>
+                        <p class="background-description">
+                            The SES (Structural Equivalency Spreadsheet) we submit to FSAE requires a minimum of ten mounts for the geometry we used, and the shifted front mounts would have failed strength as drilled. The spacers were machined, welded to the bottom of each mount, and ground flush. I specced them in SES to confirm the revised geometry cleared the strength requirement. Not elegant. It cleared.
+                        </p>
+                        <figure class="post-figure">
+                            <img src="images/CR30Pack_In_Chassis_First_Time.jpg" alt="CR30 pack installed in the chassis for the first time" class="background-image slide-up" style="animation-delay: 0.3s;">
+                            <figcaption class="post-caption">The CR30 pack in the chassis for the first time, after the drill-and-spacer fit-up.</figcaption>
+                        </figure>
+                        <p class="background-description">
+                            CR31 moves to post-cure bonded inserts. The biggest reason isn't side-to-side placement, it's surface finish: bonded inserts come out flush and flat, so a mount sits where it needs to without spacers or last-minute geometry tweaks to pass SES.
+                        </p>
+                    </div>
+
+                    <div class="background-container">
+                        <h3 class="background-title">Troubleshooting</h3>
+                        <p class="background-description">
+                            First drive was scheduled for March 1. It's April 19 and the pack still isn't powering the car. The holdup has mostly been the electrical subsystem boards (SSI, pre-charge, shutdown, HVI): roughly six revisions to pass bench testing, and even the passing revisions haven't cleared the car-level tests. One version couldn't carry the full shutdown loop. Another used relays with too much coil resistance, dropping the drive voltage below what the contactors needed to close reliably. Because the wiring harness couldn't be finalized until those boards were settled, every iteration on the board side pushed the harness and the first drive out with it.
+                        </p>
+                        <p class="background-description">
+                            On top of the board schedule, an incident during work inside the pack had an allen key touch exposed pins on a BMB connector, arc, and blow eight individual cell fuses on the board. I pulled the board, replaced the fuses, and reset for the next attempt.
+                        </p>
+                        <p class="background-description">
+                            Commissioning an electric car under its own power is a first for most of the team. The list of things that have to work simultaneously is long, and electrical failure modes are nastier than mechanical ones because you often can't see them coming. I'll update this writeup once the car drives.
+                        </p>
+                    </div>
+
+                    <div class="background-container">
+                        <h3 class="background-title">Notes for CR31</h3>
+                        <p class="background-description">
+                            The punchlist this season earned:
+                        </p>
+                        <ol class="background-description" style="margin-left: 2em;">
+                            <li><strong>Welded cell tabs:</strong> Deletes the tab block and nut pocket stack entirely.</li>
+                            <li><strong>Self-jigging slots on every wall interface:</strong> Including the corners.</li>
+                            <li><strong>Post-cure bonded chassis inserts:</strong> Flush, flat, no spacer workarounds.</li>
+                            <li><strong>BMB redesign:</strong> Better sense connector, correct harness termination, correct trace set, proper thermistor isolation.</li>
+                            <li><strong>HV termination at the corner:</strong> Short busbars to interlock connectors on adjacent modules.</li>
+                            <li><strong>Possible move to a composite housing:</strong> Pending materials analysis. Aluminum is heavy for the job it's doing here.</li>
+                            <li><strong>Melasta pouches if budget allows:</strong> Higher energy density lets us shrink the pack and stop being overkill at 600V.</li>
+                            <li><strong>Prototype more:</strong> Roughly 70% of CR30 parts had minor issues that a single 3D print or foam mockup would have caught in the design phase.</li>
+                        </ol>
+                    </div>
+                    <figure class="post-figure">
+                        <img src="images/Holding_the_CR30Pack_Minus_Penthouse.jpg" alt="Team presenting the completed CR30 pack" class="background-image slide-up" style="animation-delay: 0.3s;">
+                        <figcaption class="post-caption">The completed CR30 Pack! Mostly...</figcaption>
+                    </figure>
+                </div>
+                <h3 class="timeline-title slide-up" style="animation-delay: 0.4s;">Project Timeline</h3>
+                <div class="timeline slide-up" style="animation-delay: 0.4s;">
+                    <div class="timeline-content">
+                        <div class="timeline-track"></div>
+                        <div class="timeline-item" style="animation-delay: 0.6s;">
+                            <div class="timeline-marker" data-description="pack-desc-1">
+                                <span class="timeline-date">September 2025</span>
+                                <h4>Milestone 1: Design Phase</h4>
+                            </div>
+                        </div>
+                        <div class="timeline-item" style="animation-delay: 0.8s;">
+                            <div class="timeline-marker" data-description="pack-desc-2">
+                                <span class="timeline-date">November 2025</span>
+                                <h4>Milestone 2: Manufacturing Begins</h4>
+                            </div>
+                        </div>
+                        <div class="timeline-item" style="animation-delay: 1.0s;">
+                            <div class="timeline-marker" data-description="pack-desc-3">
+                                <span class="timeline-date">February 2026</span>
+                                <h4>Milestone 3: Modules and Housing Complete</h4>
+                            </div>
+                        </div>
+                        <div class="timeline-item" style="animation-delay: 1.2s;">
+                            <div class="timeline-marker" data-description="pack-desc-4">
+                                <span class="timeline-date">March 2026</span>
+                                <h4>Milestone 4: Commissioning Begins</h4>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="timeline-popup" class="timeline-popup">
+                        <button class="popup-close">×</button>
+                        <div id="pack-desc-1" class="timeline-description-content" style="display: none;">
+                            <p>Locked the pack-level design changes off CR29: PAHT-CF module basket with FEA validated to 40G lateral impact, cantilever tab block retention, and self-jigging slots on the aluminum housing. Design phase closed November 1.</p>
+                        </div>
+                        <div id="pack-desc-2" class="timeline-description-content" style="display: none;">
+                            <p>Began manufacturing. Took ownership of the full pack build: modules, the aluminum housing, HV integration, and chassis mount fit-up.</p>
+                        </div>
+                        <div id="pack-desc-3" class="timeline-description-content" style="display: none;">
+                            <p>Finished five-module assembly and the welded aluminum housing. Caught the missed corner slots after weld-up, triggering the HV distribution sleeve redesign to fit the reduced corner volume.</p>
+                        </div>
+                        <div id="pack-desc-4" class="timeline-description-content" style="display: none;">
+                            <p>Pack integration wrapped and commissioning underway. First drive was targeted for March 1; ongoing electrical subsystem revisions and car-level debug have pushed the drive date out through April.</p>
+                        </div>
+                    </div>
+                </div>
+                <button class="back-button slide-up" style="animation-delay: 1.4s;" data-page="projects">Back to Projects</button>
             </div>
         </section>
     </div>

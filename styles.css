@@ -1490,6 +1490,17 @@ footer {
     padding: 0 1em;
 }
 
+.inline-page-link {
+    color: #ff8080;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+    cursor: pointer;
+    transition: color 0.15s ease;
+}
+.inline-page-link:hover {
+    color: #ff5555;
+}
+
 @media (max-width: 768px) {
     .post-meta {
         font-size: 1.2em;

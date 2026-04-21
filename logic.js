@@ -51,6 +51,14 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
+    document.querySelectorAll('.inline-page-link').forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            const targetPage = this.getAttribute('data-page');
+            if (targetPage) switchPage(targetPage);
+        });
+    });
+
     document.querySelectorAll('.nav-links a').forEach(a => {
         a.classList.toggle('active-link', a.getAttribute('data-page') === 'projects');
     });
