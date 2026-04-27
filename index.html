@@ -169,12 +169,6 @@
                         <p class="background-description">
                             The FSAE rules called the main high-voltage battery pack the accumulator. That terminology shifted to "tractive battery" in the 2026 ruleset, but for CR29 it was the accumulator. It isn't one big battery. It's a housing containing smaller sub-units called modules, wired in series to reach the total pack voltage. Each module is a self-contained group of cells. For CR29, each module holds 28 pouch cells wired in series with one cell per parallel group (28s1p). Five modules make up the full pack.
                         </p>
-                        <p class="background-description">
-                            The cells are COSMX CA95B0D0HD pouch cells: 13 Ah, 3.73 V nominal, 180 Wh/kg, 1.5 mΩ DCIR. Pouch cells are encased in a polymer film rather than a metal can, but they're still rigid in practice. The large, flat electrode area gives lower internal resistance, which means less heating and better power delivery under load. Energy density is also better, which matters for a car that has to stay under weight.
-                        </p>
-                        <p class="background-description">
-                            They do need careful handling. The polymer casing isn't as protective as a steel can. A dent, crease, or puncture can bring the anode and cathode into contact, creating an internal short. From there, the cell enters thermal runaway: a self-sustaining reaction that produces heat, gas, and fire. Lithium battery fires are bad because they generate their own oxygen and produce toxic gases including hydrogen fluoride. Not that I'd know anything about that... The tabs (aluminum on the cathode side, nickel-plated copper on the anode) aren't fragile, but bending them at the root can cause delamination where the tab meets the electrode.
-                        </p>
                     </div>
 
                     <div class="background-container">
@@ -232,7 +226,7 @@
                             The JB-welded nuts were the biggest problem. Because they weren't square in their pockets, some bolts cross-threaded on the way in. Once a bolt cross-threads into an epoxy-held nut, the nut breaks free. Now there's a loose nut inside a sealed module. Fixing it meant partially disassembling the stack mid-build. The bonded nuts also made disassembly difficult when modules needed to come apart for CR30.
                         </p>
                         <p class="background-description">
-                            Stack pressure was the second gap. Pouch cells need to be compressed during cycling to prevent swelling and dendrite growth. The module had compression plates, but the cell dimensions in CAD came from the datasheet, not actual measurements. Real cells ran about 0.7mm thinner than spec per cell. Across 28 cells, that's roughly 20mm of lost compression. The plates weren't doing much.
+                            Stack pressure was the second gap. Pouch cells need to be compressed during cycling to prevent swelling and dendrite growth. The module had compression plates, but the cell dimensions in CAD came from the datasheet, not actual measurements. Real cells ran about 0.7mm thinner than spec per cell. Across 28 cells, that's roughly 20mm of lost compression.
                         </p>
                         <p class="background-description">
                             The terminal bolts were a safety concern. The pack terminals were accessible from below even with TPU plugs installed. Live conductors there are a problem for inspections and for anyone whose hand ends up near the bottom of a live pack.
@@ -880,7 +874,7 @@
                     <div style="overflow: hidden; width: 100%; max-width: 800px; margin: 0 auto; background: transparent;">
                         <img src="images/TB-001-CR30_Render_1.png" alt="CR30 Battery Pack" class="project-detail-image" style="transform: scale(1.15); transform-origin: center; width: 100%; background: transparent;">
                     </div>
-                    <figcaption class="post-caption">CR30 pack render, full assembly.</figcaption>
+                    <figcaption class="post-caption">The CR30 pack. Second iteration, first one to drive.</figcaption>
                 </figure>
                 <div class="project-detail-content slide-up" style="animation-delay: 0.2s;">
                     <p class="project-detail-description">
@@ -914,7 +908,7 @@
                             Each basket is a printed PAHT-CF shell that holds 28 cells, isolates them from the housing, and keeps the stack rigid under load. CR29 used polycarbonate baskets. PAHT-CF was chosen for CR30 after testing it against other carbon-impregnated and non-carbon filaments for impact resistance.
                         </p>
                         <p class="background-description">
-                            Printing them was a month-long fight. PAHT-CF wants to warp off the bed and warps especially badly in Z. I ran test articles on every printer I could get time on across the university and the team, and every one came out with too much deformation to use. Temporary access to a Bambu H2D finally gave me a print that warped only in Z, and only a little. I dialed in a +1.25% Z-scale to cancel the remaining shrinkage and had a basket I could print five of.
+                            Printing them was a month-long fight. PAHT-CF wants to warp off the bed and warps especially badly in Z. I started on a Bambu A1 and X1 Carbon, but the basket footprint was too large for either bed. I moved to a Voron next, which had a closed chamber but no dedicated heater, and ran prototypes through every combination of print pattern, bed temperature, and speed I had time for. Every one came out with too much deformation to use. I finally got temporary access to a Bambu H2D and iterated on the basket geometry itself; by the third revision, warping was in a range I could live with. A +1.25% Z-scale canceled the remaining shrinkage, and I had a basket I could print five of.
                         </p>
                         <p class="background-description">
                             Even on the H2D, surface quality was rough. Every basket came out with burrs I wasn't comfortable pressing cells against, so I sanded all five by hand before assembly. A burr through a pouch cell turns the pack into a fire risk, not worth the time saved.
@@ -1024,7 +1018,7 @@
                     <div class="background-container">
                         <h3 class="background-title">HV Distribution</h3>
                         <p class="background-description">
-                            CR29 ran a single beefy Amphenol connector in one corner of the pack with Coroflex HV cable handling all module-to-module routing. CR30 started from the same pattern. Midway through design, more senior members of the team proposed replacing it with a printed sleeve in that same corner (the "Power Prism") holding the contactors, the main fuse, and properly-sized copper busbars. Better packaging, fewer long HV runs, cleaner safety story. It became the new plan.
+                            CR29 ran a single beefy Amphenol connector in one corner of the pack with Coroflex HV cable handling all module-to-module routing. CR30 started from the same pattern. Midway through design, more senior members of the team proposed replacing it with a printed sleeve in that same corner (the "Power Prism") holding the contactors, the main fuse, and properly-sized copper busbars. Better packaging, fewer long HV runs. It became the new plan.
                         </p>
                         <p class="background-description">
                             The busbar sizing that made the sleeve viable came from a conductor recalculation: the cross-sections we'd been pulling from ampacity tables were too conservative for a pack that sees peak current for seconds at a time with ambient convection. Re-deriving them from ρ·L/A with endurance-duration heat rejection dropped the copper significantly. I ran a material comparison study for the busbars and contributed supporting calcs.
@@ -1040,13 +1034,6 @@
                         </figure>
                         <p class="background-description">
                             Open item for CR31: the main contactors currently terminate toward the center of the pack rather than at the adjacent module poles right next to them, even though electrically those points are the same. Moving termination to the corner replaces most of the wire runs with busbars, frees up space in the center of the pack, reduces the risk of mis-plugging the connectors, and drops a small amount of weight from shorter runs.
-                        </p>
-                    </div>
-
-                    <div class="background-container">
-                        <h3 class="background-title">Wiring Harness</h3>
-                        <p class="background-description">
-                            The pack carries a dense low-voltage harness for BMS sense lines, thermistors, contactor drives, pre-charge logic, and the shutdown loop. The wiring diagram was laid out by more senior members of the team. I built the physical harness from that diagram, crimping, terminating, and running each loom as the electrical subsystem boards came off bench testing.
                         </p>
                     </div>
 
@@ -1082,15 +1069,42 @@
                     </div>
 
                     <div class="background-container">
-                        <h3 class="background-title">Troubleshooting</h3>
+                        <h3 class="background-title">First Drive</h3>
                         <p class="background-description">
-                            First drive was scheduled for March 1. It's April 19 and the pack still isn't powering the car. The holdup has mostly been the electrical subsystem boards (SSI, pre-charge, shutdown, HVI): roughly six revisions to pass bench testing, and even the passing revisions haven't cleared the car-level tests. One version couldn't carry the full shutdown loop. Another used relays with too much coil resistance, dropping the drive voltage below what the contactors needed to close reliably. Because the wiring harness couldn't be finalized until those boards were settled, every iteration on the board side pushed the harness and the first drive out with it.
+                            First drive was scheduled for March 1. We hit it on April 26. The path there ran through roughly six revisions of the electrical subsystem boards (SSI, pre-charge, shutdown, HVI) before they passed bench testing, and even the passing revisions didn't clear car-level tests on the first try. One version couldn't carry the full shutdown loop. Another used relays with too much coil resistance, dropping the drive voltage below what the contactors needed to close reliably. The wiring harness couldn't be finalized until those boards were settled, so each iteration shifted the schedule downstream.
                         </p>
                         <p class="background-description">
                             On top of the board schedule, an incident during work inside the pack had an allen key touch exposed pins on a BMB connector, arc, and blow eight individual cell fuses on the board. I pulled the board, replaced the fuses, and reset for the next attempt.
                         </p>
                         <p class="background-description">
-                            Commissioning an electric car under its own power is a first for most of the team. The list of things that have to work simultaneously is long, and electrical failure modes are nastier than mechanical ones because you often can't see them coming. I'll update this writeup once the car drives.
+                            The night before the drive, the wheels spun in reverse on a stand. I worked it at 1 a.m. convinced it was a polarity issue and went home. The next morning at 7 a.m., another team member found the actual cause: a software flag in the inverter config that flipped motor direction. One checkbox, fifteen seconds to fix.
+                        </p>
+                        <figure class="post-figure">
+                            <video src="images/TW1_1st_Drive_Trimmed_Web.mp4" class="background-image slide-up" style="animation-delay: 0.3s;" autoplay muted loop playsinline></video>
+                            <figcaption class="post-caption">The first time I got to clear the car as ready to drive.</figcaption>
+                        </figure>
+                        <p class="background-description">
+                            We didn't get away clean. Closing the contactors for the first time threw an Orion BMS fault. The BMS was reporting an open relay that didn't actually exist on the car: I'd left a config setting enabled during commissioning that told it to expect one. Cleared with a config change.
+                        </p>
+                        <p class="background-description">
+                            Then the inverter started cutting power on a >20% disagreement between the two accelerator pedal position sensor (APPS) potentiometers. We isolated each pot in turn to figure out whether the discrepancy was real or a sync-rate issue between how quickly the two channels updated.
+                        </p>
+                        <p class="background-description">
+                            The inverter kept tripping faults that didn't have a real source we could trace. Without the mainboard from the electrical sub, we had no live or logged telemetry to read the fault history off the bus. We worked around it by dropping the fault reset time from 5 s to 1 s, which let us keep driving through the spurious trips. Pragmatic, not the right fix. Definitely going to be reviewed before the next drive.
+                        </p>
+                        <figure class="post-figure">
+                            <img src="images/TW1_Ryan_Clearing_Inverter_Faults.JPG" alt="Inverter fault debugging during first test day" class="background-image slide-up" style="animation-delay: 0.3s;">
+                            <figcaption class="post-caption">A small group hands-on with the inverter while the rest of the team watched.</figcaption>
+                        </figure>
+                        <figure class="post-figure">
+                            <video src="images/TW1_Full_Power_Accel_Web.mp4" class="background-image slide-up" style="animation-delay: 0.3s;" autoplay muted loop playsinline></video>
+                            <figcaption class="post-caption">Final acceleration of the day, just before the voltage sag threw a low-SoC fault.</figcaption>
+                        </figure>
+                        <p class="background-description">
+                            With the reset workaround in place, we got real laps. The car drove at a 40 kW cap most of the day, and the pack swept from 3.46 V down to 3.29 V per cell with no battery faults. The run ended on a low-SoC trip, and the reason it ended early traces back to module assembly. We dropped a cell during build and swapped in a replacement without checking its SoC. By end of day that one cell had hit 3.296 V while the rest of the pack was still at 3.56 V...
+                        </p>
+                        <p class="background-description">
+                            Rain rolled in as we packed up. The water-tight grommets weren't all sealed yet, so the day was ending either way.
                         </p>
                     </div>
 
@@ -1107,6 +1121,7 @@
                             <li><strong>HV termination at the corner:</strong> Short busbars to interlock connectors on adjacent modules.</li>
                             <li><strong>Possible move to a composite housing:</strong> Pending materials analysis. Aluminum is heavy for the job it's doing here.</li>
                             <li><strong>Melasta pouches if budget allows:</strong> Higher energy density lets us shrink the pack and stop being overkill at 600V.</li>
+                            <li><strong>SoC-match replacement cells:</strong> Any cell swapped during module build needs its SoC matched to the rest before insertion. CR30 didn't, and one mismatched cell governed our first-drive run length.</li>
                             <li><strong>Prototype more:</strong> Roughly 70% of CR30 parts had minor issues that a single 3D print or foam mockup would have caught in the design phase.</li>
                         </ol>
                     </div>
@@ -1143,11 +1158,17 @@
                                 <h4>Milestone 4: Commissioning Begins</h4>
                             </div>
                         </div>
+                        <div class="timeline-item" style="animation-delay: 1.4s;">
+                            <div class="timeline-marker" data-description="pack-desc-5">
+                                <span class="timeline-date">April 2026</span>
+                                <h4>Milestone 5: First Drive</h4>
+                            </div>
+                        </div>
                     </div>
                     <div id="timeline-popup" class="timeline-popup">
                         <button class="popup-close">×</button>
                         <div id="pack-desc-1" class="timeline-description-content" style="display: none;">
-                            <p>Locked the pack-level design changes off CR29: PAHT-CF module basket with FEA validated to 40G lateral impact, cantilever tab block retention, and self-jigging slots on the aluminum housing. Design phase closed November 1.</p>
+                            <p>Locked the pack-level design changes off CR29: PAHT-CF module basket, cantilever tab block retention, and self-jigging slots on the aluminum housing. Design phase closed November 1.</p>
                         </div>
                         <div id="pack-desc-2" class="timeline-description-content" style="display: none;">
                             <p>Began manufacturing. Took ownership of the full pack build: modules, the aluminum housing, HV integration, and chassis mount fit-up.</p>
@@ -1156,11 +1177,14 @@
                             <p>Finished five-module assembly and the welded aluminum housing. Caught the missed corner slots after weld-up, triggering the HV distribution sleeve redesign to fit the reduced corner volume.</p>
                         </div>
                         <div id="pack-desc-4" class="timeline-description-content" style="display: none;">
-                            <p>Pack integration wrapped and commissioning underway. First drive was targeted for March 1; ongoing electrical subsystem revisions and car-level debug have pushed the drive date out through April.</p>
+                            <p>Pack integration wrapped and commissioning underway. First drive was targeted for March 1, but electrical subsystem revisions and car-level debug pushed the date back.</p>
+                        </div>
+                        <div id="pack-desc-5" class="timeline-description-content" style="display: none;">
+                            <p>First drive on April 26. The pack drove at a 40 kW cap with no battery faults; the day ended on a low-SoC trip traced to one mismatched replacement cell.</p>
                         </div>
                     </div>
                 </div>
-                <button class="back-button slide-up" style="animation-delay: 1.4s;" data-page="projects">Back to Projects</button>
+                <button class="back-button slide-up" style="animation-delay: 1.6s;" data-page="projects">Back to Projects</button>
             </div>
         </section>
     </div>
