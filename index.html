@@ -921,7 +921,7 @@
                             <figcaption class="post-caption">Surface quality off the H2D. Every basket came out with burrs like these before sanding.</figcaption>
                         </figure>
                         <p class="background-description">
-                            The basket has one open face. A close-out plate bolts in and sandwiches the cells against the opposite wall. CAD called for about a millimeter of clearance. Real parts had none. Closing a basket around its cells takes real force (not instrumented, but not a one-person job), which technically applies a stack pressure I didn't design for. DCIR isn't sensitive to stack pressure on these cells (receipts in the thermal post), so it doesn't hurt performance.
+                            The basket has one open face. A close-out plate bolts in and sandwiches the cells against the opposite wall. CAD called for about a millimeter of clearance. Real parts had none. Closing a basket around its cells is a two-person job, which applies a stack pressure I didn't design for. DCIR isn't sensitive to stack pressure on these cells (receipts in the thermal post), so it doesn't hurt performance.
                         </p>
                     </div>
 
@@ -940,7 +940,7 @@
                             The bolts thread into aluminum nuts held in pockets in the PETG. On CR29 those pockets had clearance, so the nuts couldn't be held square: if one shifted as a bolt seated, the bolt rounded it. For CR30 I moved to an interference fit to lock the nuts in place. I test-printed a range of interferences and 0.05 mm pressed in cleanly without splitting the PETG. The CR30 nuts happened to be a slightly rounder spec than CR29's, and even with the interference holding them, seating the bolts with a tool deformed the pockets and took my preload with them. I got everything tight, but couldn't crank harder without rounding the pockets further. Contact resistance across those joints is unvalidated.
                         </p>
                         <p class="background-description">
-                            Ultrasonic or laser welding the cell tabs directly on CR31 deletes this whole stack: no tab blocks, no nut pockets, no fastener preload to worry about. Sponsor search is ongoing.
+                            Ultrasonic or laser welding the cell tabs directly on CR31 deletes this whole stack: no tab blocks, no nut pockets, no fastener preload to worry about.
                         </p>
                     </div>
 
@@ -954,7 +954,7 @@
                             <figcaption class="post-caption">Seven BMBs assembled from bare JLC blanks: five for the modules, two held back as spares.</figcaption>
                         </figure>
                         <p class="background-description">
-                            The biggest issue was stiffness. The BMB was mounted on both ends but unsupported in the middle, and the pogo pins push up against the tab blocks with real force. The board flexed under that load, the center pogo pins lost contact with the cells, and sense signals dropped. A vertical retention stack for the cell sense harness already existed in the design, but its plastic insulation was borderline sketchy and I wanted to tighten it up anyway. While redesigning it I realized the same part could do double duty as a load path across the central top face of the BMB. The new stack is a single assembly (steel rod, plastic insulator, stiffener) that clips in, pushes the BMB flat against the tab blocks, and restores contact on the center pogo pins. No board redesign needed.
+                            The biggest issue was stiffness. The BMB was mounted on both ends but unsupported in the middle, and the pogo pins are spring-loaded against the tab blocks above, so the springs push the board downward. The board flexed under that load, the center pogo pins lost contact with the cells, and sense signals dropped. A vertical retention stack for the cell sense harness already existed in the design, but it didn't clamp tightly enough to keep the insulator from shifting in service, and I wanted to fix that anyway. While redesigning it I realized the same part could do double duty as a load path across the central top face of the BMB. The new stack is a single assembly (steel rod, plastic insulator, stiffener) that clips in, pushes the BMB flat against the tab blocks, and restores contact on the center pogo pins.
                         </p>
                         <figure class="post-figure">
                             <img src="images/CR30_BMB_retention+Insulation.jpg" alt="BMB retention stack and insulation assembly" class="background-image slide-up" style="animation-delay: 0.3s;">
@@ -994,7 +994,7 @@
                     <div class="background-container">
                         <h3 class="background-title">The Aluminum Housing</h3>
                         <p class="background-description">
-                            The housing is a welded aluminum enclosure that holds all five modules, the BMS, and the HV distribution. On CR29 the panel edges were flat, which meant every seam needed external clamps to hold panels square during weld-up. The walls warped anyway. For CR30 I cut slots into the internal walls and matching tabs along the external walls so the panels self-jig: each external tab drops into its slot, flush on the inside, no clamps. It worked phenomenally on every seam where I added it.
+                            The housing is a welded aluminum enclosure that holds all five modules, the BMS, and the HV distribution. On CR29 the panel edges were flat, which meant every seam needed external clamps to hold panels square during weld-up. The walls warped anyway. For CR30 I cut slots into the internal walls and matching tabs along the external walls so the panels self-jig: each external tab drops into its slot, flush on the inside, no clamps. It worked on every seam where I added it.
                         </p>
                         <figure class="post-figure">
                             <div class="dual-image-container" style="display: flex; gap: 1em; justify-content: center; flex-wrap: wrap;">
@@ -1018,7 +1018,7 @@
                     <div class="background-container">
                         <h3 class="background-title">HV Distribution</h3>
                         <p class="background-description">
-                            CR29 ran a single beefy Amphenol connector in one corner of the pack with Coroflex HV cable handling all module-to-module routing. CR30 started from the same pattern. Midway through design, more senior members of the team proposed replacing it with a printed sleeve in that same corner (the "Power Prism") holding the contactors, the main fuse, and properly-sized copper busbars. Better packaging, fewer long HV runs. It became the new plan.
+                            CR29 ran a single beefy Amphenol connector in one corner of the pack with Coroflex HV cable handling all module-to-module routing. CR30 started from the same pattern. Midway through design, more senior members of the team proposed replacing it with a printed sleeve in that same corner (the "Power Prism") holding the contactors, the main fuse, and properly-sized copper busbars. Better packaging, fewer long HV runs.
                         </p>
                         <p class="background-description">
                             The busbar sizing that made the sleeve viable came from a conductor recalculation: the cross-sections we'd been pulling from ampacity tables were too conservative for a pack that sees peak current for seconds at a time with ambient convection. Re-deriving them from ρ·L/A with endurance-duration heat rejection dropped the copper significantly. I ran a material comparison study for the busbars and contributed supporting calcs.
@@ -1079,6 +1079,10 @@
                         <p class="background-description">
                             The night before the drive, the wheels spun in reverse on a stand. I worked it at 1 a.m. convinced it was a polarity issue and went home. The next morning at 7 a.m., another team member found the actual cause: a software flag in the inverter config that flipped motor direction. One checkbox, fifteen seconds to fix.
                         </p>
+                        <figure class="post-figure">
+                            <video src="images/Wheels_Spinning_Backwards_Web.mp4" class="background-image slide-up" style="animation-delay: 0.3s;" autoplay muted loop playsinline></video>
+                            <figcaption class="post-caption">Wheels spinning the wrong way. I thought polarity. It was a checkbox.</figcaption>
+                        </figure>
                         <figure class="post-figure">
                             <video src="images/TW1_1st_Drive_Trimmed_Web.mp4" class="background-image slide-up" style="animation-delay: 0.3s;" autoplay muted loop playsinline></video>
                             <figcaption class="post-caption">The first time I got to clear the car as ready to drive.</figcaption>
