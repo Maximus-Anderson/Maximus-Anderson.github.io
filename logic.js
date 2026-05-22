@@ -6,12 +6,12 @@ document.addEventListener('DOMContentLoaded', function() {
     const logo = document.querySelector('.logo');
     const nav = document.querySelector('.navigation');
 
-    // Morph nav from banner → pill exactly when the car starts moving (SCROLL_CAM_START = 0.18)
+    // Morph nav from banner → pill exactly when the car starts moving (SCROLL_CAM_START = 0.12)
     function getCarMorphThreshold() {
         const driver = document.querySelector('.car-scroll-driver');
         if (!driver) return 80;
         const scrollable = driver.offsetHeight - window.innerHeight;
-        return 0.18 * scrollable + driver.offsetTop;
+        return 0.12 * scrollable + driver.offsetTop;
     }
 
     let morphThreshold = getCarMorphThreshold();
@@ -65,11 +65,19 @@ document.addEventListener('DOMContentLoaded', function() {
 
     logo.addEventListener('click', () => switchPage('projects'));
 
+    const scrollPositions = new Map();
+    const visitedPages = new Set();
+    const initiallyActive = document.querySelector('.page.active');
+    if (initiallyActive) visitedPages.add(initiallyActive.id.replace(/-page$/, ''));
+
     function switchPage(targetPageId) {
         const currentPage = document.querySelector('.page.active');
         const targetPage = document.getElementById(targetPageId + '-page');
 
         if (!targetPage || currentPage === targetPage) return;
+
+        const currentPageId = currentPage.id.replace(/-page$/, '');
+        scrollPositions.set(currentPageId, window.scrollY);
 
         currentPage.style.animation = 'fadeOut 0.5s ease forwards';
 
@@ -88,17 +96,22 @@ document.addEventListener('DOMContentLoaded', function() {
                 targetPage.style.opacity = '1';
             }, 10);
 
-            window.scrollTo({ top: 0, behavior: 'smooth' });
+            const savedScroll = scrollPositions.get(targetPageId);
+            window.scrollTo({ top: savedScroll ?? 0, behavior: 'auto' });
 
-            const animatedElements = targetPage.querySelectorAll('.slide-up, .fade-in, .timeline-item');
-            animatedElements.forEach((el, index) => {
-                el.style.animation = 'none';
-                el.style.opacity = '0';
-                setTimeout(() => {
-                    el.style.animation = '';
-                    el.style.opacity = '';
-                }, 10 + index * 100);
-            });
+            // Replay entry animations only on first visit — replaying on return is jarring
+            if (!visitedPages.has(targetPageId)) {
+                visitedPages.add(targetPageId);
+                const animatedElements = targetPage.querySelectorAll('.slide-up, .fade-in, .timeline-item');
+                animatedElements.forEach((el, index) => {
+                    el.style.animation = 'none';
+                    el.style.opacity = '0';
+                    setTimeout(() => {
+                        el.style.animation = '';
+                        el.style.opacity = '';
+                    }, 10 + index * 100);
+                });
+            }
 
             const popup = targetPage.querySelector('#timeline-popup');
             if (popup) {

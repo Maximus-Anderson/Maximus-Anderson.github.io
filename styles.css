@@ -937,10 +937,10 @@ footer {
     display: none; /* car-viewer.js sets this to 'block' when projects page is active */
 }
 
-/* Tall div whose scroll height drives the camera animation (300vh = plenty of travel) */
+/* Tall div whose scroll height drives the camera animation */
 .car-scroll-driver {
     position: relative;
-    height: 300vh;
+    height: 220vh;
     width: 100%;
 }
 

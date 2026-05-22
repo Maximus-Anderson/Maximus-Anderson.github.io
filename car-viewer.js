@@ -28,10 +28,10 @@ updateCamKeyframes();
 mobileQuery.addEventListener('change', updateCamKeyframes);
 
 // Scroll fractions (0 – 1 of .car-scroll-driver height) that define each phase
-const SCROLL_CAM_START    = 0.18;   // camera starts moving
+const SCROLL_CAM_START    = 0.12;   // camera starts moving
 const SCROLL_CAM_END      = 0.52;   // camera reaches browse position
 const SCROLL_BANNERS_SHOW = 0.42;   // banners begin fading in
-const SCROLL_BANNERS_FULL = 0.60;   // banners fully visible
+const SCROLL_BANNERS_FULL = 0.72;   // banners fully visible
 
 // ─── DOM REFS ────────────────────────────────────────────────────────────────
 const canvas        = document.getElementById('car-canvas');

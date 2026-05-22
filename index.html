@@ -17,6 +17,15 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600&display=swap">
     <link rel="stylesheet" href="styles.css">
+
+    <!-- Parallelize cold start: warm jsdelivr TLS, preload Three.js modules, and start the GLB fetch immediately instead of waiting on the module chain -->
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+    <link rel="modulepreload" href="https://cdn.jsdelivr.net/npm/three@0.168.0/build/three.module.js" crossorigin>
+    <link rel="modulepreload" href="https://cdn.jsdelivr.net/npm/three@0.168.0/examples/jsm/loaders/GLTFLoader.js" crossorigin>
+    <link rel="modulepreload" href="https://cdn.jsdelivr.net/npm/three@0.168.0/examples/jsm/loaders/DRACOLoader.js" crossorigin>
+    <link rel="modulepreload" href="https://cdn.jsdelivr.net/npm/three@0.168.0/examples/jsm/environments/RoomEnvironment.js" crossorigin>
+    <link rel="preload" href="modules/CR30-Attempt_5-Render.glb" as="fetch" crossorigin>
+
     <!-- Three.js ES module imports -->
     <script type="importmap">
     {
