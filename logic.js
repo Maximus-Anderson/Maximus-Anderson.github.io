@@ -99,7 +99,6 @@ document.addEventListener('DOMContentLoaded', function() {
             const savedScroll = scrollPositions.get(targetPageId);
             window.scrollTo({ top: savedScroll ?? 0, behavior: 'auto' });
 
-            // Replay entry animations only on first visit — replaying on return is jarring
             if (!visitedPages.has(targetPageId)) {
                 visitedPages.add(targetPageId);
                 const animatedElements = targetPage.querySelectorAll('.slide-up, .fade-in, .timeline-item');
