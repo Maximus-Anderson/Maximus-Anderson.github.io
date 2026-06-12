@@ -41,7 +41,7 @@ const projectsPageEl = document.getElementById('projects-page');
 
 // ─── RENDERER ────────────────────────────────────────────────────────────────
 const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
-renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+renderer.setPixelRatio(Math.min(window.devicePixelRatio, mobileQuery.matches ? 1.5 : 2));
 renderer.setSize(window.innerWidth, window.innerHeight);
 renderer.toneMapping        = THREE.ACESFilmicToneMapping;
 renderer.toneMappingExposure = 1.0;
@@ -99,7 +99,7 @@ function loadModel() {
     modelLoaded = true;
 
     gltfLoader.load(
-        'modules/CR30-Attempt_5-Render.glb',
+        'modules/CR30-Optimized.glb',
 
         (gltf) => {
             carModel = gltf.scene;
@@ -178,9 +178,10 @@ let   isActive = projectsPageEl
     ? projectsPageEl.classList.contains('active')
     : true;
 
+let rafId = null;
+
 function animate() {
-    requestAnimationFrame(animate);
-    if (!isActive) return;
+    rafId = requestAnimationFrame(animate);
 
     // Smooth lazy-follow camera
     lerpedCamPos.lerp(targetCamPos,   0.055);
@@ -196,7 +197,18 @@ function animate() {
     renderer.render(scene, camera);
 }
 
-animate();
+function syncLoop() {
+    const shouldRun = isActive && !document.hidden;
+    if (shouldRun && rafId === null) {
+        rafId = requestAnimationFrame(animate);
+    } else if (!shouldRun && rafId !== null) {
+        cancelAnimationFrame(rafId);
+        rafId = null;
+    }
+}
+
+syncLoop();
+document.addEventListener('visibilitychange', syncLoop);
 
 // ─── PAGE VISIBILITY ─────────────────────────────────────────────────────────
 // Canvas lives outside .page divs (to avoid transform:fixed containment bug),
@@ -205,6 +217,7 @@ function syncCanvasVisibility() {
     if (!projectsPageEl) return;
     const active = projectsPageEl.classList.contains('active');
     isActive = active;
+    syncLoop();
 
     canvas.style.display = active ? 'block' : 'none';
 
@@ -247,7 +260,7 @@ window.addEventListener('resize', () => {
 //  L     — log current pos + lookAt to console  (copy into CAM_INTRO or CAM_BROWSE)
 //
 // Hold Shift to move 5× faster.
-(function devControls() {
+if (new URLSearchParams(location.search).has('dev')) (function devControls() {
     const STEP = 0.08;
     const held = new Set();
 

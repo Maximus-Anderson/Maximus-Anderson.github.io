@@ -22,16 +22,22 @@ html {
 body {
     font-family: 'JetBrains Mono', 'Fira Code', monospace;
     background-color: var(--background-color);
+    color: var(--text-color);
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    z-index: -1;
     background-image: linear-gradient(
         to top,
         #200000 0%,
         #0f0000 45%,
         #000000 75%
     );
-    background-attachment: fixed;
-    color: var(--text-color);
-    line-height: 1.6;
-    overflow-x: hidden;
 }
 
 /* Navigation */
