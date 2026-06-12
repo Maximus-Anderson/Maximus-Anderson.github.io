@@ -32,6 +32,10 @@ const SCROLL_CAM_START    = 0.12;   // camera starts moving
 const SCROLL_CAM_END      = 0.52;   // camera reaches browse position
 const SCROLL_BANNERS_SHOW = 0.42;   // banners begin fading in
 const SCROLL_BANNERS_FULL = 0.72;   // banners fully visible
+const SCROLL_LIST_START   = 0.75;   // overflowing banner list starts sweeping
+const SCROLL_PAUSE_PX     = 375;    // dead zone after banners land, before the sweep
+const SWEEP_RATIO         = 0.45;   // list px per page-scroll px (lower = slower sweep)
+const SCROLL_TAIL_PX      = 60;     // scroll runway after the sweep before the footer
 
 // ─── DOM REFS ────────────────────────────────────────────────────────────────
 const canvas        = document.getElementById('car-canvas');
@@ -143,12 +147,26 @@ function clamp01(v, start, end) {
     return Math.max(0, Math.min(1, (v - start) / (end - start)));
 }
 
+let baseScrollable = 0;
+let sweepStartY    = 0;
+let sweepExtra     = 0;
+
+function updateDriverExtent() {
+    const driver = document.querySelector('.car-scroll-driver');
+    if (!driver || !bannersPanelEl) return;
+    driver.style.height = '';
+    baseScrollable = Math.max(1, driver.offsetHeight - window.innerHeight);
+    sweepExtra = Math.max(0, bannersPanelEl.scrollHeight - bannersPanelEl.clientHeight);
+    driver.style.height =
+        (window.innerHeight + SCROLL_LIST_START * baseScrollable + SCROLL_PAUSE_PX
+            + sweepExtra / SWEEP_RATIO + SCROLL_TAIL_PX) + 'px';
+    sweepStartY = driver.offsetTop + SCROLL_LIST_START * baseScrollable + SCROLL_PAUSE_PX;
+}
+
 function getScrollFraction() {
     const driver = document.querySelector('.car-scroll-driver');
-    if (!driver) return 0;
-    const scrollable = driver.offsetHeight - window.innerHeight;
-    if (scrollable <= 0) return 0;
-    return Math.max(0, Math.min(1, (window.scrollY - driver.offsetTop) / scrollable));
+    if (!driver || baseScrollable <= 0) return 0;
+    return Math.max(0, Math.min(1, (window.scrollY - driver.offsetTop) / baseScrollable));
 }
 
 function onScroll() {
@@ -167,10 +185,16 @@ function onScroll() {
         const bannerT = easeInOut(clamp01(t, SCROLL_BANNERS_SHOW, SCROLL_BANNERS_FULL));
         bannersPanelEl.style.opacity       = String(bannerT);
         bannersPanelEl.style.pointerEvents = bannerT > 0.05 ? 'all' : 'none';
+
+        bannersPanelEl.scrollTop = Math.min(sweepExtra, Math.max(0, (window.scrollY - sweepStartY) * SWEEP_RATIO));
     }
 }
 
 window.addEventListener('scroll', onScroll, { passive: true });
+window.addEventListener('load', () => {
+    updateDriverExtent();
+    onScroll();
+});
 
 // ─── RENDER LOOP ─────────────────────────────────────────────────────────────
 const clock = new THREE.Clock();
@@ -231,6 +255,7 @@ function syncCanvasVisibility() {
 
     if (active) {
         loadModel();
+        updateDriverExtent();
         onScroll();
         lerpedCamPos.copy(targetCamPos);
         lerpedCamLook.copy(targetCamLook);
@@ -249,6 +274,8 @@ window.addEventListener('resize', () => {
     camera.aspect = window.innerWidth / window.innerHeight;
     camera.updateProjectionMatrix();
     renderer.setSize(window.innerWidth, window.innerHeight);
+    updateDriverExtent();
+    onScroll();
 });
 
 // ─── DEV CAMERA CONTROLS ─────────────────────────────────────────────────────
