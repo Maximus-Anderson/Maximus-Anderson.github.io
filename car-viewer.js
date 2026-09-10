@@ -32,10 +32,13 @@ const SCROLL_CAM_START    = 0.12;   // camera starts moving
 const SCROLL_CAM_END      = 0.52;   // camera reaches browse position
 const SCROLL_BANNERS_SHOW = 0.42;   // banners begin fading in
 const SCROLL_BANNERS_FULL = 0.72;   // banners fully visible
-const SCROLL_LIST_START   = 0.75;   // overflowing banner list starts sweeping
-const SCROLL_PAUSE_PX     = 375;    // dead zone after banners land, before the sweep
 const SWEEP_RATIO         = 0.45;   // list px per page-scroll px (lower = slower sweep)
 const SCROLL_TAIL_PX      = 60;     // scroll runway after the sweep before the footer
+const SCROLL_PAUSE_PX     = 300;
+const GATE_RELEASE_MULT   = 1.6;
+const GATE_DECAY          = 0.9;
+const GATE_IDLE_MS        = 120;
+const GATE_BACKSTOP_MS    = 600;
 
 // ─── DOM REFS ────────────────────────────────────────────────────────────────
 const canvas        = document.getElementById('car-canvas');
@@ -150,17 +153,26 @@ function clamp01(v, start, end) {
 let baseScrollable = 0;
 let sweepStartY    = 0;
 let sweepExtra     = 0;
+let checkpointY    = 0;
+let gatePassed     = false;
+let locked         = false;
+let lastWheelTime  = 0;
+let lastTouchTime  = 0;
+let lockTime       = 0;
+let momentumRef    = 0;
 
 function updateDriverExtent() {
     const driver = document.querySelector('.car-scroll-driver');
-    if (!driver || !bannersPanelEl) return;
+    if (!driver || !bannersPanelEl || driver.offsetParent === null) return;
     driver.style.height = '';
     baseScrollable = Math.max(1, driver.offsetHeight - window.innerHeight);
     sweepExtra = Math.max(0, bannersPanelEl.scrollHeight - bannersPanelEl.clientHeight);
+    const introPx = SCROLL_BANNERS_FULL * baseScrollable;
     driver.style.height =
-        (window.innerHeight + SCROLL_LIST_START * baseScrollable + SCROLL_PAUSE_PX
-            + sweepExtra / SWEEP_RATIO + SCROLL_TAIL_PX) + 'px';
-    sweepStartY = driver.offsetTop + SCROLL_LIST_START * baseScrollable + SCROLL_PAUSE_PX;
+        (window.innerHeight + introPx + SCROLL_PAUSE_PX + sweepExtra / SWEEP_RATIO + SCROLL_TAIL_PX) + 'px';
+    checkpointY = driver.offsetTop + introPx;
+    sweepStartY = checkpointY + SCROLL_PAUSE_PX;
+    driver.dataset.morphY = driver.offsetTop + SCROLL_CAM_START * baseScrollable;
 }
 
 function getScrollFraction() {
@@ -190,9 +202,92 @@ function onScroll() {
     }
 }
 
-window.addEventListener('scroll', onScroll, { passive: true });
+if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+
+function gateActive() {
+    return projectsPageEl && projectsPageEl.classList.contains('active') && checkpointY > 0;
+}
+
+function onScrollGated() {
+    if (gateActive()) {
+        if (window.scrollY < checkpointY - 4) {
+            gatePassed = false;
+            locked = false;
+        } else if (!gatePassed && window.scrollY > checkpointY + 1) {
+            const now = performance.now();
+            if (!locked) {
+                locked = true;
+                lockTime = now;
+                momentumRef = 0;
+                window.scrollTo({ top: checkpointY, left: 0, behavior: 'instant' });
+            } else if (now - lastTouchTime > 1500 && now - lockTime > GATE_BACKSTOP_MS) {
+                gatePassed = true;
+                locked = false;
+            } else {
+                window.scrollTo({ top: checkpointY, left: 0, behavior: 'instant' });
+            }
+        }
+    }
+    onScroll();
+}
+
+window.addEventListener('scroll', onScrollGated, { passive: true });
+
+window.addEventListener('wheel', (e) => {
+    const now = performance.now();
+    const dy = e.deltaY * (e.deltaMode === 1 ? 16 : e.deltaMode === 2 ? window.innerHeight : 1);
+    if (gateActive() && !gatePassed && dy > 0 && window.scrollY + dy >= checkpointY) {
+        const freshPush = dy > momentumRef * GATE_RELEASE_MULT;
+        const paused    = now - lastWheelTime > GATE_IDLE_MS;
+        const tooLong   = now - lockTime > GATE_BACKSTOP_MS;
+        if (locked && (freshPush || paused || tooLong)) {
+            gatePassed = true;
+            locked = false;
+        } else {
+            if (!locked) { lockTime = now; momentumRef = dy; }
+            else momentumRef = Math.max(dy, momentumRef * GATE_DECAY);
+            e.preventDefault();
+            locked = true;
+            window.scrollTo({ top: checkpointY, left: 0, behavior: 'instant' });
+        }
+    }
+    lastWheelTime = now;
+}, { passive: false });
+
+window.addEventListener('touchstart', () => {
+    lastTouchTime = performance.now();
+    if (gateActive() && !gatePassed && locked) {
+        gatePassed = true;
+        locked = false;
+    }
+}, { passive: true });
+
+window.addEventListener('touchmove', (e) => {
+    lastTouchTime = performance.now();
+    if (gateActive() && !gatePassed && window.scrollY >= checkpointY - 1) {
+        if (!locked) {
+            locked = true;
+            lockTime = performance.now();
+            momentumRef = 0;
+        }
+        e.preventDefault();
+        window.scrollTo({ top: checkpointY, left: 0, behavior: 'instant' });
+    }
+}, { passive: false });
+
+window.addEventListener('keydown', (e) => {
+    if (gateActive() && !gatePassed && locked
+        && ['ArrowDown', 'PageDown', 'End', ' ', 'Spacebar'].includes(e.key)) {
+        gatePassed = true;
+        locked = false;
+    }
+});
+
 window.addEventListener('load', () => {
+    window.scrollTo({ top: 0, behavior: 'instant' });
     updateDriverExtent();
+    gatePassed = window.scrollY >= checkpointY - 2;
+    locked = false;
     onScroll();
 });
 
@@ -256,6 +351,8 @@ function syncCanvasVisibility() {
     if (active) {
         loadModel();
         updateDriverExtent();
+        gatePassed = window.scrollY >= checkpointY - 2;
+        locked = false;
         onScroll();
         lerpedCamPos.copy(targetCamPos);
         lerpedCamLook.copy(targetCamLook);

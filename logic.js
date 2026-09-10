@@ -6,18 +6,17 @@ document.addEventListener('DOMContentLoaded', function() {
     const logo = document.querySelector('.logo');
     const nav = document.querySelector('.navigation');
 
-    // Morph nav from banner → pill exactly when the car starts moving (SCROLL_CAM_START = 0.12)
     function getCarMorphThreshold() {
         const driver = document.querySelector('.car-scroll-driver');
         if (!driver) return 80;
+        const fromViewer = parseFloat(driver.dataset.morphY);
+        if (Number.isFinite(fromViewer)) return fromViewer;
         const scrollable = driver.offsetHeight - window.innerHeight;
         return 0.12 * scrollable + driver.offsetTop;
     }
 
-    let morphThreshold = getCarMorphThreshold();
-    window.addEventListener('resize', () => { morphThreshold = getCarMorphThreshold(); }, { passive: true });
     window.addEventListener('scroll', () => {
-        nav.classList.toggle('scrolled', window.scrollY > morphThreshold);
+        nav.classList.toggle('scrolled', window.scrollY > getCarMorphThreshold());
     }, { passive: true });
 
     navLinks.forEach(link => {
@@ -183,6 +182,20 @@ document.addEventListener('DOMContentLoaded', function() {
     }, { threshold: 0.1, rootMargin: '0px 0px -100px 0px' });
 
     document.querySelectorAll('.slide-up, .timeline-item').forEach(el => observer.observe(el));
+
+    const videoObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            const video = entry.target;
+            if (entry.isIntersecting) {
+                video.muted = true;
+                video.play().catch(() => {});
+            } else {
+                video.pause();
+            }
+        });
+    }, { threshold: 0.2 });
+
+    document.querySelectorAll('video[preload="none"]').forEach(v => videoObserver.observe(v));
 
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {

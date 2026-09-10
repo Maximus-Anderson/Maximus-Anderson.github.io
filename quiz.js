@@ -431,7 +431,7 @@ const QUESTION_BANK = [
         choices: [
             'Lithium plating is the normal term for lithium intercalating into the graphite anode during charging',
             'Lithium plating occurs when Li⁺ can\'t intercalate fast enough, depositing as metallic lithium and potentially forming dendrites',
-            'Lithium plating is a cathode-side phenomenon that occurs at high SoC where the lithium ios for a "plate" near the separator and reduces energy density',
+            'Lithium plating is a cathode-side phenomenon that occurs at high SoC where the lithium ions form a "plate" near the separator and reduces energy density',
             'Lithium plating is triggered by deep over-discharge and is fully reversible on the subsequent charge cycle'
         ],
         answer: 1,
@@ -443,7 +443,7 @@ const QUESTION_BANK = [
         choices: [
             'NMC, LFP, and NCA are identical chemistries — naming varies by region or manufacturer',
             'NCA has highest energy density with lowest thermal stability; LFP has lowest energy density with highest stability; NMC balances both',
-            'LFP has the highest energy density of the three; NMC offers the best thermal safety profile, NCA is the cheapest and is widely used despite it\'s poor performance',
+            'LFP has the highest energy density of the three; NMC offers the best thermal safety profile, NCA is the cheapest and is widely used despite its poor performance',
             'NMC is exclusively for consumer electronics; LFP and NCA are designed for motorsport applications'
         ],
         answer: 1,
@@ -541,7 +541,7 @@ const QUESTION_BANK = [
         choices: [
             'Axial flux motors are strictly superior as they almost always have a higher torque density with minimal packaging or thermal disadvantages',
             'Radial flux is the conventional cylindrical topology with mature manufacturing; axial flux is pancake-shaped with higher torque density but more complex to build',
-            'Axial flux motors are limited to low-RPM applications that require only a high peak torque; due to differences in their moment\'s of inertia high-speed operation requires radial flux topology',
+            'Axial flux motors are limited to low-RPM applications that require only a high peak torque; due to differences in their moments of inertia, high-speed operation requires a radial flux topology',
             'Radial flux motors achieve higher efficiency across the operating map; axial flux only outperforms at peak power'
         ],
         answer: 1,
@@ -581,7 +581,7 @@ const QUESTION_BANK = [
             'Winding factor only applies to distributed windings; fractional-slot concentrated windings like these are exempt'
         ],
         answer: 1,
-        explanation: 'Winding factor kw represents how effectively the winding links the fundamental air-gap flux. 6p9s has kw ≈ 0.866; 10p12s has kw ≈ 0.966 — closer to 1.0 means more effective flux linkage per unit of copper, giving higher torque density. This is why high pole-count fractional slot machines are popular for traction motors.'
+        explanation: 'Winding factor kw represents how effectively the winding links the fundamental air-gap flux. 6p9s has kw ≈ 0.866; 10p12s has kw ≈ 0.966 single-layer (0.933 double-layer) — closer to 1.0 means more effective flux linkage per unit of copper, giving higher torque density. This is why high pole-count fractional slot machines are popular for traction motors.'
     },
     {
         id: 52, topic: 'Drive Unit', elo: 1200,
@@ -611,7 +611,7 @@ const QUESTION_BANK = [
     },
     {
         id: 54, topic: 'Optimization', elo: 1000,
-        question: 'Why should gradient descent optimizers like SLSQP be avoided when the design space is discrete?',
+        question: 'Why should gradient-based optimizers like SLSQP be avoided when the design space is discrete?',
         choices: [
             'SLSQP can only handle up to 10 design variables and crashes on larger discrete search spaces',
             'Gradient methods require differentiable objectives — discrete variables have no gradient, so the optimizer fails or gives garbage',
@@ -619,7 +619,7 @@ const QUESTION_BANK = [
             'Discrete design spaces always have a single unique global minimum, which SLSQP finds in one pass'
         ],
         answer: 1,
-        explanation: 'Gradient descent computes ∂f/∂x to determine the search direction. For discrete variables (integer slot counts, pole numbers, etc.), the gradient is either undefined or zero everywhere except at discontinuities — the optimizer cannot navigate. Use derivative-free methods: COBYLA, genetic algorithms, or Nelder-Mead simplex.'
+        explanation: 'Gradient-based methods compute ∂f/∂x to determine the search direction. For discrete variables (integer slot counts, pole numbers, etc.), the gradient is either undefined or zero everywhere except at discontinuities — the optimizer cannot navigate. Use derivative-free methods: COBYLA, genetic algorithms, or Nelder-Mead simplex.'
     },
     {
         id: 55, topic: 'Optimization', elo: 1150,
@@ -781,7 +781,7 @@ const QUESTION_BANK = [
             'Higher AWG wire has more resistance only at high frequency due to skin effect; at DC all gauges are equivalent per unit length'
         ],
         answer: 1,
-        explanation: 'R = ρL/A. ρ = resistivity (material constant; copper: 1.72×10⁻⁸ Ω·m). L = length (proportional). A = cross-sectional area (inversely proportional). AWG scale is inverse: AWG 0 (thick, ~8.3mm diameter) has very low resistance; AWG 30 (thin, ~0.25mm) has very high resistance. Every 6 AWG increase approximately halves the cross-sectional area and doubles the resistance per unit length.'
+        explanation: 'R = ρL/A. ρ = resistivity (material constant; copper: 1.72×10⁻⁸ Ω·m). L = length (proportional). A = cross-sectional area (inversely proportional). AWG scale is inverse: AWG 0 (thick, ~8.3mm diameter) has very low resistance; AWG 30 (thin, ~0.25mm) has very high resistance. Every 3 AWG increase approximately halves the cross-sectional area and doubles the resistance per unit length.'
     },
 
     {
@@ -1053,12 +1053,12 @@ const QUESTION_BANK = [
         question: 'An EV motor produces 30 kW at the shaft. The gearbox is 97% efficient, and the differential is 98% efficient. How much power reaches the wheels?',
         choices: [
             '30 kW — efficiency losses in gearing are negligible at these values',
-            '28.55 kW — total drivetrain efficiency is 0.97 × 0.98 = 95.1%',
+            '28.5 kW — total drivetrain efficiency is 0.97 × 0.98 = 95.1%',
             '27.9 kW — each component subtracts its loss independently from 30 kW',
             '29.1 kW — only the less efficient component applies its loss'
         ],
         answer: 1,
-        explanation: 'Total drivetrain efficiency = η_gearbox × η_differential = 0.97 × 0.98 = 0.9506. Power at wheels = 30 kW × 0.9506 = 28.52 kW ≈ 28.55 kW. Component efficiencies multiply — they do not add or subtract independently. Each stage\'s losses reduce the power entering the next stage. A chain of several 95–98% efficient components can reduce total efficiency to 85–90%, which has significant impact on vehicle range and thermal management.'
+        explanation: 'Total drivetrain efficiency = η_gearbox × η_differential = 0.97 × 0.98 = 0.9506. Power at wheels = 30 kW × 0.9506 = 28.52 kW. Component efficiencies multiply — they do not add or subtract independently. Each stage\'s losses reduce the power entering the next stage. A chain of several 95–98% efficient components can reduce total efficiency to 85–90%, which has significant impact on vehicle range and thermal management.'
     },
     {
         id: 93, topic: 'Battery', elo: 1200,
@@ -1122,15 +1122,15 @@ const QUESTION_BANK = [
     },
     {
         id: 98, topic: 'HV Dist', elo: 1450,
-        question: 'An HV cable run is 3 meters one-way (6 m round trip total). The motor draws 200 A continuously. Compare 4 AWG copper (0.328 mΩ/m) vs 2 AWG copper (0.205 mΩ/m). How much additional power is wasted with 4 AWG?',
+        question: 'An HV cable run is 3 meters one-way (6 m round trip total). The motor draws 200 A continuously. Compare 4 AWG copper (0.815 mΩ/m) vs 2 AWG copper (0.513 mΩ/m). How much additional power is wasted with 4 AWG?',
         choices: [
-            'ΔP = 29.5 W — 4 AWG wastes about 30 W more than 2 AWG at this current',
-            'ΔP = 7.4 W — 4 AWG wastes only slightly more because the AWG difference is small',
-            'ΔP = 118 W — 4 AWG wastes four times as much as 2 AWG because resistance is four times higher',
+            'ΔP = 72.5 W — 4 AWG wastes about 70 W more than 2 AWG at this current',
+            'ΔP = 36.2 W — the delta only applies over the 3 m one-way run',
+            'ΔP = 123 W — the extra loss equals the 2 AWG cable\'s own total dissipation',
             'ΔP = 0 W — both gauges carry 200 A, so power loss is determined only by current, not gauge'
         ],
         answer: 0,
-        explanation: 'R_4AWG = 0.328 mΩ/m × 6 m = 1.968 mΩ. R_2AWG = 0.205 × 6 = 1.230 mΩ. ΔR = 0.738 mΩ. ΔP = I² × ΔR = 200² × 0.000738 = 40,000 × 0.000738 = 29.5 W. This 30 W of extra heat must be rejected by the cable — over 2000 operating hours, that\'s 59 kWh of wasted energy. It also validates using the larger 2 AWG wire: the marginal resistance reduction is worth the added weight in a continuous high-current application.'
+        explanation: 'R_4AWG = 0.815 mΩ/m × 6 m = 4.89 mΩ. R_2AWG = 0.513 × 6 = 3.08 mΩ. ΔR = 1.81 mΩ. ΔP = I² × ΔR = 200² × 0.00181 = 40,000 × 0.00181 = 72.5 W. This extra heat must be rejected by the cable — over 2000 operating hours, that\'s 145 kWh of wasted energy. It also validates using the larger 2 AWG wire: the marginal resistance reduction is worth the added weight in a continuous high-current application.'
     },
     {
         id: 99, topic: 'Calculations', elo: 1350,
