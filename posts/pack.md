@@ -19,15 +19,15 @@ specs:
   - Mass: ~140 lbs
 timeline:
   - September 2025 | Milestone 1: Design Phase
-    We locked the pack-level design changes off CR29: PAHT-CF module basket, cantilever tab block retention, and self-jigging slots on the aluminum housing. Design phase closed November 1.
+    We settled the design changes from CR29's pack: a PAHT-CF module basket, cantilevered tab blocks with one bolt each, and tabs and slots on the aluminum housing. The design phase closed November 1.
   - November 2025 | Milestone 2: Manufacturing Begins
-    Began manufacturing. Took ownership of the full pack build: modules, the aluminum housing, HV integration, and chassis mount fit-up.
+    Manufacturing started. I took over the full pack build: the modules, the aluminum housing, the high voltage wiring, and the chassis mounts.
   - February 2026 | Milestone 3: Modules and Housing Complete
-    Finished five-module assembly and the welded aluminum housing. Caught the missed corner slots after weld-up, triggering the HV distribution sleeve redesign to fit the reduced corner volume.
-  - March 2026 | Milestone 4: Commissioning Begins
-    Pack integration wrapped and commissioning underway. First drive was targeted for March 1, but electrical subsystem revisions and car-level debug pushed the date back.
+    The five modules and the welded housing were finished. The corners had no tabs and slots, and one corner bent inward during welding, so the high voltage sleeve had to be redesigned for the smaller space.
+  - March 2026 | Milestone 4: Testing on the Car Begins
+    The pack was in the car and testing started. The first drive was planned for March 1, but revisions to the electrical boards and debugging on the car pushed it back.
   - April 2026 | Milestone 5: First Drive
-    First drive on April 26. The pack drove at a 40 kW cap with no battery faults; the day ended on a low-SoC trip traced to one mismatched replacement cell.
+    The first drive was April 26. The car ran at a 40 kW limit and the pack had no faults of its own. The day ended when one replacement cell, installed at a lower charge than the rest, reached the low voltage limit.
 ---
 
 ## Context
