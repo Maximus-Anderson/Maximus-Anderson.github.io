@@ -175,6 +175,14 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
+    document.addEventListener('pointermove', (e) => {
+        const el = e.target.closest ? e.target.closest('.light-button') : null;
+        if (!el) return;
+        const r = el.getBoundingClientRect();
+        el.style.setProperty('--bx', (e.clientX - r.left) + 'px');
+        el.style.setProperty('--by', (e.clientY - r.top) + 'px');
+    }, { passive: true });
+
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {

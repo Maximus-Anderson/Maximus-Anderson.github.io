@@ -307,7 +307,7 @@ def render_page(slug, meta, sections, slugs):
     back_delay = 0.6 + 0.2 * len(tl)
     out += ['                    </div>',
             '                </div>',
-            f'                <button class="back-button slide-up" style="animation-delay: {back_delay:.1f}s;" data-page="projects">Back to Projects</button>',
+            f'                <button class="back-button light-button slide-up" style="animation-delay: {back_delay:.1f}s;" data-page="projects">Back to Projects</button>',
             '            </div>',
             '        </section>',
             '    </div>']
