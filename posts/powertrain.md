@@ -1,7 +1,6 @@
 ---
 title: CR30 Powertrain: Troubleshooting Through Competition
 date: May-June 2026
-read: 6
 order: 1
 tags:
   - Powertrain
@@ -11,7 +10,7 @@ hero: images/Troubleshooting_To_Comp_Images/Got_Sticker_For_Battery_&_Mech.jpg
 hero-alt: The car with its battery and mechanical tech inspection stickers
 hero-caption: The car with its battery and mechanical tech stickers at our first EV competition.
 thumb: images/CR30-Render-Banner.jpg
-lead: Powertrain lead on Cyclone Racing's CR30. The pack was already built, so this is what it took to make the car actually drive, from a blown inverter to our first EV competition.
+lead: What it took to get Cyclone Racing's CR30 driving reliably after the pack was built, from a blown inverter to our first EV competition.
 specs-title: The Setup
 specs:
   - Motor: EMRAX 208 HV
@@ -20,102 +19,125 @@ specs:
 popup-prefix: pt
 timeline:
   - May 9 | Blown Inverter
-    Blew an IGBT near the end of CR30's second driving day, most likely from running an untuned motor. I traced it with a diode test and repaired the IGBT and gate driver myself for around $300 instead of waiting on a £1,400 replacement.
+    An IGBT in the inverter failed near the end of CR30's second driving day, most likely from running a motor that hadn't been tuned. I found it with a diode test and replaced the IGBT and gate driver for about $300 instead of waiting four weeks for a £1,400 inverter.
   - Late May | The Cutout
-    The car kept cutting power partway through a hard acceleration, with the HV up and no fault logged. The usual causes all checked out fine, but there was no inverter data to see what was actually happening.
+    The car cut power partway through hard accelerations with the high voltage still on and no fault logged. The limits, the BMS, and the low voltage supply all checked out, and there was no inverter data to show the cause.
   - May 31 | Inverter Telemetry
-    The wire for the inverter's data bus had never been connected, so landing that pin brought the telemetry online. Twisting the CAN pair and grounding the floating shields then stopped the noise dropouts.
+    A wire for the inverter's second CAN bus had never been connected, so no inverter data reached the logger. Connecting it brought the data through. Twisting the CAN pair and grounding the cable shields then stopped the dropouts.
   - June 6 | Root Cause Fixed
-    The flux linkage was set to about twice the motor's real value, so the inverter thought it was running out of voltage and cut power. Fixing the value, grounding the shields to one point, and retuning cleared it, and the car pulled over 50 kW for the first time.
+    The flux linkage in the inverter was set to about twice the motor's measured value, so the inverter thought it was running out of voltage and cut power. After correcting the value, grounding the shields to one point, and retuning, the cutout was gone and the car pulled over 50 kW for the first time.
   - June 8 | Power on the Dyno
-    The DC current was capped by an AC limit I'd set too low, since I'd read the datasheet's thermal peak as a hard ceiling. Raising it gave about 135 Nm at the wheels and into the high 50s of kW on the dyno.
+    The DC current was capped by an AC limit I'd set too low, since I'd read the datasheet's thermal peak as a hard ceiling. Raising it gave 56 kW and about 135 Nm at the wheels on the dyno.
   - June 16-20 | Competition
-    Passed battery and mechanical tech. An illegal precharge board meant rebuilding precharge over CAN overnight, and a charger fault melted a discharge resistor, so we ran out of time before the dynamic events.
+    Passed battery and mechanical tech. An illegal precharge board meant reworking precharge over CAN overnight, and the discharge resistor melted its enclosure during the charging check. We ran out of time before the dynamic events.
 ---
 
 ## Context
 
-This is the powertrain side of CR30. The pack build is covered in [[pack|CR30 Battery Pack: Design and Manufacture]] and the cooling in [[cell|CR30 Battery Pack: Thermal Optimization for Endurance]]. This post is about getting the EMRAX 208 and its DTI inverter to make reliable power, and the troubleshooting that took.
+This post covers getting CR30's motor and inverter to make reliable power after the pack was built. The motor is an EMRAX 208. The inverter is a DTI HV-550, which turns the battery's DC into the three-phase AC that drives the motor. The pack build is in [[pack|CR30 Battery Pack: Design and Manufacture]] and the cooling design is in [[cell|CR30 Battery Pack: Thermal Optimization for Endurance]].
 
 ## The Blown Inverter {tall}
 
-Near the end of CR30's second driving day the motor put out a loud whine and the inverter blew an IGBT. I'd handed the motor setup to our motor engineer and hadn't checked it before we ran. The motor was never properly tuned, and putting real power through an untuned motor is almost certainly what killed the IGBT.
+Near the end of CR30's second driving day the motor made a loud whine and the inverter stopped working. An inverter drives the motor through six power switches called IGBTs, and one of them had failed.
 
 ![IGBT removed from the inverter](images/Troubleshooting_To_Comp_Images/Removed_IGBT_From_Inverter.jpg)
 ![Burnt and cracked semiconductor inside the failed IGBT](images/Troubleshooting_To_Comp_Images/Inside_IGBT_Burnt&Cracked_Semiconductor.jpg)
-> The inverter opened up to reach the power stage, and the failed IGBT with its burnt, cracked semiconductor.
+> The IGBT removed from the inverter (left), and the burnt, cracked semiconductor inside it (right).
 
-A replacement was quoted at £1,400 with a four week lead time, and I didn't have four weeks before competition. So I opened the inverter and traced the failure myself. A diode test from the DC input to each phase terminal reads the voltage drop through each switch, and the failed one stood out immediately against the healthy ones. Checking its gate showed the gate driver had failed too.
+The motor had never been tuned. I had handed the motor setup to our motor engineer and didn't check it before we drove. I never confirmed what killed the IGBT, but running power through an untuned motor is the most likely cause.
+
+A replacement inverter was quoted at £1,400 with a four week lead time. Competition started June 16, so waiting four weeks would have left almost no time to test. I opened the inverter and looked for the failure with a multimeter. In diode mode the meter reads the voltage drop across a switch, and I measured from the DC input to each phase terminal. Five switches read 0.32 V and the sixth read about 0.2 V. Testing the gate of that sixth IGBT showed that its gate driver, the part that switches it on and off, had failed too.
 
 ![Failed diode reading on the gate](images/Troubleshooting_To_Comp_Images/Bad_Gate_Reading.jpg)
 ![Good diode reading on the gate](images/Troubleshooting_To_Comp_Images/Good_Gate_Reading_1.jpg)
-> Diode testing the gate. The bad reading that flagged the failed device, next to a healthy one.
+> Diode readings at the gate. The failed device (left) and a healthy one (right).
 
-I found a matching IGBT and gate driver on Digikey, swapped both, and had the inverter running again for around $300 instead of £1,400. I never confirmed exactly what killed that IGBT, but running an untuned motor into it is the obvious cause.
+Digikey sells both the IGBT and the gate driver. I bought one of each and moved the gate resistors from the old driver to the new one so the IGBT would switch the same way as the other five. The repair cost about $300, and the inverter ran again.
 
 ![Replacement IGBT and gate driver](images/Troubleshooting_To_Comp_Images/New_Purchased_IGBT_&_Driver.jpg)
 ![Repaired power stage confirmed healthy](images/Troubleshooting_To_Comp_Images/COnfirmed_repair_of_IGBT.jpg)
-> The replacement IGBT and gate driver, and the power stage confirmed healthy before it went back in.
+> The replacement IGBT and gate driver (left), and the repaired inverter testing healthy before it went back in the car (right).
 
 ## The Power Cutout
 
-With the inverter rebuilt, the car kept cutting power partway through a hard acceleration and wouldn't pull again until I brought it to a full stop. The HV system stayed live and the inverter didn't log a fault, so there was nothing obvious to troubleshoot.
+With the inverter repaired, the car had a new problem. Partway through a hard acceleration it cut power, and it wouldn't pull again until it came to a full stop. The high voltage stayed on and the inverter logged no fault.
 
-At the same time the BMS kept throwing weak cell and open cell faults. I traced those to the pogo pins on the battery monitor boards losing contact with the cells under vibration, so I rebuilt the boards with hardwired connections and the faults stopped.
+The BMS was also reporting weak cell and open cell faults at the time. Those came from the pogo pins on the battery management boards, or BMBs. A pogo pin is a spring-loaded contact, and each one reads the voltage of one cell. The pins were compressed further than the design accounted for, so they stuck and lost contact with the cells. I replaced the pins with jumper wires that run from the board to fork terminals under the bolts already on the cells.
 
 ![Pogo pin stuck from over-compression](images/Troubleshooting_To_Comp_Images/Stuck_Pogo_pin_Due_to_TOO_Much_Compression_Which_Wasnt_accounted_for_In_Design.jpg)
 ![Battery monitor board rebuilt with fork terminals](images/Troubleshooting_To_Comp_Images/BMB_With_Fork_Terminal_Assembled.jpg)
-> A pogo pin stuck from too much compression the design hadn't accounted for, and a monitor board rebuilt with hardwired fork terminals.
+> A pogo pin stuck in the compressed position (left), and a BMB rebuilt with jumper wires and fork terminals (right).
+
+I rebuilt one board first and ran it on a test day. That module had no faults, so I rebuilt the other four.
 
 ![First rebuilt board on a test day with no more faults](images/Troubleshooting_To_Comp_Images/First_Replaced_BMB_During_Test_Day_May_23_No_More_Faults_On_That_Module_Alone_Confirming_Fix.jpg)
-> The first rebuilt board on a test day. No more faults on that module on its own, which confirmed the fix before I redid the rest.
+> The first rebuilt board on a test day. Its module had no faults, so the other four boards got the same repair.
 
-I checked the likely causes of the cutout one at a time, going through the current and power limits, the switching frequency, the BMS, and supply sag, and none of them were causing it. The real problem was that I had no data coming off the inverter, so I couldn't see what it was doing in the moment it cut power.
+The BMS faults were gone but the cutout wasn't. I checked the current limits, the power limit, the switching frequency, the BMS, and low voltage supply sag one at a time, and none of them caused the cutout. I had no data coming from the inverter, so I couldn't see what it was doing when it cut power.
 
 ## Inverter Telemetry
 
-The car had a dash logger that was supposed to record the inverter, but every inverter value in the logs sat at its default. I went through the logger firmware first and fixed it dropping samples and only reading one CAN message per loop. Even then, sniffing the bus showed no inverter data at all.
+The car had data logging that was supposed to record the values sent by the inverter, but every inverter value in the excel was a zero. The logger is an Arduino Uno with a SparkFun CAN shield and a microSD card. It reads messages from CAN, the two-wire network the car's electronics use to talk to each other, and writes them to the card.
 
-It turned out the inverter sends its detailed data on a second CAN bus, and the high wire for that bus had never been connected at the connector. Landing that one pin brought through everything I'd been missing, including the phase and DC currents, temperatures, faults, and whichever limit was active.
+I checked the logger's firmware first and found two problems. The firmware opened and closed the file on the SD card every loop, which dropped samples. It also read only one CAN message per loop, so messages backed up and were lost. I fixed both, and the inverter values were still zero.
+
+Next I wrote a short Arduino program that printed the ID of every message on the bus. The only IDs that printed came from the IMU, the car's motion sensor. The inverter should have been sending eight messages and none of them were on the bus.
+
+The inverter has two CAN buses, and it sends its detailed data on the second one. At the inverter's connector, the high wire for the second bus had never been connected. Once that wire was connected, all eight messages appeared and the excel filled with inverter data. That included the phase and DC currents, the temperatures, the faults, and which limit was active.
 
 ![CAN shield and Uno taped to the side](images/Troubleshooting_To_Comp_Images/Sparkfun_CanBus-Shield_&_Uno_Taped_to_side_Saturday.jpg)
 ![CAN shield and Uno in a proper housing](images/Troubleshooting_To_Comp_Images/Canshield_Uno_Propper_Housing_Sunday.jpg)
-> The CAN logger, taped to the side on Saturday and in a proper housing by Sunday.
+> The CAN logger, taped to the side of the car on Saturday and in a housing by Sunday.
 
-After that the only problem left was the bus dropping out under hard pulls, which is the usual sign of switching noise getting into the wiring. The CAN pair was barely twisted and the HV cable shields had been left floating. I twisted the pair properly, grounded the shields, and added ferrite cores. From then on the inverter logged cleanly off a laptop riding in the car.
+One problem was left. The CAN bus dropped out during hard acceleration, which is when the inverter switches the most current and makes the most electrical noise. The two CAN wires are twisted together so that noise reaches both wires equally and cancels out. Our pair had about one twist per inch. The shields on the high voltage cables had also been assembled incorrectly and weren't connected to ground. I retwisted the CAN pair to three twists per inch, grounded the shields, and added ferrite cores to the CAN wiring. After that the dropouts were rare, and the inverter data logged cleanly to a laptop in the car.
 
 ## Root Cause: Flux Linkage
 
-With real data on the bus, I could finally see the cutout happen. The inverter was hitting its input voltage limit even though the DC bus sat far above any voltage that should have tripped it. The cause was the flux linkage value in the inverter, set to about twice what the motor actually produces. The inverter uses that value to estimate the motor's back-EMF, so it thought the back-EMF was nearly up at the bus voltage and cut power to protect itself when it really had plenty of headroom left. The open loop tuning I'd done earlier should have caught a value that far off, but it had been run incorrectly, and that hid the problem.
+With inverter data in the logs I could see what happened during a cutout. The inverter was hitting its input voltage limit, even though the battery voltage was far above that limit.
 
-I set the flux linkage to its measured value, grounded all the shields to a single point, and retuned the current loop from scratch. That retune was the first time the full procedure had been run properly, and it made clear the two axes needed fairly different gains. After those three changes the cutout was gone and the car pulled over 50 kW for the first time. They went in together, so I can't say for certain which one fixed it, but it hasn't come back since.
+The cause was the flux linkage value set in the inverter. A spinning motor generates its own voltage, called back-EMF, and flux linkage is the number that tells the inverter how much back-EMF to expect at a given speed. The value in the inverter was about twice what the motor produces. So the inverter calculated a back-EMF close to the battery voltage, decided it was running out of voltage, and cut power. The battery still had plenty of voltage left.
+
+I measured the real value by spinning the motor with a Milwaukee drill and reading the back-EMF against RPM. The measured flux linkage was about half the value loaded in the inverter.
 
 ![Flux linkage measurement setup](images/Troubleshooting_To_Comp_Images/Flux_Linkage_Measurement_Setup.jpg)
 ![Flux linkage measurement setup, second view](images/Troubleshooting_To_Comp_Images/Flux_Linkage_Measurement_Setup_2.jpg)
-> Measuring the motor's flux linkage, which came out about half the value the inverter had loaded.
+> The setup for measuring flux linkage. A drill spins the motor while the back-EMF is read.
+
+An earlier test should have caught the wrong value. Our motor engineer had run the inverter's open loop tuning with the rotor free to spin, and the procedure requires the rotor to be locked. The run looked steady, but it had been done wrong, so it hid the problem.
+
+I made three changes. I set the flux linkage to the measured value, grounded all the cable shields to a single point, and retuned the current loop with the procedure run correctly. The retune showed that the motor's two control axes needed different gains. After those changes the cutout was gone and the car pulled over 50 kW for the first time. The three changes went in together, so I can't say which one fixed the cutout, but it hasn't come back.
 
 ## Power
 
-Even with the cutout gone the car was making less power than it should, and the DC current kept capping out well below the limit I'd set. That cap turned out to come from the AC current limit. I'd set it conservatively because I was treating the motor's datasheet peak current as a hard ceiling, and it isn't one. That number is a two minute thermal rating. An acceleration run lasts a few seconds, so there's a lot of room above it for short pulls. What sent me back to look was another team running the same motor at far more current than the datasheet peak.
+With the cutout gone, the car still made less power than it should have. The DC current stopped rising well below the limit I had set. The cause was the AC current limit, which caps the current going from the inverter to the motor. I had set the AC limit low because I treated the peak current on the motor's datasheet as a hard ceiling. That number is a two minute thermal rating. An acceleration run lasts a few seconds, so the motor can take more current for short pulls. I went back to check the limit after seeing another team run the same motor at far more current than the datasheet peak.
 
-Torque keeps climbing with current until the iron saturates, so raising the AC limit brought the DC cap and the power up together. On the wheel dyno the car made about 135 Nm at the wheels and into the high 50s of kW.
-
+Raising the AC limit raised the DC current and the power with it, because torque keeps climbing with current until the iron in the motor saturates. On the wheel dyno the car made 56 kW and about 135 Nm at the wheels. Later driving logs peaked in the low 60s of kW. The rules allow 80 kW and the car never reached it.
 ## Race Prep
 
-The last week before competition went to reliability instead of power. A loose interlock had been opening the shutdown loop under cornering load, killing the car every time it turned one direction, so I reworked the HV connectors to hold it solid. The DC-DC converter was still down, so I built and mounted a backup low voltage battery big enough to get through an endurance run. The rest of the week went to balancing the pack.
+The last week before competition went to reliability.
+
+The car lost power every time it turned left. Each high voltage connector carries an interlock, a small circuit that shuts the car down if the connector comes apart. The interlock on the HV+ connector leaving the battery was loose, and cornering load opened it. I replaced that connector and its cable with a new Amphenol one, and the car stopped cutting out in left turns.
+
+The DC-DC converter, which powers the low voltage system from the main battery, was still not working. I built a backup low voltage battery to replace it and mounted it in the car. It holds 19 Ah, which is enough for an endurance run.
 
 ![Backup low voltage battery version two layout](images/Troubleshooting_To_Comp_Images/Initial_GLV_Version2_Layout.jpg)
 ![Finished backup low voltage battery](images/Troubleshooting_To_Comp_Images/Final_GLV_Battery_Assembled.jpg)
-> The backup low voltage battery, from the version two layout to the finished pack.
+> The backup low voltage battery. The version two layout (left) and the finished battery (right).
+
+The rest of the week went to balancing the pack, which means bringing every cell to the same voltage.
 
 ## Competition
 
-Our first EV competition ended up being almost entirely about tech inspection. We got through mechanical tech without much trouble, but the battery and electrical inspections were a different story, mostly around isolation rules we hadn't fully understood going in.
+Competition was our first as an electric team, and nearly all of it went to tech inspection. A car has to pass mechanical tech, battery and electrical tech, and EV active tech before it can run an event.
 
-The biggest surprise came partway through, when the precharge board the electrical team had built turned out to be illegal, since by design it could short the tractive system to the battery through a gate. Our software engineer Aaron and I spent the night reusing that board to run precharge entirely over CAN with no analog signal. The only reason that was possible overnight was that the CAN work was already done on the car. The isolation checks then took several tries to pass. My best guess is the carbon filled filament in the pack was leaking a high resistance path, though I never confirmed it.
+We passed mechanical tech without much trouble. Most of our time went to the battery and electrical station, on two rules we hadn't fully understood. The high voltage system, called the tractive system or TS, has to be kept separate from the low voltage system. High voltage parts also need two layers of insulation. We added insulation at the event to meet the second rule.
 
-The last thing standing between us and the track was charging, and we never got past it. A discharge resistor we'd added recently overheated and melted its enclosure. We traced it to a fault inside the charging cart that held the discharge path closed and drained the whole pack through that one resistor. The officials sealed the charger and waived that section, but by the time we got to EV active tech there wasn't enough time left. We finished the event having passed battery and mechanical tech without ever reaching the dynamic events.
+The precharge board failed the first rule. Precharge charges the inverter's capacitors slowly through a resistor before the main contactors close, so there is no surge of current. The board the electrical team built connected the battery side to the tractive system side through an isolated gate, and those two are supposed to be fully separate. On the insulation resistance test that path read about 5 MΩ where it should have read open. Our software engineer Aaron and I spent the night reworking the same board to run precharge over CAN with no analog signal. That was only possible overnight because the CAN work on the car was already done.
+
+The isolation checks still took several tries to pass. My best guess is that the carbon filled baskets leaked a small current from module to module, but I never confirmed it.
+
+The last thing between us and passing the battery portion of tech was charging, and technically we didn't complete it. While demonstrating charging, the discharge resistor overheated and melted its enclosure. The discharge circuit is intended to only bleed the inverter's capacitors when the shutdown circuit opens, which effectively means the pack is off. Its relay is supposed to open whenever shutdown is high and the pack is live. The relay wasn't opening, so the resistor was attempting to discharge the full pack rather than just the capacitors. That issue seemed to be in part due to an interlock inside the charger which had failed. The charger was an off-the-shelf unit we hadn't designed and couldn't reasonably repair at the competition, so the officials sealed it, which prevented us from using it during the competition, and then waived that section. Regardless, by then there wasn't enough time to complete EV active tech, so we left having passed battery and mechanical tech without running a dynamic event.
 
 ![Extra insulation added at competition](images/Troubleshooting_To_Comp_Images/All_Insulation_at_comp_added.jpg)
 ![Battery sealed at competition after passing tech](images/Troubleshooting_To_Comp_Images/Sealed_Battery_At_Comp_Passing_Bat_Tech.jpg)
-> Insulation added at comp to clear the isolation rules, and the battery sealed up after passing battery tech.
+> Insulation added at competition to meet the insulation rule (left), and the battery sealed after passing battery tech (right).

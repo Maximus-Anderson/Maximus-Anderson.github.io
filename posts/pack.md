@@ -1,7 +1,6 @@
 ---
 title: CR30 Battery Pack: Design and Manufacture
 date: April 2026
-read: 7
 order: 2
 tags:
   - Design

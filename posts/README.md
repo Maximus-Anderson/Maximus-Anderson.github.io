@@ -15,7 +15,6 @@ Everything below the second `---` is the post itself.
 title: CR30 Battery Pack: Design and Manufacture
 ledger-title: CR30 Battery Pack: Design and Manufacture   (optional, shorter title for the landing list)
 date: April 2026
-read: 7                    (minutes; shows as "~7 min read")
 order: 2                   (1 is the top of the landing list)
 tags:
   - Design
@@ -91,3 +90,5 @@ A quoted hint after the image path passes CSS through untouched:
 `img:` styles the photo, `wrap:` puts a styled box around it. For a side-by-side
 pair, a `container:` hint on the first photo styles the row. You should rarely
 need these; the existing posts show every case that exists.
+
+Read time is not set in the front matter. build.py counts the words in the post and divides by 230 words per minute.

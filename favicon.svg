@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <rect width="64" height="64" fill="#0c0c0d"/>
+  <rect y="54" width="64" height="10" fill="#d0343a"/>
+  <text x="32" y="43" text-anchor="middle" font-family="'JetBrains Mono','Consolas','Menlo',monospace" font-weight="700" font-size="36" fill="#ffffff">MA</text>
+</svg>

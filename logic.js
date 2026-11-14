@@ -69,7 +69,10 @@ document.addEventListener('DOMContentLoaded', function() {
     const initiallyActive = document.querySelector('.page.active');
     if (initiallyActive) visitedPages.add(initiallyActive.id.replace(/-page$/, ''));
 
+    let switching = false;
+
     function switchPage(targetPageId) {
+        if (switching) return;
         const currentPage = document.querySelector('.page.active');
         const targetPage = document.getElementById(targetPageId + '-page');
 
@@ -78,9 +81,11 @@ document.addEventListener('DOMContentLoaded', function() {
         const currentPageId = currentPage.id.replace(/-page$/, '');
         scrollPositions.set(currentPageId, window.scrollY);
 
-        currentPage.style.animation = 'fadeOut 0.5s ease forwards';
+        switching = true;
+        currentPage.style.animation = 'fadeOut 0.12s ease forwards';
 
         setTimeout(() => {
+            switching = false;
             currentPage.classList.remove('active');
             targetPage.classList.add('active');
 
@@ -91,7 +96,7 @@ document.addEventListener('DOMContentLoaded', function() {
             targetPage.style.animation = 'none';
             targetPage.style.opacity = '0';
             setTimeout(() => {
-                targetPage.style.animation = 'fadeIn 0.5s ease forwards';
+                targetPage.style.animation = 'fadeIn 0.2s ease forwards';
                 targetPage.style.opacity = '1';
             }, 10);
 
@@ -101,13 +106,13 @@ document.addEventListener('DOMContentLoaded', function() {
             if (!visitedPages.has(targetPageId)) {
                 visitedPages.add(targetPageId);
                 const animatedElements = targetPage.querySelectorAll('.slide-up, .fade-in, .timeline-item');
-                animatedElements.forEach((el, index) => {
+                animatedElements.forEach((el) => {
                     el.style.animation = 'none';
                     el.style.opacity = '0';
                     setTimeout(() => {
                         el.style.animation = '';
                         el.style.opacity = '';
-                    }, 10 + index * 100);
+                    }, 10);
                 });
             }
 
@@ -116,7 +121,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 popup.classList.remove('active');
                 popup.querySelectorAll('.timeline-description-content').forEach(desc => desc.style.display = 'none');
             }
-        }, 500);
+        }, 120);
     }
 
     const timelines = document.querySelectorAll('.timeline');
@@ -175,7 +180,7 @@ document.addEventListener('DOMContentLoaded', function() {
             if (entry.isIntersecting) {
                 entry.target.style.animation = entry.target.classList.contains('timeline-item')
                     ? 'timelineFadeIn 0.8s ease forwards'
-                    : 'slideUp 0.8s ease forwards';
+                    : 'slideUp 0.4s ease forwards';
                 observer.unobserve(entry.target);
             }
         });

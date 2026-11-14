@@ -425,7 +425,7 @@ if (new URLSearchParams(location.search).has('dev')) (function devControls() {
             const t = devLook;
             console.log(
                 `%c[car-viewer] Camera snapshot — copy into CAM_INTRO or CAM_BROWSE:`,
-                'color:#ff5555;font-weight:bold'
+                'color:#d0343a;font-weight:bold'
             );
             console.log(
                 `pos:    new THREE.Vector3(${p.x.toFixed(2)}, ${p.y.toFixed(2)}, ${p.z.toFixed(2)}),\n` +

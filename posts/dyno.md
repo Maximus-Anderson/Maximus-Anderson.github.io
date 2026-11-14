@@ -2,7 +2,6 @@
 title: Dyno Cart Testing
 ledger-title: Dynamometer Cart + Motor Testing
 date: April–June 2025
-read: 4
 order: 5
 tags:
   - Design
@@ -14,46 +13,46 @@ thumb: images/Dyno-Title.png
 lead: Adapting Cyclone Racing's legacy IC dyno cart to validate an Emrax 208 motor and DTI HV550 inverter before the team committed to going electric.
 timeline:
   - April 08, 2025 | Milestone 1: Design Completed
-    Completed the design, including CAD models for the dyno cart structure, water brake, mounting solutions, and all powertrain components.
+    I finished the design, including CAD of the cart structure, the water brake, the motor mount, and the powertrain components.
   - April 15, 2025 | Milestone 2: Manufacturing Completed
-    Finished manufacturing the dyno cart.
+    I finished building the dyno cart.
   - June 17, 2025 | Milestone 3: Testing Validated
-    Validated the dyno cart through the teams first loaded electric powertrain test.
+    The cart ran the team's first loaded test of the electric powertrain.
 ---
 
 ## Why This Existed
 
-Cyclone Racing was finishing its last season as an IC team while beginning the transition to electric. The Emrax 208 motor was on hand, but we had no chassis to put it in and no way to run it under load. Before abandoning a program we'd been dominant in, we needed to prove the electric powertrain worked. That meant spinning the motor with the full tractive system outside the car, which meant building somewhere to mount it.
+Cyclone Racing was finishing its last season with a combustion (IC) car and starting on its first electric one. We had the Emrax 208 motor, but no chassis to put it in and no way to run it under load. The team had done well with IC cars, so before leaving them we needed to show the electric powertrain worked. That meant running the motor with the battery, BMS, and inverter outside of a car, which meant building something to mount it on.
 
-The team had a dyno cart that had been around so long nobody knew when it was built. It had a Porsche sticker and a Ferrari sticker on the side, so we called it the Porsche Ferrari. It was configured for a Yamaha R6 engine, which made it useless as-is.
+The team had a dyno cart so old that nobody knew when it was built. It has a Porsche sticker and a Ferrari sticker on the side, so we call it the Porsche Ferrari. The cart was set up for a Yamaha R6 engine and couldn't hold the Emrax as it was.
 
 ## Reconfiguration
 
-The original cart was built around the R6: IC mounting features, a gas tank, and IC wiring with no provision for GLV power or the HV interlocks needed to keep the tractive system live. The GLV battery cutting out would kill HV power, so that had to be managed carefully.
+The cart had R6 engine mounts, a gas tank, and IC wiring. It had no low voltage (GLV) power for the EV electronics and none of the interlocks that have to stay closed to keep the high voltage system on. If the GLV battery cut out, the high voltage would shut off with it, so the GLV supply had to be dependable.
 
-I designed the reconfiguration to be swappable rather than permanent. IC mounting features were removed and replaced with bolted equivalents so the cart could switch between IC and EV configurations. The GLV wiring was pulled off entirely and moved to a separate cart, making the harness swap simple depending on what you were testing.
+I designed the changes so the cart could go back to IC. The IC mounts were removed and replaced with bolted ones, so the cart can switch between the IC and EV setups. The GLV wiring moved to a separate cart, so changing setups only means swapping the harness.
 
 ## Motor Mount
 
-The Emrax 208 is a pancake-style motor with a bolt pattern that didn't match anything on the cart. I kept the mount simple: two lengths of square tube steel spanning the full width to handle motor torque, bolted at both ends, with a third piece at 90 degrees to capture three of the four bracket mounting holes. Nothing exotic, but rigid and functional.
+The Emrax 208 is a flat, pancake-shaped motor, and its bolt pattern matched nothing on the cart. The mount is two lengths of square steel tube that span the full width of the cart and are bolted at both ends. They take the motor's torque. A third piece at 90 degrees picks up three of the four mounting holes on the motor bracket. The mount is simple and stiff.
 
 ## The Water Brake
 
-A water brake is a hydraulic absorption unit. Water enclosed in a housing acts like a pump, using fluid resistance to apply counter-torque against whatever is spinning it. The CR27 team had used one for a full-power test with the R6, so I assumed it would hold up for the electric motor.
+A water brake puts a load on the motor. The motor spins a rotor inside a housing full of water, like a pump, and the water's resistance pushes back with torque. The CR27 team had used this water brake for a full power test of the R6, so I assumed it would work for the electric motor.
 
-In hindsight I should have run hand calculations first. The data sheets had been lost along with most institutional knowledge of the thing, and I'm not confident it could handle the loads the Emrax produces. It was sufficient for what we needed at the time, but future testing will use the 300 kW dynamometer the university has since installed, which gives real load control and accurate torque curves. The Porsche Ferrari has probably earned its retirement.
+I should have done hand calculations first. The data sheets had been lost, along with most of what the team knew about the brake, and I'm not confident it can take the load the Emrax produces. It was enough for these tests. Future tests will use the 300 kW dynamometer the university has since installed, which controls load and measures torque accurately.
 
 ## Testing
 
-The no-load test was the first time the full tractive system ran: battery pack, Orion BMS, and DTI HV550 inverter all running together. The goal was to confirm everything communicated correctly and the BMS behaved as expected before putting real demand on it.
+The no-load test was the first time the battery pack, the Orion BMS, and the DTI HV550 inverter ran together. The goal was to confirm they communicated and that the BMS behaved correctly before the motor was loaded.
 
 ![No-load test](images/dynocartnoloadtest.png)
-> First full tractive-system spin-up: battery pack, Orion BMS, and DTI HV550 inverter running together for the first time.
+> The no-load test. The battery pack, Orion BMS, and DTI HV550 inverter running together for the first time.
 
-The loaded test pushed higher power through the system with the water brake applying resistance. It surfaced an issue: the motor would stop randomly after about 30 seconds with no fault codes from the inverter or BMS. We worked through it, but it was a reminder that systems that look clean on paper have a way of surprising you the first time you run them.
+The loaded test ran more power through the system with the water brake resisting the motor. It showed one problem. The motor stopped at random after about 30 seconds, with no fault code from the inverter or the BMS. We worked through it.
 
-The results weren't well documented. Something I'd do differently. What we confirmed was that the tractive system was functional and the team understood how to operate and troubleshoot it. That was the whole point before committing to an EV program.
+I didn't document the results well, and I would do that differently. What the tests confirmed is that the tractive system worked and the team knew how to run and troubleshoot it. That was the goal before committing to an electric car.
 
 ## What's Next
 
-Future powertrain testing will move to the university's dynamometer. Beyond the water brake's load limits, driver testing gives more useful data than anything we can simulate on the cart. The custom hub motors in development will spend time on the dyno before they go near a car, but that's a job for the 300 kW unit, not the Porsche Ferrari.
+Future powertrain testing moves to the university's dynamometer, because the water brake's load limit is unknown. Driving the car also gives more useful data than the cart can. The custom hub motors in development will run on the 300 kW dyno before they go on a car.

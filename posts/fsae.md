@@ -2,7 +2,6 @@
 title: CR29 Accumulator: Manufacture
 ledger-title: CR29 Battery Module: Manufacture
 date: March 2025
-read: 6
 order: 6
 tags:
   - Manufacture
@@ -10,69 +9,78 @@ tags:
 hero: images/tractivebatterymodule.jpg
 hero-alt: CR29 Battery Module: Manufacture
 hero-caption: A finished 28s1p tractive battery module with BMS sense wires harnessed.
-lead: Building Cyclone Racing's first tractive system from scratch: the aluminum housing, five battery modules, and everything that went wrong along the way.
+lead: Building Cyclone Racing's first battery pack from scratch: the aluminum housing, the five modules, and what went wrong.
 specs:
   - Configuration: 28s1p per module
   - Cells: COSMX CA95B0D0HD
   - 5 modules total
 timeline:
   - Early March 2025 | Housing Fabrication
-    Aluminum panels were water jet cut and welded into the housing enclosure. The planned bending process was abandoned after tolerances proved too loose. Weld distortion in the 2.3mm interior walls required mallet correction before modules could fit. Self-jigging slots flagged as a CR30 improvement.
+    The aluminum panels were cut on a waterjet and welded into the housing. The plan to bend the side walls was dropped because the bends weren't accurate enough. The 2.3 mm inner walls warped during welding and had to be worked back with a mallet before the modules fit. Self-jigging slots went on the list for CR30.
   - March 20, 2025 | First Module Assembly
-    The first module came together over the course of a full day. Cross-threading from misaligned JB-welded nuts appeared early. Cell gap from real vs. spec dimensions was confirmed at ~0.7mm per cell. Exposed terminal connections were flagged as a safety concern. All issues were documented for CR30 design review.
+    The first module took a full day. Bolts cross-threaded in JB Welded nuts that weren't square in their pockets. The cells measured about 0.7 mm thinner than the datasheet. The exposed terminal connections were noted as a safety problem. All of it went on the list for CR30.
   - March 30, 2025 | All Five Modules Complete
-    All five modules were completed with wiring harnesses and polycarbonate baskets installed. The full accumulator was assembled and the pack was ready for subsequent system-level testing.
+    All five modules were finished with their wiring harnesses and polycarbonate baskets. The accumulator was assembled and ready for testing.
 ---
 
 ## Context
 
-CR29 was Cyclone Racing's first electric car. The accumulator, the main high-voltage battery pack, had to be built from scratch. Nobody on the team had done this before. This write-up covers the full manufacturing process: the aluminum housing and the five battery modules that go inside it.
+CR29 was Cyclone Racing's first electric car. Its main high voltage battery pack, which the FSAE rules called the accumulator, had to be built from scratch, and nobody on the team had built one before. This post covers how the accumulator was made: the aluminum housing and the five battery modules that go inside it.
 
 ## What an Accumulator Is
 
-The FSAE rules called the main high-voltage battery pack the accumulator. That terminology shifted to "tractive battery" in the 2026 ruleset, but for CR29 it was the accumulator. It isn't one big battery. It's a housing containing smaller sub-units called modules, wired in series to reach the total pack voltage. Each module is a self-contained group of cells. For CR29, each module holds 28 pouch cells wired in series with one cell per parallel group (28s1p). Five modules make up the full pack.
+The accumulator is the car's main high voltage battery. The rules renamed it the "tractive battery" in 2026, but for CR29 it was the accumulator. It isn't one large battery. It is a housing that holds smaller units called modules, wired in series to reach the pack voltage. Each CR29 module holds 28 pouch cells in series with no cells in parallel, written 28s1p. Five modules make up the pack.
 
 ## The Aluminum Housing
 
-The housing is a welded aluminum enclosure that holds all five modules, the BMS, and the high-voltage wiring. The flat panels were water jet cut from aluminum sheet, which gave clean, accurate profiles without introducing heat distortion.
+The housing is a welded aluminum box that holds the five modules, the BMS, and the high voltage wiring. The flat panels were cut from aluminum sheet on a waterjet, which cuts accurately and puts no heat into the part.
 
-The original design called for the side walls to be bent to shape rather than cut as separate pieces and welded. Bending would have been faster and produced cleaner corners, but the bend tolerances weren't tight enough to be usable. The walls didn't sit where they needed to sit. Rather than redesign around the bending process, the bent sections were cut off and the walls were welded on as flat pieces. Both the exterior panels and the interior partitions.
+The design called for the side walls to be bent to shape instead of welded on as separate pieces. Bending would have been faster and made cleaner corners, but the bends weren't accurate enough and the walls didn't sit where they needed to. The bent sections were cut off and the walls were welded on as flat pieces, both the outer panels and the inner partitions.
 
-That created a new problem. The exterior walls are 3.2mm thick and welded fine. The interior partitions are 2.3mm, the rules minimum. Welding a continuous seam into 2.3mm aluminum puts more heat into the part than it can absorb without moving. The walls warped. After welding, the interior cavity was tight enough in places that the modules wouldn't fit. The fix was a mallet, working the distorted spots outward until the modules fit. Functional, but out of spec.
+Welding the partitions caused warping. The outer walls are 3.2 mm thick and welded fine. The inner partitions are 2.3 mm, the minimum the rules allow, and a continuous weld puts more heat into 2.3 mm aluminum than it can take without moving. After welding, the space for the modules was too tight in places and the modules wouldn't fit. The fix was to work the warped spots outward with a mallet until the modules fit. The housing worked, but it was out of spec.
 
-A lot of time went into fitting each panel before tacking so the housing would match CAD. Even then, it wasn't perfect. For CR30, the plan is to add slots to the mating edges so panels self-locate when assembled. That cuts fitment time and removes the need for careful alignment before every tack.
+Fitting each panel before tack welding took a lot of time, and the housing still didn't match CAD exactly. CR30's housing added tabs and slots on the panel edges so the panels locate themselves, which is covered in [[pack|CR30 Battery Pack: Design and Manufacture]].
 
 ![CR29 housing panels jigged for welding](images/CR29_Welding_Jigging.jpg "img:flex: 1; max-width: 38%;")
 ![CR29 housing near complete](images/CR29_Near_Complete_Container.jpg "img:flex: 1; max-width: 38%;")
-> CR29 housing panels fixtured for welding (left), and the container near complete (right). Every panel needed external clamping to hold square before tacking.
+> The CR29 housing panels clamped for welding (left), and the housing near complete (right). Every panel had to be clamped square before it was tacked.
 
 ## Module Assembly
 
-The 28 cells in each module get sorted into four types, A through D, based on tab length and orientation. The type determines where in the stack the cell goes. Getting the order wrong means a tab that doesn't reach its clamping plate, or one that's bent at the wrong angle.
+The 28 cells in each module come in four types, A through D, which differ in tab length and orientation. The type sets where a cell goes in the stack. A cell in the wrong position has a tab that doesn't reach its clamping plate or bends at the wrong angle.
 
-Before touching a cell, the tab clamping plates had to be prepared. These are 3D-printed plates that clamp the cell tabs and bolt them together electrically. The innermost bolt positions are inaccessible once cells are stacked, so the design used press-fit nuts embedded in the plastic. In FDM prints, press-fit doesn't hold reliably, so each nut got bonded in with JB Weld and left to cure. The intent was for them to behave like heat-set inserts, locking the nut so the bolt has something solid to thread into.
+The tab clamping plates had to be prepared before any cells were stacked. They are 3D printed plates that clamp the cell tabs and bolt them together electrically. The innermost bolts can't be reached once the cells are stacked, so the design has nuts pressed into the plastic. A press fit doesn't hold reliably in an FDM print, so each nut was bonded in with JB Weld and left to cure. The bonded nuts were meant to act like heat-set inserts and give the bolts something solid to thread into.
 
-With the plates ready, assembly went like this: drop the first D cell into the stack, lay a tab block over the tabs, fold the tabs up onto it, drop in the first A cell, fold its tab, add another tab block with a BMS sense wire ring, bolt through. Then repeat, alternating A and B cells through the stack. The final cell is a C type. After the last cell, main terminals get attached and the whole stack goes into polycarbonate baskets for structural support and isolation.
+Assembly then went in this order. The first D cell goes into the stack, a tab block is laid over its tabs, and the tabs are folded up onto the block. The first A cell goes in and its tab is folded. A second tab block goes on with a ring terminal for a BMS sense wire, and a bolt goes through. That repeats with alternating A and B cells, and the last cell is a C. After the last cell the main terminals are attached and the stack goes into polycarbonate baskets, which support and insulate it.
 
-Total module build time ran about 5 hours a day over three days, roughly 3 hours per module including cell stacking, tab folding, bolting, and BMS sense wire harnessing. That doesn't count 4 hours sanding burrs off the tab blocks before assembly, or the time crimping fuses onto the BMS wires.
+The modules took about 5 hours a day for three days, or about 3 hours per module including cell stacking, tab folding, bolting, and wiring the BMS sense harness. That doesn't count 4 hours of sanding burrs off the tab blocks before assembly, or the time spent crimping fuses onto the BMS wires.
 
 ![Tractive Battery Manufacture](images/tractivebatterymanufacture.jpg)
-> Module assembly in progress: cells, tab blocks, and clamping plates layered into the stack.
+> Module assembly in progress, with cells, tab blocks, and clamping plates layered into the stack.
 
 ![First completed CR29 module](images/CR29_First_Module.jpg "wrap:max-width: 700px; margin: 0 auto; overflow: hidden; aspect-ratio: 4 / 3;|img:width: 100%; height: 100%; object-fit: cover; object-position: center 75%;")
-> The first completed CR29 module after cell stacking, tab folding, and BMS sense harnessing.
+> The first finished CR29 module, with its cells stacked, tabs folded, and BMS sense harness wired.
 
 ## What Didn't Work
 
-The JB-welded nuts were the biggest problem. Because they weren't square in their pockets, some bolts cross-threaded on the way in. Once a bolt cross-threads into an epoxy-held nut, the nut breaks free. Now there's a loose nut inside a sealed module. Fixing it meant partially disassembling the stack mid-build. The bonded nuts also made disassembly difficult when modules needed to come apart for CR30.
+The JB Welded nuts were the largest problem. Some nuts weren't square in their pockets, so their bolts cross-threaded on the way in. A cross-threaded bolt breaks the nut free of the epoxy, which leaves a loose nut inside a module that is already stacked. Fixing one meant taking part of the stack apart. The bonded nuts also made the modules hard to take apart when they were reused for CR30.
 
-Stack pressure was the second gap. Pouch cells need to be compressed during cycling to prevent swelling and dendrite growth. The module had compression plates, but the cell dimensions in CAD came from the datasheet, not actual measurements. Real cells ran about 0.7mm thinner than spec per cell. Across 28 cells, that's roughly 20mm of lost compression.
+Stack pressure was the second problem. Pouch cells need to be compressed while they cycle to limit swelling and dendrite growth. The module has compression plates, but the cell thickness in CAD came from the datasheet and not from measured cells. The cells we had were about 0.7 mm thinner each. Across 28 cells that is about 20 mm of lost compression.
 
-The terminal bolts were a safety concern. The pack terminals were accessible from below even with TPU plugs installed. Live conductors there are a problem for inspections and for anyone whose hand ends up near the bottom of a live pack.
+The terminal bolts were a safety problem. The pack terminals could be reached from below even with their TPU plugs installed. Those are live conductors, which is a problem at inspection and for anyone whose hand ends up under a live pack.
 
 ## Notes for CR30
 
-The full list from this build: add self-jigging slots to the housing panels, redesign the nut pockets with tighter interference fits so they lock mechanically without JB Weld, measure actual cells before finalizing compression plate dimensions, fully enclose the terminal connections, reduce bolt count, and clean up harness routing. The accumulator worked well enough for testing. Building it showed where the next generation needs to be different.
+The changes for CR30 that came out of this build:
+
+- Add self-jigging slots to the housing panels.
+- Redesign the nut pockets with a tighter interference fit so the nuts lock without JB Weld.
+- Measure real cells before setting the compression plate dimensions.
+- Fully enclose the terminal connections.
+- Reduce the bolt count.
+- Clean up the harness routing.
+
+The accumulator worked well enough for testing.
 
 ![Completed CR29 pack with messy penthouse wiring](images/CR29_Complete_Pack_And_Messy_Penthouse.jpg)
-> CR29 pack complete, penthouse wiring visible. The harness routing mess in this photo is what CR30's cleanup targeted.
+> The finished CR29 pack with its penthouse wiring. CR30 cleaned up this harness routing.

@@ -213,7 +213,7 @@ def section_html(sec, slugs):
             out.append('                        </p>')
         elif b[0] == "h4":
             out.append("")
-            out.append(f'                        <h4 style="font-size: 1.2em; margin-top: 1.5em; color: #ff8080;">{inline(b[1], slugs)}</h4>')
+            out.append(f'                        <h4 style="font-size: 1.2em; margin-top: 1.5em; color: var(--primary-soft);">{inline(b[1], slugs)}</h4>')
         elif b[0] == "figure":
             out.append(figure_html(b[1], b[2], slugs))
         elif b[0] == "list":
@@ -331,6 +331,17 @@ def render_ledger_row(n, slug, meta):
 
 # ---------------------------------------------------------------------- main
 
+WORDS_PER_MINUTE = 230
+
+
+def read_minutes(meta, body):
+    text = FIG_RE.sub(" ", body)
+    text = re.sub(r"\[\[([^\]|]+)(?:\|([^\]]+))?\]\]", lambda m: m.group(2) or m.group(1), text)
+    words = len(re.findall(r"[A-Za-z0-9][\w'./%-]*", text))
+    words += len(re.findall(r"[A-Za-z0-9][\w'./%-]*", str(meta.get("lead", ""))))
+    return str(max(1, round(words / WORDS_PER_MINUTE)))
+
+
 def load_posts():
     posts = []
     for p in sorted(POSTS.glob("*.md")):
@@ -339,6 +350,7 @@ def load_posts():
         meta, body = parse_front_matter(p.read_text(encoding="utf-8"))
         if str(meta.get("draft", "")).lower() == "true":
             continue
+        meta["read"] = read_minutes(meta, body)
         posts.append((p.stem, meta, body))
     posts.sort(key=lambda t: int(t[1].get("order", 999)))
     return posts

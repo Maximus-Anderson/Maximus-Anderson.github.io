@@ -6,8 +6,8 @@
 }
 
 :root {
-    --primary-color: #ff5555;
-    --primary-soft: #ff8080;
+    --primary-color: #d0343a;
+    --primary-soft: #e0565b;
     --background-color: #000000;
     --text-color: #ffffff;
     --grid-width: 1100px;
@@ -183,13 +183,13 @@ body::before {
 .page {
     display: none;
     opacity: 0;
-    animation: fadeOut 0.5s ease forwards;
+    animation: fadeOut 0.12s ease forwards;
     padding-top: 80px;
 }
 
 .page.active {
     display: block;
-    animation: fadeIn 0.5s ease forwards;
+    animation: fadeIn 0.2s ease forwards;
 }
 
 /* Projects page is all fixed/scroll-driven — no top padding needed */
@@ -265,11 +265,11 @@ body::before {
 
 /* Animations */
 .fade-in {
-    animation: fadeInUp 0.8s ease forwards;
+    animation: fadeInUp 0.4s ease forwards;
 }
 
 .slide-up {
-    animation: slideUp 0.8s ease forwards;
+    animation: slideUp 0.4s ease forwards;
     opacity: 0;
 }
 
@@ -423,6 +423,9 @@ body::before {
     aspect-ratio: 16/10;
     object-fit: cover;
     background-color: #1a1a1a;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .project-detail-description {
@@ -441,6 +444,7 @@ body::before {
     background-color: transparent;
     color: var(--text-color);
     border: 1px solid var(--primary-color);
+    font-family: inherit;
     cursor: pointer;
     transition: background-color 0.3s ease, color 0.3s ease;
 }
@@ -726,7 +730,7 @@ body::before {
     margin-top: 20px;
     padding: 14px 28px;
     background: transparent;
-    border: 1px solid rgba(255, 85, 85, 0.5);
+    border: 1px solid rgba(208, 52, 58, 0.5);
     border-radius: 50px;
     color: var(--primary-color);
     font-family: inherit;
@@ -737,7 +741,7 @@ body::before {
 }
 
 .resume-open-btn:hover {
-    background: rgba(255, 85, 85, 0.08);
+    background: rgba(208, 52, 58, 0.08);
     border-color: var(--primary-color);
 }
 
@@ -800,7 +804,7 @@ footer {
 }
 .footer-quiz-link:hover {
     color: var(--primary-color);
-    border-color: rgba(255, 85, 85, 0.4);
+    border-color: rgba(208, 52, 58, 0.4);
 }
 
 /* Role and Specs Side Boxes */
@@ -1141,7 +1145,8 @@ footer {
     }
 
     .project-detail-title {
-        font-size: 4em;
+        font-size: clamp(2.6em, 9vw, 4em);
+        overflow-wrap: break-word;
     }
 
     .project-detail-image {
@@ -1491,7 +1496,7 @@ footer {
 }
 .post-meta-chip {
     padding: 2px 10px;
-    border: 1px solid rgba(255, 85, 85, 0.5);
+    border: 1px solid rgba(208, 52, 58, 0.5);
     border-radius: 999px;
     font-size: 0.85em;
     color: var(--primary-soft);
@@ -1517,6 +1522,10 @@ footer {
     margin: 10px auto 0;
     max-width: 640px;
     padding: 0 1em;
+}
+
+.background-container .post-caption {
+    margin-bottom: 24px;
 }
 
 .inline-page-link {

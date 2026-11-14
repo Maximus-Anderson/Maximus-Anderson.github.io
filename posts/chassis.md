@@ -1,7 +1,6 @@
 ---
 title: 2 Week Tube Chassis
 date: March–April 2025
-read: 4
 order: 7
 tags:
   - Research
@@ -9,7 +8,7 @@ tags:
   - Validation
 hero: images/CR29_25-C.png
 hero-caption: CR25-C, the tube-frame replacement designed over spring break to carry CR29's existing drivetrain and suspension.
-lead: CR29's carbon chassis failed at demolding. Over spring break, five of us designed a replacement tube frame from scratch in two weeks. It never got built, but it was worth doing.
+lead: CR29's carbon chassis failed during cure. Over spring break, five of us designed a replacement tube frame in two weeks. It was never built.
 timeline:
   - March 17, 2025 | Design Begins
     Using CR25 as the geometric reference and CR29's critical mounting locations as constraints, CR25-C was modeled over spring break. Subsystems were divided across the group: suspension, cooling, firewall, seat, and chassis structure, with each person working in parallel to avoid bottlenecks.
@@ -21,33 +20,33 @@ timeline:
 
 ## How It Started
 
-CR29 was designed around a carbon monocoque chassis. To speed up manufacturing, we built a welded steel mold instead of the usual fiberglass tooling. Steel is harder to seal, and during cure the vacuum bag lost pressure. Without vacuum, the laminate didn't consolidate. When the chassis was demolded, it was obvious. The surface looked crispy, layers frayed at the edges. Press anywhere and it was soft, crunching because the fibers had no matrix. There was no repairing it. Total loss.
+CR29 was designed around a carbon fiber monocoque chassis. To save time we built the mold from welded steel instead of the usual fiberglass. A steel mold is harder to seal, and during cure the vacuum bag lost pressure. Without vacuum the layers of carbon weren't pressed together and the resin didn't fill them. When the chassis came out of the mold the surface looked crispy and the layers frayed at the edges. It was soft and crunched anywhere I pressed on it. It couldn't be repaired.
 
-That left us with a competition season, a complete drivetrain and suspension package, and no chassis. Over spring break, five of us decided to salvage it.
+That left us with a competition season, a complete drivetrain and suspension design, and no chassis. Over spring break five of us designed a steel tube frame to replace it.
 
 ## The Sprint
 
-No formal assignments. We built a burndown list of everything the chassis needed, put it in front of everyone, and people grabbed tasks. The goal was to divide subsystems so nobody blocked anyone else.
+There were no formal assignments. We wrote a list of everything the chassis needed and each person took tasks from it. We split the work by subsystem so nobody blocked anyone else.
 
-The design wasn't starting from nothing. CR25 was the 25th car and one of the strongest tube frames the program had built. Its geometry was the reference point. The objective for CR25-C was to match CR29's critical dimensions: driver position, overall envelope, and the mounting locations for motor, wings, and suspension pickups. Those were optimized for CR29, and changing them would mean revisiting work already done well. The tube frame was a workaround, not a redesign.
+The design started from CR25, the team's 25th car and one of the strongest tube frames it had built. The new frame, CR25-C, had to match CR29's critical dimensions. Those were the driver position, the overall envelope, and the mounting points for the motor, wings, and suspension. Those dimensions were already worked out for CR29, and moving them would have meant redoing finished work.
 
 ![CR29_25-C Suspension](images/CR29_25-C-Chassis-2.png)
 > The bare CR25-C tube frame, before any subsystems were mounted.
 
 ## What I Worked On
 
-I took cooling because it was my original design for CR29. The tube frame changed packaging constraints, not the system, so it made sense to adapt it myself. The firewall went with it. FSAE rules are specific about what has to be sealed and how, and getting it wrong is a tech inspection failure. I'd worked on both the firewall and seat for CR29 as well.
+I took cooling because I had designed CR29's cooling system. The tube frame changed where the parts fit but not how the system works. I also took the firewall, which I had worked on for CR29 along with the seat. FSAE rules are specific about what the firewall has to seal, and getting it wrong fails tech inspection.
 
-Suspension was the bigger task. A tube frame is heavier than a monocoque, so the spring rates from CR29 wouldn't work. I updated spring selection for the added mass, re-ran the blade simulations to validate geometry, laid out hardpoints, and carried over the A-arms, ARB, and struts from the original design. The goal was to touch as little as possible while making what needed to change correct.
+Suspension was the larger job. A tube frame is heavier than a monocoque, so CR29's spring rates no longer worked. I chose new springs for the added mass, re-ran the blade simulations to check the geometry, laid out the hardpoints, and carried over the A-arms, anti-roll bar, and struts from the CR29 design. I changed as little as I could.
 
-At the end of the design phase, the team submitted an SES (Structural Equivalency Spreadsheet). It's an FSAE document that proves a chassis meets the structural requirements. It's mandatory for competition; no SES approval, no tech sign-off.
+At the end of the design phase the team submitted the SES, the Structural Equivalency Spreadsheet. It shows that a chassis meets FSAE's structural requirements, and a car can't pass tech inspection without an approved one.
 
 ## The Vote
 
-With the design done and SES submitted, the team had to decide whether to build it. That came down to funding and time. The vote went to the team leads. Two tied votes. The meeting was a war. The decision came down to bringing CR28, the last IC car, to competition instead. Optimizing a known car was a safer bet than manufacturing and debugging a new chassis in the time remaining.
+With the design done and the SES submitted, the team had to decide whether to build CR25-C. The question was funding and time. The team leads voted and tied twice, and the meeting got heated. The final decision was to take CR28, the last IC car, to competition instead. Improving a car we already knew was a safer bet than building and debugging a new chassis in the time left.
 
-CR28 went to Michigan and finished 5th. That's a hard result to argue with.
+CR28 went to Michigan and finished 5th.
 
 ## Looking Back
 
-The two weeks were worth it. Not because the chassis got built, but because of what working that way felt like. A small group, a clear deadline, a list of tasks, no bureaucracy. Everyone just worked. It's the closest thing to a startup environment I've been in, and it confirmed that's the kind of team I want to be part of. The lesson that came with it is harder: you can do everything right and still lose the vote. A good solution to a bad situation doesn't guarantee it gets used. Sometimes the answer is correct and it still doesn't happen.
+The two weeks were worth it even though the chassis was never built. Five people worked from one list with a fixed deadline and no approvals to wait on, and everyone just worked. It is the closest I have been to a startup, and it's the kind of team I want to work on. I also learned that a finished design can still lose a vote. The frame was a good answer to a bad situation, and the team chose not to build it.

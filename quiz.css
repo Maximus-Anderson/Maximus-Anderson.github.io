@@ -6,7 +6,7 @@
     --bg:          #050505;
     --card-bg:     rgba(255, 255, 255, 0.04);
     --card-border: rgba(255, 255, 255, 0.08);
-    --accent:      #ff5555;
+    --accent:      #d0343a;
     --correct:     #55cc88;
     --text:        #ffffff;
     --text-dim:    rgba(255, 255, 255, 0.45);
@@ -269,7 +269,7 @@ html, body {
     color: #000;
 }
 .choice-btn.incorrect {
-    background: rgba(255, 85, 85, 0.1);
+    background: rgba(208, 52, 58, 0.1);
     border-color: var(--accent);
 }
 .choice-btn.incorrect .choice-label {
@@ -291,8 +291,8 @@ html, body {
     border-color: rgba(85, 204, 136, 0.28);
 }
 .feedback-card.incorrect {
-    background: rgba(255, 85, 85, 0.05);
-    border-color: rgba(255, 85, 85, 0.28);
+    background: rgba(208, 52, 58, 0.05);
+    border-color: rgba(208, 52, 58, 0.28);
 }
 
 .feedback-icon { font-size: 32px; line-height: 1; }
