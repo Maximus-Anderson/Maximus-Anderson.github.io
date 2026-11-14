@@ -176,7 +176,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     document.addEventListener('pointermove', (e) => {
-        const el = e.target.closest ? e.target.closest('.light-button') : null;
+        const el = e.target.closest ? e.target.closest('.light-button, .project-banner') : null;
         if (!el) return;
         const r = el.getBoundingClientRect();
         el.style.setProperty('--bx', (e.clientX - r.left) + 'px');

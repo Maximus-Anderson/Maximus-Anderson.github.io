@@ -41,6 +41,59 @@ body::before {
     );
 }
 
+:root {
+    --e: 0;
+    --on: 0;
+}
+
+body.studio::before {
+    background-image: none;
+    background: #05070a;
+}
+
+#studio-wall,
+#studio-edge {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    display: none;
+}
+
+body.studio #studio-wall,
+body.studio #studio-edge {
+    display: block;
+}
+
+#studio-wall {
+    z-index: -1;
+    --a: calc(0.30 * var(--on));
+    background: radial-gradient(ellipse 64% 62% at calc(50% - 15% * var(--e)) -8%,
+        rgba(120, 140, 178, var(--a)) 0%,
+        rgba(120, 140, 178, calc(var(--a) * 0.5)) 30%,
+        rgba(120, 140, 178, calc(var(--a) * 0.18)) 58%,
+        rgba(120, 140, 178, calc(var(--a) * 0.04)) 82%,
+        transparent 100%);
+}
+
+#studio-edge {
+    z-index: 1200;
+    opacity: var(--on);
+}
+
+#studio-edge::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    padding: 1px;
+    background: radial-gradient(560px circle at calc(50% - 15% * var(--e)) 0%,
+        rgba(225, 233, 255, 0.6),
+        rgba(225, 233, 255, 0.12) 45%,
+        rgba(225, 233, 255, 0.02) 78%);
+    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+}
+
 /* Navigation */
 .navigation {
     position: fixed;
@@ -1011,7 +1064,13 @@ footer {
     gap: 16px;
     padding: 13px 18px;
     cursor: pointer;
-    transition: background 0.25s ease;
+    overflow: hidden;
+    --bx: 50%;
+    --by: 50%;
+}
+
+.project-banner > * {
+    position: relative;
 }
 
 .project-banner + .project-banner {
@@ -1021,20 +1080,15 @@ footer {
 .project-banner::before {
     content: '';
     position: absolute;
-    left: 0;
-    top: 0;
-    bottom: 0;
-    width: 0;
-    background: var(--primary-color);
-    transition: width 0.22s ease;
+    inset: 0;
+    background: radial-gradient(420px circle at var(--bx) var(--by), rgba(255, 255, 255, 0.09), transparent 60%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
 }
 
 .project-banner:hover::before {
-    width: 3px;
-}
-
-.project-banner:hover {
-    background: rgba(255, 255, 255, 0.035);
+    opacity: 1;
 }
 
 .banner-index {
@@ -1060,6 +1114,11 @@ footer {
     font-weight: 400;
     line-height: 1.4;
     letter-spacing: 0.01em;
+    transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.project-banner:hover .banner-info h3 {
+    transform: translateX(6px);
 }
 
 .banner-tag {
@@ -1088,11 +1147,11 @@ footer {
 
 .banner-arrow {
     font-size: 1.3em;
-    color: var(--primary-color);
+    color: var(--text-color);
     flex-shrink: 0;
     opacity: 0;
-    transform: translateX(-6px);
-    transition: opacity 0.22s ease, transform 0.22s ease;
+    transform: translateX(-10px);
+    transition: opacity 0.3s ease, transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
 .project-banner:hover .banner-arrow {

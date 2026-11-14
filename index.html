@@ -34,7 +34,7 @@
     <link rel="modulepreload" href="https://cdn.jsdelivr.net/npm/three@0.168.0/examples/jsm/loaders/GLTFLoader.js" crossorigin>
     <link rel="modulepreload" href="https://cdn.jsdelivr.net/npm/three@0.168.0/examples/jsm/loaders/DRACOLoader.js" crossorigin>
     <link rel="modulepreload" href="https://cdn.jsdelivr.net/npm/three@0.168.0/examples/jsm/environments/RoomEnvironment.js" crossorigin>
-    <link rel="preload" href="modules/CR30-Optimized.glb" as="fetch" crossorigin>
+    <link rel="preload" href="modules/CR30-Painted.glb" as="fetch" crossorigin>
 </head>
 <body>
     <nav class="navigation">
@@ -57,6 +57,8 @@
     <!-- Three.js overlay elements — all outside .page divs to avoid the fadeIn
          transform:translateY(0) containment bug that breaks position:fixed children.
          Visibility is managed explicitly by car-viewer.js. -->
+    <div id="studio-wall"></div>
+    <div id="studio-edge"></div>
     <canvas id="car-canvas"></canvas>
 
     <div class="car-hero-text" id="car-hero-text">
