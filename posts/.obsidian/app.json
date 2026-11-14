@@ -1,0 +1,14 @@
+{
+  "readableLineLength": true,
+  "showLineNumber": false,
+  "spellcheck": true,
+  "strictLineBreaks": false,
+  "showFrontmatter": true,
+  "propertiesInDocument": "visible",
+  "defaultViewMode": "source",
+  "livePreview": true,
+  "attachmentFolderPath": "../images",
+  "newLinkFormat": "shortest",
+  "useMarkdownLinks": false,
+  "alwaysUpdateLinks": false
+}

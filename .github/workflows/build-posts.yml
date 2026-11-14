@@ -1,0 +1,32 @@
+name: Build posts
+
+on:
+  push:
+    branches: ["**"]
+    paths:
+      - "posts/**"
+      - "build.py"
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: python build.py
+      - name: Commit rebuilt index.html
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          if git diff --quiet -- index.html; then
+            echo "index.html unchanged"
+          else
+            git add index.html
+            git commit -m "Build posts into index.html"
+            git push
+          fi
