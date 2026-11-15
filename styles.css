@@ -272,20 +272,6 @@ body.studio #studio-edge {
     }
 }
 
-/* Hero Section */
-.hero {
-    min-height: 60vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 120px var(--site-margin);
-}
-
-.hero-content {
-    max-width: var(--grid-width);
-    text-align: center;
-}
-
 .hero-title {
     font-size: 9.1em;
     line-height: 1.33;
@@ -357,91 +343,6 @@ body.studio #studio-edge {
         opacity: 1;
         transform: translateY(0);
     }
-}
-
-/* Projects Section */
-.projects-section {
-    padding: 80px var(--site-margin);
-}
-
-.current-projects-section {
-    padding: 80px var(--site-margin);
-}
-
-.projects-grid {
-    max-width: var(--grid-width);
-    margin: 0 auto;
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 25px;
-}
-
-.project-card {
-    position: relative;
-    cursor: pointer;
-}
-
-.project-image {
-    position: relative;
-    width: 100%;
-    aspect-ratio: 16/10;
-    overflow: hidden;
-    background-color: #1a1a1a;
-}
-
-.project-image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.6s ease;
-}
-
-.project-card:hover .project-image img {
-    transform: scale(1.05);
-}
-
-.placeholder-image {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 2.5em;
-    background: #1a1a1a;
-    transition: transform 0.6s ease;
-}
-
-.project-card:hover .placeholder-image {
-    transform: scale(1.05);
-}
-
-.project-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(36deg, rgba(0,0,0,0.73) 1%, rgba(201,201,201,0) 100%);
-    opacity: 0;
-    transition: opacity 0.5s ease;
-    pointer-events: none;
-}
-
-.project-card:hover .project-overlay {
-    opacity: 1;
-}
-
-.project-card h3 {
-    font-size: 2.5em;
-    line-height: 1.5;
-    padding-top: 1em;
-    font-weight: 400;
-    letter-spacing: 0.01em;
-    transition: color 0.3s ease;
-}
-
-.project-card:hover h3 {
-    color: var(--primary-color);
 }
 
 
@@ -942,10 +843,9 @@ footer {
     align-items: flex-start;
 }
 
-.role-container,
 .specs-container {
     position: relative;
-    flex: 0 0 180px;
+    flex: 0 0 300px;
     background-color: #0e0e10;
     padding: 16px 18px;
     text-align: left;
@@ -975,11 +875,6 @@ footer {
     pointer-events: none;
 }
 
-.specs-container {
-    flex: 0 0 300px;
-}
-
-.role-title,
 .specs-title {
     font-size: 1.2em;
     font-weight: 500;
@@ -989,7 +884,6 @@ footer {
     margin-bottom: 10px;
 }
 
-.role-list,
 .specs-list {
     font-size: 1.5em;
     line-height: 1.5;
@@ -997,7 +891,6 @@ footer {
     list-style: none;
 }
 
-.role-list li,
 .specs-list li {
     margin-bottom: 6px;
 }
@@ -1044,42 +937,6 @@ footer {
 
 #project-powertrain-page .project-detail-image {
     aspect-ratio: 1 / 1;
-}
-
-/* Additional Photos Section */
-.additional-photos-container {
-    max-width: 800px;
-    margin: 40px auto 0;
-}
-
-.additional-photos-title {
-    font-size: 1.8em;
-    font-weight: 400;
-    color: var(--primary-color);
-    margin-bottom: 20px;
-    text-align: left;
-}
-
-.additional-photos-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 20px;
-}
-
-.photo-item {
-    position: relative;
-}
-
-.additional-photo {
-    width: 100%;
-    aspect-ratio: 16/10;
-    object-fit: cover;
-    background-color: #1a1a1a;
-    transition: transform 0.6s ease;
-}
-
-.photo-item:hover .additional-photo {
-    transform: scale(1.05);
 }
 
 /* ── Three.js Car Viewer ─────────────────────────────────────────────────── */
@@ -1295,14 +1152,6 @@ footer {
         font-size: 5vw;
     }
 
-    .projects-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .project-card h3 {
-        font-size: 5vw;
-    }
-
     .project-detail-title {
         font-size: clamp(2.6em, 9vw, 4em);
         overflow-wrap: break-word;
@@ -1321,18 +1170,15 @@ footer {
         gap: 15px;
     }
 
-    .role-container,
     .specs-container {
         flex: 0 0 auto;
         max-width: 300px;
     }
 
-    .role-title,
     .specs-title {
         font-size: 1.6em;
     }
 
-    .role-list,
     .specs-list {
         font-size: 1.4em;
     }
@@ -1347,19 +1193,6 @@ footer {
 
     .background-image {
         max-width: 100%;
-    }
-
-    .additional-photos-container {
-        margin: 20px auto 0;
-    }
-
-    .additional-photos-title {
-        font-size: 1.6em;
-    }
-
-    .additional-photos-grid {
-        grid-template-columns: 1fr;
-        gap: 15px;
     }
 
     .timeline {
@@ -1422,20 +1255,8 @@ footer {
 
 
 @media (max-width: 480px) {
-    .hero {
-        padding: 80px var(--site-margin);
-    }
-
     .hero-title {
         font-size: 3.5em;
-    }
-
-    .projects-section {
-        padding: 40px var(--site-margin);
-    }
-
-    .current-projects-section {
-        padding: 40px var(--site-margin);
     }
 
     .project-detail-section {
@@ -1459,17 +1280,14 @@ footer {
         font-size: 1.8em;
     }
 
-    .role-container,
     .specs-container {
         padding: 8px;
     }
 
-    .role-title,
     .specs-title {
         font-size: 1.4em;
     }
 
-    .role-list,
     .specs-list {
         font-size: 1.2em;
     }
@@ -1480,10 +1298,6 @@ footer {
 
     .background-description {
         font-size: 1.2em;
-    }
-
-    .additional-photos-title {
-        font-size: 1.4em;
     }
 
     .timeline {

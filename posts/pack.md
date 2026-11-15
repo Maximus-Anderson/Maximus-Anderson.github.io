@@ -7,6 +7,7 @@ tags:
   - Manufacture
   - Lead
 hero: images/TB-001-CR30_Render_1.png
+thumb: images/thumbs/pack.png
 hero-alt: CR30 Battery Pack
 hero-scale: 1.15
 hero-caption: The CR30 pack. Second iteration, first one to drive.

@@ -23,7 +23,7 @@ hero: images/TB-001-CR30_Render_1.png
 hero-alt: CR30 Battery Pack                (optional, defaults to the title)
 hero-scale: 1.15                           (optional, zooms a render with empty edges)
 hero-caption: The CR30 pack. Second iteration, first one to drive.
-thumb: images/CR30-Render-Banner.jpg       (optional, landing-list thumbnail if not the hero)
+thumb: images/thumbs/pack.png              (landing-list thumbnail, a small 192x128 copy; the hero is used if missing)
 lead: One sentence under the hero photo that says what the post is.
 specs-title: Specifications                (optional, defaults to "Specifications")
 specs:

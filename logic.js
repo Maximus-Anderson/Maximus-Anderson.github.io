@@ -1,6 +1,5 @@
 document.addEventListener('DOMContentLoaded', function() {
     const navLinks = document.querySelectorAll('.nav-links a');
-    const projectCards = document.querySelectorAll('.project-card');
     const projectBanners = document.querySelectorAll('.project-banner');
     const backButtons = document.querySelectorAll('.back-button');
     const logo = document.querySelector('.logo');
@@ -26,16 +25,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    projectCards.forEach(card => {
-        card.addEventListener('click', function(e) {
-            if (!e.target.closest('.comparison-slider') && !e.target.closest('.comparison-wrapper')) {
-                e.preventDefault();
-                const targetPage = this.getAttribute('data-page');
-                if (targetPage) switchPage(targetPage);
-            }
-        });
-    });
-
     projectBanners.forEach(banner => {
         banner.addEventListener('click', function() {
             const targetPage = this.getAttribute('data-page');
@@ -58,7 +47,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    document.querySelectorAll('.nav-links a').forEach(a => {
+    navLinks.forEach(a => {
         a.classList.toggle('active-link', a.getAttribute('data-page') === 'projects');
     });
 
@@ -89,7 +78,7 @@ document.addEventListener('DOMContentLoaded', function() {
             currentPage.classList.remove('active');
             targetPage.classList.add('active');
 
-            document.querySelectorAll('.nav-links a').forEach(a => {
+            navLinks.forEach(a => {
                 a.classList.toggle('active-link', a.getAttribute('data-page') === targetPageId);
             });
 
@@ -209,14 +198,4 @@ document.addEventListener('DOMContentLoaded', function() {
     }, { threshold: 0.2 });
 
     document.querySelectorAll('video[preload="none"]').forEach(v => videoObserver.observe(v));
-
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
-            e.preventDefault();
-            const href = this.getAttribute('href');
-            if (href === '#') return;
-            const target = document.querySelector(href);
-            if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        });
-    });
 });

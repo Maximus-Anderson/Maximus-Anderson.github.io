@@ -12,7 +12,7 @@ hero: images/TB-001-CR30_Render_1.png
 hero-alt: CR30 Battery Pack
 hero-scale: 1.15
 hero-caption: CR30 battery pack render.
-thumb: images/DCIRMap10-11-25.png
+thumb: images/thumbs/cell.jpg
 lead: How DCIR testing on Cyclone Racing's CR30 cells replaced a liquid cooling system with ten fans.
 timeline:
   - September 27, 2025 | Milestone 1: Test Rig Design
