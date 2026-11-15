@@ -5,6 +5,7 @@ Each posts/<slug>.md becomes the <div id="project-<slug>-page"> block and a
 ledger row. Everything in index.html outside the marker comments is left alone.
 The post format is documented in posts/README.md.
 """
+import hashlib
 import html
 import re
 import shutil
@@ -385,6 +386,18 @@ def route_page(src, page_id, block):
     return re.sub(r'\n[^\n]*rel="preload"[^\n]*\.glb[^\n]*', "", src)
 
 
+ASSETS = ("styles.css", "logic.js", "car-viewer.js")
+
+
+def stamp_assets(src):
+    for name in ASSETS:
+        digest = hashlib.sha1((ROOT / name).read_text(encoding="utf-8").encode("utf-8")).hexdigest()[:8]
+        src, n = re.subn(r'"%s(\?v=[0-9a-f]+)?"' % re.escape(name), '"%s?v=%s"' % (name, digest), src)
+        if n != 1:
+            sys.exit(f"index.html must reference {name} exactly once")
+    return src
+
+
 def write_route(path, text):
     out = ROOT / path / "index.html"
     out.parent.mkdir(parents=True, exist_ok=True)
@@ -434,6 +447,7 @@ def main():
     src = src[:a] + "\n" + "\n\n".join(rows) + "\n        " + src[b:]
     a, b = src.index(PAGES_START) + len(PAGES_START), src.index(PAGES_END)
     src = src[:a] + "\n" + "\n\n".join(pages) + "\n    " + src[b:]
+    src = stamp_assets(src)
     if src.count(META_START) != 1 or src.count(META_END) != 1:
         sys.exit(f"index.html must contain exactly one {META_START} and {META_END}")
     INDEX.write_text(with_meta(src, meta_html(HOME_TITLE, HOME_DESC, HOME_IMAGE, "", "website")),

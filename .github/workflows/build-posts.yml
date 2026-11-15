@@ -7,6 +7,9 @@ on:
       - "posts/**"
       - "build.py"
       - "index.html"
+      - "styles.css"
+      - "logic.js"
+      - "car-viewer.js"
 
 permissions:
   contents: write
