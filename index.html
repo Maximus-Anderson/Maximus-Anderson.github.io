@@ -3,16 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- head:meta:start -->
     <title>Maximus Anderson | Mechanical Engineer</title>
-
-    <!-- Open Graph / link preview -->
-    <meta property="og:title"       content="Maximus Anderson | Mechanical Engineer">
-    <meta property="og:description" content="Battery pack, electric powertrain, and chassis projects from Cyclone Racing, Iowa State's Formula SAE team.">
-    <meta property="og:image"       content="https://maximus-anderson.github.io/images/CR30.png">
-    <meta property="og:url"         content="https://maximus-anderson.github.io">
-    <meta property="og:type"        content="website">
-    <meta name="twitter:card"       content="summary_large_image">
-    <meta name="twitter:image"      content="https://maximus-anderson.github.io/images/CR30.png">
+    <meta name="description" content="Battery pack, electric powertrain, and chassis projects from Cyclone Racing, Iowa State&#x27;s Formula SAE team.">
+    <link rel="canonical" href="https://maximus-anderson.github.io/">
+    <meta property="og:title" content="Maximus Anderson | Mechanical Engineer">
+    <meta property="og:description" content="Battery pack, electric powertrain, and chassis projects from Cyclone Racing, Iowa State&#x27;s Formula SAE team.">
+    <meta property="og:image" content="https://maximus-anderson.github.io/images/share/home.jpg">
+    <meta property="og:url" content="https://maximus-anderson.github.io/">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Maximus Anderson">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="https://maximus-anderson.github.io/images/share/home.jpg">
+    <!-- head:meta:end -->
+    <base href="/">
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -36,7 +40,7 @@
     <link rel="modulepreload" href="https://cdn.jsdelivr.net/npm/three@0.168.0/examples/jsm/environments/RoomEnvironment.js" crossorigin>
     <link rel="preload" href="modules/CR30-Painted.glb" as="fetch" crossorigin>
 </head>
-<body>
+<body class="studio">
     <nav class="navigation">
         <div class="nav-content">
             <h1 class="logo">Maximus Anderson</h1>
@@ -47,9 +51,9 @@
             </div>
             <div class="nav-divider nav-divider-pill"></div>
             <div class="nav-links">
-                <a href="#" data-page="projects">Projects</a>
-                <a href="#" data-page="about">About</a>
-                <a href="#" data-page="resume">Resume</a>
+                <a href="/" data-page="projects">Projects</a>
+                <a href="/about/" data-page="about">About</a>
+                <a href="/resume/" data-page="resume">Resume</a>
             </div>
         </div>
     </nav>
@@ -71,7 +75,7 @@
     <div class="projects-banners-panel" id="projects-banners">
         <div class="banners-ledger">
         <!-- posts:ledger:start -->
-        <div class="project-banner" data-page="project-powertrain">
+        <a class="project-banner" href="/projects/powertrain/" data-page="project-powertrain">
             <span class="banner-index">01</span>
             <div class="banner-info">
                 <h3>CR30 Powertrain: Troubleshooting Through Competition</h3>
@@ -79,9 +83,9 @@
             </div>
             <img class="banner-thumb" src="images/thumbs/powertrain.jpg" alt="CR30 Powertrain: Troubleshooting Through Competition">
             <span class="banner-arrow">→</span>
-        </div>
+        </a>
 
-        <div class="project-banner" data-page="project-pack">
+        <a class="project-banner" href="/projects/pack/" data-page="project-pack">
             <span class="banner-index">02</span>
             <div class="banner-info">
                 <h3>CR30 Battery Pack: Design and Manufacture</h3>
@@ -89,9 +93,9 @@
             </div>
             <img class="banner-thumb" src="images/thumbs/pack.png" alt="CR30 Battery Pack: Design and Manufacture">
             <span class="banner-arrow">→</span>
-        </div>
+        </a>
 
-        <div class="project-banner" data-page="project-cell">
+        <a class="project-banner" href="/projects/cell/" data-page="project-cell">
             <span class="banner-index">03</span>
             <div class="banner-info">
                 <h3>CR30 Battery Pack: Thermal Optimization</h3>
@@ -99,9 +103,9 @@
             </div>
             <img class="banner-thumb" src="images/thumbs/cell.jpg" alt="CR30 Battery Pack: Thermal Optimization">
             <span class="banner-arrow">→</span>
-        </div>
+        </a>
 
-        <div class="project-banner" data-page="project-honda">
+        <a class="project-banner" href="/projects/honda/" data-page="project-honda">
             <span class="banner-index">04</span>
             <div class="banner-info">
                 <h3>1976 Honda CB750F Restoration</h3>
@@ -109,9 +113,9 @@
             </div>
             <img class="banner-thumb" src="images/thumbs/honda.jpg" alt="1976 Honda CB750F Restoration">
             <span class="banner-arrow">→</span>
-        </div>
+        </a>
 
-        <div class="project-banner" data-page="project-dyno">
+        <a class="project-banner" href="/projects/dyno/" data-page="project-dyno">
             <span class="banner-index">05</span>
             <div class="banner-info">
                 <h3>Dynamometer Cart + Motor Testing</h3>
@@ -119,9 +123,9 @@
             </div>
             <img class="banner-thumb" src="images/thumbs/dyno.jpg" alt="Dynamometer Cart + Motor Testing">
             <span class="banner-arrow">→</span>
-        </div>
+        </a>
 
-        <div class="project-banner" data-page="project-fsae">
+        <a class="project-banner" href="/projects/fsae/" data-page="project-fsae">
             <span class="banner-index">06</span>
             <div class="banner-info">
                 <h3>CR29 Battery Module: Manufacture</h3>
@@ -129,9 +133,9 @@
             </div>
             <img class="banner-thumb" src="images/thumbs/fsae.jpg" alt="CR29 Battery Module: Manufacture">
             <span class="banner-arrow">→</span>
-        </div>
+        </a>
 
-        <div class="project-banner" data-page="project-chassis">
+        <a class="project-banner" href="/projects/chassis/" data-page="project-chassis">
             <span class="banner-index">07</span>
             <div class="banner-info">
                 <h3>2 Week Tube Chassis</h3>
@@ -139,18 +143,18 @@
             </div>
             <img class="banner-thumb" src="images/thumbs/chassis.jpg" alt="2 Week Tube Chassis">
             <span class="banner-arrow">→</span>
-        </div>
+        </a>
         <!-- posts:ledger:end -->
         </div>
     </div>
 
     <!-- Projects Page (scroll driver only — fixed overlays live above) -->
-    <div id="projects-page" class="page active">
+    <div id="projects-page" class="page active" data-path="" data-title="Maximus Anderson | Mechanical Engineer">
         <div class="car-scroll-driver"></div>
     </div>
 
 <!-- posts:pages:start -->
-    <div id="project-powertrain-page" class="page">
+    <div id="project-powertrain-page" class="page" data-path="projects/powertrain/" data-title="CR30 Powertrain: Troubleshooting Through Competition | Maximus Anderson">
         <section class="project-detail-section">
             <div class="project-detail-container">
                 <h1 class="project-detail-title fade-in">CR30 Powertrain: Troubleshooting Through Competition</h1>
@@ -187,7 +191,7 @@
                     <div class="background-container">
                         <h3 class="background-title">Context</h3>
                         <p class="background-description">
-                            This post covers getting CR30's motor and inverter to make reliable power after the pack was built. The motor is an EMRAX 208. The inverter is a DTI HV-550, which turns the battery's DC into the three-phase AC that drives the motor. The pack build is in <a href="#" class="inline-page-link" data-page="project-pack">CR30 Battery Pack: Design and Manufacture</a> and the cooling design is in <a href="#" class="inline-page-link" data-page="project-cell">CR30 Battery Pack: Thermal Optimization for Endurance</a>.
+                            This post covers getting CR30's motor and inverter to make reliable power after the pack was built. The motor is an EMRAX 208. The inverter is a DTI HV-550, which turns the battery's DC into the three-phase AC that drives the motor. The pack build is in <a href="/projects/pack/" class="inline-page-link" data-page="project-pack">CR30 Battery Pack: Design and Manufacture</a> and the cooling design is in <a href="/projects/cell/" class="inline-page-link" data-page="project-cell">CR30 Battery Pack: Thermal Optimization for Endurance</a>.
                         </p>
                     </div>
 
@@ -435,7 +439,7 @@
         </section>
     </div>
 
-    <div id="project-pack-page" class="page">
+    <div id="project-pack-page" class="page" data-path="projects/pack/" data-title="CR30 Battery Pack: Design and Manufacture | Maximus Anderson">
         <section class="project-detail-section">
             <div class="project-detail-container">
                 <h1 class="project-detail-title fade-in">CR30 Battery Pack: Design and Manufacture</h1>
@@ -481,7 +485,7 @@
                             I was powertrain lead and built the pack. That included the modules, the housing, the high voltage wiring, the chassis mounts, and getting the battery management boards working. The design was shared. My design work was the tabs and slots on the housing, the way the tab blocks are held down, and the retention stack that holds the battery management boards flat.
                         </p>
                         <p class="background-description">
-                            The cells are the ones bought for CR29. CR29 never ran, and we had no budget for new cells. The cooling design has its own post, <a href="#" class="inline-page-link" data-page="project-cell">CR30 Battery Pack: Thermal Optimization for Endurance</a>, and the CR29 pack build is in <a href="#" class="inline-page-link" data-page="project-fsae">CR29 Accumulator: Manufacture</a>.
+                            The cells are the ones bought for CR29. CR29 never ran, and we had no budget for new cells. The cooling design has its own post, <a href="/projects/cell/" class="inline-page-link" data-page="project-cell">CR30 Battery Pack: Thermal Optimization for Endurance</a>, and the CR29 pack build is in <a href="/projects/fsae/" class="inline-page-link" data-page="project-fsae">CR29 Accumulator: Manufacture</a>.
                         </p>
                     </div>
 
@@ -507,7 +511,7 @@
                             <figcaption class="post-caption">Burrs on a basket straight off the H2D. Every basket had them before sanding.</figcaption>
                         </figure>
                         <p class="background-description">
-                            One side of the basket is open. A plate bolts over that side and holds the cells against the opposite wall. The CAD had about 1 mm of clearance between the plate and the cells. The printed parts had none, and I never found out whether the baskets came out small or the way the cells interfaced with one another caused them to be thicker than modeled. Because of this issue, it takes two people to close a basket, and the plate presses firmly on the cells, sort of like an interference fit. I had already tested cell resistance against pressure for the <a href="#" class="inline-page-link" data-page="project-cell">thermal post</a> and pressure had almost no effect, so the tight fit shouldn't change how the cells perform and was acceptable.
+                            One side of the basket is open. A plate bolts over that side and holds the cells against the opposite wall. The CAD had about 1 mm of clearance between the plate and the cells. The printed parts had none, and I never found out whether the baskets came out small or the way the cells interfaced with one another caused them to be thicker than modeled. Because of this issue, it takes two people to close a basket, and the plate presses firmly on the cells, sort of like an interference fit. I had already tested cell resistance against pressure for the <a href="/projects/cell/" class="inline-page-link" data-page="project-cell">thermal post</a> and pressure had almost no effect, so the tight fit shouldn't change how the cells perform and was acceptable.
                         </p>
                     </div>
 
@@ -550,7 +554,7 @@
                             <figcaption class="post-caption">The redesigned insulator.</figcaption>
                         </figure>
                         <p class="background-description">
-                            This fix initially seemed to work, but later the pogo pins began sticking in the compressed position and had to be replaced with wires and fork terminals. That repair is in <a href="#" class="inline-page-link" data-page="project-powertrain">CR30 Powertrain: Troubleshooting Through Competition</a>.
+                            This fix initially seemed to work, but later the pogo pins began sticking in the compressed position and had to be replaced with wires and fork terminals. That repair is in <a href="/projects/powertrain/" class="inline-page-link" data-page="project-powertrain">CR30 Powertrain: Troubleshooting Through Competition</a>.
                         </p>
                         <p class="background-description">
                             Four smaller problems also cost time:
@@ -793,7 +797,7 @@
         </section>
     </div>
 
-    <div id="project-cell-page" class="page">
+    <div id="project-cell-page" class="page" data-path="projects/cell/" data-title="CR30 Battery Pack: Thermal Optimization for Endurance | Maximus Anderson">
         <section class="project-detail-section">
             <div class="project-detail-container">
                 <h1 class="project-detail-title fade-in">CR30 Battery Pack: Thermal Optimization for Endurance</h1>
@@ -982,7 +986,7 @@
         </section>
     </div>
 
-    <div id="project-honda-page" class="page">
+    <div id="project-honda-page" class="page" data-path="projects/honda/" data-title="1976 Honda CB750F Restoration | Maximus Anderson">
         <section class="project-detail-section">
             <div class="project-detail-container">
                 <h1 class="project-detail-title fade-in">1976 Honda CB750F Restoration</h1>
@@ -1127,7 +1131,7 @@
         </section>
     </div>
 
-    <div id="project-dyno-page" class="page">
+    <div id="project-dyno-page" class="page" data-path="projects/dyno/" data-title="Dyno Cart Testing | Maximus Anderson">
         <section class="project-detail-section">
             <div class="project-detail-container">
                 <h1 class="project-detail-title fade-in">Dyno Cart Testing</h1>
@@ -1254,7 +1258,7 @@
         </section>
     </div>
 
-    <div id="project-fsae-page" class="page">
+    <div id="project-fsae-page" class="page" data-path="projects/fsae/" data-title="CR29 Accumulator: Manufacture | Maximus Anderson">
         <section class="project-detail-section">
             <div class="project-detail-container">
                 <h1 class="project-detail-title fade-in">CR29 Accumulator: Manufacture</h1>
@@ -1313,7 +1317,7 @@
                             Welding the partitions caused warping. The outer walls are 3.2 mm thick and welded fine. The inner partitions are 2.3 mm, the minimum the rules allow, and a continuous weld puts more heat into 2.3 mm aluminum than it can take without moving. After welding, the space for the modules was too tight in places and the modules wouldn't fit. The fix was to work the warped spots outward with a mallet until the modules fit. The housing worked, but it was out of spec.
                         </p>
                         <p class="background-description">
-                            Fitting each panel before tack welding took a lot of time, and the housing still didn't match CAD exactly. CR30's housing added tabs and slots on the panel edges so the panels locate themselves, which is covered in <a href="#" class="inline-page-link" data-page="project-pack">CR30 Battery Pack: Design and Manufacture</a>.
+                            Fitting each panel before tack welding took a lot of time, and the housing still didn't match CAD exactly. CR30's housing added tabs and slots on the panel edges so the panels locate themselves, which is covered in <a href="/projects/pack/" class="inline-page-link" data-page="project-pack">CR30 Battery Pack: Design and Manufacture</a>.
                         </p>
                         <figure class="post-figure">
                             <div class="dual-image-container" style="display: flex; gap: 1em; justify-content: center; flex-wrap: wrap;">
@@ -1427,7 +1431,7 @@
         </section>
     </div>
 
-    <div id="project-chassis-page" class="page">
+    <div id="project-chassis-page" class="page" data-path="projects/chassis/" data-title="2 Week Tube Chassis | Maximus Anderson">
         <section class="project-detail-section">
             <div class="project-detail-container">
                 <h1 class="project-detail-title fade-in">2 Week Tube Chassis</h1>
@@ -1548,7 +1552,7 @@
     </div>
     <!-- posts:pages:end -->
 
-    <div id="about-page" class="page">
+    <div id="about-page" class="page" data-path="about/" data-title="About | Maximus Anderson">
         <section class="about-section">
             <div class="about-grid">
                 <div class="about-photo slide-up">
@@ -1577,7 +1581,7 @@
                     </div>
                     <div class="about-links">
                         <a href="https://www.linkedin.com/in/maximus-anderson-491545337/" target="_blank" rel="noopener">LinkedIn</a>
-                        <a href="#" class="inline-page-link about-resume-link" data-page="resume">Resume</a>
+                        <a href="/resume/" class="inline-page-link about-resume-link" data-page="resume">Resume</a>
                         <a href="mailto:mnra@iastate.edu">mnra@iastate.edu</a>
                     </div>
                     <p class="about-legal">Logos are trademarks of their respective owners. No endorsement implied.</p>
@@ -1586,7 +1590,7 @@
         </section>
     </div>
 
-   <div id="resume-page" class="page">
+   <div id="resume-page" class="page" data-path="resume/" data-title="Resume | Maximus Anderson">
         <section class="resume-section">
             <div class="resume-container">
                 <div class="resume-viewport">

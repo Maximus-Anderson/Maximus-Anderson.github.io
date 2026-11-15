@@ -1,0 +1,1623 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- head:meta:start -->
+    <title>1976 Honda CB750F Restoration | Maximus Anderson</title>
+    <meta name="description" content="Reviving a 50-year-old SOHC four: carburetors, electrics, timing, and the start of a cafe racer build.">
+    <link rel="canonical" href="https://maximus-anderson.github.io/projects/honda/">
+    <meta property="og:title" content="1976 Honda CB750F Restoration | Maximus Anderson">
+    <meta property="og:description" content="Reviving a 50-year-old SOHC four: carburetors, electrics, timing, and the start of a cafe racer build.">
+    <meta property="og:image" content="https://maximus-anderson.github.io/images/share/honda.jpg">
+    <meta property="og:url" content="https://maximus-anderson.github.io/projects/honda/">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="Maximus Anderson">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="https://maximus-anderson.github.io/images/share/honda.jpg">
+    <!-- head:meta:end -->
+    <base href="/">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600&display=swap">
+    <link rel="stylesheet" href="styles.css">
+
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+
+    <script type="importmap">
+    {
+        "imports": {
+            "three":          "https://cdn.jsdelivr.net/npm/three@0.168.0/build/three.module.js",
+            "three/addons/":  "https://cdn.jsdelivr.net/npm/three@0.168.0/examples/jsm/"
+        }
+    }
+    </script>
+
+    <link rel="modulepreload" href="https://cdn.jsdelivr.net/npm/three@0.168.0/build/three.module.js" crossorigin>
+    <link rel="modulepreload" href="https://cdn.jsdelivr.net/npm/three@0.168.0/examples/jsm/loaders/GLTFLoader.js" crossorigin>
+    <link rel="modulepreload" href="https://cdn.jsdelivr.net/npm/three@0.168.0/examples/jsm/loaders/DRACOLoader.js" crossorigin>
+    <link rel="modulepreload" href="https://cdn.jsdelivr.net/npm/three@0.168.0/examples/jsm/environments/RoomEnvironment.js" crossorigin>
+</head>
+<body>
+    <nav class="navigation">
+        <div class="nav-content">
+            <h1 class="logo">Maximus Anderson</h1>
+            <div class="nav-center">
+                <div class="nav-divider"></div>
+                <span class="nav-tagline">Mechanical Engineer</span>
+                <div class="nav-divider"></div>
+            </div>
+            <div class="nav-divider nav-divider-pill"></div>
+            <div class="nav-links">
+                <a href="/" data-page="projects">Projects</a>
+                <a href="/about/" data-page="about">About</a>
+                <a href="/resume/" data-page="resume">Resume</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Three.js overlay elements — all outside .page divs to avoid the fadeIn
+         transform:translateY(0) containment bug that breaks position:fixed children.
+         Visibility is managed explicitly by car-viewer.js. -->
+    <div id="studio-wall"></div>
+    <div id="studio-edge"></div>
+    <canvas id="car-canvas"></canvas>
+
+    <div class="car-hero-text" id="car-hero-text">
+        <h1 class="hero-title">Projects</h1>
+        <h2 class="hero-subtitle">Projects I have researched, designed, or manufactured</h2>
+        <div class="divider"><span></span></div>
+        <div class="scroll-hint">↓ scroll</div>
+    </div>
+
+    <div class="projects-banners-panel" id="projects-banners">
+        <div class="banners-ledger">
+        <!-- posts:ledger:start -->
+        <a class="project-banner" href="/projects/powertrain/" data-page="project-powertrain">
+            <span class="banner-index">01</span>
+            <div class="banner-info">
+                <h3>CR30 Powertrain: Troubleshooting Through Competition</h3>
+                <span class="banner-tag">May-June 2026 · 9 min</span>
+            </div>
+            <img class="banner-thumb" src="images/thumbs/powertrain.jpg" alt="CR30 Powertrain: Troubleshooting Through Competition">
+            <span class="banner-arrow">→</span>
+        </a>
+
+        <a class="project-banner" href="/projects/pack/" data-page="project-pack">
+            <span class="banner-index">02</span>
+            <div class="banner-info">
+                <h3>CR30 Battery Pack: Design and Manufacture</h3>
+                <span class="banner-tag">April 2026 · 13 min</span>
+            </div>
+            <img class="banner-thumb" src="images/thumbs/pack.png" alt="CR30 Battery Pack: Design and Manufacture">
+            <span class="banner-arrow">→</span>
+        </a>
+
+        <a class="project-banner" href="/projects/cell/" data-page="project-cell">
+            <span class="banner-index">03</span>
+            <div class="banner-info">
+                <h3>CR30 Battery Pack: Thermal Optimization</h3>
+                <span class="banner-tag">October 2025 · 4 min</span>
+            </div>
+            <img class="banner-thumb" src="images/thumbs/cell.jpg" alt="CR30 Battery Pack: Thermal Optimization">
+            <span class="banner-arrow">→</span>
+        </a>
+
+        <a class="project-banner" href="/projects/honda/" data-page="project-honda">
+            <span class="banner-index">04</span>
+            <div class="banner-info">
+                <h3>1976 Honda CB750F Restoration</h3>
+                <span class="banner-tag">Summer 2025 · 3 min</span>
+            </div>
+            <img class="banner-thumb" src="images/thumbs/honda.jpg" alt="1976 Honda CB750F Restoration">
+            <span class="banner-arrow">→</span>
+        </a>
+
+        <a class="project-banner" href="/projects/dyno/" data-page="project-dyno">
+            <span class="banner-index">05</span>
+            <div class="banner-info">
+                <h3>Dynamometer Cart + Motor Testing</h3>
+                <span class="banner-tag">April–June 2025 · 3 min</span>
+            </div>
+            <img class="banner-thumb" src="images/thumbs/dyno.jpg" alt="Dynamometer Cart + Motor Testing">
+            <span class="banner-arrow">→</span>
+        </a>
+
+        <a class="project-banner" href="/projects/fsae/" data-page="project-fsae">
+            <span class="banner-index">06</span>
+            <div class="banner-info">
+                <h3>CR29 Battery Module: Manufacture</h3>
+                <span class="banner-tag">March 2025 · 4 min</span>
+            </div>
+            <img class="banner-thumb" src="images/thumbs/fsae.jpg" alt="CR29 Battery Module: Manufacture">
+            <span class="banner-arrow">→</span>
+        </a>
+
+        <a class="project-banner" href="/projects/chassis/" data-page="project-chassis">
+            <span class="banner-index">07</span>
+            <div class="banner-info">
+                <h3>2 Week Tube Chassis</h3>
+                <span class="banner-tag">March–April 2025 · 2 min</span>
+            </div>
+            <img class="banner-thumb" src="images/thumbs/chassis.jpg" alt="2 Week Tube Chassis">
+            <span class="banner-arrow">→</span>
+        </a>
+        <!-- posts:ledger:end -->
+        </div>
+    </div>
+
+    <!-- Projects Page (scroll driver only — fixed overlays live above) -->
+    <div id="projects-page" class="page" data-path="" data-title="Maximus Anderson | Mechanical Engineer">
+        <div class="car-scroll-driver"></div>
+    </div>
+
+<!-- posts:pages:start -->
+    <div id="project-powertrain-page" class="page" data-path="projects/powertrain/" data-title="CR30 Powertrain: Troubleshooting Through Competition | Maximus Anderson">
+        <section class="project-detail-section">
+            <div class="project-detail-container">
+                <h1 class="project-detail-title fade-in">CR30 Powertrain: Troubleshooting Through Competition</h1>
+                <div class="post-meta fade-in" style="animation-delay: 0.1s;">
+                    <span class="post-meta-date">May-June 2026</span>
+                    <span class="post-meta-sep">·</span>
+                    <span class="post-meta-chips">
+                        <span class="post-meta-chip">Powertrain</span>
+                        <span class="post-meta-chip">Inverter</span>
+                        <span class="post-meta-chip">Lead</span>
+                    </span>
+                    <span class="post-meta-sep">·</span>
+                    <span class="post-meta-read">~9 min read</span>
+                </div>
+                <figure class="post-figure slide-up">
+                    <img loading="lazy" decoding="async" src="images/Troubleshooting_To_Comp_Images/Got_Sticker_For_Battery_&amp;_Mech.jpg" alt="The car with its battery and mechanical tech inspection stickers" class="project-detail-image">
+                    <figcaption class="post-caption">The car with its battery and mechanical tech stickers at our first EV competition.</figcaption>
+                </figure>
+                <div class="project-detail-content slide-up" style="animation-delay: 0.2s;">
+                    <p class="project-detail-description">
+                        What it took to get Cyclone Racing's CR30 driving reliably after the pack was built, from a blown inverter to our first EV competition.
+                    </p>
+                    <div class="side-boxes-container">
+                        <div class="specs-container">
+                            <h3 class="specs-title">The Setup</h3>
+                            <ul class="specs-list">
+                                <li>Motor: EMRAX 208 HV</li>
+                                <li>Inverter: DTI HV-550</li>
+                                <li>Competition: passed battery + mechanical tech</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="background-container">
+                        <h3 class="background-title">Context</h3>
+                        <p class="background-description">
+                            This post covers getting CR30's motor and inverter to make reliable power after the pack was built. The motor is an EMRAX 208. The inverter is a DTI HV-550, which turns the battery's DC into the three-phase AC that drives the motor. The pack build is in <a href="/projects/pack/" class="inline-page-link" data-page="project-pack">CR30 Battery Pack: Design and Manufacture</a> and the cooling design is in <a href="/projects/cell/" class="inline-page-link" data-page="project-cell">CR30 Battery Pack: Thermal Optimization for Endurance</a>.
+                        </p>
+                    </div>
+
+                    <div class="background-container tall-figures">
+                        <h3 class="background-title">The Blown Inverter</h3>
+                        <p class="background-description">
+                            Near the end of CR30's second driving day the motor made a loud whine and the inverter stopped working. An inverter drives the motor through six power switches called IGBTs, and one of them had failed.
+                        </p>
+                        <figure class="post-figure">
+                            <div class="dual-image-container" style="display: flex; gap: 1em; justify-content: center; flex-wrap: wrap;">
+                                <img loading="lazy" decoding="async" src="images/Troubleshooting_To_Comp_Images/Removed_IGBT_From_Inverter.jpg" alt="IGBT removed from the inverter" class="background-image slide-up" style="animation-delay: 0.3s; flex: 1; max-width: 48%;">
+                                <img loading="lazy" decoding="async" src="images/Troubleshooting_To_Comp_Images/Inside_IGBT_Burnt&amp;Cracked_Semiconductor.jpg" alt="Burnt and cracked semiconductor inside the failed IGBT" class="background-image slide-up" style="animation-delay: 0.3s; flex: 1; max-width: 48%;">
+                            </div>
+                            <figcaption class="post-caption">The IGBT removed from the inverter (left), and the burnt, cracked semiconductor inside it (right).</figcaption>
+                        </figure>
+                        <p class="background-description">
+                            The motor had never been tuned. I had handed the motor setup to our motor engineer and didn't check it before we drove. I never confirmed what killed the IGBT, but running power through an untuned motor is the most likely cause.
+                        </p>
+                        <p class="background-description">
+                            A replacement inverter was quoted at £1,400 with a four week lead time. Competition started June 16, so waiting four weeks would have left almost no time to test. I opened the inverter and looked for the failure with a multimeter. In diode mode the meter reads the voltage drop across a switch, and I measured from the DC input to each phase terminal. Five switches read 0.32 V and the sixth read about 0.2 V. Testing the gate of that sixth IGBT showed that its gate driver, the part that switches it on and off, had failed too.
+                        </p>
+                        <figure class="post-figure">
+                            <div class="dual-image-container" style="display: flex; gap: 1em; justify-content: center; flex-wrap: wrap;">
+                                <img loading="lazy" decoding="async" src="images/Troubleshooting_To_Comp_Images/Bad_Gate_Reading.jpg" alt="Failed diode reading on the gate" class="background-image slide-up" style="animation-delay: 0.3s; flex: 1; max-width: 48%;">
+                                <img loading="lazy" decoding="async" src="images/Troubleshooting_To_Comp_Images/Good_Gate_Reading_1.jpg" alt="Good diode reading on the gate" class="background-image slide-up" style="animation-delay: 0.3s; flex: 1; max-width: 48%;">
+                            </div>
+                            <figcaption class="post-caption">Diode readings at the gate. The failed device (left) and a healthy one (right).</figcaption>
+                        </figure>
+                        <p class="background-description">
+                            Digikey sells both the IGBT and the gate driver. I bought one of each and moved the gate resistors from the old driver to the new one so the IGBT would switch the same way as the other five. The repair cost about $300, and the inverter ran again.
+                        </p>
+                        <figure class="post-figure">
+                            <div class="dual-image-container" style="display: flex; gap: 1em; justify-content: center; flex-wrap: wrap;">
+                                <img loading="lazy" decoding="async" src="images/Troubleshooting_To_Comp_Images/New_Purchased_IGBT_&amp;_Driver.jpg" alt="Replacement IGBT and gate driver" class="background-image slide-up" style="animation-delay: 0.3s; flex: 1; max-width: 48%;">
+                                <img loading="lazy" decoding="async" src="images/Troubleshooting_To_Comp_Images/COnfirmed_repair_of_IGBT.jpg" alt="Repaired power stage confirmed healthy" class="background-image slide-up" style="animation-delay: 0.3s; flex: 1; max-width: 48%;">
+                            </div>
+                            <figcaption class="post-caption">The replacement IGBT and gate driver (left), and the repaired inverter testing healthy before it went back in the car (right).</figcaption>
+                        </figure>
+                    </div>
+
+                    <div class="background-container">
+                        <h3 class="background-title">The Power Cutout</h3>
+                        <p class="background-description">
+                            With the inverter repaired, the car had a new problem. Partway through a hard acceleration it cut power, and it wouldn't pull again until it came to a full stop. The high voltage stayed on and the inverter logged no fault.
+                        </p>
+                        <p class="background-description">
+                            The BMS was also reporting weak cell and open cell faults at the time. Those came from the pogo pins on the battery management boards, or BMBs. A pogo pin is a spring-loaded contact, and each one reads the voltage of one cell. The pins were compressed further than the design accounted for, so they stuck and lost contact with the cells. I replaced the pins with jumper wires that run from the board to fork terminals under the bolts already on the cells.
+                        </p>
+                        <figure class="post-figure">
+                            <div class="dual-image-container" style="display: flex; gap: 1em; justify-content: center; flex-wrap: wrap;">
+                                <img loading="lazy" decoding="async" src="images/Troubleshooting_To_Comp_Images/Stuck_Pogo_pin_Due_to_TOO_Much_Compression_Which_Wasnt_accounted_for_In_Design.jpg" alt="Pogo pin stuck from over-compression" class="background-image slide-up" style="animation-delay: 0.3s; flex: 1; max-width: 48%;">
+                                <img loading="lazy" decoding="async" src="images/Troubleshooting_To_Comp_Images/BMB_With_Fork_Terminal_Assembled.jpg" alt="Battery monitor board rebuilt with fork terminals" class="background-image slide-up" style="animation-delay: 0.3s; flex: 1; max-width: 48%;">
+                            </div>
+                            <figcaption class="post-caption">A pogo pin stuck in the compressed position (left), and a BMB rebuilt with jumper wires and fork terminals (right).</figcaption>
+                        </figure>
+                        <p class="background-description">
+                            I rebuilt one board first and ran it on a test day. That module had no faults, so I rebuilt the other four.
+                        </p>
+                        <figure class="post-figure">
+                            <img loading="lazy" decoding="async" src="images/Troubleshooting_To_Comp_Images/First_Replaced_BMB_During_Test_Day_May_23_No_More_Faults_On_That_Module_Alone_Confirming_Fix.jpg" alt="First rebuilt board on a test day with no more faults" class="background-image slide-up" style="animation-delay: 0.3s;">
+                            <figcaption class="post-caption">The first rebuilt board on a test day. Its module had no faults, so the other four boards got the same repair.</figcaption>
+                        </figure>
+                        <p class="background-description">
+                            The BMS faults were gone but the cutout wasn't. I checked the current limits, the power limit, the switching frequency, the BMS, and low voltage supply sag one at a time, and none of them caused the cutout. I had no data coming from the inverter, so I couldn't see what it was doing when it cut power.
+                        </p>
+                    </div>
+
+                    <div class="background-container">
+                        <h3 class="background-title">Inverter Telemetry</h3>
+                        <p class="background-description">
+                            The car had no way to record what the inverter was doing, so I added a data logger in the middle of a test day. The logger is an Arduino Uno with a SparkFun CAN shield and a microSD card. It reads messages from CAN, the two-wire network the car's electronics use to talk to each other, and writes them to the card. The car had no mount for a logger, so I taped it to the side. On the first runs every inverter value in the excel was a zero.
+                        </p>
+                        <p class="background-description">
+                            I had written the logger's firmware in a hurry, so I checked it first and found two problems. The firmware opened and closed the file on the SD card every loop, which dropped samples. It also read only one CAN message per loop, so messages backed up and were lost. I fixed both, and the inverter values were still zero.
+                        </p>
+                        <p class="background-description">
+                            Next I wrote a short Arduino program that printed the ID of every message on the bus. The only IDs that printed came from the IMU, the car's motion sensor. The inverter should have been sending eight messages and none of them were on the bus.
+                        </p>
+                        <p class="background-description">
+                            The inverter has two CAN buses, and it sends its detailed data on the second one. At the inverter's connector, the high wire for the second bus had never been connected. Once that wire was connected, all eight messages appeared and the excel filled with inverter data. That included the phase and DC currents, the temperatures, the faults, and which limit was active.
+                        </p>
+                        <figure class="post-figure">
+                            <div class="dual-image-container" style="display: flex; gap: 1em; justify-content: center; flex-wrap: wrap;">
+                                <img loading="lazy" decoding="async" src="images/Troubleshooting_To_Comp_Images/Sparkfun_CanBus-Shield_&amp;_Uno_Taped_to_side_Saturday.jpg" alt="CAN shield and Uno taped to the side" class="background-image slide-up" style="animation-delay: 0.3s; flex: 1; max-width: 48%;">
+                                <img loading="lazy" decoding="async" src="images/Troubleshooting_To_Comp_Images/Canshield_Uno_Propper_Housing_Sunday.jpg" alt="CAN shield and Uno in a proper housing" class="background-image slide-up" style="animation-delay: 0.3s; flex: 1; max-width: 48%;">
+                            </div>
+                            <figcaption class="post-caption">The CAN logger, taped to the side of the car on Saturday and in a housing by Sunday.</figcaption>
+                        </figure>
+                        <p class="background-description">
+                            One problem was left. The CAN bus dropped out during hard acceleration, which is when the inverter switches the most current and makes the most electrical noise. The two CAN wires are twisted together so that noise reaches both wires equally and cancels out. Our pair had about one twist per inch. The shields on the high voltage cables had also been assembled incorrectly and weren't connected to ground. I retwisted the CAN pair to three twists per inch, grounded the shields, and added ferrite cores to the CAN wiring. After that the dropouts were rare, and the inverter data logged cleanly to a laptop in the car.
+                        </p>
+                    </div>
+
+                    <div class="background-container">
+                        <h3 class="background-title">Root Cause: Flux Linkage</h3>
+                        <p class="background-description">
+                            With inverter data in the logs I could see what happened during a cutout. The inverter was hitting its input voltage limit, even though the battery voltage was far above that limit.
+                        </p>
+                        <p class="background-description">
+                            The cause was the flux linkage value set in the inverter. A spinning motor generates its own voltage, called back-EMF, and flux linkage is the number that tells the inverter how much back-EMF to expect at a given speed. The value in the inverter was about twice what the motor produces. So the inverter calculated a back-EMF close to the battery voltage, decided it was running out of voltage, and cut power. The battery still had plenty of voltage left.
+                        </p>
+                        <p class="background-description">
+                            I measured the real value by spinning the motor with a Milwaukee drill and reading the back-EMF against RPM. The measured flux linkage was about half the value loaded in the inverter.
+                        </p>
+                        <figure class="post-figure">
+                            <div class="dual-image-container" style="display: flex; gap: 1em; justify-content: center; flex-wrap: wrap;">
+                                <img loading="lazy" decoding="async" src="images/Troubleshooting_To_Comp_Images/Flux_Linkage_Measurement_Setup.jpg" alt="Flux linkage measurement setup" class="background-image slide-up" style="animation-delay: 0.3s; flex: 1; max-width: 48%;">
+                                <img loading="lazy" decoding="async" src="images/Troubleshooting_To_Comp_Images/Flux_Linkage_Measurement_Setup_2.jpg" alt="Flux linkage measurement setup, second view" class="background-image slide-up" style="animation-delay: 0.3s; flex: 1; max-width: 48%;">
+                            </div>
+                            <figcaption class="post-caption">The setup for measuring flux linkage. A drill spins the motor while the back-EMF is read.</figcaption>
+                        </figure>
+                        <p class="background-description">
+                            An earlier test should have caught the wrong value. Our motor engineer had run the inverter's open loop tuning with the rotor free to spin, and the procedure requires the rotor to be locked. The run looked steady, but it had been done wrong, so it hid the problem.
+                        </p>
+                        <p class="background-description">
+                            I made three changes. I set the flux linkage to the measured value, grounded all the cable shields to a single point, and retuned the current loop with the procedure run correctly. The retune showed that the motor's two control axes needed different gains. After those changes the cutout was gone and the car pulled over 50 kW for the first time. The three changes went in together, so I can't say which one fixed the cutout, but it hasn't come back.
+                        </p>
+                    </div>
+
+                    <div class="background-container">
+                        <h3 class="background-title">Power</h3>
+                        <p class="background-description">
+                            With the cutout gone, the car still made less power than it should have. The DC current stopped rising well below the limit I had set. The cause was the AC current limit, which caps the current going from the inverter to the motor. I had set the AC limit low because I treated the peak current on the motor's datasheet as a hard ceiling. That number is a two minute thermal rating. An acceleration run lasts a few seconds, so the motor can take more current for short pulls. I went back to check the limit after seeing another team run the same motor at far more current than the datasheet peak.
+                        </p>
+                        <p class="background-description">
+                            Raising the AC limit raised the DC current and the power with it, because torque keeps climbing with current until the iron in the motor saturates. On the wheel dyno the car made 56 kW and about 135 Nm at the wheels. Later driving logs peaked in the low 60s of kW. The rules allow 80 kW and the car never reached it.
+                        </p>
+                    </div>
+
+                    <div class="background-container">
+                        <h3 class="background-title">Race Prep</h3>
+                        <p class="background-description">
+                            The last week before competition went to reliability.
+                        </p>
+                        <p class="background-description">
+                            The car lost power every time it turned left. Each high voltage connector carries an interlock, a small circuit that shuts the car down if the connector comes apart. The interlock on the HV+ connector leaving the battery was loose, and cornering load opened it. I replaced that connector and its cable with a new Amphenol one, and the car stopped cutting out in left turns.
+                        </p>
+                        <p class="background-description">
+                            The DC-DC converter, which powers the low voltage system from the main battery, was still not working. I built a backup low voltage battery to replace it and mounted it in the car. It holds 19 Ah, which is enough for an endurance run.
+                        </p>
+                        <figure class="post-figure">
+                            <div class="dual-image-container" style="display: flex; gap: 1em; justify-content: center; flex-wrap: wrap;">
+                                <img loading="lazy" decoding="async" src="images/Troubleshooting_To_Comp_Images/Initial_GLV_Version2_Layout.jpg" alt="Backup low voltage battery version two layout" class="background-image slide-up" style="animation-delay: 0.3s; flex: 1; max-width: 48%;">
+                                <img loading="lazy" decoding="async" src="images/Troubleshooting_To_Comp_Images/Final_GLV_Battery_Assembled.jpg" alt="Finished backup low voltage battery" class="background-image slide-up" style="animation-delay: 0.3s; flex: 1; max-width: 48%;">
+                            </div>
+                            <figcaption class="post-caption">The backup low voltage battery. The version two layout (left) and the finished battery (right).</figcaption>
+                        </figure>
+                        <p class="background-description">
+                            The rest of the week went to balancing the pack, which means bringing every cell to the same voltage.
+                        </p>
+                    </div>
+
+                    <div class="background-container">
+                        <h3 class="background-title">Competition</h3>
+                        <p class="background-description">
+                            Competition was our first as an electric team, and nearly all of it went to tech inspection. A car has to pass mechanical tech, battery and electrical tech, and EV active tech before it can run an event.
+                        </p>
+                        <p class="background-description">
+                            We passed mechanical tech without much trouble. Most of our time went to the battery and electrical station, on two rules we hadn't fully understood. The high voltage system, called the tractive system or TS, has to be kept separate from the low voltage system. High voltage parts also need two layers of insulation. We added insulation at the event to meet the second rule.
+                        </p>
+                        <p class="background-description">
+                            The precharge board failed the first rule. Precharge charges the inverter's capacitors slowly through a resistor before the main contactors close, so there is no surge of current. The board the electrical team built connected the battery side to the tractive system side through an isolated gate, and those two are supposed to be fully separate. On the insulation resistance test that path read about 5 MΩ where it should have read open. Our software engineer Aaron and I spent the night reworking the same board to run precharge over CAN with no analog signal. That was only possible overnight because the CAN work on the car was already done.
+                        </p>
+                        <p class="background-description">
+                            The isolation checks still took several tries to pass. My best guess is that the carbon filled baskets leaked a small current from module to module, but I never confirmed it.
+                        </p>
+                        <p class="background-description">
+                            The last thing between us and passing the battery portion of tech was charging, and technically we didn't complete it. While demonstrating charging, the discharge resistor overheated and melted its enclosure. The discharge circuit is intended to only bleed the inverter's capacitors when the shutdown circuit opens, which effectively means the pack is off. Its relay is supposed to open whenever shutdown is high and the pack is live. The relay wasn't opening, so the resistor was attempting to discharge the full pack rather than just the capacitors. That issue seemed to be in part due to an interlock inside the charger which had failed. The charger was an off-the-shelf unit we hadn't designed and couldn't reasonably repair at the competition, so the officials sealed it, which prevented us from using it during the competition, and then waived that section. Regardless, by then there wasn't enough time to complete EV active tech, so we left having passed battery and mechanical tech without running a dynamic event.
+                        </p>
+                        <figure class="post-figure">
+                            <div class="dual-image-container" style="display: flex; gap: 1em; justify-content: center; flex-wrap: wrap;">
+                                <img loading="lazy" decoding="async" src="images/Troubleshooting_To_Comp_Images/All_Insulation_at_comp_added.jpg" alt="Extra insulation added at competition" class="background-image slide-up" style="animation-delay: 0.3s; flex: 1; max-width: 48%;">
+                                <img loading="lazy" decoding="async" src="images/Troubleshooting_To_Comp_Images/Sealed_Battery_At_Comp_Passing_Bat_Tech.jpg" alt="Battery sealed at competition after passing tech" class="background-image slide-up" style="animation-delay: 0.3s; flex: 1; max-width: 48%;">
+                            </div>
+                            <figcaption class="post-caption">Insulation added at competition to meet the insulation rule (left), and the battery sealed after passing battery tech (right).</figcaption>
+                        </figure>
+                    </div>
+                </div>
+
+                <h3 class="timeline-title slide-up" style="animation-delay: 0.4s;">Project Timeline</h3>
+                <div class="timeline slide-up" style="animation-delay: 0.4s;">
+                    <div class="timeline-content">
+                        <div class="timeline-track"></div>
+                        <div class="timeline-item" style="animation-delay: 0.6s;">
+                            <div class="timeline-marker" data-description="pt-desc-1">
+                                <span class="timeline-date">May 9</span>
+                                <h4>Blown Inverter</h4>
+                            </div>
+                        </div>
+                        <div class="timeline-item" style="animation-delay: 0.8s;">
+                            <div class="timeline-marker" data-description="pt-desc-2">
+                                <span class="timeline-date">Late May</span>
+                                <h4>The Cutout</h4>
+                            </div>
+                        </div>
+                        <div class="timeline-item" style="animation-delay: 1.0s;">
+                            <div class="timeline-marker" data-description="pt-desc-3">
+                                <span class="timeline-date">May 31</span>
+                                <h4>Inverter Telemetry</h4>
+                            </div>
+                        </div>
+                        <div class="timeline-item" style="animation-delay: 1.2s;">
+                            <div class="timeline-marker" data-description="pt-desc-4">
+                                <span class="timeline-date">June 6</span>
+                                <h4>Root Cause Fixed</h4>
+                            </div>
+                        </div>
+                        <div class="timeline-item" style="animation-delay: 1.4s;">
+                            <div class="timeline-marker" data-description="pt-desc-5">
+                                <span class="timeline-date">June 8</span>
+                                <h4>Power on the Dyno</h4>
+                            </div>
+                        </div>
+                        <div class="timeline-item" style="animation-delay: 1.6s;">
+                            <div class="timeline-marker" data-description="pt-desc-6">
+                                <span class="timeline-date">June 16-20</span>
+                                <h4>Competition</h4>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="timeline-popup" class="timeline-popup">
+                        <button class="popup-close">×</button>
+                        <div id="pt-desc-1" class="timeline-description-content" style="display: none;">
+                            <p>An IGBT in the inverter failed near the end of CR30's second driving day, most likely from running a motor that hadn't been tuned. I found it with a diode test and replaced the IGBT and gate driver for about $300 instead of waiting four weeks for a £1,400 inverter.</p>
+                        </div>
+                        <div id="pt-desc-2" class="timeline-description-content" style="display: none;">
+                            <p>The car cut power partway through hard accelerations with the high voltage still on and no fault logged. The limits, the BMS, and the low voltage supply all checked out, and there was no inverter data to show the cause.</p>
+                        </div>
+                        <div id="pt-desc-3" class="timeline-description-content" style="display: none;">
+                            <p>I added a CAN data logger to the car in the middle of a test day. A wire for the inverter's second CAN bus had never been connected, so no inverter data reached the logger. Connecting the wire brought the data through. Twisting the CAN pair and grounding the cable shields then stopped the dropouts.</p>
+                        </div>
+                        <div id="pt-desc-4" class="timeline-description-content" style="display: none;">
+                            <p>The flux linkage in the inverter was set to about twice the motor's measured value, so the inverter thought it was running out of voltage and cut power. After correcting the value, grounding the shields to one point, and retuning, the cutout was gone and the car pulled over 50 kW for the first time.</p>
+                        </div>
+                        <div id="pt-desc-5" class="timeline-description-content" style="display: none;">
+                            <p>The DC current was capped by an AC limit I'd set too low, since I'd read the datasheet's thermal peak as a hard ceiling. Raising it gave 56 kW and about 135 Nm at the wheels on the dyno.</p>
+                        </div>
+                        <div id="pt-desc-6" class="timeline-description-content" style="display: none;">
+                            <p>Passed battery and mechanical tech. An illegal precharge board meant reworking precharge over CAN overnight, and the discharge resistor melted its enclosure during the charging check. We ran out of time before the dynamic events.</p>
+                        </div>
+                    </div>
+                </div>
+                <button class="back-button light-button slide-up" style="animation-delay: 1.8s;" data-page="projects">Back to Projects</button>
+            </div>
+        </section>
+    </div>
+
+    <div id="project-pack-page" class="page" data-path="projects/pack/" data-title="CR30 Battery Pack: Design and Manufacture | Maximus Anderson">
+        <section class="project-detail-section">
+            <div class="project-detail-container">
+                <h1 class="project-detail-title fade-in">CR30 Battery Pack: Design and Manufacture</h1>
+                <div class="post-meta fade-in" style="animation-delay: 0.1s;">
+                    <span class="post-meta-date">April 2026</span>
+                    <span class="post-meta-sep">·</span>
+                    <span class="post-meta-chips">
+                        <span class="post-meta-chip">Design</span>
+                        <span class="post-meta-chip">Manufacture</span>
+                        <span class="post-meta-chip">Lead</span>
+                    </span>
+                    <span class="post-meta-sep">·</span>
+                    <span class="post-meta-read">~13 min read</span>
+                </div>
+                <figure class="post-figure slide-up">
+                    <div style="overflow: hidden; width: 100%; max-width: 800px; margin: 0 auto; background: transparent;">
+                        <img loading="lazy" decoding="async" src="images/TB-001-CR30_Render_1.png" alt="CR30 Battery Pack" class="project-detail-image" style="transform: scale(1.15); transform-origin: center; width: 100%; background: transparent;">
+                    </div>
+                    <figcaption class="post-caption">The CR30 pack. Second iteration, first one to drive.</figcaption>
+                </figure>
+                <div class="project-detail-content slide-up" style="animation-delay: 0.2s;">
+                    <p class="project-detail-description">
+                        How Cyclone Racing's CR30 battery pack was built, what went wrong, and what changes for CR31.
+                    </p>
+                    <div class="side-boxes-container">
+                        <div class="specs-container">
+                            <h3 class="specs-title">Specifications</h3>
+                            <ul class="specs-list">
+                                <li>Configuration: 28s per module, 5 modules in series</li>
+                                <li>Cells: COSMX CA95B0D0HD (carried from CR29)</li>
+                                <li>Pack voltage: 600 V fully charged</li>
+                                <li>Mass: ~140 lbs</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="background-container">
+                        <h3 class="background-title">Context</h3>
+                        <p class="background-description">
+                            CR30 is Cyclone Racing's first complete electric car and the first to drive under its own power. Prior to this, there was only the CR29 research car that was never finished, and its pack was only built as a proof of concept. This post covers how the CR30 pack was built. The pack is 140 cells in series, which is near 600 V fully charged. The cells are split into five modules of 28, and the modules sit in a welded aluminum housing that bolts into the chassis.
+                        </p>
+                        <p class="background-description">
+                            I was powertrain lead and built the pack. That included the modules, the housing, the high voltage wiring, the chassis mounts, and getting the battery management boards working. The design was shared. My design work was the tabs and slots on the housing, the way the tab blocks are held down, and the retention stack that holds the battery management boards flat.
+                        </p>
+                        <p class="background-description">
+                            The cells are the ones bought for CR29. CR29 never ran, and we had no budget for new cells. The cooling design has its own post, <a href="/projects/cell/" class="inline-page-link" data-page="project-cell">CR30 Battery Pack: Thermal Optimization for Endurance</a>, and the CR29 pack build is in <a href="/projects/fsae/" class="inline-page-link" data-page="project-fsae">CR29 Accumulator: Manufacture</a>.
+                        </p>
+                    </div>
+
+                    <div class="background-container">
+                        <h3 class="background-title">Module Baskets</h3>
+                        <p class="background-description">
+                            Each module sits in a basket, a 3D printed shell that holds the 28 cells, insulates them from the aluminum housing, and keeps them from moving. CR29's baskets were polycarbonate. CR30's are PAHT-CF, a carbon fiber filled nylon that was chosen after impact tests against other filaments. Granville designed the basket and filled out its SES, the structural spreadsheet FSAE requires, but struggled to complete it. I took over to finalize the SES and then manufacture the basket.
+                        </p>
+                        <p class="background-description">
+                            PAHT-CF warps when it is printed in a part this large, and since our team doesn't have direct access to 3D printers, it took a month to get a basket I could use. The basket was too big for the beds on my Bambu A1 and another powertrain member's X1 Carbon. After digging around, I used a suspension team member's Voron, which was large enough and had an enclosed chamber but didn't have a chamber heater. On the initial prints the corners lifted off the bed and the part came out short in Z. I printed baskets on the Voron with different print patterns, bed temperatures, and speeds, and every one warped too much to use.
+                        </p>
+                        <p class="background-description">
+                            I then borrowed a Bambu H2D, which has a heated chamber, and the baskets warped much less. The parts still shrank, so I scaled the model to make up for it. It took three test prints to tune the scaling, and the final model was 1.25% larger in Z.
+                        </p>
+                        <p class="background-description">
+                            Even so, the print quality wasn't perfect and every basket came off the printer with burrs. A burr pressed into a pouch cell can puncture it, so I had to sand all five baskets by hand before assembly.
+                        </p>
+                        <figure class="post-figure">
+                            <div class="dual-image-container" style="display: flex; gap: 1em; justify-content: center; flex-wrap: wrap;">
+                                <img loading="lazy" decoding="async" src="images/PAHT-CF_Basket_Burrs.jpg" alt="PAHT-CF basket surface burrs" class="background-image slide-up" style="animation-delay: 0.3s; flex: 1; max-width: 48%;">
+                                <img loading="lazy" decoding="async" src="images/PAHT-CF_Basket_Burrs_2.jpg" alt="PAHT-CF basket surface burrs, second angle" class="background-image slide-up" style="animation-delay: 0.3s; flex: 1; max-width: 48%;">
+                            </div>
+                            <figcaption class="post-caption">Burrs on a basket straight off the H2D. Every basket had them before sanding.</figcaption>
+                        </figure>
+                        <p class="background-description">
+                            One side of the basket is open. A plate bolts over that side and holds the cells against the opposite wall. The CAD had about 1 mm of clearance between the plate and the cells. The printed parts had none, and I never found out whether the baskets came out small or the way the cells interfaced with one another caused them to be thicker than modeled. Because of this issue, it takes two people to close a basket, and the plate presses firmly on the cells, sort of like an interference fit. I had already tested cell resistance against pressure for the <a href="/projects/cell/" class="inline-page-link" data-page="project-cell">thermal post</a> and pressure had almost no effect, so the tight fit shouldn't change how the cells perform and was acceptable.
+                        </p>
+                    </div>
+
+                    <div class="background-container">
+                        <h3 class="background-title">Tab Plates and Tab Blocks</h3>
+                        <p class="background-description">
+                            The tab plate holds the cells in each module as well as their electrical connections. Each cell's tabs pass through slots in the plate and fold over between two aluminum tab blocks. Bolting the blocks together clamps the tabs. The plate is a PETG print, and it also holds the module's two terminals, which are Amphenol posts. The bulk of the design came from my mentor Gavin, who used a similar concept on the CR29 module design.
+                        </p>
+                        <p class="background-description">
+                            The tab blocks are aluminum because the clamp has to be light and stiff, and aluminum also carries heat away from the tabs.
+                        </p>
+                        <p class="background-description">
+                            On CR29 every tab block had a bolt at each end. For CR30 Granville and I wanted one bolt per block, which halves the fastener count. Granville first proposed one plastic cover that clamped down over all the blocks. The rules don't allow plastic in a clamped electrical joint, so that wasn't selected. His second idea was a small plastic key/finger over each block, but the keys had stress concentrations and I didn't trust them to last. I suggested adding a small overhang to the plate. One end of each block sits under the overhang and the other end takes a single bolt, cantilevering the block to provide force along the whole length. That removed half the bolts without much effect on cooling.
+                        </p>
+                        <p class="background-description">
+                            The bolts thread into aluminum nuts that sit in pockets in the plate. On CR29 the pockets were loose, so a nut could shift as its bolt tightened and get rounded off. For CR30 I made the pockets an interference fit. I printed test pockets at several sizes, and 0.05 mm of interference let a nut press in without damaging the PETG. The nuts we bought for CR30 had rounder corners than CR29's, and tightening the bolts with a tool still deformed the pockets. I got every joint tight but couldn't go tighter without damaging the pockets more. The resistance of those joints was never measured, but it seemed reasonably low in testing.
+                        </p>
+                        <p class="background-description">
+                            The initial plan for CR31 is to weld the cell tabs together, ultrasonically or with a laser. That removes the tab blocks, the nuts, and the bolts.
+                        </p>
+                    </div>
+
+                    <div class="background-container">
+                        <h3 class="background-title">BMBs</h3>
+                        <p class="background-description">
+                            Each module has a battery management board, or BMB, that measures the voltage of every cell. The BMB touches each tab block through a pogo pin, which is a spring-loaded contact. Granville designed the board and the pogo pin layout. I ordered bare boards from JLC, assembled seven of them, and tested them on the modules.
+                        </p>
+                        <figure class="post-figure">
+                            <img loading="lazy" decoding="async" src="images/7_BMBs_Assembled_No_Connector.jpg" alt="Seven assembled BMBs" class="background-image slide-up" style="animation-delay: 0.3s;">
+                            <figcaption class="post-caption">Seven BMBs assembled from bare boards. Five went on the modules and two were spares.</figcaption>
+                        </figure>
+                        <p class="background-description">
+                            The largest problem was that the boards bent. In Granville's design, a BMB is fastened at both ends and unsupported in the middle, and the pogo pin springs push the board away from the tab blocks. The middle of the board bowed, the center pins lost contact, and the BMS lost those cell readings.
+                        </p>
+                        <p class="background-description">
+                            The module already had a retention rod that holds the baskets in place, fed through a printed plastic insulator. I redesigned the insulator as a stiffener that presses down across the middle of the board so the center pins make contact.
+                        </p>
+                        <figure class="post-figure">
+                            <img loading="lazy" decoding="async" src="images/CR30_BMB_retention+Insulation.jpg" alt="BMB retention stack and insulation assembly" class="background-image slide-up" style="animation-delay: 0.3s;">
+                            <figcaption class="post-caption">The redesigned insulator.</figcaption>
+                        </figure>
+                        <p class="background-description">
+                            This fix initially seemed to work, but later the pogo pins began sticking in the compressed position and had to be replaced with wires and fork terminals. That repair is in <a href="/projects/powertrain/" class="inline-page-link" data-page="project-powertrain">CR30 Powertrain: Troubleshooting Through Competition</a>.
+                        </p>
+                        <p class="background-description">
+                            Four smaller problems also cost time:
+                        </p>
+                        <ul class="background-description" style="margin-left: 2em;">
+                            <li><strong>Harness termination:</strong> The harness gave cell 12, cell 13 negative, and cell 13 their own terminations. In a series string the positive of cell 12 and the negative of cell 13 are the same point, so those two wires have to share one termination. The BMS reported ten cells missing until I made version two of the BMBs and rewired the harness.</li>
+                            <li><strong>Missing trace:</strong> The production boards were missing one trace, so every board had a jumper wire in its place. That was fixed when version two arrived.</li>
+                            <li><strong>Thermistor traces:</strong> The thermistor traces share a plane, so a wire end touching a cell during installation can burn a trace. That happened twice. After that I covered the pins with Kapton tape while mounting a board and removed the tape once the board was secured. I moved the components from the damaged board onto a spare.</li>
+                            <li><strong>Connector:</strong> The sense connector doesn't tolerate misalignment. Plugging it in slightly off arcs the pins and blows fuses. That can't be fixed on this board revision.</li>
+                        </ul>
+                        <figure class="post-figure">
+                            <div class="dual-image-container" style="display: flex; gap: 1em; justify-content: center; flex-wrap: wrap;">
+                                <img loading="lazy" decoding="async" src="images/CR30_Module_complete_with_BMB_But_blown_trace.jpg" alt="Module with BMB installed, blown thermistor trace" class="background-image slide-up" style="animation-delay: 0.3s; flex: 1; max-width: 48%;">
+                                <img loading="lazy" decoding="async" src="images/Blown_trace_BMB_Removed_Pic_of_trace.jpg" alt="Closeup of blown thermistor trace on removed BMB" class="background-image slide-up" style="animation-delay: 0.3s; flex: 1; max-width: 48%;">
+                            </div>
+                            <figcaption class="post-caption">A finished module with its BMB installed (left), and the burned thermistor trace on the board after it was removed (right).</figcaption>
+                        </figure>
+                        <p class="background-description">
+                            The boards were meant to make the sense wiring cleaner than CR29's, which was terminated by hand. They worked after these repairs. I later found the boards were illegal, because the low voltage and tractive system wiring terminate into one connector. That didn't stop us from passing that section at comp, but redesigning them is required for CR31.
+                        </p>
+                    </div>
+
+                    <div class="background-container">
+                        <h3 class="background-title">Module Lifting Tool</h3>
+                        <p class="background-description">
+                            The baskets had no feature for lifting a module out of the housing, and I didn't notice until I had to remove one for service. I designed a lifting tool in about twenty minutes. It attaches through the same holes the vertical retention rods use.
+                        </p>
+                        <figure class="post-figure">
+                            <div class="dual-image-container" style="display: flex; gap: 1em; justify-content: center; flex-wrap: wrap; align-items: flex-start;">
+                                <img loading="lazy" decoding="async" src="images/CR30_Module_Lift_Tool_Pic_1.jpg" alt="Module lifting tool" class="background-image slide-up" style="animation-delay: 0.3s; flex: 1; max-width: 38%; aspect-ratio: 5/6; object-fit: cover; object-position: center;">
+                                <img loading="lazy" decoding="async" src="images/CR30_Module_Lift_Tool_Pic_2.jpg" alt="Module lifting tool, second angle" class="background-image slide-up" style="animation-delay: 0.3s; flex: 1; max-width: 38%; aspect-ratio: 5/6; object-fit: cover; object-position: center;">
+                            </div>
+                            <figcaption class="post-caption">The lifting tool. It attaches through the same holes as the retention rod.</figcaption>
+                        </figure>
+                    </div>
+
+                    <div class="background-container">
+                        <h3 class="background-title">The Aluminum Housing</h3>
+                        <p class="background-description">
+                            The housing is a welded aluminum box that holds the five modules, the BMS, and the high voltage wiring. The panels are cut on a waterjet and welded together.
+                        </p>
+                        <p class="background-description">
+                            On CR29 the panel edges were flat. Every seam had to be clamped, and we had to pray the panels were square before welding. Even then the walls warped. For CR30 I added tabs along the edges of the outer walls and matching slots in the inner walls. Each tab drops into its slot, so the panels hold themselves in position and need no clamps. That worked on every seam that had tabs and slots. Fitting and welding the housing took over three weeks on CR29 and two days on CR30.
+                        </p>
+                        <figure class="post-figure">
+                            <div class="dual-image-container" style="display: flex; gap: 1em; justify-content: center; flex-wrap: wrap;">
+                                <img loading="lazy" decoding="async" src="images/TB_Container_Layout_All_Waterjet_Parts_with_slots_and_tabs_CR30.jpg" alt="Waterjet aluminum panels with slot and tab features" class="background-image slide-up" style="animation-delay: 0.3s; flex: 1; max-width: 48%;">
+                                <img loading="lazy" decoding="async" src="images/Self_Jigged_TB_Container_CR30.jpg" alt="Self-jigged housing assembly" class="background-image slide-up" style="animation-delay: 0.3s; flex: 1; max-width: 48%;">
+                            </div>
+                            <figcaption class="post-caption">The waterjet panels with their tabs and slots (left), and the same panels fitted together with no clamps (right).</figcaption>
+                        </figure>
+                        <figure class="post-figure">
+                            <div class="dual-image-container" style="display: flex; gap: 1em; justify-content: center; flex-wrap: wrap;">
+                                <img loading="lazy" decoding="async" src="images/Self_Jigged_TB_COntainer_CR30_Isometric_Pic.jpg" alt="Self-jigged housing, isometric view" class="background-image slide-up" style="animation-delay: 0.3s; flex: 1; max-width: 48%;">
+                                <img loading="lazy" decoding="async" src="images/Jigged_TB_Container_CR30_For_Easier_Tacks.jpg" alt="Self-jigged housing ready for tack welds" class="background-image slide-up" style="animation-delay: 0.3s; flex: 1; max-width: 48%;">
+                            </div>
+                            <figcaption class="post-caption">The fitted housing from another angle (left), and the panels held square for tack welds (right).</figcaption>
+                        </figure>
+                        <p class="background-description">
+                            I didn't add tabs and slots at the corners. After welding, one corner was bent inward. That corner is where the high voltage components go, and the bend took away enough space that the planned layout no longer fit.
+                        </p>
+                    </div>
+
+                    <div class="background-container">
+                        <h3 class="background-title">HV Distribution</h3>
+                        <p class="background-description">
+                            CR29 brought high voltage out of the pack through one large Amphenol connector in a corner and used Coroflex cable to connect the modules to each other. CR30 started with the same layout. Partway through the design, a senior team member proposed a printed sleeve in that corner, called the Power Prism, to hold the contactors, the main fuse, and copper busbars. The sleeve packs those parts closer together and shortens the high voltage cable runs.
+                        </p>
+                        <p class="background-description">
+                            The sleeve only fit because the busbars could be made smaller. We had been sizing conductors from ampacity tables, and those sizes are larger than this pack needs because it only sees peak current for a few seconds at a time. Recalculating from the conductor's resistance and the heat it produces over an endurance run gave much smaller cross sections.
+                        </p>
+                        <p class="background-description">
+                            When the housing corner bent inward, the original sleeve no longer fit. I worked with newer team members to redesign it for the smaller space.
+                        </p>
+                        <figure class="post-figure">
+                            <div style="max-width: 700px; margin: 0 auto;">
+                                <img loading="lazy" decoding="async" src="images/CR30_PowerPrism_In_Container.jpg" alt="Power Prism sleeve installed in the pack corner" class="background-image slide-up" style="animation-delay: 0.3s; width: 100%;">
+                            </div>
+                            <figcaption class="post-caption">The Power Prism in the corner of the pack. It holds the contactors, the main fuse, and the busbars.</figcaption>
+                        </figure>
+                        <p class="background-description">
+                            The main contactors currently connect to points near the center of the pack. The module terminals beside the corner are electrically the same points. Connecting there on CR31 would replace most of the cable with busbars, free up the center of the pack, make it harder to plug a connector into the wrong place, and save a little weight.
+                        </p>
+                    </div>
+
+                    <div class="background-container">
+                        <h3 class="background-title">Chassis Mounts</h3>
+                        <p class="background-description">
+                            The pack bolts to the chassis at ten mounts, four at the rear and six at the front. Each mount bolts into an insert that was laid into the carbon fiber monocoque before it was cured.
+                        </p>
+                        <figure class="post-figure">
+                            <div class="dual-image-container" style="display: flex; gap: 1em; justify-content: center; flex-wrap: wrap;">
+                                <img loading="lazy" decoding="async" src="images/Chassis_Puck_Interts_CR30.jpg" alt="Pre-preg insert pucks in the CR30 monocoque" class="background-image slide-up" style="animation-delay: 0.3s; flex: 1; max-width: 48%;">
+                                <img loading="lazy" decoding="async" src="images/Chassis_Puck_Inserts_Low_Angle.jpg" alt="Pre-preg pucks, low angle" class="background-image slide-up" style="animation-delay: 0.3s; flex: 1; max-width: 48%;">
+                            </div>
+                            <figcaption class="post-caption">The inserts laid into the monocoque before cure, from two angles.</figcaption>
+                        </figure>
+                        <figure class="post-figure">
+                            <img loading="lazy" decoding="async" src="images/Tab_Shims_Sizing_Temporary_Fit.jpg" alt="Shims sizing pack-to-chassis mount tabs" class="background-image slide-up" style="animation-delay: 0.3s;">
+                            <figcaption class="post-caption">Numbered shims under the pack's mount tabs, used to measure the gap at each mount.</figcaption>
+                        </figure>
+                        <p class="background-description">
+                            The four rear inserts came out flush with the surface and those mounts bolted on. The six front inserts stuck out above the surface, so the front mounts sat higher than the mounting points on the pack. The pack was already in position and couldn't move. I lowered each front mount until it sat flush with the pack, which left a gap between the mount and the chassis.
+                        </p>
+                        <p class="background-description">
+                            The gap was a problem for the SES. The SES requires at least ten mounts for our geometry, and a mount with a gap under it carries more load, so the front mounts failed the strength check. I made an aluminum spacer for each gap. The spacers were machined, welded to the bottom of each mount, and ground flush. The pack, sitting in the chassis, was then used as a jig to drill the bolt holes so they lined up. With the spacers entered in the SES, the mounts passed.
+                        </p>
+                        <figure class="post-figure">
+                            <img loading="lazy" decoding="async" src="images/CR30Pack_In_Chassis_First_Time.jpg" alt="CR30 pack installed in the chassis for the first time" class="background-image slide-up" style="animation-delay: 0.3s;">
+                            <figcaption class="post-caption">The pack in the chassis for the first time, after the spacers were fitted.</figcaption>
+                        </figure>
+                        <p class="background-description">
+                            CR31 will bond the inserts in after the chassis is cured. Bonded inserts come out flush and flat, so the mounts sit where they were designed to.
+                        </p>
+                    </div>
+
+                    <div class="background-container">
+                        <h3 class="background-title">First Drive</h3>
+                        <p class="background-description">
+                            The first drive was planned for March 1 and happened on April 26. Most of the delay came from the electrical boards outside the pack, which are the SSI, precharge, shutdown, and HVI boards. They went through about six revisions before they passed bench tests, and some revisions that passed on the bench failed on the car. One couldn't carry the full shutdown loop. Another used relays with too much coil resistance, which dropped the voltage below what the contactors need to close. The wiring harness couldn't be finished until the boards were final, so every revision pushed the schedule back.
+                        </p>
+                        <p class="background-description">
+                            The pack had one incident in that time. During work inside the pack an allen key touched exposed pins on a BMB connector. The pins arced and blew eight cell fuses on the board. I removed the board and replaced the fuses.
+                        </p>
+                        <p class="background-description">
+                            The night before the drive, with the car on a stand, the wheels spun backward. I worked on it until 1 a.m. thinking the polarity was wrong. At 7 a.m. another team member found a setting in the inverter that reverses motor direction. Unchecking that setting fixed it...
+                        </p>
+                        <figure class="post-figure">
+                            <video src="images/Wheels_Spinning_Backwards_Web.mp4" class="background-image slide-up" style="animation-delay: 0.3s;" preload="none" muted loop playsinline></video>
+                            <figcaption class="post-caption">The wheels spinning backward the night before the first drive.</figcaption>
+                        </figure>
+                        <figure class="post-figure">
+                            <video src="images/TW1_1st_Drive_Trimmed_Web.mp4" class="background-image slide-up" style="animation-delay: 0.3s;" preload="none" muted loop playsinline></video>
+                            <figcaption class="post-caption">The first drive.</figcaption>
+                        </figure>
+                        <p class="background-description">
+                            The first time the contactors closed, the Orion BMS reported an open charging relay. The car has no charging relay... I had apparently left a setting enabled that told the BMS to expect one, and turning the setting off cleared the fault.
+                        </p>
+                        <p class="background-description">
+                            Next the inverter cut power because the two accelerator pedal sensors disagreed by more than 20%. We tested each sensor alone to find out whether the difference was real or came from the two channels updating at different rates. We didn't find the cause, but we increased the disagreement threshold to 80%.
+                        </p>
+                        <p class="background-description">
+                            The inverter also kept faulting for reasons we couldn't trace. The main board from the electrical team wasn't ready, so we had no logged data to read the faults from. We shortened the fault reset time from 5 s to 1 s so the car would recover quickly and keep driving. That was a workaround and not a fix.
+                        </p>
+                        <figure class="post-figure">
+                            <img loading="lazy" decoding="async" src="images/TW1_Ryan_Clearing_Inverter_Faults.JPG" alt="Inverter fault debugging during first test day" class="background-image slide-up" style="animation-delay: 0.3s;">
+                            <figcaption class="post-caption">Working on the inverter faults during the first test day.</figcaption>
+                        </figure>
+                        <figure class="post-figure">
+                            <video src="images/TW1_Full_Power_Accel_Web.mp4" class="background-image slide-up" style="animation-delay: 0.3s;" preload="none" muted loop playsinline></video>
+                            <figcaption class="post-caption">The last acceleration of the day, just before the low voltage fault.</figcaption>
+                        </figure>
+                        <p class="background-description">
+                            With the workaround the car ran laps for most of the day at a 40 kW limit, and the pack had no faults of its own. The day ended when one cell reached the low voltage limit. During module assembly we had dropped a cell and replaced it without checking the replacement's state of charge. That cell fell from 3.46 V to 3.296 V over the day while the rest stayed near 3.56 V.
+                        </p>
+                        <p class="background-description">
+                            It started to rain as we packed up. Not every grommet on the car was sealed yet, so we would have had to stop anyway.
+                        </p>
+                    </div>
+
+                    <div class="background-container">
+                        <h3 class="background-title">Notes for CR31</h3>
+                        <p class="background-description">
+                            The changes planned for the next pack:
+                        </p>
+                        <ol class="background-description" style="margin-left: 2em;">
+                            <li><strong>Weld the cell tabs.</strong> That removes the tab blocks, the nuts, and the bolts.</li>
+                            <li><strong>Tabs and slots on every housing seam,</strong> including the corners.</li>
+                            <li><strong>Bond the chassis inserts after cure</strong> so they sit flush and need no spacers.</li>
+                            <li><strong>Redesign the BMB</strong> with a sturdier sense connector, the correct harness termination, the missing trace, and isolated thermistor traces.</li>
+                            <li><strong>Connect high voltage at the corner modules</strong> with short busbars.</li>
+                            <li><strong>Consider a composite housing.</strong> Aluminum is heavy for this job, and a materials analysis is pending.</li>
+                            <li><strong>Use Melasta pouch cells if the budget allows.</strong> They are 11.5 Ah cells instead of 13 Ah, so the pack would be smaller and lighter.</li>
+                            <li><strong>Match the state of charge of any replacement cell</strong> before installing it. One mismatched cell ended CR30's first drive early.</li>
+                            <li><strong>Prototype more.</strong> About 70% of CR30's parts had small problems that one test print or foam mockup would have caught.</li>
+                        </ol>
+                    </div>
+                        <figure class="post-figure">
+                    <img loading="lazy" decoding="async" src="images/Holding_the_CR30Pack_Minus_Penthouse.jpg" alt="Granville, Gavin, and Maximus holding the completed CR30 pack" class="background-image slide-up" style="animation-delay: 0.3s;">
+                        <figcaption class="post-caption">The finished CR30 pack and the people who designed it. Granville (left), Gavin (middle), me (right).</figcaption>
+                    </figure>
+                </div>
+
+                <h3 class="timeline-title slide-up" style="animation-delay: 0.4s;">Project Timeline</h3>
+                <div class="timeline slide-up" style="animation-delay: 0.4s;">
+                    <div class="timeline-content">
+                        <div class="timeline-track"></div>
+                        <div class="timeline-item" style="animation-delay: 0.6s;">
+                            <div class="timeline-marker" data-description="pack-desc-1">
+                                <span class="timeline-date">September 2025</span>
+                                <h4>Milestone 1: Design Phase</h4>
+                            </div>
+                        </div>
+                        <div class="timeline-item" style="animation-delay: 0.8s;">
+                            <div class="timeline-marker" data-description="pack-desc-2">
+                                <span class="timeline-date">November 2025</span>
+                                <h4>Milestone 2: Manufacturing Begins</h4>
+                            </div>
+                        </div>
+                        <div class="timeline-item" style="animation-delay: 1.0s;">
+                            <div class="timeline-marker" data-description="pack-desc-3">
+                                <span class="timeline-date">February 2026</span>
+                                <h4>Milestone 3: Modules and Housing Complete</h4>
+                            </div>
+                        </div>
+                        <div class="timeline-item" style="animation-delay: 1.2s;">
+                            <div class="timeline-marker" data-description="pack-desc-4">
+                                <span class="timeline-date">March 2026</span>
+                                <h4>Milestone 4: Testing on the Car Begins</h4>
+                            </div>
+                        </div>
+                        <div class="timeline-item" style="animation-delay: 1.4s;">
+                            <div class="timeline-marker" data-description="pack-desc-5">
+                                <span class="timeline-date">April 2026</span>
+                                <h4>Milestone 5: First Drive</h4>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="timeline-popup" class="timeline-popup">
+                        <button class="popup-close">×</button>
+                        <div id="pack-desc-1" class="timeline-description-content" style="display: none;">
+                            <p>We settled the design changes from CR29's pack: a PAHT-CF module basket, cantilevered tab blocks with one bolt each, and tabs and slots on the aluminum housing. The design phase closed November 1.</p>
+                        </div>
+                        <div id="pack-desc-2" class="timeline-description-content" style="display: none;">
+                            <p>Manufacturing started. I took over the full pack build: the modules, the aluminum housing, the high voltage wiring, and the chassis mounts.</p>
+                        </div>
+                        <div id="pack-desc-3" class="timeline-description-content" style="display: none;">
+                            <p>The five modules and the welded housing were finished. The corners had no tabs and slots, and one corner bent inward during welding, so the high voltage sleeve had to be redesigned for the smaller space.</p>
+                        </div>
+                        <div id="pack-desc-4" class="timeline-description-content" style="display: none;">
+                            <p>The pack was in the car and testing started. The first drive was planned for March 1, but revisions to the electrical boards and debugging on the car pushed it back.</p>
+                        </div>
+                        <div id="pack-desc-5" class="timeline-description-content" style="display: none;">
+                            <p>The first drive was April 26. The car ran at a 40 kW limit and the pack had no faults of its own. The day ended when one replacement cell, installed at a lower charge than the rest, reached the low voltage limit.</p>
+                        </div>
+                    </div>
+                </div>
+                <button class="back-button light-button slide-up" style="animation-delay: 1.6s;" data-page="projects">Back to Projects</button>
+            </div>
+        </section>
+    </div>
+
+    <div id="project-cell-page" class="page" data-path="projects/cell/" data-title="CR30 Battery Pack: Thermal Optimization for Endurance | Maximus Anderson">
+        <section class="project-detail-section">
+            <div class="project-detail-container">
+                <h1 class="project-detail-title fade-in">CR30 Battery Pack: Thermal Optimization for Endurance</h1>
+                <div class="post-meta fade-in" style="animation-delay: 0.1s;">
+                    <span class="post-meta-date">October 2025</span>
+                    <span class="post-meta-sep">·</span>
+                    <span class="post-meta-chips">
+                        <span class="post-meta-chip">Research</span>
+                        <span class="post-meta-chip">Design</span>
+                        <span class="post-meta-chip">Testing</span>
+                        <span class="post-meta-chip">Lead</span>
+                    </span>
+                    <span class="post-meta-sep">·</span>
+                    <span class="post-meta-read">~4 min read</span>
+                </div>
+                <figure class="post-figure slide-up">
+                    <div style="overflow: hidden; width: 100%; max-width: 800px; margin: 0 auto; background: transparent;">
+                        <img loading="lazy" decoding="async" src="images/TB-001-CR30_Render_1.png" alt="CR30 Battery Pack" class="project-detail-image" style="transform: scale(1.15); transform-origin: center; width: 100%; background: transparent;">
+                    </div>
+                    <figcaption class="post-caption">CR30 battery pack render.</figcaption>
+                </figure>
+                <div class="project-detail-content slide-up" style="animation-delay: 0.2s;">
+                    <p class="project-detail-description">
+                        How DCIR testing on Cyclone Racing's CR30 cells replaced a liquid cooling system with ten fans.
+                    </p>
+
+                    <div class="background-container">
+                        <h3 class="background-title">The Problem with the Spec Sheet</h3>
+                        <p class="background-description">
+                            The CR30 battery is five modules of lithium-ion pouch cells, and in an FSAE endurance event it sees current bursts up to 200 A. Current through a cell makes heat in proportion to the cell's internal resistance, called DCIR. To work out how much cooling the pack needed, I needed the DCIR of our cells.
+                        </p>
+                        <p class="background-description">
+                            The cell spec sheet listed DCIR as either 1.5 mΩ or 5 mΩ, with no graph and no test conditions. With one value the thermal math showed the pack overheating before the end of endurance. With the other it barely needed cooling. I assumed the worst case and started designing a liquid cooling system. It had U-shaped shims touching the cell faces, a cooling plate, thermal pads, quick disconnects, and a pump loop mounted to the pack.
+                        </p>
+                        <figure class="post-figure">
+                            <div class="dual-image-container" style="display: flex; gap: 1em; justify-content: center; flex-wrap: wrap;">
+                                <img loading="lazy" decoding="async" src="images/UShims.png" alt="U Shims" class="background-image slide-up" style="animation-delay: 0.3s; flex: 1; max-width: 48%;">
+                                <img loading="lazy" decoding="async" src="images/CoolingPlate.png" alt="Cooling plate" class="background-image slide-up" style="animation-delay: 0.3s; flex: 1; max-width: 48%;">
+                            </div>
+                            <figcaption class="post-caption">The liquid cooling design I dropped. U-shaped shims that touch the cell faces (left) and the cooling plate (right).</figcaption>
+                        </figure>
+                        <p class="background-description">
+                            The liquid design had three problems. It added weight and parts, it wouldn't have cooled the cells much, and a fluid loop is one more thing that can fail on a racecar. I was also designing for a problem I hadn't confirmed. So I stopped and tested the cells myself.
+                        </p>
+                    </div>
+
+                    <div class="background-container">
+                        <h3 class="background-title">Building the Test Rig</h3>
+                        <p class="background-description">
+                            Four things can change a cell's DCIR: the pressure on its faces, its temperature, how fast it is discharged (C-rate), and its state of charge (SoC). I built a rig that could test each one separately, for under $100.
+                        </p>
+                        <ul class="background-description" style="margin-left: 2em;">
+                            <li><strong>Load Bank:</strong> Four 0.1 Ω heatsink resistors in a 2s2p arrangement so they heat evenly. The bank measured 0.131 Ω by 4-wire Kelvin sensing.</li>
+                            <li><strong>C-Rate Tester:</strong> A carbon pile rheostat, which gives an adjustable current draw.</li>
+                            <li><strong>Pressure Fixture:</strong> Machined steel plates with springs, adjustable from 0 to 8 psi.</li>
+                            <li><strong>Current Sensing:</strong> An SSA-250 and a current clamp borrowed from the PRISM Solar Car team.</li>
+                        </ul>
+                    </div>
+
+                    <div class="background-container">
+                        <h3 class="background-title">Testing Each Variable</h3>
+
+                        <h4 style="font-size: 1.2em; margin-top: 1.5em; color: var(--primary-soft);">Face Pressure: Ruled Out</h4>
+                        <p class="background-description">
+                            I tested face pressure first. With the spring fixture I ran pulse tests at 0, 2, 5, and 8 psi on the cell faces, and DCIR barely moved. Pressure also affects how fast cells age, but the car sees few charge cycles over its life, so aging from low pressure isn't a design concern. I dropped pressure as a variable.
+                        </p>
+                        <figure class="post-figure">
+                            <div style="overflow: hidden; width: 80%; margin: 1em auto 0; max-height: 400px;">
+                                <img loading="lazy" decoding="async" src="images/FacePressureJig.jpg" alt="Face pressure test" class="background-image slide-up" style="animation-delay: 0.3s; width: 100%; object-fit: cover; object-position: center 60%;">
+                            </div>
+                            <figcaption class="post-caption">The spring fixture, which sets cell face pressure from 0 to 8 psi.</figcaption>
+                        </figure>
+
+                        <h4 style="font-size: 1.2em; margin-top: 1.5em; color: var(--primary-soft);">C-Rate: Secondary Effect</h4>
+                        <p class="background-description">
+                            In the carbon pile tests DCIR went down as current went up, probably because higher current warms the cell. The effect was small, so I left it out of the thermal simulations.
+                        </p>
+                        <figure class="post-figure">
+                            <img loading="lazy" decoding="async" src="images/Carbon_Pile.jpg" alt="Current draw test" class="background-image slide-up" style="animation-delay: 0.3s;">
+                            <figcaption class="post-caption">The carbon pile rheostat used to sweep C-rate.</figcaption>
+                        </figure>
+
+                        <h4 style="font-size: 1.2em; margin-top: 1.5em; color: var(--primary-soft);">State-of-Charge: Repeatable and Strong</h4>
+                        <p class="background-description">
+                            For state of charge I ran 10 second discharge pulses with a 3 minute rest after each. The pulse shows the immediate voltage drop and the first slow response (the 1RC transient), and the rest shows the slower recovery (2RC). As SoC drops there are fewer lithium ions in the electrolyte and the reaction at the electrode surface slows down, and both raise resistance. The tests matched that. DCIR rose at lower SoC, and the result repeated.
+                        </p>
+                        <figure class="post-figure">
+                            <img loading="lazy" decoding="async" src="images/SoC-Pulse.jpg" alt="State of charge test" class="background-image slide-up" style="animation-delay: 0.3s;">
+                            <figcaption class="post-caption">A 10 second discharge pulse, showing the voltage drop and the recovery after it.</figcaption>
+                        </figure>
+
+                        <h4 style="font-size: 1.2em; margin-top: 1.5em; color: var(--primary-soft);">Temperature: The One That Mattered</h4>
+                        <p class="background-description">
+                            I didn't have access to the university's temperature chamber, so I wrapped a foldable heat pad around isolated cells. I checked cell temperature with a FLIR camera and an IR spot meter. I ran the same pulse test from 25 to 60°C, and temperature changed DCIR more than any other variable.
+                        </p>
+                        <figure class="post-figure">
+                            <img loading="lazy" decoding="async" src="images/TemperatureTest.png" alt="DCIR vs. SoC across temperatures" class="background-image slide-up" style="animation-delay: 0.3s;">
+                            <figcaption class="post-caption">DCIR against SoC at each temperature in the heat pad tests.</figcaption>
+                        </figure>
+                    </div>
+
+                    <div class="background-container">
+                        <h3 class="background-title">DCIR Mapping: The Spec Sheet Was Way Off</h3>
+                        <p class="background-description">
+                            Temperature and SoC together accounted for most of the change in DCIR. At operating temperature DCIR dropped as low as 0.7 mΩ, less than half of the spec sheet's lower value of 1.5 mΩ. So the cells make less heat than the spec sheet implies.
+                        </p>
+                        <p class="background-description">
+                            I built a 3D surface in MATLAB of DCIR against temperature and SoC, then fit a third-order polynomial to it for the team's thermal simulation.
+                        </p>
+                        <figure class="post-figure">
+                            <div class="dual-image-container" style="display: flex; gap: 1em; justify-content: center; flex-wrap: wrap;">
+                                <img loading="lazy" decoding="async" src="images/DCIRMap10-11-25.png" alt="DCIR Map Raw Data" class="background-image slide-up" style="animation-delay: 0.3s; flex: 1; max-width: 48%;">
+                                <img loading="lazy" decoding="async" src="images/DCIRMapfit.png" alt="DCIR Map Fitted" class="background-image slide-up" style="animation-delay: 0.3s; flex: 1; max-width: 48%;">
+                            </div>
+                            <figcaption class="post-caption">DCIR against temperature and SoC. The raw data (left) and the third-order polynomial fit (right).</figcaption>
+                        </figure>
+                        <p class="background-description">
+                            I ran the thermal model with the measured DCIR and a 1.5x safety factor taken from the RC recovery analysis. The pack's peak temperature stayed well below 60°C, the rules maximum, for a full endurance run. The pack didn't need liquid cooling.
+                        </p>
+                    </div>
+
+                    <div class="background-container">
+                        <h3 class="background-title">Redesign</h3>
+                        <p class="background-description">
+                            Since the cells' own thermal mass was enough, I removed the liquid system: the base plate, U-shims, thermal pads, pump, and radiator. I added ten fans in its place. Five run all the time to cool the electronics in the penthouse, the compartment on top of the pack. The other five sit above the modules and are switched on by the BMS as a backup for the cells. Air comes in over the cell tabs and leaves through the penthouse vents whether or not the cell fans are on. The BMS-switched fans cover problems like a connection that degrades and heats up.
+                        </p>
+                        <figure class="post-figure">
+                            <img loading="lazy" decoding="async" src="images/PenthouseFans.png" alt="Redesigned cooling architecture" class="background-image slide-up" style="animation-delay: 0.3s; width: 90%; display: block; margin: 0 auto;">
+                            <figcaption class="post-caption">The final cooling layout. Ten fans pull air across the tabs and out through the penthouse vents.</figcaption>
+                        </figure>
+                    </div>
+
+                    <div class="background-container">
+                        <h3 class="background-title">Specific Heat: Freezer Calorimetry</h3>
+                        <p class="background-description">
+                            No specific heat data was published for these cells, so the team had been using aluminum's value. I checked that with a calorimetry test made from styrofoam, thermocouples, and my freezer. I ran the test on aluminum blocks first to get a calibration multiplier, then on a cell. The cell averaged 0.954 J/g°C across runs. That is close enough to aluminum that the earlier simulations weren't far off.
+                        </p>
+                    </div>
+
+                    <div class="background-container">
+                        <h3 class="background-title">Takeaways</h3>
+                        <p class="background-description">
+                            The spec sheet wasn't usable for thermal design. It gave two DCIR values with no conditions, and the measured value at operating temperature was lower than both. Testing the cells removed the liquid cooling system, saved its weight, and gave the team a thermal model built on measured data. With a temperature chamber I would fill in the edges of the DCIR map and run higher C-rates than the load bank could reach.
+                        </p>
+                    </div>
+                </div>
+
+                <h3 class="timeline-title slide-up" style="animation-delay: 0.4s;">Project Timeline</h3>
+                <div class="timeline slide-up" style="animation-delay: 0.4s;">
+                    <div class="timeline-content">
+                        <div class="timeline-track"></div>
+                        <div class="timeline-item" style="animation-delay: 0.6s;">
+                            <div class="timeline-marker" data-description="cell-desc-1">
+                                <span class="timeline-date">September 27, 2025</span>
+                                <h4>Milestone 1: Test Rig Design</h4>
+                            </div>
+                        </div>
+                        <div class="timeline-item" style="animation-delay: 0.8s;">
+                            <div class="timeline-marker" data-description="cell-desc-2">
+                                <span class="timeline-date">October 4, 2025</span>
+                                <h4>Milestone 2: DCIR Characterization</h4>
+                            </div>
+                        </div>
+                        <div class="timeline-item" style="animation-delay: 1.0s;">
+                            <div class="timeline-marker" data-description="cell-desc-3">
+                                <span class="timeline-date">October 18, 2025</span>
+                                <h4>Milestone 3: Thermal Model &amp; Redesign</h4>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="timeline-popup" class="timeline-popup">
+                        <button class="popup-close">×</button>
+                        <div id="cell-desc-1" class="timeline-description-content" style="display: none;">
+                            <p>I built a DCIR test rig for under $100 with a load bank, a carbon pile rheostat, a pressure fixture, and borrowed current sensors. I also set the test procedure for face pressure, temperature, C-rate, and state of charge.</p>
+                        </div>
+                        <div id="cell-desc-2" class="timeline-description-content" style="display: none;">
+                            <p>I tested face pressure, C-rate, temperature, and state of charge one at a time. The 3D DCIR map showed that temperature and state of charge matter most, and that the pack doesn't need liquid cooling at race loads.</p>
+                        </div>
+                        <div id="cell-desc-3" class="timeline-description-content" style="display: none;">
+                            <p>I fit the DCIR data to a third-order polynomial for the thermal simulation. The liquid system was replaced with ten fans, five always on and five switched by the BMS. A calorimetry test put the cells' specific heat at 0.954 J/g°C.</p>
+                        </div>
+                    </div>
+                </div>
+                <button class="back-button light-button slide-up" style="animation-delay: 1.2s;" data-page="projects">Back to Projects</button>
+            </div>
+        </section>
+    </div>
+
+    <div id="project-honda-page" class="page active" data-path="projects/honda/" data-title="1976 Honda CB750F Restoration | Maximus Anderson">
+        <section class="project-detail-section">
+            <div class="project-detail-container">
+                <h1 class="project-detail-title fade-in">1976 Honda CB750F Restoration</h1>
+                <div class="post-meta fade-in" style="animation-delay: 0.1s;">
+                    <span class="post-meta-date">Summer 2025</span>
+                    <span class="post-meta-sep">·</span>
+                    <span class="post-meta-chips">
+                        <span class="post-meta-chip">Diagnosis</span>
+                        <span class="post-meta-chip">Rebuild</span>
+                        <span class="post-meta-chip">Fabrication</span>
+                    </span>
+                    <span class="post-meta-sep">·</span>
+                    <span class="post-meta-read">~3 min read</span>
+                </div>
+                <figure class="post-figure slide-up">
+                    <img loading="lazy" decoding="async" src="images/CB750F-Title.jpg" alt="1976 Honda CB750F Restoration" class="project-detail-image">
+                    <figcaption class="post-caption">The 1976 Honda CB750F.</figcaption>
+                </figure>
+                <div class="project-detail-content slide-up" style="animation-delay: 0.2s;">
+                    <p class="project-detail-description">
+                        Reviving a 50-year-old SOHC four: carburetors, electrics, timing, and the start of a cafe racer build.
+                    </p>
+
+                    <div class="background-container">
+                        <h3 class="background-title">Why This Bike</h3>
+                        <p class="background-description">
+                            I saw a cafe racer that Milezero Racer built from a CB750F Clubsport and wanted one. I also wanted to work on a carbureted engine. I had learned how carburetors work in theory but had never had my hands on one, and fixing a bike that didn't run was a way to learn. The bike I got is a 1976 CB750F that hadn't run in years.
+                        </p>
+                    </div>
+
+                    <div class="background-container">
+                        <h3 class="background-title">Initial Assessment</h3>
+                        <p class="background-description">
+                            The bike didn't run when I got it. The tires were dry rotted, so I built a center stand from scrap wood and replaced them first.
+                        </p>
+                        <figure class="post-figure">
+                            <img loading="lazy" decoding="async" src="images/CB750_Center_Stand.jpg" alt="Makeshift center stand" class="background-image slide-up" style="animation-delay: 0.3s;">
+                            <figcaption class="post-caption">The center stand I built from scrap wood to change the dry rotted tires.</figcaption>
+                        </figure>
+                        <p class="background-description">
+                            Then I checked the four things an engine needs: spark, compression, air, and fuel.
+                        </p>
+                        <p class="background-description">
+                            Compression was 130 to 135 psi on all four cylinders. The SOHC forums give 150 to 180 psi as healthy, 120 as the low end, and under 100 as needing work. So the engine was even across cylinders, which is a good sign, but on the low side. The air filter was torn and I replaced it. The carburetors were the main problem. Their float pins were seized from corrosion, so cleaning alone wasn't going to fix them.
+                        </p>
+                    </div>
+
+                    <div class="background-container">
+                        <h3 class="background-title">Electrical System</h3>
+                        <p class="background-description">
+                            The electrical system had three problems. The headlight and tail light drew too much current, turning on the high beams cut power to the whole bike, and the turn signals didn't work. The previous owner had also installed a lithium battery whose BMS couldn't supply what the bike needed, so I replaced it with an AGM battery.
+                        </p>
+                        <p class="background-description">
+                            I traced the harness and found loose and corroded bullet connectors all through it. I cleaned or replaced the bad ones and checked continuity afterward. Spark was weak, but the coils tested fine. The coil boots measured well above spec resistance where they meet the plugs, so I replaced the boots and the plugs.
+                        </p>
+                        <p class="background-description">
+                            For lighting I built a headlight from a Suzuki GS850 housing with high-output LEDs, and swapped the tail light for an LED one. Before the swap, switching the lights on dropped the voltage by nearly half a volt. After the swap the draw was negligible, the turn signals worked, and the high beams no longer cut power.
+                        </p>
+                        <figure class="post-figure">
+                            <div class="dual-image-container" style="display: flex; gap: 1em; justify-content: center; flex-wrap: wrap;">
+                                <img loading="lazy" decoding="async" src="images/CB750_LED_Front.jpg" alt="Custom LED headlight" class="background-image slide-up" style="animation-delay: 0.3s; flex: 1; max-width: 48%;">
+                                <img loading="lazy" decoding="async" src="images/CB750_LED_Tail.jpg" alt="LED tail light swap" class="background-image slide-up" style="animation-delay: 0.3s; flex: 1; max-width: 48%;">
+                            </div>
+                            <figcaption class="post-caption">The headlight built from a GS850 housing with high-output LEDs (left), and the LED tail light (right).</figcaption>
+                        </figure>
+                    </div>
+
+                    <div class="background-container">
+                        <h3 class="background-title">Carburetor Swap</h3>
+                        <p class="background-description">
+                            The original carburetors were too corroded to rebuild. I found a donor bike and took its Keihin 7A carbs, which have about the same jetting as the originals. I cleaned them, set the float levels, synced all four, and installed them.
+                        </p>
+                        <figure class="post-figure">
+                            <img loading="lazy" decoding="async" src="images/CB750F-Carbs.jpg" alt="CB750F Carburetors" class="background-image slide-up" style="animation-delay: 0.3s;">
+                            <figcaption class="post-caption">The Keihin 7A carbs from the donor bike, cleaned and synced before they went on.</figcaption>
+                        </figure>
+                        <p class="background-description">
+                            The donor carbs got the bike running, but they have been a problem since. They run rich, clog regularly, and lose their tune. I have retuned them six times and fully rebuilt them four times, resetting the float levels and cleaning the jets each time. The plugs have fouled repeatedly. Fixing the carbs is the top priority.
+                        </p>
+                    </div>
+
+                    <div class="background-container">
+                        <h3 class="background-title">Timing</h3>
+                        <p class="background-description">
+                            With the spark fixed and the carbs on, the bike started, but it ran on three cylinders and lugged to a stop after a few minutes. I checked the static timing with the procedure from the SOHC forums. That uses a 12 V test light on the points while the engine is turned by hand, with top dead center confirmed by the timing marks and a finger over the plug hole. Timing was retarded on cylinders 2 and 3. After I adjusted it, all four cylinders fired. I skipped dynamic timing because the bike ran well after the static adjustment, so I still need to check it.
+                        </p>
+                    </div>
+
+                    <div class="background-container">
+                        <h3 class="background-title">First Miles and What Still Needs Work</h3>
+                        <p class="background-description">
+                            The first long ride was 100 miles and the bike finished it. Several problems are left. Fuel economy is poor because the carbs run rich, and the petcock has to be on reserve to flow enough fuel. The clutch is notchy and needs a rebuild. The left front caliper seeps slowly and leaves a film on the rotor before each ride. The seep hasn't soaked the pad yet, and I don't know why.
+                        </p>
+                    </div>
+
+                    <div class="background-container">
+                        <h3 class="background-title">What's Next</h3>
+                        <p class="background-description">
+                            Reliability comes first: the clutch rebuild, the brakes, and the carbs. After that the cafe build starts. I want to make a seat from carbon fiber nylon to cut weight and clean up the tail. The tank will get a clear coat to protect the steel and keep some of the patina. The mirrors vibrate at speed, so I plan to replace them with lower ones that damp better.
+                        </p>
+                    </div>
+                </div>
+
+                <h3 class="timeline-title slide-up" style="animation-delay: 0.4s;">Project Timeline</h3>
+                <div class="timeline slide-up" style="animation-delay: 0.4s;">
+                    <div class="timeline-content">
+                        <div class="timeline-track"></div>
+                        <div class="timeline-item" style="animation-delay: 0.6s;">
+                            <div class="timeline-marker" data-description="honda-desc-1">
+                                <span class="timeline-date">July 4, 2025</span>
+                                <h4>Milestone 1: Diagnosis</h4>
+                            </div>
+                        </div>
+                        <div class="timeline-item" style="animation-delay: 0.8s;">
+                            <div class="timeline-marker" data-description="honda-desc-2">
+                                <span class="timeline-date">July 19, 2025</span>
+                                <h4>Milestone 2: Carb Swap &amp; Electrical Overhaul</h4>
+                            </div>
+                        </div>
+                        <div class="timeline-item" style="animation-delay: 1.0s;">
+                            <div class="timeline-marker" data-description="honda-desc-3">
+                                <span class="timeline-date">September 1, 2025</span>
+                                <h4>Milestone 3: First Ride</h4>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="timeline-popup" class="timeline-popup">
+                        <button class="popup-close">×</button>
+                        <div id="honda-desc-1" class="timeline-description-content" style="display: none;">
+                            <p>I inspected the whole bike. Compression was 130 to 135 psi, the tires were dry rotted, the carb floats were seized, the bullet connectors were corroded, the coil boots gave a weak spark, and the headlight and tail light drew too much current.</p>
+                        </div>
+                        <div id="honda-desc-2" class="timeline-description-content" style="display: none;">
+                            <p>I installed Keihin 7A carbs from a donor bike after cleaning and syncing them, and replaced the coil boots and plugs. I repaired the wiring harness, built a headlight from a GS850 housing with LEDs, swapped the tail light, and replaced the lithium battery with an AGM. I set the static timing on cylinders 2 and 3.</p>
+                        </div>
+                        <div id="honda-desc-3" class="timeline-description-content" style="display: none;">
+                            <p>I finished a 100-mile ride with the bike running on all four cylinders. The carbs still run rich, the front brake seeps, and the clutch is notchy. The cafe racer changes come next.</p>
+                        </div>
+                    </div>
+                </div>
+                <button class="back-button light-button slide-up" style="animation-delay: 1.2s;" data-page="projects">Back to Projects</button>
+            </div>
+        </section>
+    </div>
+
+    <div id="project-dyno-page" class="page" data-path="projects/dyno/" data-title="Dyno Cart Testing | Maximus Anderson">
+        <section class="project-detail-section">
+            <div class="project-detail-container">
+                <h1 class="project-detail-title fade-in">Dyno Cart Testing</h1>
+                <div class="post-meta fade-in" style="animation-delay: 0.1s;">
+                    <span class="post-meta-date">April–June 2025</span>
+                    <span class="post-meta-sep">·</span>
+                    <span class="post-meta-chips">
+                        <span class="post-meta-chip">Design</span>
+                        <span class="post-meta-chip">Manufacture</span>
+                        <span class="post-meta-chip">Validation</span>
+                    </span>
+                    <span class="post-meta-sep">·</span>
+                    <span class="post-meta-read">~3 min read</span>
+                </div>
+                <figure class="post-figure slide-up">
+                    <img loading="lazy" decoding="async" src="images/dynocarttesting.png" alt="Dyno Cart Testing" class="project-detail-image">
+                    <figcaption class="post-caption">The "Porsche Ferrari" dyno cart, reconfigured from its Yamaha R6 origins to carry the Emrax 208 and the tractive system.</figcaption>
+                </figure>
+                <div class="project-detail-content slide-up" style="animation-delay: 0.2s;">
+                    <p class="project-detail-description">
+                        Adapting Cyclone Racing's legacy IC dyno cart to validate an Emrax 208 motor and DTI HV550 inverter before the team committed to going electric.
+                    </p>
+
+                    <div class="background-container">
+                        <h3 class="background-title">Why This Existed</h3>
+                        <p class="background-description">
+                            Cyclone Racing was finishing its last season with a combustion (IC) car and starting on its first electric one. We had the Emrax 208 motor, but no chassis to put it in and no way to run it under load. The team had done well with IC cars, so before leaving them we needed to show the electric powertrain worked. That meant running the motor with the battery, BMS, and inverter outside of a car, which meant building something to mount it on.
+                        </p>
+                        <p class="background-description">
+                            The team had a dyno cart so old that nobody knew when it was built. It has a Porsche sticker and a Ferrari sticker on the side, so we call it the Porsche Ferrari. The cart was set up for a Yamaha R6 engine and couldn't hold the Emrax as it was.
+                        </p>
+                    </div>
+
+                    <div class="background-container">
+                        <h3 class="background-title">Reconfiguration</h3>
+                        <p class="background-description">
+                            The cart had R6 engine mounts, a gas tank, and IC wiring. It had no low voltage (GLV) power for the EV electronics and none of the interlocks that have to stay closed to keep the high voltage system on. If the GLV battery cut out, the high voltage would shut off with it, so the GLV supply had to be dependable.
+                        </p>
+                        <p class="background-description">
+                            I designed the changes so the cart could go back to IC. The IC mounts were removed and replaced with bolted ones, so the cart can switch between the IC and EV setups. The GLV wiring moved to a separate cart, so changing setups only means swapping the harness.
+                        </p>
+                    </div>
+
+                    <div class="background-container">
+                        <h3 class="background-title">Motor Mount</h3>
+                        <p class="background-description">
+                            The Emrax 208 is a flat, pancake-shaped motor, and its bolt pattern matched nothing on the cart. The mount is two lengths of square steel tube that span the full width of the cart and are bolted at both ends. They take the motor's torque. A third piece at 90 degrees picks up three of the four mounting holes on the motor bracket. The mount is simple and stiff.
+                        </p>
+                    </div>
+
+                    <div class="background-container">
+                        <h3 class="background-title">The Water Brake</h3>
+                        <p class="background-description">
+                            A water brake puts a load on the motor. The motor spins a rotor inside a housing full of water, like a pump, and the water's resistance pushes back with torque. The CR27 team had used this water brake for a full power test of the R6, so I assumed it would work for the electric motor.
+                        </p>
+                        <p class="background-description">
+                            I should have done hand calculations first. The data sheets had been lost, along with most of what the team knew about the brake, and I'm not confident it can take the load the Emrax produces. It was enough for these tests. Future tests will use the 300 kW dynamometer the university has since installed, which controls load and measures torque accurately.
+                        </p>
+                    </div>
+
+                    <div class="background-container">
+                        <h3 class="background-title">Testing</h3>
+                        <p class="background-description">
+                            The no-load test was the first time the battery pack, the Orion BMS, and the DTI HV550 inverter ran together. The goal was to confirm they communicated and that the BMS behaved correctly before the motor was loaded.
+                        </p>
+                        <figure class="post-figure">
+                            <img loading="lazy" decoding="async" src="images/dynocartnoloadtest.png" alt="No-load test" class="background-image slide-up" style="animation-delay: 0.3s;">
+                            <figcaption class="post-caption">The no-load test. The battery pack, Orion BMS, and DTI HV550 inverter running together for the first time.</figcaption>
+                        </figure>
+                        <p class="background-description">
+                            The loaded test ran more power through the system with the water brake resisting the motor. It showed one problem. The motor stopped at random after about 30 seconds, with no fault code from the inverter or the BMS. We worked through it.
+                        </p>
+                        <p class="background-description">
+                            I didn't document the results well, and I would do that differently. What the tests confirmed is that the tractive system worked and the team knew how to run and troubleshoot it. That was the goal before committing to an electric car.
+                        </p>
+                    </div>
+
+                    <div class="background-container">
+                        <h3 class="background-title">What's Next</h3>
+                        <p class="background-description">
+                            Future powertrain testing moves to the university's dynamometer, because the water brake's load limit is unknown. Driving the car also gives more useful data than the cart can. The custom hub motors in development will run on the 300 kW dyno before they go on a car.
+                        </p>
+                    </div>
+                </div>
+
+                <h3 class="timeline-title slide-up" style="animation-delay: 0.4s;">Project Timeline</h3>
+                <div class="timeline slide-up" style="animation-delay: 0.4s;">
+                    <div class="timeline-content">
+                        <div class="timeline-track"></div>
+                        <div class="timeline-item" style="animation-delay: 0.6s;">
+                            <div class="timeline-marker" data-description="dyno-desc-1">
+                                <span class="timeline-date">April 08, 2025</span>
+                                <h4>Milestone 1: Design Completed</h4>
+                            </div>
+                        </div>
+                        <div class="timeline-item" style="animation-delay: 0.8s;">
+                            <div class="timeline-marker" data-description="dyno-desc-2">
+                                <span class="timeline-date">April 15, 2025</span>
+                                <h4>Milestone 2: Manufacturing Completed</h4>
+                            </div>
+                        </div>
+                        <div class="timeline-item" style="animation-delay: 1.0s;">
+                            <div class="timeline-marker" data-description="dyno-desc-3">
+                                <span class="timeline-date">June 17, 2025</span>
+                                <h4>Milestone 3: Testing Validated</h4>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="timeline-popup" class="timeline-popup">
+                        <button class="popup-close">×</button>
+                        <div id="dyno-desc-1" class="timeline-description-content" style="display: none;">
+                            <p>I finished the design, including CAD of the cart structure, the water brake, the motor mount, and the powertrain components.</p>
+                        </div>
+                        <div id="dyno-desc-2" class="timeline-description-content" style="display: none;">
+                            <p>I finished building the dyno cart.</p>
+                        </div>
+                        <div id="dyno-desc-3" class="timeline-description-content" style="display: none;">
+                            <p>The cart ran the team's first loaded test of the electric powertrain.</p>
+                        </div>
+                    </div>
+                </div>
+                <button class="back-button light-button slide-up" style="animation-delay: 1.2s;" data-page="projects">Back to Projects</button>
+            </div>
+        </section>
+    </div>
+
+    <div id="project-fsae-page" class="page" data-path="projects/fsae/" data-title="CR29 Accumulator: Manufacture | Maximus Anderson">
+        <section class="project-detail-section">
+            <div class="project-detail-container">
+                <h1 class="project-detail-title fade-in">CR29 Accumulator: Manufacture</h1>
+                <div class="post-meta fade-in" style="animation-delay: 0.1s;">
+                    <span class="post-meta-date">March 2025</span>
+                    <span class="post-meta-sep">·</span>
+                    <span class="post-meta-chips">
+                        <span class="post-meta-chip">Manufacture</span>
+                        <span class="post-meta-chip">Validation</span>
+                    </span>
+                    <span class="post-meta-sep">·</span>
+                    <span class="post-meta-read">~4 min read</span>
+                </div>
+                <figure class="post-figure slide-up">
+                    <img loading="lazy" decoding="async" src="images/tractivebatterymodule.jpg" alt="CR29 Battery Module: Manufacture" class="project-detail-image">
+                    <figcaption class="post-caption">A finished 28s1p tractive battery module with BMS sense wires harnessed.</figcaption>
+                </figure>
+                <div class="project-detail-content slide-up" style="animation-delay: 0.2s;">
+                    <p class="project-detail-description">
+                        Building Cyclone Racing's first battery pack from scratch: the aluminum housing, the five modules, and what went wrong.
+                    </p>
+                    <div class="side-boxes-container">
+                        <div class="specs-container">
+                            <h3 class="specs-title">Specifications</h3>
+                            <ul class="specs-list">
+                                <li>Configuration: 28s1p per module</li>
+                                <li>Cells: COSMX CA95B0D0HD</li>
+                                <li>5 modules total</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="background-container">
+                        <h3 class="background-title">Context</h3>
+                        <p class="background-description">
+                            CR29 was Cyclone Racing's first electric car. Its main high voltage battery pack, which the FSAE rules called the accumulator, had to be built from scratch, and nobody on the team had built one before. This post covers how the accumulator was made: the aluminum housing and the five battery modules that go inside it.
+                        </p>
+                    </div>
+
+                    <div class="background-container">
+                        <h3 class="background-title">What an Accumulator Is</h3>
+                        <p class="background-description">
+                            The accumulator is the car's main high voltage battery. The rules renamed it the "tractive battery" in 2026, but for CR29 it was the accumulator. It isn't one large battery. It is a housing that holds smaller units called modules, wired in series to reach the pack voltage. Each CR29 module holds 28 pouch cells in series with no cells in parallel, written 28s1p. Five modules make up the pack.
+                        </p>
+                    </div>
+
+                    <div class="background-container">
+                        <h3 class="background-title">The Aluminum Housing</h3>
+                        <p class="background-description">
+                            The housing is a welded aluminum box that holds the five modules, the BMS, and the high voltage wiring. The flat panels were cut from aluminum sheet on a waterjet, which cuts accurately and puts no heat into the part.
+                        </p>
+                        <p class="background-description">
+                            The design called for the side walls to be bent to shape instead of welded on as separate pieces. Bending would have been faster and made cleaner corners, but the bends weren't accurate enough and the walls didn't sit where they needed to. The bent sections were cut off and the walls were welded on as flat pieces, both the outer panels and the inner partitions.
+                        </p>
+                        <p class="background-description">
+                            Welding the partitions caused warping. The outer walls are 3.2 mm thick and welded fine. The inner partitions are 2.3 mm, the minimum the rules allow, and a continuous weld puts more heat into 2.3 mm aluminum than it can take without moving. After welding, the space for the modules was too tight in places and the modules wouldn't fit. The fix was to work the warped spots outward with a mallet until the modules fit. The housing worked, but it was out of spec.
+                        </p>
+                        <p class="background-description">
+                            Fitting each panel before tack welding took a lot of time, and the housing still didn't match CAD exactly. CR30's housing added tabs and slots on the panel edges so the panels locate themselves, which is covered in <a href="/projects/pack/" class="inline-page-link" data-page="project-pack">CR30 Battery Pack: Design and Manufacture</a>.
+                        </p>
+                        <figure class="post-figure">
+                            <div class="dual-image-container" style="display: flex; gap: 1em; justify-content: center; flex-wrap: wrap;">
+                                <img loading="lazy" decoding="async" src="images/CR29_Welding_Jigging.jpg" alt="CR29 housing panels jigged for welding" class="background-image slide-up" style="animation-delay: 0.3s; flex: 1; max-width: 38%;">
+                                <img loading="lazy" decoding="async" src="images/CR29_Near_Complete_Container.jpg" alt="CR29 housing near complete" class="background-image slide-up" style="animation-delay: 0.3s; flex: 1; max-width: 38%;">
+                            </div>
+                            <figcaption class="post-caption">The CR29 housing panels clamped for welding (left), and the housing near complete (right). Every panel had to be clamped square before it was tacked.</figcaption>
+                        </figure>
+                    </div>
+
+                    <div class="background-container">
+                        <h3 class="background-title">Module Assembly</h3>
+                        <p class="background-description">
+                            The 28 cells in each module come in four types, A through D, which differ in tab length and orientation. The type sets where a cell goes in the stack. A cell in the wrong position has a tab that doesn't reach its clamping plate or bends at the wrong angle.
+                        </p>
+                        <p class="background-description">
+                            The tab clamping plates had to be prepared before any cells were stacked. They are 3D printed plates that clamp the cell tabs and bolt them together electrically. The innermost bolts can't be reached once the cells are stacked, so the design has nuts pressed into the plastic. A press fit doesn't hold reliably in an FDM print, so each nut was bonded in with JB Weld and left to cure. The bonded nuts were meant to act like heat-set inserts and give the bolts something solid to thread into.
+                        </p>
+                        <p class="background-description">
+                            Assembly then went in this order. The first D cell goes into the stack, a tab block is laid over its tabs, and the tabs are folded up onto the block. The first A cell goes in and its tab is folded. A second tab block goes on with a ring terminal for a BMS sense wire, and a bolt goes through. That repeats with alternating A and B cells, and the last cell is a C. After the last cell the main terminals are attached and the stack goes into polycarbonate baskets, which support and insulate it.
+                        </p>
+                        <p class="background-description">
+                            The modules took about 5 hours a day for three days, or about 3 hours per module including cell stacking, tab folding, bolting, and wiring the BMS sense harness. That doesn't count 4 hours of sanding burrs off the tab blocks before assembly, or the time spent crimping fuses onto the BMS wires.
+                        </p>
+                        <figure class="post-figure">
+                            <img loading="lazy" decoding="async" src="images/tractivebatterymanufacture.jpg" alt="Tractive Battery Manufacture" class="background-image slide-up" style="animation-delay: 0.3s;">
+                            <figcaption class="post-caption">Module assembly in progress, with cells, tab blocks, and clamping plates layered into the stack.</figcaption>
+                        </figure>
+                        <figure class="post-figure">
+                            <div style="max-width: 700px; margin: 0 auto; overflow: hidden; aspect-ratio: 4 / 3;">
+                                <img loading="lazy" decoding="async" src="images/CR29_First_Module.jpg" alt="First completed CR29 module" class="background-image slide-up" style="animation-delay: 0.3s; width: 100%; height: 100%; object-fit: cover; object-position: center 75%;">
+                            </div>
+                            <figcaption class="post-caption">The first finished CR29 module, with its cells stacked, tabs folded, and BMS sense harness wired.</figcaption>
+                        </figure>
+                    </div>
+
+                    <div class="background-container">
+                        <h3 class="background-title">What Didn't Work</h3>
+                        <p class="background-description">
+                            The JB Welded nuts were the largest problem. Some nuts weren't square in their pockets, so their bolts cross-threaded on the way in. A cross-threaded bolt breaks the nut free of the epoxy, which leaves a loose nut inside a module that is already stacked. Fixing one meant taking part of the stack apart. The bonded nuts also made the modules hard to take apart when they were reused for CR30.
+                        </p>
+                        <p class="background-description">
+                            Stack pressure was the second problem. Pouch cells need to be compressed while they cycle to limit swelling and dendrite growth. The module has compression plates, but the cell thickness in CAD came from the datasheet and not from measured cells. The cells we had were about 0.7 mm thinner each. Across 28 cells that is about 20 mm of lost compression.
+                        </p>
+                        <p class="background-description">
+                            The terminal bolts were a safety problem. The pack terminals could be reached from below even with their TPU plugs installed. Those are live conductors, which is a problem at inspection and for anyone whose hand ends up under a live pack.
+                        </p>
+                    </div>
+
+                    <div class="background-container">
+                        <h3 class="background-title">Notes for CR30</h3>
+                        <p class="background-description">
+                            The changes for CR30 that came out of this build:
+                        </p>
+                        <ul class="background-description" style="margin-left: 2em;">
+                            <li>Add self-jigging slots to the housing panels.</li>
+                            <li>Redesign the nut pockets with a tighter interference fit so the nuts lock without JB Weld.</li>
+                            <li>Measure real cells before setting the compression plate dimensions.</li>
+                            <li>Fully enclose the terminal connections.</li>
+                            <li>Reduce the bolt count.</li>
+                            <li>Clean up the harness routing.</li>
+                        </ul>
+                        <p class="background-description">
+                            The accumulator worked well enough for testing.
+                        </p>
+                        <figure class="post-figure">
+                            <img loading="lazy" decoding="async" src="images/CR29_Complete_Pack_And_Messy_Penthouse.jpg" alt="Completed CR29 pack with messy penthouse wiring" class="background-image slide-up" style="animation-delay: 0.3s;">
+                            <figcaption class="post-caption">The finished CR29 pack with its penthouse wiring. CR30 cleaned up this harness routing.</figcaption>
+                        </figure>
+                    </div>
+                </div>
+
+                <h3 class="timeline-title slide-up" style="animation-delay: 0.4s;">Project Timeline</h3>
+                <div class="timeline slide-up" style="animation-delay: 0.4s;">
+                    <div class="timeline-content">
+                        <div class="timeline-track"></div>
+                        <div class="timeline-item" style="animation-delay: 0.6s;">
+                            <div class="timeline-marker" data-description="fsae-desc-1">
+                                <span class="timeline-date">Early March 2025</span>
+                                <h4>Housing Fabrication</h4>
+                            </div>
+                        </div>
+                        <div class="timeline-item" style="animation-delay: 0.8s;">
+                            <div class="timeline-marker" data-description="fsae-desc-2">
+                                <span class="timeline-date">March 20, 2025</span>
+                                <h4>First Module Assembly</h4>
+                            </div>
+                        </div>
+                        <div class="timeline-item" style="animation-delay: 1.0s;">
+                            <div class="timeline-marker" data-description="fsae-desc-3">
+                                <span class="timeline-date">March 30, 2025</span>
+                                <h4>All Five Modules Complete</h4>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="timeline-popup" class="timeline-popup">
+                        <button class="popup-close">×</button>
+                        <div id="fsae-desc-1" class="timeline-description-content" style="display: none;">
+                            <p>The aluminum panels were cut on a waterjet and welded into the housing. The plan to bend the side walls was dropped because the bends weren't accurate enough. The 2.3 mm inner walls warped during welding and had to be worked back with a mallet before the modules fit. Self-jigging slots went on the list for CR30.</p>
+                        </div>
+                        <div id="fsae-desc-2" class="timeline-description-content" style="display: none;">
+                            <p>The first module took a full day. Bolts cross-threaded in JB Welded nuts that weren't square in their pockets. The cells measured about 0.7 mm thinner than the datasheet. The exposed terminal connections were noted as a safety problem. All of it went on the list for CR30.</p>
+                        </div>
+                        <div id="fsae-desc-3" class="timeline-description-content" style="display: none;">
+                            <p>All five modules were finished with their wiring harnesses and polycarbonate baskets. The accumulator was assembled and ready for testing.</p>
+                        </div>
+                    </div>
+                </div>
+                <button class="back-button light-button slide-up" style="animation-delay: 1.2s;" data-page="projects">Back to Projects</button>
+            </div>
+        </section>
+    </div>
+
+    <div id="project-chassis-page" class="page" data-path="projects/chassis/" data-title="2 Week Tube Chassis | Maximus Anderson">
+        <section class="project-detail-section">
+            <div class="project-detail-container">
+                <h1 class="project-detail-title fade-in">2 Week Tube Chassis</h1>
+                <div class="post-meta fade-in" style="animation-delay: 0.1s;">
+                    <span class="post-meta-date">March–April 2025</span>
+                    <span class="post-meta-sep">·</span>
+                    <span class="post-meta-chips">
+                        <span class="post-meta-chip">Research</span>
+                        <span class="post-meta-chip">Design</span>
+                        <span class="post-meta-chip">Validation</span>
+                    </span>
+                    <span class="post-meta-sep">·</span>
+                    <span class="post-meta-read">~2 min read</span>
+                </div>
+                <figure class="post-figure slide-up">
+                    <img loading="lazy" decoding="async" src="images/CR29_25-C.png" alt="2 Week Tube Chassis" class="project-detail-image">
+                    <figcaption class="post-caption">CR25-C, the tube-frame replacement designed over spring break to carry CR29's existing drivetrain and suspension.</figcaption>
+                </figure>
+                <div class="project-detail-content slide-up" style="animation-delay: 0.2s;">
+                    <p class="project-detail-description">
+                        CR29's carbon chassis failed during cure. Over spring break, five of us designed a replacement tube frame in two weeks. It was never built.
+                    </p>
+
+                    <div class="background-container">
+                        <h3 class="background-title">How It Started</h3>
+                        <p class="background-description">
+                            CR29 was designed around a carbon fiber monocoque chassis. To save time we built the mold from welded steel instead of the usual fiberglass. A steel mold is harder to seal, and during cure the vacuum bag lost pressure. Without vacuum the layers of carbon weren't pressed together and the resin didn't fill them. When the chassis came out of the mold the surface looked crispy and the layers frayed at the edges. It was soft and crunched anywhere I pressed on it. It couldn't be repaired.
+                        </p>
+                        <p class="background-description">
+                            That left us with a competition season, a complete drivetrain and suspension design, and no chassis. Over spring break five of us designed a steel tube frame to replace it.
+                        </p>
+                    </div>
+
+                    <div class="background-container">
+                        <h3 class="background-title">The Sprint</h3>
+                        <p class="background-description">
+                            There were no formal assignments. We wrote a list of everything the chassis needed and each person took tasks from it. We split the work by subsystem so nobody blocked anyone else.
+                        </p>
+                        <p class="background-description">
+                            The design started from CR25, the team's 25th car and one of the strongest tube frames it had built. The new frame, CR25-C, had to match CR29's critical dimensions. Those were the driver position, the overall envelope, and the mounting points for the motor, wings, and suspension. Those dimensions were already worked out for CR29, and moving them would have meant redoing finished work.
+                        </p>
+                        <figure class="post-figure">
+                            <img loading="lazy" decoding="async" src="images/CR29_25-C-Chassis-2.png" alt="CR29_25-C Suspension" class="background-image slide-up" style="animation-delay: 0.3s;">
+                            <figcaption class="post-caption">The bare CR25-C tube frame, before any subsystems were mounted.</figcaption>
+                        </figure>
+                    </div>
+
+                    <div class="background-container">
+                        <h3 class="background-title">What I Worked On</h3>
+                        <p class="background-description">
+                            I took cooling because I had designed CR29's cooling system. The tube frame changed where the parts fit but not how the system works. I also took the firewall, which I had worked on for CR29 along with the seat. FSAE rules are specific about what the firewall has to seal, and getting it wrong fails tech inspection.
+                        </p>
+                        <p class="background-description">
+                            Suspension was the larger job. A tube frame is heavier than a monocoque, so CR29's spring rates no longer worked. I chose new springs for the added mass, re-ran the blade simulations to check the geometry, laid out the hardpoints, and carried over the A-arms, anti-roll bar, and struts from the CR29 design. I changed as little as I could.
+                        </p>
+                        <p class="background-description">
+                            At the end of the design phase the team submitted the SES, the Structural Equivalency Spreadsheet. It shows that a chassis meets FSAE's structural requirements, and a car can't pass tech inspection without an approved one.
+                        </p>
+                    </div>
+
+                    <div class="background-container">
+                        <h3 class="background-title">The Vote</h3>
+                        <p class="background-description">
+                            With the design done and the SES submitted, the team had to decide whether to build CR25-C. The question was funding and time. The team leads voted and tied twice, and the meeting got heated. The final decision was to take CR28, the last IC car, to competition instead. Improving a car we already knew was a safer bet than building and debugging a new chassis in the time left.
+                        </p>
+                        <p class="background-description">
+                            CR28 went to Michigan and finished 5th.
+                        </p>
+                    </div>
+
+                    <div class="background-container">
+                        <h3 class="background-title">Looking Back</h3>
+                        <p class="background-description">
+                            The two weeks were worth it even though the chassis was never built. Five people worked from one list with a fixed deadline and no approvals to wait on, and everyone just worked. It is the closest I have been to a startup, and it's the kind of team I want to work on. I also learned that a finished design can still lose a vote. The frame was a good answer to a bad situation, and the team chose not to build it.
+                        </p>
+                    </div>
+                </div>
+
+                <h3 class="timeline-title slide-up" style="animation-delay: 0.4s;">Project Timeline</h3>
+                <div class="timeline slide-up" style="animation-delay: 0.4s;">
+                    <div class="timeline-content">
+                        <div class="timeline-track"></div>
+                        <div class="timeline-item" style="animation-delay: 0.6s;">
+                            <div class="timeline-marker" data-description="chassis-desc-1">
+                                <span class="timeline-date">March 17, 2025</span>
+                                <h4>Design Begins</h4>
+                            </div>
+                        </div>
+                        <div class="timeline-item" style="animation-delay: 0.8s;">
+                            <div class="timeline-marker" data-description="chassis-desc-2">
+                                <span class="timeline-date">March 31, 2025</span>
+                                <h4>SES Submitted</h4>
+                            </div>
+                        </div>
+                        <div class="timeline-item" style="animation-delay: 1.0s;">
+                            <div class="timeline-marker" data-description="chassis-desc-3">
+                                <span class="timeline-date">April 7, 2025</span>
+                                <h4>Project Terminated</h4>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="timeline-popup" class="timeline-popup">
+                        <button class="popup-close">×</button>
+                        <div id="chassis-desc-1" class="timeline-description-content" style="display: none;">
+                            <p>Using CR25 as the geometric reference and CR29's critical mounting locations as constraints, CR25-C was modeled over spring break. Subsystems were divided across the group: suspension, cooling, firewall, seat, and chassis structure, with each person working in parallel to avoid bottlenecks.</p>
+                        </div>
+                        <div id="chassis-desc-2" class="timeline-description-content" style="display: none;">
+                            <p>The Structural Equivalency Spreadsheet was completed and submitted, formally demonstrating that CR25-C met FSAE's structural requirements. SES approval is required before a car can pass technical inspection at competition.</p>
+                        </div>
+                        <div id="chassis-desc-3" class="timeline-description-content" style="display: none;">
+                            <p>After two tied votes, the team leads decided to bring CR28 to competition rather than manufacture CR25-C. CR28 finished 5th at Michigan. The team's final IC season.</p>
+                        </div>
+                    </div>
+                </div>
+                <button class="back-button light-button slide-up" style="animation-delay: 1.2s;" data-page="projects">Back to Projects</button>
+            </div>
+        </section>
+    </div>
+    <!-- posts:pages:end -->
+
+    <div id="about-page" class="page" data-path="about/" data-title="About | Maximus Anderson">
+        <section class="about-section">
+            <div class="about-grid">
+                <div class="about-photo slide-up">
+                    <img loading="lazy" decoding="async" src="images/CR30_Car_Pictures/Max_And_CR30.jpg" alt="Maximus Anderson standing beside CR30 at sunset">
+                </div>
+                <div class="about-side slide-up" style="animation-delay: 0.15s;">
+                    <h2 class="about-name">Maximus Anderson</h2>
+                    <p class="about-quip">Trying not to get electrocuted.</p>
+                    <div class="about-jobs">
+                        <div class="about-job">
+                            <div class="about-mark"><img src="images/logos/tesla.svg" alt="Tesla"></div>
+                            <div class="about-more"><b>Cell Engineering intern</b>, 2026 to now<br>Bounded a key failure risk at 3 to 6 times the assumed level.</div>
+                        </div>
+                        <div class="about-job">
+                            <div class="about-mark stacked"><img src="images/logos/emerson.svg" alt="Emerson"></div>
+                            <div class="about-more"><b>Additive manufacturing co-op</b>, 2025<br>Moved a titanium part from casting to printing.</div>
+                        </div>
+                        <div class="about-job">
+                            <div class="about-mark tall"><img src="images/logos/iowa-state.svg" alt="Iowa State University"></div>
+                            <div class="about-more"><b>Design and manufacturing engineer</b>, 2025<br>Printed probes that replaced $3,240 of machined parts.</div>
+                        </div>
+                        <div class="about-job">
+                            <div class="about-mark"><span>Cyclone Racing</span></div>
+                            <div class="about-more"><b>Powertrain lead</b>, 2023 to now<br>Led 28 people through the team's first EV competition.</div>
+                        </div>
+                    </div>
+                    <div class="about-links">
+                        <a href="https://www.linkedin.com/in/maximus-anderson-491545337/" target="_blank" rel="noopener">LinkedIn</a>
+                        <a href="/resume/" class="inline-page-link about-resume-link" data-page="resume">Resume</a>
+                        <a href="mailto:mnra@iastate.edu">mnra@iastate.edu</a>
+                    </div>
+                    <p class="about-legal">Logos are trademarks of their respective owners. No endorsement implied.</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+   <div id="resume-page" class="page" data-path="resume/" data-title="Resume | Maximus Anderson">
+        <section class="resume-section">
+            <div class="resume-container">
+                <div class="resume-viewport">
+                    <iframe
+                    id="resume_iframe"
+                    src="resume.pdf#zoom=FitH"
+                    class="resume-iframe"
+                    title="Resume PDF">
+                    </iframe>
+                </div>
+                <!-- Shown on mobile instead of the iframe, which iOS Safari renders incorrectly -->
+                <div class="resume-mobile-fallback">
+                    <p>PDF preview isn't available on mobile browsers.</p>
+                    <a href="resume.pdf" target="_blank" class="resume-open-btn light-button">Open Resume PDF ↗</a>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <div class="social-links">
+                <a href="https://www.linkedin.com/in/maximus-anderson-491545337/" target="_blank" class="social-icon linkedin" aria-label="LinkedIn"></a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="logic.js"></script>
+    <script type="module" src="car-viewer.js"></script>
+</body>
+</html>

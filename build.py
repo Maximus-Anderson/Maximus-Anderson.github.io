@@ -7,6 +7,7 @@ The post format is documented in posts/README.md.
 """
 import html
 import re
+import shutil
 import sys
 from pathlib import Path
 
@@ -18,6 +19,20 @@ LEDGER_START = "<!-- posts:ledger:start -->"
 LEDGER_END = "<!-- posts:ledger:end -->"
 PAGES_START = "<!-- posts:pages:start -->"
 PAGES_END = "<!-- posts:pages:end -->"
+META_START = "<!-- head:meta:start -->"
+META_END = "<!-- head:meta:end -->"
+
+SITE = "https://maximus-anderson.github.io"
+AUTHOR = "Maximus Anderson"
+HOME_TITLE = "Maximus Anderson | Mechanical Engineer"
+HOME_DESC = ("Battery pack, electric powertrain, and chassis projects from Cyclone Racing, "
+             "Iowa State's Formula SAE team.")
+HOME_IMAGE = "images/share/home.jpg"
+STATIC_ROUTES = [
+    ("about", "about/", "About | Maximus Anderson",
+     "Maximus Anderson is a mechanical engineering student at Iowa State and powertrain lead at Cyclone Racing."),
+    ("resume", "resume/", "Resume | Maximus Anderson", "Resume of Maximus Anderson, mechanical engineer."),
+]
 
 IMG = '<img loading="lazy" decoding="async" src="{src}" alt="{alt}" class="background-image slide-up" style="animation-delay: 0.3s;{extra}">'
 
@@ -80,7 +95,7 @@ def inline(text, slugs):
         target = m.group(1)
         label = m.group(2) if m.group(2) else target
         if target in slugs:
-            return f'<a href="#" class="inline-page-link" data-page="project-{target}">{label}</a>'
+            return f'<a href="/projects/{target}/" class="inline-page-link" data-page="project-{target}">{label}</a>'
         return f'<a href="{target}">{label}</a>'
 
     text = re.sub(r"\[\[([^\]|]+)(?:\|([^\]]+))?\]\]", link, text)
@@ -236,7 +251,7 @@ def render_page(slug, meta, sections, slugs):
     hero_alt = meta.get("hero-alt", meta["title"])
     hero_cap = meta.get("hero-caption", "")
     hero_scale = meta.get("hero-scale", "")
-    out = [f'    <div id="{pid}-page" class="page">',
+    out = [f'    <div id="{pid}-page" class="page" data-path="projects/{slug}/" data-title="{esc(page_title(meta))}">',
            '        <section class="project-detail-section">',
            '            <div class="project-detail-container">',
            f'                <h1 class="project-detail-title fade-in">{esc_text(meta["title"])}</h1>',
@@ -318,7 +333,7 @@ def render_ledger_row(n, slug, meta):
     title = meta.get("ledger-title", meta["title"])
     thumb = meta.get("thumb", meta.get("hero", ""))
     return "\n".join([
-        f'        <div class="project-banner" data-page="project-{slug}">',
+        f'        <a class="project-banner" href="/projects/{slug}/" data-page="project-{slug}">',
         f'            <span class="banner-index">{n:02d}</span>',
         '            <div class="banner-info">',
         f'                <h3>{esc_text(title)}</h3>',
@@ -326,7 +341,54 @@ def render_ledger_row(n, slug, meta):
         '            </div>',
         f'            <img class="banner-thumb" src="{esc(thumb)}" alt="{esc(title)}">',
         '            <span class="banner-arrow">→</span>',
-        '        </div>'])
+        '        </a>'])
+
+
+# -------------------------------------------------------------------- routes
+
+def page_title(meta):
+    return f'{meta["title"]} | {AUTHOR}'
+
+
+def meta_html(title, desc, image, path, kind):
+    url = f"{SITE}/{path}"
+    return "\n".join([
+        f'    <title>{esc_text(title)}</title>',
+        f'    <meta name="description" content="{esc(desc)}">',
+        f'    <link rel="canonical" href="{url}">',
+        f'    <meta property="og:title" content="{esc(title)}">',
+        f'    <meta property="og:description" content="{esc(desc)}">',
+        f'    <meta property="og:image" content="{SITE}/{esc(image)}">',
+        f'    <meta property="og:url" content="{url}">',
+        f'    <meta property="og:type" content="{kind}">',
+        f'    <meta property="og:site_name" content="{AUTHOR}">',
+        '    <meta name="twitter:card" content="summary_large_image">',
+        f'    <meta name="twitter:image" content="{SITE}/{esc(image)}">'])
+
+
+def with_meta(src, block):
+    a, b = src.index(META_START) + len(META_START), src.index(META_END)
+    return src[:a] + "\n" + block + "\n    " + src[b:]
+
+
+def swap_once(src, old, new):
+    if src.count(old) != 1:
+        sys.exit(f"index.html must contain exactly one: {old}")
+    return src.replace(old, new)
+
+
+def route_page(src, page_id, block):
+    src = with_meta(src, block)
+    src = swap_once(src, '<div id="projects-page" class="page active"', '<div id="projects-page" class="page"')
+    src = swap_once(src, f'<div id="{page_id}-page" class="page"', f'<div id="{page_id}-page" class="page active"')
+    src = swap_once(src, '<body class="studio">', '<body>')
+    return re.sub(r'\n[^\n]*rel="preload"[^\n]*\.glb[^\n]*', "", src)
+
+
+def write_route(path, text):
+    out = ROOT / path / "index.html"
+    out.parent.mkdir(parents=True, exist_ok=True)
+    out.write_text(text, encoding="utf-8", newline="\n")
 
 
 # ---------------------------------------------------------------------- main
@@ -372,8 +434,18 @@ def main():
     src = src[:a] + "\n" + "\n\n".join(rows) + "\n        " + src[b:]
     a, b = src.index(PAGES_START) + len(PAGES_START), src.index(PAGES_END)
     src = src[:a] + "\n" + "\n\n".join(pages) + "\n    " + src[b:]
-    INDEX.write_text(src, encoding="utf-8", newline="\n")
-    print(f"built {len(posts)} posts into index.html")
+    if src.count(META_START) != 1 or src.count(META_END) != 1:
+        sys.exit(f"index.html must contain exactly one {META_START} and {META_END}")
+    INDEX.write_text(with_meta(src, meta_html(HOME_TITLE, HOME_DESC, HOME_IMAGE, "", "website")),
+                     encoding="utf-8", newline="\n")
+    shutil.rmtree(ROOT / "projects", ignore_errors=True)
+    for slug, meta, _ in posts:
+        image = meta.get("share") or meta.get("hero", HOME_IMAGE)
+        block = meta_html(page_title(meta), meta.get("lead") or HOME_DESC, image, f"projects/{slug}/", "article")
+        write_route(f"projects/{slug}", route_page(src, f"project-{slug}", block))
+    for page_id, path, title, desc in STATIC_ROUTES:
+        write_route(path, route_page(src, page_id, meta_html(title, desc, HOME_IMAGE, path, "website")))
+    print(f"built {len(posts)} posts into index.html and {len(posts) + len(STATIC_ROUTES)} route pages")
 
 
 if __name__ == "__main__":

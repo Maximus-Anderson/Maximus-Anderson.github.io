@@ -8,6 +8,7 @@ tags:
   - Fabrication
 hero: images/CB750F-Title.jpg
 thumb: images/thumbs/honda.jpg
+share: images/share/honda.jpg
 hero-caption: The 1976 Honda CB750F.
 lead: Reviving a 50-year-old SOHC four: carburetors, electrics, timing, and the start of a cafe racer build.
 timeline:

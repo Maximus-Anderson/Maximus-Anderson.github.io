@@ -10,6 +10,7 @@ hero: images/Troubleshooting_To_Comp_Images/Got_Sticker_For_Battery_&_Mech.jpg
 hero-alt: The car with its battery and mechanical tech inspection stickers
 hero-caption: The car with its battery and mechanical tech stickers at our first EV competition.
 thumb: images/thumbs/powertrain.jpg
+share: images/share/powertrain.jpg
 lead: What it took to get Cyclone Racing's CR30 driving reliably after the pack was built, from a blown inverter to our first EV competition.
 specs-title: The Setup
 specs:

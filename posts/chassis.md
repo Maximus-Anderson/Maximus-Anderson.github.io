@@ -8,6 +8,7 @@ tags:
   - Validation
 hero: images/CR29_25-C.png
 thumb: images/thumbs/chassis.jpg
+share: images/share/chassis.jpg
 hero-caption: CR25-C, the tube-frame replacement designed over spring break to carry CR29's existing drivetrain and suspension.
 lead: CR29's carbon chassis failed during cure. Over spring break, five of us designed a replacement tube frame in two weeks. It was never built.
 timeline:

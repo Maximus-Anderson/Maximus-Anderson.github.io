@@ -1,7 +1,5 @@
 document.addEventListener('DOMContentLoaded', function() {
     const navLinks = document.querySelectorAll('.nav-links a');
-    const projectBanners = document.querySelectorAll('.project-banner');
-    const backButtons = document.querySelectorAll('.back-button');
     const logo = document.querySelector('.logo');
     const nav = document.querySelector('.navigation');
 
@@ -18,49 +16,40 @@ document.addEventListener('DOMContentLoaded', function() {
         nav.classList.toggle('scrolled', window.scrollY > getCarMorphThreshold());
     }, { passive: true });
 
-    navLinks.forEach(link => {
-        link.addEventListener('click', function(e) {
-            e.preventDefault();
-            switchPage(this.getAttribute('data-page'));
-        });
-    });
-
-    projectBanners.forEach(banner => {
-        banner.addEventListener('click', function() {
-            const targetPage = this.getAttribute('data-page');
-            if (targetPage) switchPage(targetPage);
-        });
-    });
-
-    backButtons.forEach(button => {
-        button.addEventListener('click', function(e) {
-            e.preventDefault();
-            switchPage(this.getAttribute('data-page'));
-        });
-    });
-
-    document.querySelectorAll('.inline-page-link').forEach(link => {
-        link.addEventListener('click', function(e) {
-            e.preventDefault();
-            const targetPage = this.getAttribute('data-page');
-            if (targetPage) switchPage(targetPage);
-        });
-    });
-
-    navLinks.forEach(a => {
-        a.classList.toggle('active-link', a.getAttribute('data-page') === 'projects');
+    document.addEventListener('click', (e) => {
+        const link = e.target.closest('[data-page]');
+        if (!link) return;
+        if (link.tagName === 'A' && (e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey)) return;
+        e.preventDefault();
+        switchPage(link.getAttribute('data-page'));
     });
 
     logo.addEventListener('click', () => switchPage('projects'));
 
+    function pageIdFromPath() {
+        let path = location.pathname.replace(/index\.html$/, '');
+        if (!path.endsWith('/')) path += '/';
+        const match = Array.from(document.querySelectorAll('.page'))
+            .find(p => '/' + (p.dataset.path || '') === path);
+        return match ? match.id.replace(/-page$/, '') : 'projects';
+    }
+
+    window.addEventListener('popstate', () => switchPage(pageIdFromPath(), true));
+
     const scrollPositions = new Map();
     const visitedPages = new Set();
     const initiallyActive = document.querySelector('.page.active');
-    if (initiallyActive) visitedPages.add(initiallyActive.id.replace(/-page$/, ''));
+    if (initiallyActive) {
+        const initialId = initiallyActive.id.replace(/-page$/, '');
+        visitedPages.add(initialId);
+        navLinks.forEach(a => {
+            a.classList.toggle('active-link', a.getAttribute('data-page') === initialId);
+        });
+    }
 
     let switching = false;
 
-    function switchPage(targetPageId) {
+    function switchPage(targetPageId, fromHistory) {
         if (switching) return;
         const currentPage = document.querySelector('.page.active');
         const targetPage = document.getElementById(targetPageId + '-page');
@@ -77,6 +66,11 @@ document.addEventListener('DOMContentLoaded', function() {
             switching = false;
             currentPage.classList.remove('active');
             targetPage.classList.add('active');
+
+            if (targetPage.dataset.title) document.title = targetPage.dataset.title;
+            if (!fromHistory) {
+                history.pushState({ page: targetPageId }, '', '/' + (targetPage.dataset.path || ''));
+            }
 
             navLinks.forEach(a => {
                 a.classList.toggle('active-link', a.getAttribute('data-page') === targetPageId);
@@ -110,6 +104,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 popup.classList.remove('active');
                 popup.querySelectorAll('.timeline-description-content').forEach(desc => desc.style.display = 'none');
             }
+
+            const wanted = pageIdFromPath();
+            if (wanted !== targetPageId) switchPage(wanted, true);
         }, 120);
     }
 

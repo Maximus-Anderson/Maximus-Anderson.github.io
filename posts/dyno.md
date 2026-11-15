@@ -10,6 +10,7 @@ tags:
 hero: images/dynocarttesting.png
 hero-caption: The "Porsche Ferrari" dyno cart, reconfigured from its Yamaha R6 origins to carry the Emrax 208 and the tractive system.
 thumb: images/thumbs/dyno.jpg
+share: images/share/dyno.jpg
 lead: Adapting Cyclone Racing's legacy IC dyno cart to validate an Emrax 208 motor and DTI HV550 inverter before the team committed to going electric.
 timeline:
   - April 08, 2025 | Milestone 1: Design Completed

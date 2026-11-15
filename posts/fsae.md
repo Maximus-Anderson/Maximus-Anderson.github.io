@@ -8,6 +8,7 @@ tags:
   - Validation
 hero: images/tractivebatterymodule.jpg
 thumb: images/thumbs/fsae.jpg
+share: images/share/fsae.jpg
 hero-alt: CR29 Battery Module: Manufacture
 hero-caption: A finished 28s1p tractive battery module with BMS sense wires harnessed.
 lead: Building Cyclone Racing's first battery pack from scratch: the aluminum housing, the five modules, and what went wrong.

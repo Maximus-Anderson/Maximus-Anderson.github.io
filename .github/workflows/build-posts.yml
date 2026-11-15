@@ -6,6 +6,7 @@ on:
     paths:
       - "posts/**"
       - "build.py"
+      - "index.html"
 
 permissions:
   contents: write
@@ -19,14 +20,14 @@ jobs:
         with:
           python-version: "3.12"
       - run: python build.py
-      - name: Commit rebuilt index.html
+      - name: Commit rebuilt pages
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          if git diff --quiet -- index.html; then
-            echo "index.html unchanged"
+          git add index.html projects about resume
+          if git diff --cached --quiet; then
+            echo "pages unchanged"
           else
-            git add index.html
-            git commit -m "Build posts into index.html"
+            git commit -m "Build posts into index.html and route pages"
             git push
           fi
