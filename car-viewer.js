@@ -35,9 +35,10 @@ const SCROLL_CAM_START    = 0.12;   // camera starts moving
 const SCROLL_CAM_END      = 0.52;   // camera reaches browse position
 const SCROLL_BANNERS_SHOW = 0.42;   // banners begin fading in
 const SCROLL_BANNERS_FULL = 0.72;   // banners fully visible
-const WHEEL_QUIET_MS      = 150;
-const FRESH_PUSH_MULT     = 1.6;
-const MOMENTUM_DECAY      = 0.9;
+const WHEEL_QUIET_MS      = 180;
+const FRESH_PUSH_MULT     = 2.0;
+const FRESH_MIN_PX        = 30;
+const FRESH_AFTER_DECAY   = 0.5;
 
 // ─── DOM REFS ────────────────────────────────────────────────────────────────
 const canvas        = document.getElementById('car-canvas');
@@ -395,8 +396,13 @@ let endY           = 0;
 let listOpen       = false;
 let savedListTop   = 0;
 let lastWheelTime  = 0;
-let momentumRef    = 0;
 let openTimer      = 0;
+let wheelPeak      = 0;
+let wheelDecayed   = false;
+let wheelTrough    = 0;
+let wheelSign      = 0;
+let holdUp         = false;
+let wheelBound     = false;
 
 function updateDriverExtent() {
     if (!driverEl || !bannersPanelEl || driverEl.offsetParent === null) return;
@@ -461,28 +467,80 @@ if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
 
 window.addEventListener('scroll', onScroll, { passive: true });
 
-window.addEventListener('wheel', (e) => {
+function onWheel(e) {
     if (!isActive || !bannersPanelEl) return;
     const now   = performance.now();
     const dy    = e.deltaY * (e.deltaMode === 1 ? 16 : e.deltaMode === 2 ? window.innerHeight : 1);
+    if (dy === 0) return;
     const mag   = Math.abs(dy);
-    const quiet = now - lastWheelTime > WHEEL_QUIET_MS;
-    const fresh = quiet || mag > momentumRef * FRESH_PUSH_MULT;
-    momentumRef = quiet ? mag : Math.max(mag, momentumRef * MOMENTUM_DECAY);
-    lastWheelTime = now;
-    if (!atEnd() || dy <= 0) return;
-    if (!listOpen) {
-        if (fresh) setListOpen(true);
-        else { syncList(); return; }
+    const sign  = dy > 0 ? 1 : -1;
+    const fromRest = now - lastWheelTime > WHEEL_QUIET_MS || sign !== wheelSign;
+    let fresh = fromRest;
+    if (fromRest) {
+        wheelPeak = mag;
+        wheelTrough = mag;
+        wheelDecayed = false;
+    } else {
+        if (mag >= wheelPeak) {
+            wheelPeak = mag;
+            wheelTrough = mag;
+            wheelDecayed = false;
+        }
+        if (mag < wheelPeak * FRESH_AFTER_DECAY) wheelDecayed = true;
+        if (wheelDecayed && mag >= FRESH_MIN_PX && mag > wheelTrough * FRESH_PUSH_MULT) {
+            fresh = true;
+            wheelPeak = mag;
+            wheelTrough = mag;
+            wheelDecayed = false;
+        }
+        wheelTrough = Math.min(wheelTrough, mag);
     }
-    if (!bannersPanelEl.contains(e.target)) bannersPanelEl.scrollTop += dy;
-}, { passive: true });
+    lastWheelTime = now;
+    wheelSign = sign;
+    if (fresh) holdUp = false;
+    if (!atEnd()) return;
+
+    if (dy > 0) {
+        if (!listOpen) {
+            if (fresh) setListOpen(true);
+            else { syncList(); return; }
+        }
+        e.preventDefault();
+        bannersPanelEl.scrollTop += dy;
+        return;
+    }
+
+    if (listOpen && bannersPanelEl.scrollTop > 0) {
+        e.preventDefault();
+        bannersPanelEl.scrollTop += dy;
+        holdUp = true;
+    } else if (holdUp) {
+        e.preventDefault();
+    }
+}
+
+function bindWheel(on) {
+    if (on === wheelBound) return;
+    wheelBound = on;
+    if (on) window.addEventListener('wheel', onWheel, { passive: false });
+    else window.removeEventListener('wheel', onWheel, { passive: false });
+}
 
 window.addEventListener('keydown', (e) => {
     if (!isActive || !listOpen || !atEnd() || !bannersPanelEl) return;
-    if (e.key === 'ArrowDown') bannersPanelEl.scrollTop += 60;
-    else if (e.key === 'PageDown' || e.key === ' ') bannersPanelEl.scrollTop += bannersPanelEl.clientHeight * 0.8;
-    else if (e.key === 'End') bannersPanelEl.scrollTop = bannersPanelEl.scrollHeight;
+    const p = bannersPanelEl;
+    const room = p.scrollHeight - p.clientHeight - p.scrollTop;
+    let step = 0;
+    if (e.key === 'ArrowDown') step = 60;
+    else if (e.key === 'PageDown' || e.key === ' ') step = p.clientHeight * 0.8;
+    else if (e.key === 'End') step = room;
+    else if (e.key === 'ArrowUp') step = -60;
+    else if (e.key === 'PageUp') step = -p.clientHeight * 0.8;
+    else if (e.key === 'Home') step = -p.scrollTop;
+    if ((step > 0 && room > 1) || (step < 0 && p.scrollTop > 0)) {
+        e.preventDefault();
+        p.scrollTop += step;
+    }
 });
 
 window.addEventListener('load', () => {
@@ -536,6 +594,7 @@ function syncCanvasVisibility() {
     const active = projectsPageEl.classList.contains('active');
     if (isActive && !active && bannersPanelEl) savedListTop = bannersPanelEl.scrollTop;
     isActive = active;
+    bindWheel(active);
     document.body.classList.toggle('studio', active);
     syncLoop();
 
