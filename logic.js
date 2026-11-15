@@ -90,7 +90,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }, 10);
 
             const savedScroll = scrollPositions.get(targetPageId);
-            window.scrollTo({ top: savedScroll ?? 0, behavior: 'auto' });
+            window.scrollTo({ top: savedScroll ?? 0, behavior: 'instant' });
 
             if (!visitedPages.has(targetPageId)) {
                 visitedPages.add(targetPageId);

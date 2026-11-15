@@ -35,24 +35,29 @@ const SCROLL_CAM_START    = 0.12;   // camera starts moving
 const SCROLL_CAM_END      = 0.52;   // camera reaches browse position
 const SCROLL_BANNERS_SHOW = 0.42;   // banners begin fading in
 const SCROLL_BANNERS_FULL = 0.72;   // banners fully visible
-const SWEEP_RATIO         = 0.45;   // list px per page-scroll px (lower = slower sweep)
-const SCROLL_TAIL_PX      = 60;     // scroll runway after the sweep before the footer
-const SCROLL_PAUSE_PX     = 300;
-const GATE_RELEASE_MULT   = 1.6;
-const GATE_DECAY          = 0.9;
-const GATE_IDLE_MS        = 120;
-const GATE_BACKSTOP_MS    = 600;
+const WHEEL_QUIET_MS      = 150;
+const FRESH_PUSH_MULT     = 1.6;
+const MOMENTUM_DECAY      = 0.9;
 
 // ─── DOM REFS ────────────────────────────────────────────────────────────────
 const canvas        = document.getElementById('car-canvas');
 const heroTextEl    = document.getElementById('car-hero-text');
 const bannersPanelEl = document.getElementById('projects-banners');
 const projectsPageEl = document.getElementById('projects-page');
+const driverEl       = document.querySelector('.car-scroll-driver');
+
+const heightProbe = document.createElement('div');
+heightProbe.style.cssText = 'position:fixed;top:0;left:0;width:0;height:100lvh;visibility:hidden;pointer-events:none';
+document.body.appendChild(heightProbe);
+
+function stableHeight() {
+    return heightProbe.offsetHeight || window.innerHeight;
+}
 
 // ─── RENDERER ────────────────────────────────────────────────────────────────
 const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
-renderer.setSize(window.innerWidth, window.innerHeight);
+renderer.setSize(window.innerWidth, stableHeight());
 renderer.toneMapping        = THREE.ACESFilmicToneMapping;
 renderer.toneMappingExposure = 1.0;
 renderer.outputColorSpace   = THREE.SRGBColorSpace;
@@ -60,7 +65,7 @@ renderer.outputColorSpace   = THREE.SRGBColorSpace;
 // ─── SCENE & CAMERA ──────────────────────────────────────────────────────────
 const scene  = new THREE.Scene();
 
-const camera = new THREE.PerspectiveCamera(40, window.innerWidth / window.innerHeight, 0.01, 200);
+const camera = new THREE.PerspectiveCamera(40, window.innerWidth / stableHeight(), 0.01, 200);
 camera.position.copy(CAM_INTRO.pos);
 
 // ─── ENVIRONMENT ─────────────────────────────────────────────────────────────
@@ -385,37 +390,52 @@ function updateStudio() {
 }
 
 let baseScrollable = 0;
-let sweepStartY    = 0;
-let sweepExtra     = 0;
-let checkpointY    = 0;
-let gatePassed     = false;
-let locked         = false;
+let driverTop      = 0;
+let endY           = 0;
+let listOpen       = false;
+let savedListTop   = 0;
 let lastWheelTime  = 0;
-let lastTouchTime  = 0;
-let lockTime       = 0;
 let momentumRef    = 0;
+let openTimer      = 0;
 
 function updateDriverExtent() {
-    const driver = document.querySelector('.car-scroll-driver');
-    if (!driver || !bannersPanelEl || driver.offsetParent === null) return;
-    driver.style.height = '';
-    baseScrollable = Math.max(1, driver.offsetHeight - window.innerHeight);
-    sweepExtra = Math.max(0, bannersPanelEl.scrollHeight - bannersPanelEl.clientHeight);
+    if (!driverEl || !bannersPanelEl || driverEl.offsetParent === null) return;
+    const h = stableHeight();
+    driverEl.style.height = '';
+    baseScrollable = Math.max(1, driverEl.offsetHeight - h);
     const introPx = SCROLL_BANNERS_FULL * baseScrollable;
-    driver.style.height =
-        (window.innerHeight + introPx + SCROLL_PAUSE_PX + sweepExtra / SWEEP_RATIO + SCROLL_TAIL_PX) + 'px';
-    checkpointY = driver.offsetTop + introPx;
-    sweepStartY = checkpointY + SCROLL_PAUSE_PX;
-    driver.dataset.morphY = driver.offsetTop + SCROLL_CAM_START * baseScrollable;
+    driverEl.style.height = (h + introPx) + 'px';
+    driverTop = driverEl.offsetTop;
+    endY = driverTop + introPx;
+    driverEl.dataset.morphY = driverTop + SCROLL_CAM_START * baseScrollable;
 }
 
 function getScrollFraction() {
-    const driver = document.querySelector('.car-scroll-driver');
-    if (!driver || baseScrollable <= 0) return 0;
-    return Math.max(0, Math.min(1, (window.scrollY - driver.offsetTop) / baseScrollable));
+    if (baseScrollable <= 0) return 0;
+    return Math.max(0, Math.min(1, (window.scrollY - driverTop) / baseScrollable));
+}
+
+function atEnd() {
+    return endY > 0 && window.scrollY >= endY - 2;
+}
+
+function setListOpen(open) {
+    if (open === listOpen || !bannersPanelEl) return;
+    listOpen = open;
+    bannersPanelEl.style.overflowY = open ? 'auto' : 'hidden';
+}
+
+function syncList() {
+    clearTimeout(openTimer);
+    if (!atEnd()) { setListOpen(false); return; }
+    if (listOpen) return;
+    const wait = WHEEL_QUIET_MS - (performance.now() - lastWheelTime);
+    if (wait <= 0) setListOpen(true);
+    else openTimer = setTimeout(syncList, wait);
 }
 
 function onScroll() {
+    if (!isActive) return;
     const t    = getScrollFraction();
     const camT = easeInOut(clamp01(t, SCROLL_CAM_START, SCROLL_CAM_END));
 
@@ -423,7 +443,6 @@ function onScroll() {
     targetCamLook.lerpVectors(CAM_INTRO.target, CAM_BROWSE.target, camT);
     targetT = camT;
 
-    // Hero text fades out in the first half of the transition
     if (heroTextEl) {
         heroTextEl.style.opacity = String(Math.max(0, 1 - camT * 2.2));
     }
@@ -432,97 +451,43 @@ function onScroll() {
         const bannerT = easeInOut(clamp01(t, SCROLL_BANNERS_SHOW, SCROLL_BANNERS_FULL));
         bannersPanelEl.style.opacity       = String(bannerT);
         bannersPanelEl.style.pointerEvents = bannerT > 0.05 ? 'all' : 'none';
-
-        bannersPanelEl.scrollTop = Math.min(sweepExtra, Math.max(0, (window.scrollY - sweepStartY) * SWEEP_RATIO));
+        if (bannerT === 0 && bannersPanelEl.scrollTop !== 0) bannersPanelEl.scrollTop = 0;
     }
+
+    syncList();
 }
 
 if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
 
-function gateActive() {
-    return projectsPageEl && projectsPageEl.classList.contains('active') && checkpointY > 0;
-}
-
-function onScrollGated() {
-    if (gateActive()) {
-        if (window.scrollY < checkpointY - 4) {
-            gatePassed = false;
-            locked = false;
-        } else if (!gatePassed && window.scrollY > checkpointY + 1) {
-            const now = performance.now();
-            if (!locked) {
-                locked = true;
-                lockTime = now;
-                momentumRef = 0;
-                window.scrollTo({ top: checkpointY, left: 0, behavior: 'instant' });
-            } else if (now - lastTouchTime > 1500 && now - lockTime > GATE_BACKSTOP_MS) {
-                gatePassed = true;
-                locked = false;
-            } else {
-                window.scrollTo({ top: checkpointY, left: 0, behavior: 'instant' });
-            }
-        }
-    }
-    onScroll();
-}
-
-window.addEventListener('scroll', onScrollGated, { passive: true });
+window.addEventListener('scroll', onScroll, { passive: true });
 
 window.addEventListener('wheel', (e) => {
-    const now = performance.now();
-    const dy = e.deltaY * (e.deltaMode === 1 ? 16 : e.deltaMode === 2 ? window.innerHeight : 1);
-    if (gateActive() && !gatePassed && dy > 0 && window.scrollY + dy >= checkpointY) {
-        const freshPush = dy > momentumRef * GATE_RELEASE_MULT;
-        const paused    = now - lastWheelTime > GATE_IDLE_MS;
-        const tooLong   = now - lockTime > GATE_BACKSTOP_MS;
-        if (locked && (freshPush || paused || tooLong)) {
-            gatePassed = true;
-            locked = false;
-        } else {
-            if (!locked) { lockTime = now; momentumRef = dy; }
-            else momentumRef = Math.max(dy, momentumRef * GATE_DECAY);
-            e.preventDefault();
-            locked = true;
-            window.scrollTo({ top: checkpointY, left: 0, behavior: 'instant' });
-        }
-    }
+    if (!isActive || !bannersPanelEl) return;
+    const now   = performance.now();
+    const dy    = e.deltaY * (e.deltaMode === 1 ? 16 : e.deltaMode === 2 ? window.innerHeight : 1);
+    const mag   = Math.abs(dy);
+    const quiet = now - lastWheelTime > WHEEL_QUIET_MS;
+    const fresh = quiet || mag > momentumRef * FRESH_PUSH_MULT;
+    momentumRef = quiet ? mag : Math.max(mag, momentumRef * MOMENTUM_DECAY);
     lastWheelTime = now;
-}, { passive: false });
-
-window.addEventListener('touchstart', () => {
-    lastTouchTime = performance.now();
-    if (gateActive() && !gatePassed && locked) {
-        gatePassed = true;
-        locked = false;
+    if (!atEnd() || dy <= 0) return;
+    if (!listOpen) {
+        if (fresh) setListOpen(true);
+        else { syncList(); return; }
     }
+    if (!bannersPanelEl.contains(e.target)) bannersPanelEl.scrollTop += dy;
 }, { passive: true });
 
-window.addEventListener('touchmove', (e) => {
-    lastTouchTime = performance.now();
-    if (gateActive() && !gatePassed && window.scrollY >= checkpointY - 1) {
-        if (!locked) {
-            locked = true;
-            lockTime = performance.now();
-            momentumRef = 0;
-        }
-        e.preventDefault();
-        window.scrollTo({ top: checkpointY, left: 0, behavior: 'instant' });
-    }
-}, { passive: false });
-
 window.addEventListener('keydown', (e) => {
-    if (gateActive() && !gatePassed && locked
-        && ['ArrowDown', 'PageDown', 'End', ' ', 'Spacebar'].includes(e.key)) {
-        gatePassed = true;
-        locked = false;
-    }
+    if (!isActive || !listOpen || !atEnd() || !bannersPanelEl) return;
+    if (e.key === 'ArrowDown') bannersPanelEl.scrollTop += 60;
+    else if (e.key === 'PageDown' || e.key === ' ') bannersPanelEl.scrollTop += bannersPanelEl.clientHeight * 0.8;
+    else if (e.key === 'End') bannersPanelEl.scrollTop = bannersPanelEl.scrollHeight;
 });
 
 window.addEventListener('load', () => {
     window.scrollTo({ top: 0, behavior: 'instant' });
     updateDriverExtent();
-    gatePassed = window.scrollY >= checkpointY - 2;
-    locked = false;
     onScroll();
 });
 
@@ -569,6 +534,7 @@ document.addEventListener('visibilitychange', syncLoop);
 function syncCanvasVisibility() {
     if (!projectsPageEl) return;
     const active = projectsPageEl.classList.contains('active');
+    if (isActive && !active && bannersPanelEl) savedListTop = bannersPanelEl.scrollTop;
     isActive = active;
     document.body.classList.toggle('studio', active);
     syncLoop();
@@ -586,9 +552,12 @@ function syncCanvasVisibility() {
     if (active) {
         loadModel();
         updateDriverExtent();
-        gatePassed = window.scrollY >= checkpointY - 2;
-        locked = false;
         onScroll();
+        if (atEnd() && bannersPanelEl) {
+            clearTimeout(openTimer);
+            setListOpen(true);
+            bannersPanelEl.scrollTop = savedListTop;
+        }
         lerpedCamPos.copy(targetCamPos);
         lerpedCamLook.copy(targetCamLook);
         slowT = targetT;
@@ -604,10 +573,18 @@ if (projectsPageEl) {
 }
 
 // ─── RESIZE ──────────────────────────────────────────────────────────────────
+let lastW = window.innerWidth;
+let lastH = stableHeight();
+
 window.addEventListener('resize', () => {
-    camera.aspect = window.innerWidth / window.innerHeight;
+    const w = window.innerWidth;
+    const h = stableHeight();
+    if (w === lastW && h === lastH) return;
+    lastW = w;
+    lastH = h;
+    camera.aspect = w / h;
     camera.updateProjectionMatrix();
-    renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.setSize(w, h);
     updateDriverExtent();
     onScroll();
     forceFrames = 3;
