@@ -23,7 +23,7 @@ timeline:
   - Late May | The Cutout
     The car cut power partway through hard accelerations with the high voltage still on and no fault logged. The limits, the BMS, and the low voltage supply all checked out, and there was no inverter data to show the cause.
   - May 31 | Inverter Telemetry
-    A wire for the inverter's second CAN bus had never been connected, so no inverter data reached the logger. Connecting it brought the data through. Twisting the CAN pair and grounding the cable shields then stopped the dropouts.
+    I added a CAN data logger to the car in the middle of a test day. A wire for the inverter's second CAN bus had never been connected, so no inverter data reached the logger. Connecting the wire brought the data through. Twisting the CAN pair and grounding the cable shields then stopped the dropouts.
   - June 6 | Root Cause Fixed
     The flux linkage in the inverter was set to about twice the motor's measured value, so the inverter thought it was running out of voltage and cut power. After correcting the value, grounding the shields to one point, and retuning, the cutout was gone and the car pulled over 50 kW for the first time.
   - June 8 | Power on the Dyno
@@ -77,9 +77,9 @@ The BMS faults were gone but the cutout wasn't. I checked the current limits, th
 
 ## Inverter Telemetry
 
-The car had data logging that was supposed to record the values sent by the inverter, but every inverter value in the excel was a zero. The logger is an Arduino Uno with a SparkFun CAN shield and a microSD card. It reads messages from CAN, the two-wire network the car's electronics use to talk to each other, and writes them to the card.
+The car had no way to record what the inverter was doing, so I added a data logger in the middle of a test day. The logger is an Arduino Uno with a SparkFun CAN shield and a microSD card. It reads messages from CAN, the two-wire network the car's electronics use to talk to each other, and writes them to the card. The car had no mount for a logger, so I taped it to the side. On the first runs every inverter value in the excel was a zero.
 
-I checked the logger's firmware first and found two problems. The firmware opened and closed the file on the SD card every loop, which dropped samples. It also read only one CAN message per loop, so messages backed up and were lost. I fixed both, and the inverter values were still zero.
+I had written the logger's firmware in a hurry, so I checked it first and found two problems. The firmware opened and closed the file on the SD card every loop, which dropped samples. It also read only one CAN message per loop, so messages backed up and were lost. I fixed both, and the inverter values were still zero.
 
 Next I wrote a short Arduino program that printed the ID of every message on the bus. The only IDs that printed came from the IMU, the car's motion sensor. The inverter should have been sending eight messages and none of them were on the bus.
 

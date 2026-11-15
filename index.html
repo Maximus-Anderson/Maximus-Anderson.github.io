@@ -258,10 +258,10 @@
                     <div class="background-container">
                         <h3 class="background-title">Inverter Telemetry</h3>
                         <p class="background-description">
-                            The car had data logging that was supposed to record the values sent by the inverter, but every inverter value in the excel was a zero. The logger is an Arduino Uno with a SparkFun CAN shield and a microSD card. It reads messages from CAN, the two-wire network the car's electronics use to talk to each other, and writes them to the card.
+                            The car had no way to record what the inverter was doing, so I added a data logger in the middle of a test day. The logger is an Arduino Uno with a SparkFun CAN shield and a microSD card. It reads messages from CAN, the two-wire network the car's electronics use to talk to each other, and writes them to the card. The car had no mount for a logger, so I taped it to the side. On the first runs every inverter value in the excel was a zero.
                         </p>
                         <p class="background-description">
-                            I checked the logger's firmware first and found two problems. The firmware opened and closed the file on the SD card every loop, which dropped samples. It also read only one CAN message per loop, so messages backed up and were lost. I fixed both, and the inverter values were still zero.
+                            I had written the logger's firmware in a hurry, so I checked it first and found two problems. The firmware opened and closed the file on the SD card every loop, which dropped samples. It also read only one CAN message per loop, so messages backed up and were lost. I fixed both, and the inverter values were still zero.
                         </p>
                         <p class="background-description">
                             Next I wrote a short Arduino program that printed the ID of every message on the bus. The only IDs that printed came from the IMU, the car's motion sensor. The inverter should have been sending eight messages and none of them were on the bus.
@@ -417,7 +417,7 @@
                             <p>The car cut power partway through hard accelerations with the high voltage still on and no fault logged. The limits, the BMS, and the low voltage supply all checked out, and there was no inverter data to show the cause.</p>
                         </div>
                         <div id="pt-desc-3" class="timeline-description-content" style="display: none;">
-                            <p>A wire for the inverter's second CAN bus had never been connected, so no inverter data reached the logger. Connecting it brought the data through. Twisting the CAN pair and grounding the cable shields then stopped the dropouts.</p>
+                            <p>I added a CAN data logger to the car in the middle of a test day. A wire for the inverter's second CAN bus had never been connected, so no inverter data reached the logger. Connecting the wire brought the data through. Twisting the CAN pair and grounding the cable shields then stopped the dropouts.</p>
                         </div>
                         <div id="pt-desc-4" class="timeline-description-content" style="display: none;">
                             <p>The flux linkage in the inverter was set to about twice the motor's measured value, so the inverter thought it was running out of voltage and cut power. After correcting the value, grounding the shields to one point, and retuning, the cutout was gone and the car pulled over 50 kW for the first time.</p>
@@ -1550,22 +1550,37 @@
 
     <div id="about-page" class="page">
         <section class="about-section">
-            <div class="about-container">
-                <div class="about-image slide-up">
-                    <div class="circle-frame">
-                        <img loading="lazy" decoding="async" src="images/MaximusProfilePicture.jpg" width="100%">
-                    </div>
+            <div class="about-grid">
+                <div class="about-photo slide-up">
+                    <img loading="lazy" decoding="async" src="images/CR30_Car_Pictures/Max_And_CR30.jpg" alt="Maximus Anderson standing beside CR30 at sunset">
                 </div>
-                <div class="about-text slide-up" style="animation-delay: 0.2s;">
+                <div class="about-side slide-up" style="animation-delay: 0.15s;">
                     <h2 class="about-name">Maximus Anderson</h2>
-                    <p class="about-email">mnra@iastate.edu</p>
-                    <p class="about-bio">I'm a mechanical engineering student who excels in designing and manufacturing battery packs and electric race cars... that hopefully won't blow up.</p>
-                    <div class="about-links">
-                        <a href="https://www.linkedin.com/in/maximus-anderson-491545337/" target="_blank" class="about-link-button light-button">
-                            <span class="about-link-icon linkedin"></span>
-                            LinkedIn
-                        </a>
+                    <p class="about-quip">Trying not to get electrocuted.</p>
+                    <div class="about-jobs">
+                        <div class="about-job">
+                            <div class="about-mark"><img src="images/logos/tesla.svg" alt="Tesla"></div>
+                            <div class="about-more"><b>Cell Engineering intern</b>, 2026 to now<br>Bounded a key failure risk at 3 to 6 times the assumed level.</div>
+                        </div>
+                        <div class="about-job">
+                            <div class="about-mark stacked"><img src="images/logos/emerson.svg" alt="Emerson"></div>
+                            <div class="about-more"><b>Additive manufacturing co-op</b>, 2025<br>Moved a titanium part from casting to printing.</div>
+                        </div>
+                        <div class="about-job">
+                            <div class="about-mark tall"><img src="images/logos/iowa-state.svg" alt="Iowa State University"></div>
+                            <div class="about-more"><b>Design and manufacturing engineer</b>, 2025<br>Printed probes that replaced $3,240 of machined parts.</div>
+                        </div>
+                        <div class="about-job">
+                            <div class="about-mark"><span>Cyclone Racing</span></div>
+                            <div class="about-more"><b>Powertrain lead</b>, 2023 to now<br>Led 28 people through the team's first EV competition.</div>
+                        </div>
                     </div>
+                    <div class="about-links">
+                        <a href="https://www.linkedin.com/in/maximus-anderson-491545337/" target="_blank" rel="noopener">LinkedIn</a>
+                        <a href="#" class="inline-page-link about-resume-link" data-page="resume">Resume</a>
+                        <a href="mailto:mnra@iastate.edu">mnra@iastate.edu</a>
+                    </div>
+                    <p class="about-legal">Logos are trademarks of their respective owners. They are shown only to identify where I have worked, and no endorsement is implied.</p>
                 </div>
             </div>
         </section>
@@ -1595,7 +1610,6 @@
         <div class="footer-content">
             <div class="social-links">
                 <a href="https://www.linkedin.com/in/maximus-anderson-491545337/" target="_blank" class="social-icon linkedin" aria-label="LinkedIn"></a>
-                <a href="quiz.html" class="footer-quiz-link">⚡ Powertrain Quiz</a>
             </div>
         </div>
     </footer>
