@@ -79,7 +79,7 @@
             <span class="banner-index">01</span>
             <div class="banner-info">
                 <h3>CR30 Powertrain: Troubleshooting Through Competition</h3>
-                <span class="banner-tag">May-June 2026 · 9 min</span>
+                <span class="banner-tag">May-June 2026 · 8 min</span>
             </div>
             <img class="banner-thumb" src="images/thumbs/powertrain.jpg" alt="CR30 Powertrain: Troubleshooting Through Competition">
             <span class="banner-arrow">→</span>
@@ -167,7 +167,7 @@
                         <span class="post-meta-chip">Lead</span>
                     </span>
                     <span class="post-meta-sep">·</span>
-                    <span class="post-meta-read">~9 min read</span>
+                    <span class="post-meta-read">~8 min read</span>
                 </div>
                 <figure class="post-figure slide-up">
                     <img loading="lazy" decoding="async" src="images/Troubleshooting_To_Comp_Images/Got_Sticker_For_Battery_&amp;_Mech.jpg" alt="The car with its battery and mechanical tech inspection stickers" class="project-detail-image">
@@ -198,7 +198,7 @@
                     <div class="background-container tall-figures">
                         <h3 class="background-title">The Blown Inverter</h3>
                         <p class="background-description">
-                            Near the end of CR30's second driving day the motor made a loud whine and the inverter stopped working. An inverter drives the motor through six power switches called IGBTs, and one of them had failed.
+                            Near the end of CR30's second driving day the motor made a loud whine and the inverter stopped working. An inverter drives the motor through six power switches called IGBTs. They come in three modules of two, one module per motor phase. One switch had failed, so that module had to be replaced.
                         </p>
                         <figure class="post-figure">
                             <div class="dual-image-container" style="display: flex; gap: 1em; justify-content: center; flex-wrap: wrap;">
@@ -221,7 +221,7 @@
                             <figcaption class="post-caption">Diode readings at the gate. The failed device (left) and a healthy one (right).</figcaption>
                         </figure>
                         <p class="background-description">
-                            Digikey sells both the IGBT and the gate driver. I bought one of each and moved the gate resistors from the old driver to the new one so the IGBT would switch the same way as the other five. The repair cost about $300, and the inverter ran again.
+                            Digikey sells both the IGBT module and the gate driver. I bought one of each and moved the gate resistors from the old driver to the new one so the new module would switch the same way as the other two. The repair cost about $300, and the inverter ran again.
                         </p>
                         <figure class="post-figure">
                             <div class="dual-image-container" style="display: flex; gap: 1em; justify-content: center; flex-wrap: wrap;">
@@ -255,7 +255,7 @@
                             <figcaption class="post-caption">The first rebuilt board on a test day. Its module had no faults, so the other four boards got the same repair.</figcaption>
                         </figure>
                         <p class="background-description">
-                            The BMS faults were gone but the cutout wasn't. I checked the current limits, the power limit, the switching frequency, the BMS, and low voltage supply sag one at a time, and none of them caused the cutout. I had no data coming from the inverter, so I couldn't see what it was doing when it cut power.
+                            The BMS faults were gone but the cutout wasn't. I checked the current limits, the power limit, the switching frequency, the BMS, and low voltage supply sag one at a time, and none of them caused the cutout.
                         </p>
                     </div>
 
@@ -268,10 +268,10 @@
                             I had written the logger's firmware in a hurry, so I checked it first and found two problems. The firmware opened and closed the file on the SD card every loop, which dropped samples. It also read only one CAN message per loop, so messages backed up and were lost. I fixed both, and the inverter values were still zero.
                         </p>
                         <p class="background-description">
-                            Next I wrote a short Arduino program that printed the ID of every message on the bus. The only IDs that printed came from the IMU, the car's motion sensor. The inverter should have been sending eight messages and none of them were on the bus.
+                            Next I wrote a short Arduino program that printed the ID of every message on the CAN bus. The only IDs that printed came from the IMU, the car's motion sensor. The inverter should have been sending eight messages, and none of them showed up.
                         </p>
                         <p class="background-description">
-                            The inverter has two CAN buses, and it sends its detailed data on the second one. At the inverter's connector, the high wire for the second bus had never been connected. Once that wire was connected, all eight messages appeared and the excel filled with inverter data. That included the phase and DC currents, the temperatures, the faults, and which limit was active.
+                            The inverter has two CAN buses, and it sends its detailed data on the second one. At the inverter's connector, the high wire for the second CAN bus had never been connected. Once that wire was connected, all eight messages appeared and the excel filled with inverter data. That included the phase and DC currents, the temperatures, the faults, and which limit was active.
                         </p>
                         <figure class="post-figure">
                             <div class="dual-image-container" style="display: flex; gap: 1em; justify-content: center; flex-wrap: wrap;">
@@ -281,20 +281,17 @@
                             <figcaption class="post-caption">The CAN logger, taped to the side of the car on Saturday and in a housing by Sunday.</figcaption>
                         </figure>
                         <p class="background-description">
-                            One problem was left. The CAN bus dropped out during hard acceleration, which is when the inverter switches the most current and makes the most electrical noise. The two CAN wires are twisted together so that noise reaches both wires equally and cancels out. Our pair had about one twist per inch. The shields on the high voltage cables had also been assembled incorrectly and weren't connected to ground. I retwisted the CAN pair to three twists per inch, grounded the shields, and added ferrite cores to the CAN wiring. After that the dropouts were rare, and the inverter data logged cleanly to a laptop in the car.
+                            One problem was left. The CAN bus dropped out during hard acceleration, which is when the inverter switches the most current and makes the most electrical noise. The two CAN wires are twisted together so that noise reaches both wires equally and cancels out. Our pair had about one twist per inch. The shields on the high voltage cables had also been assembled incorrectly and weren't connected to ground. I retwisted the CAN pair to three twists per inch, grounded the shields, and added ferrite cores to the CAN wiring. After that the dropouts were rare, and the inverter data logged to a laptop in the car, which it had never done before.
                         </p>
                     </div>
 
                     <div class="background-container">
-                        <h3 class="background-title">Root Cause: Flux Linkage</h3>
+                        <h3 class="background-title">Flux Linkage and Tuning</h3>
                         <p class="background-description">
                             With inverter data in the logs I could see what happened during a cutout. The inverter was hitting its input voltage limit, even though the battery voltage was far above that limit.
                         </p>
                         <p class="background-description">
-                            The cause was the flux linkage value set in the inverter. A spinning motor generates its own voltage, called back-EMF, and flux linkage is the number that tells the inverter how much back-EMF to expect at a given speed. The value in the inverter was about twice what the motor produces. So the inverter calculated a back-EMF close to the battery voltage, decided it was running out of voltage, and cut power. The battery still had plenty of voltage left.
-                        </p>
-                        <p class="background-description">
-                            I measured the real value by spinning the motor with a Milwaukee drill and reading the back-EMF against RPM. The measured flux linkage was about half the value loaded in the inverter.
+                            One setting in the inverter was wrong. A spinning motor generates its own voltage, called back-EMF, and flux linkage is the number that tells the inverter how much back-EMF to expect at a given speed. I measured it by spinning the motor with a Milwaukee drill and reading the back-EMF against RPM. The measured value was about half the value loaded in the inverter, so I corrected it.
                         </p>
                         <figure class="post-figure">
                             <div class="dual-image-container" style="display: flex; gap: 1em; justify-content: center; flex-wrap: wrap;">
@@ -304,21 +301,22 @@
                             <figcaption class="post-caption">The setup for measuring flux linkage. A drill spins the motor while the back-EMF is read.</figcaption>
                         </figure>
                         <p class="background-description">
-                            An earlier test should have caught the wrong value. Our motor engineer had run the inverter's open loop tuning with the rotor free to spin, and the procedure requires the rotor to be locked. The run looked steady, but it had been done wrong, so it hid the problem.
+                            The current loop tuning had also been done wrong. Our motor engineer had run the inverter's open loop tuning with the rotor free to spin, and the procedure requires the rotor to be locked. I reran it with the rotor locked, and it showed that the motor's two control axes needed different gains. I also grounded all the cable shields to a single point.
                         </p>
                         <p class="background-description">
-                            I made three changes. I set the flux linkage to the measured value, grounded all the cable shields to a single point, and retuned the current loop with the procedure run correctly. The retune showed that the motor's two control axes needed different gains. After those changes the cutout was gone and the car pulled over 50 kW for the first time. The three changes went in together, so I can't say which one fixed the cutout, but it hasn't come back.
+                            After those changes the car pulled over 50 kW for the first time. I don't know which change mattered, if any.
                         </p>
                     </div>
 
                     <div class="background-container">
-                        <h3 class="background-title">Power</h3>
+                        <h3 class="background-title">On the Dyno</h3>
                         <p class="background-description">
-                            With the cutout gone, the car still made less power than it should have. The DC current stopped rising well below the limit I had set. The cause was the AC current limit, which caps the current going from the inverter to the motor. I had set the AC limit low because I treated the peak current on the motor's datasheet as a hard ceiling. That number is a two minute thermal rating. An acceleration run lasts a few seconds, so the motor can take more current for short pulls. I went back to check the limit after seeing another team run the same motor at far more current than the datasheet peak.
+                            On the wheel dyno the car made 56 kW and about 135 Nm at the wheels. The run in the video had no cutout and reached the power limit I had set. Later driving logs peaked in the low 60s of kW. The rules allow 80 kW, and the car unfortunately never officially met that.
                         </p>
-                        <p class="background-description">
-                            Raising the AC limit raised the DC current and the power with it, because torque keeps climbing with current until the iron in the motor saturates. On the wheel dyno the car made 56 kW and about 135 Nm at the wheels. Later driving logs peaked in the low 60s of kW. The rules allow 80 kW and the car never reached it.
-                        </p>
+                        <figure class="post-figure">
+                            <video src="images/Dyno_Test_Web.mp4" class="background-image slide-up" style="animation-delay: 0.3s;" preload="none" muted loop playsinline></video>
+                            <figcaption class="post-caption">A full power run on the wheel dyno. Gavin is driving, and Ryan is holding my laptop to screen record the inverter data.</figcaption>
+                        </figure>
                     </div>
 
                     <div class="background-container">
@@ -330,7 +328,7 @@
                             The car lost power every time it turned left. Each high voltage connector carries an interlock, a small circuit that shuts the car down if the connector comes apart. The interlock on the HV+ connector leaving the battery was loose, and cornering load opened it. I replaced that connector and its cable with a new Amphenol one, and the car stopped cutting out in left turns.
                         </p>
                         <p class="background-description">
-                            The DC-DC converter, which powers the low voltage system from the main battery, was still not working. I built a backup low voltage battery to replace it and mounted it in the car. It holds 19 Ah, which is enough for an endurance run.
+                            The DC-DC converter, which powers the low voltage system from the main battery, was still not working. The car's low voltage battery holds 6 Ah. I built a 13 Ah backup battery and wired it in parallel with the first, which gives 19 Ah and is enough for an endurance run.
                         </p>
                         <figure class="post-figure">
                             <div class="dual-image-container" style="display: flex; gap: 1em; justify-content: center; flex-wrap: wrap;">
@@ -347,7 +345,7 @@
                     <div class="background-container">
                         <h3 class="background-title">Competition</h3>
                         <p class="background-description">
-                            Competition was our first as an electric team, and nearly all of it went to tech inspection. A car has to pass mechanical tech, battery and electrical tech, and EV active tech before it can run an event.
+                            Competition was our first as an electric team, and nearly all of it went to tech inspection. A car needs six inspection stickers before it can run an event: mechanical, battery and electrical, EV active, tilt, rain, and brakes. The last three are easy to pass once a car is through EV active. We got two stickers and were stopped at EV active.
                         </p>
                         <p class="background-description">
                             We passed mechanical tech without much trouble. Most of our time went to the battery and electrical station, on two rules we hadn't fully understood. The high voltage system, called the tractive system or TS, has to be kept separate from the low voltage system. High voltage parts also need two layers of insulation. We added insulation at the event to meet the second rule.
@@ -356,7 +354,7 @@
                             The precharge board failed the first rule. Precharge charges the inverter's capacitors slowly through a resistor before the main contactors close, so there is no surge of current. The board the electrical team built connected the battery side to the tractive system side through an isolated gate, and those two are supposed to be fully separate. On the insulation resistance test that path read about 5 MΩ where it should have read open. Our software engineer Aaron and I spent the night reworking the same board to run precharge over CAN with no analog signal. That was only possible overnight because the CAN work on the car was already done.
                         </p>
                         <p class="background-description">
-                            The isolation checks still took several tries to pass. My best guess is that the carbon filled baskets leaked a small current from module to module, but I never confirmed it.
+                            The isolation checks still took several tries to pass. My best guess is that the carbon filled baskets leaked a small current from module to module, but I never confirmed it, because it mysteriously went away after the competition and I couldn't replicate it.
                         </p>
                         <p class="background-description">
                             The last thing between us and passing the battery portion of tech was charging, and technically we didn't complete it. While demonstrating charging, the discharge resistor overheated and melted its enclosure. The discharge circuit is intended to only bleed the inverter's capacitors when the shutdown circuit opens, which effectively means the pack is off. Its relay is supposed to open whenever shutdown is high and the pack is live. The relay wasn't opening, so the resistor was attempting to discharge the full pack rather than just the capacitors. That issue seemed to be in part due to an interlock inside the charger which had failed. The charger was an off-the-shelf unit we hadn't designed and couldn't reasonably repair at the competition, so the officials sealed it, which prevented us from using it during the competition, and then waived that section. Regardless, by then there wasn't enough time to complete EV active tech, so we left having passed battery and mechanical tech without running a dynamic event.
@@ -396,7 +394,7 @@
                         <div class="timeline-item" style="animation-delay: 1.2s;">
                             <div class="timeline-marker" data-description="pt-desc-4">
                                 <span class="timeline-date">June 6</span>
-                                <h4>Root Cause Fixed</h4>
+                                <h4>Flux Linkage and Retune</h4>
                             </div>
                         </div>
                         <div class="timeline-item" style="animation-delay: 1.4s;">
@@ -424,10 +422,10 @@
                             <p>I added a CAN data logger to the car in the middle of a test day. A wire for the inverter's second CAN bus had never been connected, so no inverter data reached the logger. Connecting the wire brought the data through. Twisting the CAN pair and grounding the cable shields then stopped the dropouts.</p>
                         </div>
                         <div id="pt-desc-4" class="timeline-description-content" style="display: none;">
-                            <p>The flux linkage in the inverter was set to about twice the motor's measured value, so the inverter thought it was running out of voltage and cut power. After correcting the value, grounding the shields to one point, and retuning, the cutout was gone and the car pulled over 50 kW for the first time.</p>
+                            <p>The flux linkage in the inverter was set to about twice the motor's measured value. I corrected it, grounded the shields to one point, and retuned the current loop. The car then pulled over 50 kW for the first time. I don't know which change mattered, if any.</p>
                         </div>
                         <div id="pt-desc-5" class="timeline-description-content" style="display: none;">
-                            <p>The DC current was capped by an AC limit I'd set too low, since I'd read the datasheet's thermal peak as a hard ceiling. Raising it gave 56 kW and about 135 Nm at the wheels on the dyno.</p>
+                            <p>On the wheel dyno the car made 56 kW and about 135 Nm at the wheels.</p>
                         </div>
                         <div id="pt-desc-6" class="timeline-description-content" style="display: none;">
                             <p>Passed battery and mechanical tech. An illegal precharge board meant reworking precharge over CAN overnight, and the discharge resistor melted its enclosure during the charging check. We ran out of time before the dynamic events.</p>
