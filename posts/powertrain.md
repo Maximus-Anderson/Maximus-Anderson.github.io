@@ -110,8 +110,8 @@ After those changes the car pulled over 50 kW for the first time. I don't know w
 
 On the wheel dyno the car made 56 kW and about 135 Nm at the wheels. The run in the video had no cutout and reached the power limit I had set. Later driving logs peaked in the low 60s of kW. The rules allow 80 kW, and the car unfortunately never officially met that.
 
-![CR30 on the wheel dyno during a full power run](images/Dyno_Test_Web.mp4)
-> A full power run on the wheel dyno. Gavin is driving, and Ryan is holding my laptop to screen record the inverter data.
+![CR30 during a run on the wheel dyno](images/Dyno_Test_Web.mp4)
+> A run on the wheel dyno. Gavin is driving, and Ryan is holding my laptop to screen record the inverter data.
 
 ## Race Prep
 
